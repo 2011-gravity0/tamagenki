@@ -1,12 +1,13 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const DailyProgress = require('./dailyProgress')
 
 const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
   },
   password: {
     type: Sequelize.STRING,
@@ -14,7 +15,7 @@ const User = db.define('user', {
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('password')
-    }
+    },
   },
   salt: {
     type: Sequelize.STRING,
@@ -22,11 +23,34 @@ const User = db.define('user', {
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('salt')
-    }
+    },
   },
   googleId: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+  },
+  exerciseReminder: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  waterReminder: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  meditationReminder: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  sleepReminder: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  petName: {
+    type: Sequelize.STRING,
+  },
+  points: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
 })
 
 module.exports = User
@@ -34,18 +58,18 @@ module.exports = User
 /**
  * instanceMethods
  */
-User.prototype.correctPassword = function(candidatePwd) {
+User.prototype.correctPassword = function (candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
 /**
  * classMethods
  */
-User.generateSalt = function() {
+User.generateSalt = function () {
   return crypto.randomBytes(16).toString('base64')
 }
 
-User.encryptPassword = function(plainText, salt) {
+User.encryptPassword = function (plainText, salt) {
   return crypto
     .createHash('RSA-SHA256')
     .update(plainText)
@@ -56,15 +80,23 @@ User.encryptPassword = function(plainText, salt) {
 /**
  * hooks
  */
-const setSaltAndPassword = user => {
+const setSaltAndPassword = (user) => {
   if (user.changed('password')) {
     user.salt = User.generateSalt()
     user.password = User.encryptPassword(user.password(), user.salt())
   }
 }
 
+User.beforeDestroy((userInstance) => {
+  return DailyProgress.destroy({
+    where: {
+      userId: userInstance.id,
+    },
+  })
+})
+
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
-User.beforeBulkCreate(users => {
+User.beforeBulkCreate((users) => {
   users.forEach(setSaltAndPassword)
 })
