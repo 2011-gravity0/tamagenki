@@ -15,6 +15,7 @@ const adminsOnly = (req, res, next) => {
   next()
 }
 
+// get today's dailyProgress
 router.get('/', async (req, res, next) => {
   try {
     const allProgresses = await DailyProgress.findAll()
