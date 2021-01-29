@@ -31,7 +31,7 @@ const loggedInUserOnly = (req, res, next) => {
 router.get('/', adminsOnly, async (req, res, next) => {
   try {
     const allUsers = await User.findAll({
-      attributes: ['id', 'email'],
+      attributes: ['id', 'email', 'petName'],
       include: [{model: DailyProgress}],
     })
     res.json(allUsers)
@@ -83,7 +83,7 @@ router.put('/:userId', async (req, res, next) => {
 router.delete('/:userId', async (req, res, next) => {
   try {
     const id = req.params.userId
-    const deleteUser = await Profile.findByPk(id)
+    const deleteUser = await User.findByPk(id)
     if (deleteUser) {
       await deleteUser.destroy()
       res.status(204).send()

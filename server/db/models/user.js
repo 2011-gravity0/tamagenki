@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const DailyProgress = require('./dailyProgress')
 
 const User = db.define('user', {
   email: {
@@ -27,29 +28,28 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING,
   },
-  execrise: {
+  exerciseReminder: {
     type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
-  diet: {
-    type: Sequelize.STRING,
-  },
-  water: {
+  waterReminder: {
     type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
-  meditation: {
+  meditationReminder: {
     type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
-  sleep: {
-    type: Sequelize.DATE,
-  },
-  relaxtion: {
+  sleepReminder: {
     type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
-  eggName: {
+  petName: {
     type: Sequelize.STRING,
   },
   points: {
     type: Sequelize.INTEGER,
+    defaultValue: 0,
   },
 })
 
@@ -86,6 +86,14 @@ const setSaltAndPassword = (user) => {
     user.password = User.encryptPassword(user.password(), user.salt())
   }
 }
+
+User.beforeDestroy((userInstance) => {
+  return DailyProgress.destroy({
+    where: {
+      userId: userInstance.id,
+    },
+  })
+})
 
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)

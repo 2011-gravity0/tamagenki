@@ -7,6 +7,8 @@ const DailyProgress = require('/dailyprogress')
  *
  *    BlogPost.belongsTo(User)
  */
+User.hasMany(DailyProgress)
+DailyProgress.belongsTo(User)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

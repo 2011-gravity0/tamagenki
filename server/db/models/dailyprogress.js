@@ -2,23 +2,33 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const DailyProgress = db.define('dailyprogress', {
-  execrise: {
-    type: Sequelize.BOOLEAN,
+  exercise: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
   },
-  diet: {
-    type: Sequelize.STRING,
+  fruit: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
+  vegetables: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
   },
   water: {
-    type: Sequelize.BOOLEAN,
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
   },
   meditation: {
-    type: Sequelize.BOOLEAN,
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
   },
   sleep: {
-    type: Sequelize.DATE,
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
   },
   relaxtions: {
-    type: Sequelize.BOOLEAN,
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
   },
 })
 module.exports = DailyProgress
