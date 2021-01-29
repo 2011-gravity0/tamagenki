@@ -17,7 +17,7 @@ const DailyProgress = db.define('dailyprogress', {
   sleep: {
     type: Sequelize.DATE,
   },
-  relaxtion: {
+  relaxtions: {
     type: Sequelize.BOOLEAN,
   },
 })
