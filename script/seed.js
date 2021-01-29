@@ -1,16 +1,91 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, DailyProgress} = require('../server/db/models')
+
+const users = [
+  {
+    email: 'cody@email.com',
+    password: 'cdpassword',
+    userName: 'Cody',
+    exerciseReminder: true,
+    waterReminder: true,
+    meditationReminder: true,
+    sleepReminder: true,
+    petName: 'Esspresso',
+    points: 12
+  },
+  {
+    email: 'tama@email.com',
+    password: 'tmpassword',
+    userName: 'Morty',
+    petName: 'Roundy'
+  },
+  {
+    email: 'maru@email.com',
+    userName: 'Rick',
+    password: 'mrpassword',
+    exerciseReminder: true,
+    petName: 'Fuzzy Face'
+  },
+  {
+    email: 'rachel@email.com',
+    userName: 'Rachel',
+    password: 'rcpassword',
+    waterReminder: true,
+    petName: 'Sabi',
+    points: 100
+  },
+  {
+    email: 'fs@email.com',
+    userName: 'Summer',
+    password: 'fspassword',
+    meditationReminder: true,
+    petName: 'Mamashita',
+    points: 250
+  },
+  {
+    email: 'gh@email.com',
+    userName: 'Jerry',
+    password: 'ghpassword',
+    meditationReminder: true,
+    petName: 'PomPom pudding',
+    points: 300
+  },
+  {
+    email: 'wdf@email.com',
+    userName: 'Beth',
+    password: 'wdpassword',
+    sleepReminder: true,
+    petName: 'Moffle',
+    points: 500
+  }
+]
+
+//Cody has history dailyProgress data.
+const dataHistory = {
+  exercise: 1,
+  fruit: 2,
+  vegetables: 1,
+  water: 5,
+  meditation: 0,
+  sleep: 1,
+  relaxtions: 2,
+  isToday: false
+}
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+  await Promise.all(
+    users.map(user => {
+      return User.create(user)
+    })
+  )
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const cody = await User.findOne({where: {email: 'cody@email.com'}})
+  const history = await DailyProgress.create(dataHistory)
+  await history.setUser(cody)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
