@@ -36,6 +36,10 @@ const DailyProgress = db.define('dailyprogress', {
   isToday: {
     type: sequelize.BOOLEAN,
     defaultValue: true
+  },
+  date: {
+    type: Sequelize.DATEONLY,
+    defaultValue: Date.now()
   }
 })
 module.exports = DailyProgress
