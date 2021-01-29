@@ -1,5 +1,5 @@
 const User = require('./user')
-const DailyProgress = require('/dailyprogress')
+const DailyProgress = require('./dailyprogress')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -18,5 +18,5 @@ DailyProgress.belongsTo(User)
  */
 module.exports = {
   User,
-  DailyProgress,
+  DailyProgress
 }
