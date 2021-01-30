@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
     month.length !== 2
       ? (today = `${year}-0${month}-${date}`)
       : (today = `${year}-${month}-${date}`)
-    const todaysProgress = await DailyProgress.findOne({
+    const [todaysProgress, created] = await DailyProgress.findOrCreate({
       where: {
         userId: req.user.id,
         date: today
