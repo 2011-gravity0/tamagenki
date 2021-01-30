@@ -106,6 +106,7 @@ h1 {
 }
 
 .nameEgg h2 {
+  margin-top: 0;
   color: rgb(94, 94, 94);
 }
 

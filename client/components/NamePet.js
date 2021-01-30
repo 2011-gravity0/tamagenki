@@ -1,16 +1,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {auth, updateUser} from '../store'
 import {TextField, Button, Typography} from '@material-ui/core'
 
-const NamePet = prop => {
+const NamePet = props => {
+  const {updateUser, userid} = props
+  const handleSubmit = evt => {
+    evt.preventDefault()
+    const petName = evt.target.eggname.value
+    updateUser(userid, {petName})
+  }
+
   return (
     <div className="viewContainer">
       <div className="nameEgg">
         <h2>Name your tamabuddy!</h2>
         <img className="loginEgg" src="/eggHatch.gif" />
-        <form className="nameEggForm">
+        <form className="nameEggForm" onSubmit={handleSubmit}>
           <TextField
             required
             type="eggname"
@@ -38,4 +45,16 @@ const NamePet = prop => {
   )
 }
 
-export default NamePet
+const mapState = state => {
+  return {
+    userid: state.user.id
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    updateUser: (userId, data) => dispatch(updateUser(userId, data))
+  }
+}
+
+export default connect(mapState, mapDispatch)(NamePet)
