@@ -38,8 +38,7 @@ const DailyProgress = db.define('dailyprogress', {
     defaultValue: true
   },
   date: {
-    type: Sequelize.DATEONLY,
-    defaultValue: Date.now()
+    type: Sequelize.DATEONLY
   }
 })
 module.exports = DailyProgress
