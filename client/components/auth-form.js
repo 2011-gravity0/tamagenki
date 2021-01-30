@@ -41,7 +41,6 @@ const AuthForm = props => {
           variant="contained"
           className="login"
           color="secondary"
-          name="password"
           type="submit"
           className="loginButton"
         >
