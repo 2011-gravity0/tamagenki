@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, NamePet} from './components'
 import {me} from './store'
+import UserForm from './components/questions/UserForm'
 
 /**
  * COMPONENT
@@ -30,6 +31,7 @@ class Routes extends Component {
             {/* Routes placed here are only available for bedore logging in */}
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route path="/questions" component={UserForm} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
