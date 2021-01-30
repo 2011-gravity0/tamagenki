@@ -26,13 +26,20 @@ h1 {
   text-align: center;
 }
 
+.viewContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .appTitle {
   text-align: center;
   color: rgb(92, 111, 165);
 }
 
 .loginContainer {
-  margin-top: 12%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,7 +70,7 @@ h1 {
 
 .googleLink {
   text-align: center;
-  margin-top: 15px;
+  margin: 15px 0 20px;
   color: rgb(228, 115, 134);
 }
 
@@ -91,7 +98,7 @@ h1 {
 }
 
 .nameEgg {
-  margin-top: 30%;
+  /* margin-top: 30%; */
   display: flex;
   flex-direction: column;
   justify-content: center;

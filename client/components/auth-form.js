@@ -11,43 +11,44 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error, reroute, reroutePath} = props
 
   return (
-    <div className="loginContainer">
-      <h1>Tamagenki</h1>
-      <img className="loginEgg" src="/eggHatch.gif" />
-      <form className="login-form" onSubmit={handleSubmit} name={name}>
-        <TextField
-          required
-          label="email"
-          name="email"
-          variant="outlined"
-          className="login"
-          InputLabelProps={{
-            shrink: true
-          }}
-        />
-        <TextField
-          required
-          type="password"
-          label="Password"
-          name="password"
-          variant="outlined"
-          className="login"
-          InputLabelProps={{
-            shrink: true
-          }}
-        />
-        <Button
-          waves="light"
-          variant="contained"
-          className="login"
-          color="secondary"
-          type="submit"
-          className="loginButton"
-        >
-          {displayName}
-        </Button>
-      </form>
-      {/* <form onSubmit={handleSubmit} name={name}>
+    <div className="viewContainer">
+      <div className="loginContainer">
+        <h1>Tamagenki</h1>
+        <img className="loginEgg" src="/eggHatch.gif" />
+        <form className="login-form" onSubmit={handleSubmit} name={name}>
+          <TextField
+            required
+            label="email"
+            name="email"
+            variant="outlined"
+            className="login"
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+          <TextField
+            required
+            type="password"
+            label="Password"
+            name="password"
+            variant="outlined"
+            className="login"
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+          <Button
+            waves="light"
+            variant="contained"
+            className="login"
+            color="secondary"
+            type="submit"
+            className="loginButton"
+          >
+            {displayName}
+          </Button>
+        </form>
+        {/* <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email">
             <small>Email</small>
@@ -65,18 +66,19 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form> */}
-      <Typography variant="subtitle2" align="center" className="or">
-        or
-      </Typography>
-      <Button variant="outlined" className="googleButton">
-        <div className="google">
-          <img src="/google-icon.svg" />
-        </div>
-        <a href="/auth/google">{displayName} with Google</a>
-      </Button>
-      <a className="googleLink" href={reroutePath}>
-        {reroute}
-      </a>
+        <Typography variant="subtitle2" align="center" className="or">
+          or
+        </Typography>
+        <Button variant="outlined" className="googleButton">
+          <div className="google">
+            <img src="/google-icon.svg" />
+          </div>
+          <a href="/auth/google">{displayName} with Google</a>
+        </Button>
+        <a className="googleLink" href={reroutePath}>
+          {reroute}
+        </a>
+      </div>
     </div>
   )
 }
