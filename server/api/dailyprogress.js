@@ -18,8 +18,18 @@ const adminsOnly = (req, res, next) => {
 // get today's dailyProgress
 router.get('/', async (req, res, next) => {
   try {
-    const allProgresses = await DailyProgress.findAll()
-    res.send(allProgresses)
+    let [month, date, year] = new Date().toLocaleDateString('en-US').split('/')
+    let today
+    month.length !== 2
+      ? (today = `${year}-0${month}-${date}`)
+      : (today = `${year}-${month}-${date}`)
+    const todaysProgress = await DailyProgress.findOne({
+      where: {
+        userId: req.user.id,
+        date: today
+      }
+    })
+    res.send(todaysProgress)
   } catch (error) {
     next(error)
   }
