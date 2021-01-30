@@ -21,7 +21,7 @@ class Routes extends Component {
       <Switch>
         {/* Only logged in user can see home*/}
         {isLoggedIn ? (
-          <Route path="/" component={UserHome} />
+          <Route exact path="/" component={UserHome} />
         ) : (
           <Switch>
             {/* Routes placed here are only available for bedore logging in */}
