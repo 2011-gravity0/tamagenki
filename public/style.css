@@ -19,3 +19,73 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+h1 {
+  font-family: 'Fredoka One', cursive;
+  color: rgb(228, 115, 134);
+  text-align: center;
+}
+
+.appTitle {
+  text-align: center;
+  color: rgb(92, 111, 165);
+}
+
+.loginContainer {
+  margin-top: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form {
+  margin-bottom: 5px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login {
+  width: 100%;
+}
+
+.loginButton {
+  width: 90%;
+  margin-bottom: 0;
+}
+
+.loginEgg {
+  width: 125px;
+  margin-bottom: 20px;
+}
+
+.googleLink {
+  text-align: center;
+  margin-top: 10px;
+  color: rgb(228, 115, 134);
+}
+
+.google {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.google img {
+  max-width: 100%;
+  display: inline-block;
+}
+
+.googleButton {
+  width: 72%;
+}
+.or {
+  margin: 5px 0;
+  color: rgb(160, 159, 159);
+}
+
+.googleButton a {
+  color: rgb(59, 59, 59);
+}
