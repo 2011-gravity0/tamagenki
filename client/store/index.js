@@ -7,7 +7,7 @@ import dailyProgress from './dailyProgress'
 
 const reducer = combineReducers({
   user,
-  dailyProgress
+  list: dailyProgress
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
