@@ -48,6 +48,10 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
+  bedTime: {
+    type: Sequelize.STRING,
+    defaultValue: '11:00'
+  },
   petName: {
     type: Sequelize.STRING
   }

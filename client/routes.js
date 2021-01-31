@@ -20,20 +20,19 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Only logged in user can see home*/}
-        {isLoggedIn ? (
+        {/* Routes placed here are available to all visitors */}
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        {isLoggedIn && (
+          //Only logged in user can see home
+
           <Switch>
             <Route exact path="/" component={UserHome} />
             <Route exact path="/nameEgg" component={NamePet} />
-          </Switch>
-        ) : (
-          <Switch>
-            {/* Routes placed here are only available for bedore logging in */}
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route path="/questions" component={UserForm} />
+            <Route exact path="/questions" component={UserForm} />
           </Switch>
         )}
+
         {/* Displays our Login component as a fallback */}
         {/* <Route component={Login} /> */}
       </Switch>
