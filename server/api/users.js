@@ -21,8 +21,7 @@ const loggedInUserOnly = (req, res, next) => {
     const err = new Error('You are not logged in')
     err.status = 401
     return next(err)
-  } else if (req.user.id !== Number(req.params.userId)) {
-    console.log(req.user.userId)
+  } else if (req.user.userId !== Number(req.params.userId)) {
     const err = new Error('No <3')
     err.status = 401
     return next(err)
@@ -33,7 +32,7 @@ router.get('/', adminsOnly, async (req, res, next) => {
   try {
     const allUsers = await User.findAll({
       attributes: ['id', 'email', 'petName'],
-      include: [{model: DailyProgress}]
+      include: [{model: DailyProgress}],
     })
     res.json(allUsers)
   } catch (err) {
@@ -41,12 +40,12 @@ router.get('/', adminsOnly, async (req, res, next) => {
   }
 })
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', loggedInUserOnly, async (req, res, next) => {
   try {
     const id = req.params.userId
     if (isNaN(id)) res.status(400).send()
     const singleUser = await User.findByPk(id, {
-      include: [{model: DailyProgress}]
+      include: [{model: DailyProgress}],
     })
     if (!singleUser) res.status(400).send()
     res.status(200).send(singleUser)
