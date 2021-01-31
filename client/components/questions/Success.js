@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 import {withStyles} from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -71,12 +72,12 @@ export class Success extends Component {
         <Paper>
           <div className={classes.toolbar} />
         </Paper>
-        <Box m={4}>
+        <Box m={1}>
           <Grid container justify="center">
             <h1>Great! Let's Get Started!</h1>
           </Grid>
         </Box>
-        <Grid container justify="center">
+        <Grid container column="true" justify="center">
           {/* this is the dumpling animation. Lottie elements aren't clickable so I had to wrap the whole thing in a Button */}
           <Button
             onClick={this.handleClick}
@@ -87,8 +88,11 @@ export class Success extends Component {
               options={toggleAnimation ? defaultOptions : defaultOptions2}
               height={400}
               width={400}
-              onClick={this.handleClick}
             />
+          </Button>
+          <h1>Are you ready to meet your tamabuddy?</h1>
+          <Button component={Link} to="/nameEgg">
+            yes
           </Button>
         </Grid>
       </React.Fragment>
