@@ -1,4 +1,7 @@
 import React, {Component} from 'react'
+import {updateUser} from '../../store'
+import {connect} from 'react-redux'
+import {compose} from 'redux'
 
 import {withStyles} from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -9,9 +12,6 @@ import Paper from '@material-ui/core/Paper'
 import Toolbar from '@material-ui/core/Toolbar'
 import Card from '@material-ui/core/Card'
 import Box from '@material-ui/core/Box'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -31,15 +31,33 @@ const styles = theme => ({
 })
 
 export class Confirm extends Component {
-  continue = e => {
-    e.preventDefault()
-    //Connect to redux thunk here
-    this.props.nextStep()
+  // continue = (e) => {
+  //   e.preventDefault()
+  //   //Connect to redux thunk here
+  //   this.props.nextStep()
+  // }
+  constructor(props) {
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   goBack = e => {
     e.preventDefault()
     this.props.prevStep()
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault()
+    let userData = {
+      userName: this.props.values.userName,
+      bedTime: this.props.values.bedTime,
+      sleepReminder: this.props.values.sleepReminder,
+      exerciseReminder: this.props.values.exerciseReminder,
+      waterReminder: this.props.values.waterReminder,
+      meditationReminder: this.props.values.meditationReminder
+    }
+    await this.props.updateUserInfo(this.props.user.id, userData)
+    this.props.nextStep()
   }
 
   render() {
@@ -48,7 +66,7 @@ export class Confirm extends Component {
       values: {
         userName,
         bedTime,
-        bedtimeReminder,
+        sleepReminder,
         exerciseReminder,
         waterReminder,
         meditationReminder
@@ -108,7 +126,7 @@ export class Confirm extends Component {
                 <ListItem alignItems="center">
                   <ListItemText
                     primary={`You ${
-                      bedtimeReminder ? 'DO' : 'DO NOT'
+                      sleepReminder ? 'DO' : 'DO NOT'
                     } want a reminder to go to bed on time each night`}
                   />
                 </ListItem>
@@ -124,7 +142,7 @@ export class Confirm extends Component {
             </Button>
           </Box>
           <Box m={2} pt={3}>
-            <Button style={styles.button} onClick={this.continue}>
+            <Button style={styles.button} onClick={this.handleSubmit}>
               Confirm
             </Button>
           </Box>
@@ -133,5 +151,17 @@ export class Confirm extends Component {
     )
   }
 }
+const mapState = state => {
+  return {
+    user: state.user
+  }
+}
 
-export default withStyles(styles)(Confirm)
+const mapDispatch = dispatch => ({
+  updateUserInfo: (userId, userData) => dispatch(updateUser(userId, userData))
+})
+
+export default compose(
+  connect(mapState, mapDispatch),
+  withStyles(styles, {withTheme: true})
+)(Confirm)

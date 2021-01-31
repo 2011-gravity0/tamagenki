@@ -9,7 +9,7 @@ export class UserForm extends Component {
     step: 1,
     userName: '',
     bedTime: '',
-    bedtimeReminder: false,
+    sleepReminder: false,
     exerciseReminder: false,
     waterReminder: false,
     meditationReminder: false
@@ -44,7 +44,7 @@ export class UserForm extends Component {
     const {
       userName,
       bedTime,
-      bedtimeReminder,
+      sleepReminder,
       exerciseReminder,
       waterReminder,
       meditationReminder
@@ -52,7 +52,7 @@ export class UserForm extends Component {
     const values = {
       userName,
       bedTime,
-      bedtimeReminder,
+      sleepReminder,
       exerciseReminder,
       waterReminder,
       meditationReminder

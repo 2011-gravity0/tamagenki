@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import Lottie from 'react-lottie'
-import animationData from '../../../public/lotties/owl.json'
+import animationData from '../../../public/lotties/dumpling1/data.json'
+import animationData2 from '../../../public/lotties/dumpling2/data.json'
 
 const styles = theme => ({
   // Load app bar information from the theme
@@ -25,21 +26,34 @@ const styles = theme => ({
 })
 
 export class Success extends Component {
-  continue = e => {
-    e.preventDefault()
-    this.props.nextStep()
+  constructor(props) {
+    super(props)
+    //state determines which animation will be played. since there are only 2 options for now i'm using true/false
+    this.state = {
+      toggleAnimation: true
+    }
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  goBack = e => {
-    e.preventDefault()
-    this.props.prevStep()
+  //this handle click function changes the state, which decides which animation to play
+  handleClick = () => {
+    this.setState({toggleAnimation: !this.state.toggleAnimation})
   }
-
   render() {
+    let toggleAnimation = this.state.toggleAnimation
     const defaultOptions = {
       loop: true,
       autoplay: true,
       animationData: animationData,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    }
+
+    const defaultOptions2 = {
+      loop: true,
+      autoplay: true,
+      animationData: animationData2,
       rendererSettings: {
         preserveAspectRatio: 'xMidYMid slice'
       }
@@ -62,7 +76,21 @@ export class Success extends Component {
             <h1>Great! Let's Get Started!</h1>
           </Grid>
         </Box>
-        <Lottie options={defaultOptions} height={400} width={400} />
+        <Grid container justify="center">
+          {/* this is the dumpling animation. Lottie elements aren't clickable so I had to wrap the whole thing in a Button */}
+          <Button
+            onClick={this.handleClick}
+            style={{backgroundColor: 'transparent'}}
+            disableRipple={true}
+          >
+            <Lottie
+              options={toggleAnimation ? defaultOptions : defaultOptions2}
+              height={400}
+              width={400}
+              onClick={this.handleClick}
+            />
+          </Button>
+        </Grid>
       </React.Fragment>
     )
   }

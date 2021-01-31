@@ -91,9 +91,7 @@ export class Reminders extends Component {
                 label="sit still and meditate"
               />
               <FormControlLabel
-                control={
-                  <Checkbox onChange={handleChange('bedtimeReminder')} />
-                }
+                control={<Checkbox onChange={handleChange('sleepReminder')} />}
                 label="get ready for bed"
               />
             </Grid>
