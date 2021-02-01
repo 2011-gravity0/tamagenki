@@ -6,11 +6,26 @@
     <title>TAMAGENKI</title>
     <link rel="stylesheet" href="/style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="manifest" href="manifest.json" />
     <link
       href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
       rel="stylesheet"
     />
     <script defer src="/bundle.js"></script>
+
+    <!-- <script>
+  
+  if (navigator.serviceWorker.controller) {
+  console.log("Active service worker found");
+  } else {
+      navigator.serviceWorker
+      .register("serviceWorker.js", {
+      scope: "./"
+      })
+      .then(function (reg) {console.log("Service worker  registered)})
+  }
+
+</script> -->
   </head>
   <body>
     <div id="app"></div>
