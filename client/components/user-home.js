@@ -41,6 +41,8 @@ export class UserHome extends React.Component {
   //   return false
   // }
 
+  // write random thing
+
   async handleCheck(event) {
     event.preventDefault()
     // event.persist()
@@ -144,8 +146,10 @@ export class UserHome extends React.Component {
                             this.handleCheck(event)
                           }}
                           checked={
-                            !!(this.props.list.vegetables > 1 &&
-                            idx < this.props.list.vegetables)
+                            !!(
+                              this.props.list.vegetables > 1 &&
+                              idx < this.props.list.vegetables
+                            )
                           }
                           name="vegetables"
                           inputProps={{'aria-label': 'primary checkbox'}}
@@ -170,8 +174,10 @@ export class UserHome extends React.Component {
                             this.handleCheck(event)
                           }}
                           checked={
-                            !!(this.props.list.water > 1 &&
-                            idx < this.props.list.water)
+                            !!(
+                              this.props.list.water > 1 &&
+                              idx < this.props.list.water
+                            )
                           }
                           name="water"
                           inputProps={{'aria-label': 'primary checkbox'}}
