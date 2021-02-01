@@ -12,7 +12,8 @@ const users = [
     waterReminder: true,
     meditationReminder: true,
     sleepReminder: true,
-    petName: 'Esspresso'
+    petName: 'Esspresso',
+    points: 12
   },
   {
     email: 'tama@email.com',
@@ -32,28 +33,32 @@ const users = [
     userName: 'Rachel',
     password: 'rcpassword',
     waterReminder: true,
-    petName: 'Sabi'
+    petName: 'Sabi',
+    points: 100
   },
   {
     email: 'fs@email.com',
     userName: 'Summer',
     password: 'fspassword',
     meditationReminder: true,
-    petName: 'Mamashita'
+    petName: 'Mamashita',
+    points: 250
   },
   {
     email: 'gh@email.com',
     userName: 'Jerry',
     password: 'ghpassword',
     meditationReminder: true,
-    petName: 'PomPom pudding'
+    petName: 'PomPom pudding',
+    points: 300
   },
   {
     email: 'wdf@email.com',
     userName: 'Beth',
     password: 'wdpassword',
     sleepReminder: true,
-    petName: 'Moffle'
+    petName: 'Moffle',
+    points: 500
   }
 ]
 
@@ -66,8 +71,7 @@ const dataHistory = {
   meditation: 0,
   sleep: 1,
   relaxtions: 2,
-  isToday: false,
-  date: '2021-1-11'
+  isToday: false
 }
 
 async function seed() {
