@@ -10,7 +10,6 @@ const getList = list => {
 const updatePoints = list => {
   return {type: UPDATE_POINTS, list}
 }
-//delete comment later
 
 export const fetchList = () => {
   return async dispatch => {
