@@ -15,10 +15,21 @@ const adminsOnly = (req, res, next) => {
   next()
 }
 
+// get today's dailyProgress
 router.get('/', async (req, res, next) => {
   try {
-    const allProgresses = await DailyProgress.findAll()
-    res.send(allProgresses)
+    let [month, date, year] = new Date().toLocaleDateString('en-US').split('/')
+    let today
+    month.length !== 2
+      ? (today = `${year}-0${month}-${date}`)
+      : (today = `${year}-${month}-${date}`)
+    const [todaysProgress, created] = await DailyProgress.findOrCreate({
+      where: {
+        userId: req.user.id,
+        date: today
+      }
+    })
+    res.send(todaysProgress)
   } catch (error) {
     next(error)
   }
@@ -42,9 +53,20 @@ router.post('/', adminsOnly, async (req, res, next) => {
   }
 })
 
-router.put('/:id', adminsOnly, async (req, res, next) => {
+//update user points
+router.put('/', async (req, res, next) => {
   try {
-    const updateProgress = await DailyProgress.findByPk(req.params.id)
+    let [month, date, year] = new Date().toLocaleDateString('en-US').split('/')
+    let today
+    month.length !== 2
+      ? (today = `${year}-0${month}-${date}`)
+      : (today = `${year}-${month}-${date}`)
+    const updateProgress = await DailyProgress.findOne({
+      where: {
+        userId: req.user.id,
+        date: today
+      }
+    })
     if (updateProgress) {
       await updateProgress.update(req.body)
     } else {
