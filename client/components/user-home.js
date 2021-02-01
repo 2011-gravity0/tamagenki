@@ -35,6 +35,10 @@ export class UserHome extends React.Component {
 
   // write random thing
 
+  componentDidMount() {
+    this.props.loadList()
+  }
+
   async handleCheck(event) {
     event.preventDefault()
     // event.persist()
