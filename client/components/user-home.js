@@ -253,11 +253,20 @@ export class UserHome extends React.Component {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    userId: state.user.id,
+    list: state.list.list
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    loadList: () => dispatch(fetchList()),
+    updateList: (column, points) => dispatch(fetchUpdatedList(column, points))
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
 
 /**
  * PROP TYPES
