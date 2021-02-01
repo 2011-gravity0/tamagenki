@@ -41,6 +41,10 @@ export class UserHome extends React.Component {
   //   return false
   // }
 
+  componentDidMount() {
+    this.props.loadList()
+  }
+
   async handleCheck(event) {
     event.preventDefault()
     // event.persist()
@@ -73,7 +77,7 @@ export class UserHome extends React.Component {
         <>
           <Grid container justify="center" alignItems="center">
             <Grid item>
-              <img src="../../assets/eggGIF.gif" />
+              <img src="../../eggGIF.gif" />
             </Grid>
           </Grid>
           <List>
