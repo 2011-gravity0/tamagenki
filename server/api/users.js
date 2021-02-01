@@ -32,7 +32,7 @@ router.get('/', adminsOnly, async (req, res, next) => {
   try {
     const allUsers = await User.findAll({
       attributes: ['id', 'email', 'petName'],
-      include: [{model: DailyProgress}],
+      include: [{model: DailyProgress}]
     })
     res.json(allUsers)
   } catch (err) {
@@ -45,7 +45,7 @@ router.get('/:userId', loggedInUserOnly, async (req, res, next) => {
     const id = req.params.userId
     if (isNaN(id)) res.status(400).send()
     const singleUser = await User.findByPk(id, {
-      include: [{model: DailyProgress}],
+      include: [{model: DailyProgress}]
     })
     if (!singleUser) res.status(400).send()
     res.status(200).send(singleUser)
