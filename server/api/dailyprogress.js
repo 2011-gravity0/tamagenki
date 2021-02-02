@@ -68,7 +68,8 @@ router.put('/', async (req, res, next) => {
       }
     })
     if (updateProgress) {
-      await updateProgress.update(req.body)
+      const updatedProgress = await updateProgress.update(req.body)
+      res.send(updatedProgress)
     } else {
       const error = new Error('Progress not found')
       error.status = '404'
