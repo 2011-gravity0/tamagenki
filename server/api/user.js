@@ -40,14 +40,35 @@ router.get('/', adminsOnly, async (req, res, next) => {
   }
 })
 
-router.get('/:userId', loggedInUserOnly, async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
     const id = req.params.userId
-    if (isNaN(id)) res.status(400).send()
-    const singleUser = await User.findByPk(id, {
-      include: [{model: DailyProgress}]
-    })
-    if (!singleUser) res.status(400).send()
+    const action = req.query.action
+    if (isNaN(id)) res.status(400).send('No user found')
+    let singleUser
+    if (action === 'pointsOnly') {
+      singleUser = await User.findByPk(id, {
+        include: [
+          {
+            model: DailyProgress,
+            attributes: [
+              'exercise',
+              'fruit',
+              'vegetables',
+              'water',
+              'meditation',
+              'sleep',
+              'relaxation'
+            ]
+          }
+        ]
+      })
+    } else {
+      singleUser = await User.findByPk(id, {
+        include: [{model: DailyProgress}]
+      })
+    }
+    if (!singleUser) res.status(400).send('No user found')
     res.status(200).send(singleUser)
   } catch (error) {
     next(error)
