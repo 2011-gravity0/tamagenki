@@ -26,6 +26,24 @@ h1 {
   text-align: center;
 }
 
+.petImg {
+  margin-top: 80px;
+}
+
+.homeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.listContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .viewContainer {
   height: 100vh;
   display: flex;

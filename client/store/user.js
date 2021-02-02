@@ -7,6 +7,7 @@ import history from '../history'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const PUT_USER = 'PUT_USER'
+const GET_HISTORY = 'GET_HISTORY'
 
 /**
  * INITIAL STATE
@@ -19,6 +20,7 @@ const defaultUser = {}
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 const putUser = updatedUser => ({type: PUT_USER, updatedUser})
+const getHistory = userWithHistory => ({type: GET_HISTORY, userWithHistory})
 
 /**
  * THUNK CREATORS
@@ -66,10 +68,21 @@ export const logout = () => async dispatch => {
 export const updateUser = (userId, userData) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/users/${userId}`, userData)
+      const {data} = await axios.put(`/api/user/${userId}`, userData)
       dispatch(putUser(data))
     } catch (error) {
       console.log('This is Error in updateUser Thunk', error)
+    }
+  }
+}
+
+export const fetchUserHistory = (userId, action) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(`/api/user/${userId}?action=${action}`)
+      dispatch(getHistory(data))
+    } catch (error) {
+      console.log('This is Error in fetchUserHistory Thunk', error)
     }
   }
 }
@@ -85,6 +98,8 @@ export default function(state = defaultUser, action) {
       return defaultUser
     case PUT_USER:
       return action.updatedUser
+    case GET_HISTORY:
+      return action.userWithHistory
     default:
       return state
   }
