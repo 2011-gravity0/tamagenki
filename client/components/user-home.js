@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
+import Navbar from './navbar'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -10,71 +11,47 @@ import Avatar from '@material-ui/core/Avatar'
 import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import AppBar from '@material-ui/core/AppBar'
+
 /**
  * COMPONENT
  */
 export class UserHome extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      exercise: this.props.list === undefined ? 0 : this.props.list.exercise,
-      fruit: this.props.list === undefined ? 0 : this.props.list.fruit,
-      meditation:
-        this.props.list === undefined ? 0 : this.props.list.meditation,
-      relaxation:
-        this.props.list === undefined ? 0 : this.props.list.relaxation,
-      sleep: this.props.list === undefined ? 0 : this.props.list.sleep,
-      vegetables:
-        this.props.list === undefined ? 0 : this.props.list.vegetables,
-      water: this.props.list === undefined ? 0 : this.props.list.water,
-      points: 0,
-      checked: false
-    }
-    // this.checked = this.checked.bind(this)
     this.handleCheck = this.handleCheck.bind(this)
   }
-
-  // checked(column, idx) {
-  //   if (this.state[column] !== 0 && idx < this.state[column]) {
-  //     return true
-  //   }
-  //   return false
-  // }
 
   componentDidMount() {
     this.props.loadList()
   }
 
-  async handleCheck(event) {
+  handleCheck(event) {
     event.preventDefault()
-    // event.persist()
-    console.log('target name', event.target.name)
-    console.log('checked', event.target.checked)
+
     if (event.target.checked === true) {
-      this.setState({checked: event.target.checked})
+      this.props.updateList(
+        event.target.name,
+        this.props.list[event.target.name] + 1
+      )
+    } else {
+      this.props.updateList(
+        event.target.name,
+        this.props.list[event.target.name] - 1
+      )
     }
-    // if (event.target.checked === true) {
-    //   await this.setState({
-    //     [event.target.name]: this.props.list[event.target.name] + 1,
-    //     points: this.state.points + 1,
-    //   })
-    //   console.log('state after adding point', this.state)
-    // } else {
-    //   await this.setState({
-    //     [event.target.name]: this.props.list[event.target.name] - 1,
-    //     points: this.state.points - 1,
-    //   })
-    //   console.log('state after subtracting point', this.state)
-    // }
-    // this.props.updateList(event.target.name, this.state[event.target.name])
   }
 
   render() {
-    console.log(this.props)
-
     if (this.props.list) {
       return (
         <>
+          <AppBar margin="5em">
+            <Grid container justify="center">
+              <h1>TAMAGENKI</h1>
+              <Navbar />
+            </Grid>
+          </AppBar>
           <Grid container justify="center" alignItems="center">
             <Grid item>
               <img src="../../eggGIF.gif" />
@@ -99,7 +76,7 @@ export class UserHome extends React.Component {
                       onClick={event => {
                         this.handleCheck(event)
                       }}
-                      checked={this.props.list.sleep > 1}
+                      checked={this.props.list.sleep > 0}
                       name="sleep"
                       inputProps={{'aria-label': 'primary checkbox'}}
                     />
@@ -113,24 +90,30 @@ export class UserHome extends React.Component {
                       <Avatar src="https://img.icons8.com/cotton/64/000000/grape.png" />
                     </ListItemAvatar>
                     <ListItemText primary="Check off today's fruit servings!" />
-                    {[1, 2, 3].map((checkbox, idx) => {
-                      return (
-                        <Checkbox
-                          onClick={event => {
-                            this.handleCheck(event)
-                          }}
-                          checked={
-                            this.props.list.fruit > 1 &&
-                            idx < this.props.list.fruit
-                              ? true
-                              : this.state.checked
-                          }
-                          name="fruit"
-                          inputProps={{'aria-label': 'primary checkbox'}}
-                          key={idx}
-                        />
-                      )
-                    })}
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.fruit > 0}
+                      name="fruit"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.fruit > 1}
+                      name="fruit"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.fruit > 2}
+                      name="fruit"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
                   </ListItem>
                 </Paper>
               </Grid>
@@ -141,24 +124,30 @@ export class UserHome extends React.Component {
                       <Avatar src="https://img.icons8.com/fluent/48/000000/group-of-vegetables.png" />
                     </ListItemAvatar>
                     <ListItemText primary="Check off today's vegetables servings!" />
-                    {[1, 2, 3].map((checkbox, idx) => {
-                      return (
-                        <Checkbox
-                          onClick={event => {
-                            this.handleCheck(event)
-                          }}
-                          checked={
-                            !!(
-                              this.props.list.vegetables > 1 &&
-                              idx < this.props.list.vegetables
-                            )
-                          }
-                          name="vegetables"
-                          inputProps={{'aria-label': 'primary checkbox'}}
-                          key={idx}
-                        />
-                      )
-                    })}
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.vegetables > 0}
+                      name="vegetables"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.vegetables > 1}
+                      name="vegetables"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.vegetables > 2}
+                      name="vegetables"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
                   </ListItem>
                 </Paper>
               </Grid>
@@ -169,24 +158,54 @@ export class UserHome extends React.Component {
                       <Avatar src="https://img.icons8.com/office/16/000000/water.png" />
                     </ListItemAvatar>
                     <ListItemText primary="Check off today's water servings!" />
-                    {[1, 2, 3, 4, 5, 6].map((checkbox, idx) => {
-                      return (
-                        <Checkbox
-                          onClick={event => {
-                            this.handleCheck(event)
-                          }}
-                          checked={
-                            !!(
-                              this.props.list.water > 1 &&
-                              idx < this.props.list.water
-                            )
-                          }
-                          name="water"
-                          inputProps={{'aria-label': 'primary checkbox'}}
-                          key={idx}
-                        />
-                      )
-                    })}
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.water > 0}
+                      name="water"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.water > 1}
+                      name="water"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.water > 2}
+                      name="water"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.water > 3}
+                      name="water"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.water > 4}
+                      name="water"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
+                    <Checkbox
+                      onClick={event => {
+                        this.handleCheck(event)
+                      }}
+                      checked={this.props.list.water > 5}
+                      name="water"
+                      inputProps={{'aria-label': 'primary checkbox'}}
+                    />
                   </ListItem>
                 </Paper>
               </Grid>
