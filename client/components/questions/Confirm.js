@@ -20,7 +20,7 @@ const styles = theme => ({
   // Load app bar information from the theme
   toolbar: theme.mixins.toolbar,
   root: {
-    margin: 100,
+    marginTop: 50,
     marginBottom: 15,
     padding: 20
   },
@@ -83,13 +83,13 @@ export class Confirm extends Component {
         <Paper>
           <div className={classes.toolbar} />
         </Paper>
-        <Box m={4}>
+        <Box mt={2}>
           <Grid container justify="center">
             <h1>Did I Get Your Answers Right?</h1>
           </Grid>
         </Box>
 
-        <Box m={6} pt={3}>
+        <Box mt={2} pt={3}>
           <Card>
             <Grid container justify="center">
               <List>
