@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import history from '../history'
 import {auth, updateUser} from '../store'
 import {TextField, Button, Typography} from '@material-ui/core'
 
@@ -10,8 +11,8 @@ const NamePet = props => {
     evt.preventDefault()
     const petName = evt.target.eggname.value
     updateUser(userid, {petName})
+    history.push('/guidePet')
   }
-
   return (
     <div className="viewContainer">
       <div className="nameEgg">

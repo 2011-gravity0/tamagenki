@@ -17,6 +17,7 @@ const adminsOnly = (req, res, next) => {
 }
 
 const loggedInUserOnly = (req, res, next) => {
+  console.log(req)
   if (!req.user) {
     const err = new Error('You are not logged in')
     err.status = 401
