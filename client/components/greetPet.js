@@ -1,5 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 import UserHome from './user-home'
+import animationOwl from '../lotties/4203-take-a-selfie.json'
+import Lottie from 'react-lottie'
+import history from '../history'
 export default class GreetPet extends React.Component {
   constructor(props) {
     super(props)
