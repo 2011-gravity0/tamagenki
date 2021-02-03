@@ -16,7 +16,7 @@ const styles = theme => ({
   // Load app bar information from the theme
   toolbar: theme.mixins.toolbar,
   root: {
-    margin: 100,
+    marginTop: 50,
     marginBottom: 15,
     padding: 20
   },

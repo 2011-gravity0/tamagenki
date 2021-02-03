@@ -17,7 +17,7 @@ const styles = theme => ({
   // Load app bar information from the theme
   toolbar: theme.mixins.toolbar,
   root: {
-    margin: 100,
+    marginTop: 50,
     marginBottom: 15,
     padding: 20
   },
@@ -51,7 +51,7 @@ export class Reminders extends Component {
         <Paper>
           <div className={classes.toolbar} />
         </Paper>
-        <Box m={4}>
+        <Box m={1}>
           <Grid container justify="center">
             <h1>Let's Move on to Your Preferences</h1>
           </Grid>
