@@ -1,6 +1,6 @@
 import React from 'react'
 // import UserHome from './user-home'
-import animationOwl from '../public/lotties/owl.json'
+import animationOwl from '../../public/lotties/owl.json'
 import Lottie from 'react-lottie'
 import history from '../history'
 export default class GuidePet extends React.Component {
