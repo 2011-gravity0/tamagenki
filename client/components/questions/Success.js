@@ -16,7 +16,7 @@ const styles = theme => ({
   // Load app bar information from the theme
   toolbar: theme.mixins.toolbar,
   root: {
-    margin: 100,
+    marginTop: 50,
     marginBottom: 15,
     padding: 20
   },
@@ -79,21 +79,27 @@ export class Success extends Component {
         </Box>
         <Grid container column="true" justify="center">
           {/* this is the dumpling animation. Lottie elements aren't clickable so I had to wrap the whole thing in a Button */}
-          <Button
-            onClick={this.handleClick}
-            style={{backgroundColor: 'transparent'}}
-            disableRipple={true}
-          >
-            <Lottie
-              options={toggleAnimation ? defaultOptions : defaultOptions2}
-              height={400}
-              width={400}
-            />
-          </Button>
-          <h1>Are you ready to meet your tamabuddy?</h1>
-          <Button component={Link} to="/nameEgg">
-            yes
-          </Button>
+          <Grid item container justify="center">
+            <Button
+              onClick={this.handleClick}
+              style={{backgroundColor: 'transparent'}}
+              disableRipple={true}
+            >
+              <Lottie
+                options={toggleAnimation ? defaultOptions : defaultOptions2}
+                height={400}
+                width={400}
+              />
+            </Button>
+          </Grid>
+          <Grid item container justify="center">
+            <h1>Are you ready to meet your tamabuddy?</h1>
+          </Grid>
+          <Grid item container justify="center">
+            <Button component={Link} to="/nameEgg">
+              yes
+            </Button>
+          </Grid>
         </Grid>
       </React.Fragment>
     )
