@@ -1,30 +1,33 @@
-import React, {Component} from 'react'
-import UserHome from './user-home'
-import animationOwl from '../lotties/4203-take-a-selfie.json'
+import React from 'react'
+// import UserHome from './user-home'
+import animationOwl from '../public/lotties/owl.json'
 import Lottie from 'react-lottie'
 import history from '../history'
-export default class GreetPet extends React.Component {
+export default class GuidePet extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      showPage: false
-    }
     this.nextPage = this.nextPage.bind(this)
-    this.petPage = this.petPage.bind(this)
   }
   nextPage() {
-    this.setState({
-      showPage: true
-    })
+    history.push('/')
   }
-  petPage() {
+  render() {
+    const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationOwl,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    }
     return (
       <div>
         <div>
-          <img
+          <Lottie options={defaultOptions} height={400} width={400} />
+          {/* <img
             src="https://i.pinimg.com/originals/e2/c9/cd/e2c9cd63e38ced85263bf88d8e131cfb.jpg"
             alt="Red Ruff Monster"
-          />
+          /> */}
         </div>
         <div>
           <p>
@@ -36,15 +39,6 @@ export default class GreetPet extends React.Component {
           Next
         </button>
       </div>
-    )
-  }
-  render() {
-    return this.state.showPage ? (
-      <div>
-        <UserHome />
-      </div>
-    ) : (
-      <div>{this.nextPage()}</div>
     )
   }
 }
