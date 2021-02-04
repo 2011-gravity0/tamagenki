@@ -13,7 +13,9 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import AppBar from '@material-ui/core/AppBar'
-
+import LinearProgress from '@material-ui/core/LinearProgress'
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
 /**
  * COMPONENT
  */
@@ -22,10 +24,12 @@ export class UserHome extends React.Component {
     super(props)
     this.state = {
       image: '',
-      totalPoints: 0
+      totalPoints: 0,
+      dailyPoints: 0
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
+    this.setDailyPoints = this.setDailyPoints.bind(this)
   }
 
   async setTotalPoints() {
@@ -44,9 +48,17 @@ export class UserHome extends React.Component {
     }
   }
 
+  setDailyPoints() {
+    let dailyPoints = Object.values(this.props.list).reduce((acc, next) => {
+      return acc + next
+    }, 0)
+    this.setState({dailyPoints: dailyPoints})
+  }
+
   async componentDidMount() {
     try {
       await this.props.loadList()
+      await this.setTotalPoints()
       await this.setTotalPoints()
       if (this.state.totalPoints < 7) {
         this.setState({image: '/eggGIF.gif'})
@@ -95,11 +107,32 @@ export class UserHome extends React.Component {
                 <Navbar />
               </Grid>
             </AppBar>
-            <Grid container justify="center" alignItems="center">
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              direction="column"
+            >
               <Grid item>
                 <img className="petImg" src={this.state.image} />
               </Grid>
+              <Grid item>
+                <Box display="flex" alignItems="center">
+                  <Box width="100%" mr={1}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={this.state.dailyPoints / 16 * 100}
+                    />
+                  </Box>
+                  <Box minWidth={35}>
+                    <Typography>{`${Math.round(
+                      this.state.dailyPoints / 16 * 100
+                    )}%`}</Typography>
+                  </Box>
+                </Box>
+              </Grid>
             </Grid>
+
             <List className="listContainer">
               <Grid
                 container
