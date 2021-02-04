@@ -76,7 +76,7 @@ export const updateUser = (userId, userData) => {
   }
 }
 
-export const fetchUserHistory = (userId, action) => {
+export const fetchUserHistory = (userId, action = 'all') => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/user/${userId}?action=${action}`)

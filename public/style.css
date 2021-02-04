@@ -145,3 +145,15 @@ form div {
   justify-content: center;
   align-items: center;
 }
+
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoContainer {
+  width: 400px;
+  height: 90vh;
+}
