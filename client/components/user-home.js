@@ -89,12 +89,7 @@ export class UserHome extends React.Component {
       return (
         <>
           <div className="homeContainer">
-            <AppBar margin="5em">
-              <Grid container justify="center">
-                <h1>TAMAGENKI</h1>
-                <Navbar />
-              </Grid>
-            </AppBar>
+            <Navbar />
             <Grid container justify="center" alignItems="center">
               <Grid item>
                 <img className="petImg" src={this.state.image} />
