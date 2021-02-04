@@ -58,7 +58,7 @@ form div {
 }
 
 .loginContainer {
-  width: 400px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,8 +73,16 @@ form div {
   align-items: center;
 }
 
+.MuiInputBase-root {
+  margin: 0 0 20px;
+}
+
 .login {
+  margin: 0;
   width: 100%;
+  border-width: 1;
+  /* padding: 15; */
+  border-color: 'gray';
 }
 
 .loginButton {

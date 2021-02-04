@@ -34,16 +34,19 @@ const AuthForm = props => {
         <form className="login-form" onSubmit={handleSubmit} name={name}>
           <TextField
             required
+            id="outlined-required"
             label="email"
             name="email"
             variant="outlined"
             className="login"
             InputLabelProps={{
-              shrink: true
+              shrink: true,
+              margin: 'dense'
             }}
           />
           <TextField
             required
+            id="outlined-required"
             type="password"
             label="Password"
             name="password"
