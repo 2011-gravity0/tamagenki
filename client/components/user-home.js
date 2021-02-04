@@ -15,7 +15,7 @@ import Paper from '@material-ui/core/Paper'
 import AppBar from '@material-ui/core/AppBar'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
+
 /**
  * COMPONENT
  */
@@ -49,17 +49,22 @@ export class UserHome extends React.Component {
   }
 
   setDailyPoints() {
-    let dailyPoints = Object.values(this.props.list).reduce((acc, next) => {
-      return acc + next
-    }, 0)
-    this.setState({dailyPoints: dailyPoints})
+    try {
+      let dailyPoints = Object.values(this.props.list).reduce((acc, curr) => {
+        return acc + curr
+      }, 0)
+      this.setState({dailyPoints: dailyPoints})
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   async componentDidMount() {
     try {
+      console.log('component did mount')
       await this.props.loadList()
       await this.setTotalPoints()
-      await this.setTotalPoints()
+      await this.setDailyPoints()
       if (this.state.totalPoints < 7) {
         this.setState({image: '/eggGIF.gif'})
       } else {
@@ -84,6 +89,7 @@ export class UserHome extends React.Component {
           this.props.list[event.target.name] - 1
         )
       }
+      await this.setDailyPoints()
       await this.setTotalPoints()
       if (this.state.totalPoints >= 7 && this.state.image === '/eggGIF.gif') {
         this.setState({image: '/hatchEgg.gif'})
@@ -107,29 +113,27 @@ export class UserHome extends React.Component {
                 <Navbar />
               </Grid>
             </AppBar>
+
+            {/* <h2> Today's Progress: {this.state.dailyPoints} out of 16</h2> */}
+            <img className="petImg" src={this.state.image} />
             <Grid
               container
+              // item
               justify="center"
               alignItems="center"
-              direction="column"
+              direction="row"
             >
-              <Grid item>
-                <img className="petImg" src={this.state.image} />
+              <Grid item style={{width: '40%'}}>
+                <LinearProgress
+                  variant="determinate"
+                  value={this.state.dailyPoints / 16 * 100}
+                />{' '}
               </Grid>
-              <Grid item>
-                <Box display="flex" alignItems="center">
-                  <Box width="100%" mr={1}>
-                    <LinearProgress
-                      variant="determinate"
-                      value={this.state.dailyPoints / 16 * 100}
-                    />
-                  </Box>
-                  <Box minWidth={35}>
-                    <Typography>{`${Math.round(
-                      this.state.dailyPoints / 16 * 100
-                    )}%`}</Typography>
-                  </Box>
-                </Box>
+              <Grid item style={{width: '5%'}}>
+                {' '}
+                <Typography>{`${Math.round(
+                  this.state.dailyPoints / 16 * 100
+                )}%`}</Typography>
               </Grid>
             </Grid>
 
@@ -332,7 +336,7 @@ export class UserHome extends React.Component {
                         onClick={event => {
                           this.handleCheck(event)
                         }}
-                        checked={this.props.list.meditation > 1}
+                        checked={this.props.list.meditation > 0}
                         name="meditation"
                         inputProps={{'aria-label': 'primary checkbox'}}
                       />
