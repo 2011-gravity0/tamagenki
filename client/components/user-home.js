@@ -107,15 +107,8 @@ export class UserHome extends React.Component {
       return (
         <>
           <div className="homeContainer">
-            <AppBar margin="5em">
-              <Grid container justify="center">
-                <h1>TAMAGENKI</h1>
-                <Navbar />
-              </Grid>
-            </AppBar>
+            <Navbar />
 
-            {/* <h2> Today's Progress: {this.state.dailyPoints} out of 16</h2> */}
-            <img className="petImg" src={this.state.image} />
             <Grid
               container
               // item
@@ -123,6 +116,9 @@ export class UserHome extends React.Component {
               alignItems="center"
               direction="row"
             >
+              <Grid item>
+                <img className="petImg" src={this.state.image} />
+              </Grid>
               <Grid item style={{width: '40%'}}>
                 <LinearProgress
                   variant="determinate"
