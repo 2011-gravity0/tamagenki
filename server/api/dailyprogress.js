@@ -15,21 +15,41 @@ const adminsOnly = (req, res, next) => {
   next()
 }
 
+const getDate = () => {
+  let [month, date, year] = new Date().toLocaleDateString('en-US').split('/')
+
+  if (month.length !== 0) {
+    return `${year}-0${month}-${date}`
+  } else {
+    return `${year}-${month}-${date}`
+  }
+}
+
 // get today's dailyProgress
 router.get('/', async (req, res, next) => {
   try {
-    let [month, date, year] = new Date().toLocaleDateString('en-US').split('/')
-    let today
-    month.length !== 2
-      ? (today = `${year}-0${month}-${date}`)
-      : (today = `${year}-${month}-${date}`)
+    let today = await getDate()
+
     const [todaysProgress, created] = await DailyProgress.findOrCreate({
+      attributes: [
+        'exercise',
+        'fruit',
+        'vegetables',
+        'water',
+        'meditation',
+        'sleep',
+        'relaxation'
+      ],
       where: {
         userId: req.user.id,
         date: today
       }
     })
-    res.send(todaysProgress)
+    if (todaysProgress) {
+      res.send(todaysProgress)
+    } else {
+      next()
+    }
   } catch (error) {
     next(error)
   }
@@ -56,19 +76,27 @@ router.post('/', adminsOnly, async (req, res, next) => {
 //update user points
 router.put('/', async (req, res, next) => {
   try {
-    let [month, date, year] = new Date().toLocaleDateString('en-US').split('/')
-    let today
-    month.length !== 2
-      ? (today = `${year}-0${month}-${date}`)
-      : (today = `${year}-${month}-${date}`)
+    let today = await getDate()
     const updateProgress = await DailyProgress.findOne({
-      where: {
-        userId: req.user.id,
-        date: today
-      }
+      where: {userId: req.user.id, date: today}
     })
     if (updateProgress) {
-      const updatedProgress = await updateProgress.update(req.body)
+      await updateProgress.update(req.body)
+      const updatedProgress = await DailyProgress.findOne({
+        where: {
+          userId: req.user.id,
+          date: today
+        },
+        attributes: [
+          'exercise',
+          'fruit',
+          'vegetables',
+          'water',
+          'meditation',
+          'sleep',
+          'relaxation'
+        ]
+      })
       res.send(updatedProgress)
     } else {
       const error = new Error('Progress not found')
