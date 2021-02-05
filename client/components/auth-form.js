@@ -25,7 +25,6 @@ const AuthForm = props => {
     }
   }
 
-  console.log('displayName', displayName)
   return (
     <div className="viewContainer">
       <div className="loginContainer">
@@ -34,6 +33,7 @@ const AuthForm = props => {
         <form className="login-form" onSubmit={handleSubmit} name={name}>
           <TextField
             required
+            id="outlined-required"
             label="email"
             name="email"
             variant="outlined"
@@ -44,6 +44,7 @@ const AuthForm = props => {
           />
           <TextField
             required
+            id="outlined-required"
             type="password"
             label="Password"
             name="password"
@@ -64,25 +65,6 @@ const AuthForm = props => {
             {displayName}
           </Button>
         </form>
-
-        {/* <form onSubmit={handleSubmit} name={name}>
-      //   <div>
-      //     <label htmlFor="email">
-      //       <small>Email</small>
-      //     </label>
-      //     <input name="email" type="text" />
-      //   </div>
-      //   <div>
-      //     <label htmlFor="password">
-      //       <small>Password</small>
-      //     </label>
-      //     <input name="password" type="password" />
-      //   </div>
-      //   <div>
-      //     <button type="submit">{displayName}</button>
-      //   </div>
-      //   {error && error.response && <div> {error.response.data} </div>}
-      // </form> */}
         <Typography variant="subtitle2" align="center" className="or">
           or
         </Typography>
