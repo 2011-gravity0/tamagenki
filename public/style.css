@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -20,14 +21,14 @@ form div {
   display: inline-block;
 }
 
-h1 {
+.loginContainer h1 {
   font-family: 'Fredoka One', cursive;
   color: rgb(228, 115, 134);
   text-align: center;
 }
 
 .petImg {
-  margin-top: 80px;
+  margin: 10px;
 }
 
 .homeContainer {
@@ -57,7 +58,7 @@ h1 {
 }
 
 .loginContainer {
-  width: 100%;
+  width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,8 +73,16 @@ h1 {
   align-items: center;
 }
 
+.MuiInputBase-root {
+  margin: 0 0 20px;
+}
+
 .login {
+  margin: 0;
   width: 100%;
+  border-width: 1;
+  /* padding: 15; */
+  border-color: 'gray';
 }
 
 .loginButton {
@@ -135,4 +144,88 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.editContainer {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoContainer {
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.infoPaper {
+  width: 90%;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.itemContainer {
+  margin: 5px 0;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.fieldName {
+  width: 90px;
+  margin-left: 15px;
+  /* text-align: right;
+  padding-right: 20px; */
+}
+
+.userInfo {
+  width: 180px;
+  text-align: left;
+}
+
+.userInfo h4 {
+  margin-left: 10px;
+}
+
+.editIcon {
+  width: 30px;
+}
+
+.settingTitle {
+  color: #c58684;
+  margin: 15px 0;
+}
+
+.editContainer h5 {
+  color: gray;
+  margin: 10px 0;
+}
+
+.editContainer hr {
+  color: gray;
+  margin-top: 5px;
+}
+
+.textBox {
+  height: 40px;
+}
+
+.reminderContainer {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.MuiInputBase-root {
+  height: 40px;
+  padding: 10px;
+}
+.MuiInputBase-input {
+  padding: 10px;
 }
