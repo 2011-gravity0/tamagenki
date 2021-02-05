@@ -147,6 +147,7 @@ form div {
 }
 
 .editContainer {
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -154,6 +155,77 @@ form div {
 }
 
 .infoContainer {
-  width: 400px;
-  height: 90vh;
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.infoPaper {
+  width: 90%;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.itemContainer {
+  margin: 5px 0;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.fieldName {
+  width: 90px;
+  margin-left: 15px;
+  /* text-align: right;
+  padding-right: 20px; */
+}
+
+.userInfo {
+  width: 180px;
+  text-align: left;
+}
+
+.userInfo h4 {
+  margin-left: 10px;
+}
+
+.editIcon {
+  width: 30px;
+}
+
+.settingTitle {
+  color: #c58684;
+  margin: 15px 0;
+}
+
+.editContainer h5 {
+  color: gray;
+  margin: 10px 0;
+}
+
+.editContainer hr {
+  color: gray;
+  margin-top: 5px;
+}
+
+.textBox {
+  height: 40px;
+}
+
+.reminderContainer {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.MuiInputBase-root {
+  height: 40px;
+  padding: 10px;
+}
+.MuiInputBase-input {
+  padding: 10px;
 }
