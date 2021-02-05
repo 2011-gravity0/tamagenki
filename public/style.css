@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -20,14 +21,14 @@ form div {
   display: inline-block;
 }
 
-h1 {
+.loginContainer h1 {
   font-family: 'Fredoka One', cursive;
   color: rgb(228, 115, 134);
   text-align: center;
 }
 
 .petImg {
-  margin-top: 80px;
+  margin: 10px;
 }
 
 .homeContainer {

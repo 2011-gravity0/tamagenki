@@ -3,53 +3,119 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {makeStyles} from '@material-ui/core/styles'
+import {
+  AppBar,
+  Typography,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar
+} from '@material-ui/core'
+import {AccountCircle} from '@material-ui/icons'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-)
+const useStyles = makeStyles(theme => ({
+  grow: {
+    marginTop: 0,
+    flexGrow: 1,
+    width: '100vw'
+  },
+  menu: {
+    color: 'gray'
+  },
+  title: {
+    flexGrow: 1,
+    fontFamily: 'Fredoka One'
+  }
+}))
+
+const Navbar = ({handleLogout}) => {
+  const classes = useStyles()
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
+
+  const handleMenu = event => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  return (
+    <div className={classes.grow}>
+      <AppBar position="static" style={{background: '#FFB0AD'}}>
+        <Toolbar className="nav">
+          {/* The navbar will show these links and tools to anyone */}
+          <Typography variant="h5" className={classes.title}>
+            <Link to="/" style={{color: '#FFF'}}>
+              Tamagenki
+            </Link>
+          </Typography>
+
+          <div>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem>
+                <Link to="/dashboard" className={classes.menu}>
+                  Dashboard
+                </Link>
+              </MenuItem>
+              <MenuItem className={classes.menu}>
+                <Link to="/setting" className={classes.menu}>
+                  Setting
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleLogout} className={classes.menu}>
+                Logout
+              </MenuItem>
+            </Menu>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
+  )
+}
 
 /**
  * CONTAINER
  */
-const mapState = state => {
-  return {
-    isLoggedIn: !!state.user.id
-  }
-}
 
 const mapDispatch = dispatch => {
   return {
-    handleClick() {
+    handleLogout() {
       dispatch(logout())
     }
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(null, mapDispatch)(Navbar)
 
 /**
  * PROP TYPES
  */
 Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  handleLogout: PropTypes.func.isRequired
 }
