@@ -90,22 +90,31 @@ export class UserHome extends React.Component {
         <>
           <div className="homeContainer">
             <Navbar />
-
-            <Grid container justify="center" alignItems="center">
-              <Grid item>
-                <TamabuddyRoom
-                  dailyPoints={this.state.dailyPoints}
-                  totalPoints={this.state.totalPoints}
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+              className="contentsContainer"
+            >
+              <div className="animationContainer">
+                <div className="animation">
+                  <TamabuddyRoom
+                    dailyPoints={this.state.dailyPoints}
+                    totalPoints={this.state.totalPoints}
+                  />
+                </div>
+                <div className="progressBar">
+                  <ProgressBar dailyPoints={this.state.dailyPoints} />
+                </div>
+              </div>
+              <div className="listView">
+                <DailyProgressList
+                  handleCheck={this.handleCheck}
+                  list={this.props.list}
                 />
-              </Grid>
-
-              <ProgressBar dailyPoints={this.state.dailyPoints} />
+              </div>
             </Grid>
-
-            <DailyProgressList
-              handleCheck={this.handleCheck}
-              list={this.props.list}
-            />
           </div>
         </>
       )

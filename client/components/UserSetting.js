@@ -188,7 +188,7 @@ const UserSetting = props => {
               {bedTimeEdit ? (
                 <TextField
                   defaultValue={props.user.bedTime}
-                  name="userName"
+                  name="bedTime"
                   variant="outlined"
                   onChange={handleChange}
                   className="textBox"
