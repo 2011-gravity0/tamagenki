@@ -57,7 +57,6 @@ const UserSetting = props => {
         await setUpdateBody({bedTime: props.user.bedTime})
         break
       default:
-        
     }
   }
 
@@ -84,7 +83,6 @@ const UserSetting = props => {
         setBedTimeEdit(false)
         break
       default:
-        
     }
   }
 
@@ -92,7 +90,7 @@ const UserSetting = props => {
     <div className="editContainer">
       <Navbar />
       <div className="infoContainer">
-        <Paper className="infoPaper">
+        <Paper elevation={1} className="infoPaper">
           <h4 className="settingTitle">Account Setting</h4>
           <hr />
           <div className="itemContainer">
