@@ -91,13 +91,7 @@ export class UserHome extends React.Component {
           <div className="homeContainer">
             <Navbar />
 
-            <Grid
-              container
-              // item
-              justify="center"
-              alignItems="center"
-              direction="row"
-            >
+            <Grid container justify="center" alignItems="center">
               <Grid item>
                 <TamabuddyRoom
                   dailyPoints={this.state.dailyPoints}
