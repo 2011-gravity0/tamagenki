@@ -2,12 +2,12 @@ const webPush = require('web-push')
 
 const pushSubscription = {
   endpoint:
-    'https://fcm.googleapis.com/fcm/send/ekKeTSKVogs:APA91bGiE8txfyy9LJwx2jnc4n2Vlx2OF3Rb_bKsS2KrLmXpPSNVUiYtpf5ItoMbZtOlylseHL97MEn3RKdJQjZ48qA8oHQMoYxwcjQCS3ebMlZz41IdOp-IEPEhcvCJTzcxpjfgst5y',
+    'https://fcm.googleapis.com/fcm/send/d0cQRWP89W8:APA91bH2lwmd8Yz_ClJU-7ClUuioHxHXe9QuLG1w_bMaJPTNLSmixWcZ0-88M9n15rUmKOthSYU4_UuR2GegLra4uGOZJnA8djC2R4PmbLR14a8dVjWgR30wQrFRRaP3itknmifkAdbu',
   expirationTime: null,
   keys: {
     p256dh:
-      'BGsqaHiLv2_x1Hj4wWdKpebA6xyghmfngZBlTia0f-0cetr2tK9Py_g2PIVuH2_9RNKE4hKW8qqd0d2NzLcJFJo',
-    auth: 'Mk7p1F5fKVRHxtPnmCeTYw'
+      'BL6r_rm2oUREwCGLZrbtctE56YEuBasz0K7wY4KwuSYactRNlQbRitEK900so56yObrschK8O3jiMkglSDMkf0A',
+    auth: 'vjj0hpGz3MtIq2kMxSmoKQ'
   }
 }
 const vapidPublicKey =
