@@ -196,3 +196,4 @@ const app = (() => {
     pushButton.textContent = 'Push Not Supported'
   }
 })()
+console.log('this is endpoint:', document.querySelector('.js-endpoint-url'))

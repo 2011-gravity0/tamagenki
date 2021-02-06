@@ -54,6 +54,12 @@ self.addEventListener('notificationclose', event => {
 
   console.log('Closed notification: ' + primaryKey)
 })
+self.addEventListener('notificationclose', event => {
+  const notification = event.notification
+  const primaryKey = notification.data.primaryKey
+
+  console.log('Closed notification: ' + primaryKey)
+})
 
 self.addEventListener('notificationclick', event => {
   const notification = event.notification
