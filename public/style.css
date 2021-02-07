@@ -36,6 +36,11 @@ form div {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  /* background-image: url('/eggIcon192.png');
+  background-repeat: no-repeat;
+  background-size: 500px 400px;
+  background-position: center top;
+  background-attachment: fixed; */
 }
 
 .listContainer {
