@@ -6,7 +6,6 @@ import {
   Switch,
   Paper,
   TextField,
-  Typography,
   IconButton,
   FormControlLabel
 } from '@material-ui/core'
@@ -14,22 +13,24 @@ import {withStyles} from '@material-ui/core/styles'
 import EditIcon from '@material-ui/icons/Edit'
 import SaveIcon from '@material-ui/icons/Save'
 
-const UserSetting = props => {
-  const [nameEdit, setNameEdit] = useState(false)
-  const [emailEdit, setEmailEdit] = useState(false)
-  const [passwordEdit, setPasswordEdit] = useState(false)
-  const [bedTimeEdit, setBedTimeEdit] = useState(false)
+const UserSetting = ({user, updateUser}) => {
+  const [editMode, setEditMode] = useState({
+    userName: false,
+    email: false,
+    password: false,
+    bedTime: false
+  })
   const [updateBody, setUpdateBody] = useState({})
   const [reminder, setReminder] = useState({
-    exerciseReminder: props.user.exerciseReminder,
-    waterReminder: props.user.waterReminder,
-    meditationReminder: props.user.meditationReminder,
-    sleepReminder: props.user.sleepReminder
+    exerciseReminder: user.exerciseReminder,
+    waterReminder: user.waterReminder,
+    meditationReminder: user.meditationReminder,
+    sleepReminder: user.sleepReminder
   })
 
   const handleReminder = event => {
     console.log(event.target)
-    props.updateUser(props.user.id, {
+    updateUser(user.id, {
       [event.target.name]: event.target.checked
     })
     setReminder({
@@ -39,25 +40,8 @@ const UserSetting = props => {
   }
 
   const handleEdit = async field => {
-    switch (field) {
-      case 'userName':
-        await setNameEdit(true)
-        await setUpdateBody({userName: props.user.userName})
-        break
-      case 'email':
-        await setEmailEdit(true)
-        await setUpdateBody({email: props.user.email})
-        break
-      case 'password':
-        await setPasswordEdit(true)
-        await setUpdateBody({password: props.user.password})
-        break
-      case 'bedTime':
-        await setBedTimeEdit(true)
-        await setUpdateBody({bedTime: props.user.bedTime})
-        break
-      default:
-    }
+    await setEditMode({...editMode, [field]: true})
+    await setUpdateBody({[field]: user[field]})
   }
 
   const handleChange = event => {
@@ -67,24 +51,23 @@ const UserSetting = props => {
   }
 
   const handleSubmit = field => {
-    props.updateUser(props.user.id, updateBody)
+    updateUser(user.id, updateBody)
     setUpdateBody({})
-    switch (field) {
-      case 'userName':
-        setNameEdit(false)
-        break
-      case 'email':
-        setEmailEdit(false)
-        break
-      case 'password':
-        setPasswordEdit(false)
-        break
-      case 'bedTime':
-        setBedTimeEdit(false)
-        break
-      default:
-    }
+    setEditMode({...editMode, [field]: false})
   }
+
+  const mapUserInfo = [
+    {field: 'userName', displayName: 'Name'},
+    {field: 'email', displayName: 'Email'},
+    {field: 'password', displayName: 'Password'},
+    {field: 'bedTime', displayName: 'Bedtime'}
+  ]
+  const mapReminer = [
+    {field: 'exerciseReminder', displayName: 'Exercise'},
+    {field: 'waterReminder', displayName: 'Water Intake'},
+    {field: 'meditationReminder', displayName: 'Meditation'},
+    {field: 'sleepReminder', displayName: 'Bedtime'}
+  ]
 
   return (
     <div className="editContainer">
@@ -93,188 +76,60 @@ const UserSetting = props => {
         <Paper elevation={1} className="infoPaper">
           <h4 className="settingTitle">Account Setting</h4>
           <hr />
-          <div className="itemContainer">
-            <div className="fieldName">
-              <h5>Name</h5>
+          {mapUserInfo.map(item => (
+            <div className="itemContainer">
+              <div className="fieldName">
+                <h5>{item.displayName}</h5>
+              </div>
+              <div className="userInfo">
+                {editMode[item.field] ? (
+                  <TextField
+                    defaultValue={user[item.field]}
+                    type={item.field === 'password' ? 'password' : 'string'}
+                    name={item.field}
+                    variant="outlined"
+                    onChange={handleChange}
+                    className="textBox"
+                  />
+                ) : (
+                  <h4>
+                    {item.field === 'password' ? '****' : user[item.field]}
+                  </h4>
+                )}
+              </div>
+              <div className="editIcon">
+                <IconButton
+                  onClick={
+                    editMode[item.field]
+                      ? () => handleSubmit(item.field)
+                      : () => handleEdit(item.field)
+                  }
+                >
+                  {editMode[item.field] ? <SaveIcon /> : <EditIcon />}
+                </IconButton>
+              </div>
             </div>
-            <div className="userInfo">
-              {nameEdit ? (
-                <TextField
-                  defaultValue={props.user.userName}
-                  name="userName"
-                  variant="outlined"
-                  onChange={handleChange}
-                  className="textBox"
-                />
-              ) : (
-                <h4>{props.user.userName}</h4>
-              )}
-            </div>
-            <div className="editIcon">
-              <IconButton
-                onClick={
-                  nameEdit
-                    ? () => handleSubmit('userName')
-                    : () => handleEdit('userName')
-                }
-              >
-                {nameEdit ? <SaveIcon /> : <EditIcon />}
-              </IconButton>
-            </div>
-          </div>
-          <div className="itemContainer">
-            <div className="fieldName">
-              <h5>Email</h5>
-            </div>
-            <div className="userInfo">
-              {emailEdit ? (
-                <TextField
-                  defaultValue={props.user.email}
-                  name="email"
-                  variant="outlined"
-                  onChange={handleChange}
-                  className="textBox"
-                />
-              ) : (
-                <h4>{props.user.email}</h4>
-              )}
-            </div>
-            <div className="editIcon">
-              <IconButton
-                onClick={
-                  emailEdit
-                    ? () => handleSubmit('email')
-                    : () => handleEdit('email')
-                }
-              >
-                {emailEdit ? <SaveIcon /> : <EditIcon />}
-              </IconButton>
-            </div>
-          </div>
-          <div className="itemContainer">
-            <div className="fieldName">
-              <h5>Password</h5>
-            </div>
-            <div className="userInfo">
-              {passwordEdit ? (
-                <TextField
-                  type="password"
-                  name="password"
-                  variant="outlined"
-                  onChange={handleChange}
-                  className="textBox"
-                />
-              ) : (
-                <h4>****</h4>
-              )}
-            </div>
-            <div className="editIcon">
-              <IconButton
-                onClick={
-                  passwordEdit
-                    ? () => handleSubmit('password')
-                    : () => handleEdit('password')
-                }
-              >
-                {passwordEdit ? <SaveIcon /> : <EditIcon />}
-              </IconButton>
-            </div>
-          </div>
-          <div className="itemContainer">
-            <div className="fieldName">
-              <h5>Bed Time</h5>
-            </div>
-            <div className="userInfo">
-              {bedTimeEdit ? (
-                <TextField
-                  defaultValue={props.user.bedTime}
-                  name="userName"
-                  variant="outlined"
-                  onChange={handleChange}
-                  className="textBox"
-                />
-              ) : (
-                <h4>{props.user.bedTime}</h4>
-              )}
-            </div>
-            <div className="editIcon">
-              <IconButton
-                onClick={
-                  bedTimeEdit
-                    ? () => handleSubmit('bedTime')
-                    : () => handleEdit('bedTime')
-                }
-              >
-                {bedTimeEdit ? <SaveIcon /> : <EditIcon />}
-              </IconButton>
-            </div>
-          </div>
+          ))}
           <h4 className="settingTitle">Reminder Setting</h4>
           <hr />
-          <div className="reminderContainer">
-            <div className="fieldName">
-              <h5>Exercise</h5>
+          {mapReminer.map(item => (
+            <div className="reminderContainer">
+              <div className="fieldName">
+                <h5>{item.displayName}</h5>
+              </div>
+              <div className="toggle">
+                <FormControlLabel
+                  control={
+                    <IOSSwitch
+                      checked={reminder[item.field]}
+                      onClick={handleReminder}
+                      name={item.field}
+                    />
+                  }
+                />
+              </div>
             </div>
-            <div className="toggle">
-              <FormControlLabel
-                control={
-                  <IOSSwitch
-                    checked={reminder.exerciseReminder}
-                    onClick={handleReminder}
-                    name="exerciseReminder"
-                  />
-                }
-              />
-            </div>
-          </div>
-          <div className="reminderContainer">
-            <div className="fieldName">
-              <h5>Water Intake</h5>
-            </div>
-            <div className="toggle">
-              <FormControlLabel
-                control={
-                  <IOSSwitch
-                    checked={reminder.waterReminder}
-                    onClick={handleReminder}
-                    name="waterReminder"
-                  />
-                }
-              />
-            </div>
-          </div>
-          <div className="reminderContainer">
-            <div className="fieldName">
-              <h5>Meditation</h5>
-            </div>
-            <div className="toggle">
-              <FormControlLabel
-                control={
-                  <IOSSwitch
-                    checked={reminder.meditationReminder}
-                    onClick={handleReminder}
-                    name="meditationReminder"
-                  />
-                }
-              />
-            </div>
-          </div>
-          <div className="reminderContainer">
-            <div className="fieldName">
-              <h5>Bedtime</h5>
-            </div>
-            <div className="toggle">
-              <FormControlLabel
-                control={
-                  <IOSSwitch
-                    checked={reminder.sleepReminder}
-                    onClick={handleReminder}
-                    name="sleepReminder"
-                  />
-                }
-              />
-            </div>
-          </div>
+          ))}
         </Paper>
       </div>
     </div>

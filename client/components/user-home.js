@@ -335,24 +335,35 @@ export class UserHome extends React.Component {
           <div className="homeContainer">
             <Navbar />
 
-            <Grid container justify="center" alignItems="center">
-              <Grid item>
-                <Button
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+              className="contentsContainer"
+            >
+              <div className="animationContainer">
+                <div className="animation">
+                   <Button
                   onClick={this.handleClick}
                   style={{backgroundColor: 'transparent'}}
                   disableRipple={true}
                 >
                   <Lottie options={lottie} height={400} width={400} />
                 </Button>
-              </Grid>
+                </div>
+                <div className="progressBar">
+                  <ProgressBar dailyPoints={this.state.dailyPoints} />
+                </div>
+              </div>
+              <div className="listView">
+                <DailyProgressList
+                  handleCheck={this.handleCheck}
+                  list={this.props.list}
+                />
+              </div>
 
-              <ProgressBar dailyPoints={this.state.dailyPoints} />
             </Grid>
-
-            <DailyProgressList
-              handleCheck={this.handleCheck}
-              list={this.props.list}
-            />
           </div>
         </>
       )
