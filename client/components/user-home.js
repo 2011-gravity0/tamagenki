@@ -23,8 +23,22 @@ import sparkleData from '../../public/lotties/tamabuddySparkle.json'
 import waveData from '../../public/lotties/tamabuddyWave.json'
 import waterData from '../../public/lotties/tamabuddyWater.json'
 
+import owlData from '../../public/lotties/owl.json'
+
 /**
- * LOTTIES
+ * OWL LOTTIE
+ */
+const guideAnimation = {
+  loop: true,
+  autoplay: true,
+  animationData: owlData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+}
+
+/**
+ * TAMABUDDY LOTTIES
  */
 
 const eggWiggleAnimation = {
@@ -170,7 +184,6 @@ export class UserHome extends React.Component {
 
   async componentDidMount() {
     try {
-      console.log('totalPoints', this.state.totalPoints)
       await this.props.loadList()
       await this.setTotalPoints()
       await this.setDailyPoints()
@@ -184,7 +197,7 @@ export class UserHome extends React.Component {
           sparkleMode: true
         })
       }
-      if (this.state.totalPoints < 7) {
+      if (this.state.totalPoints < 10) {
         this.setState({lottie: eggWiggleAnimation, isHatched: false})
       }
     } catch (error) {
@@ -195,13 +208,30 @@ export class UserHome extends React.Component {
   async handleCheck(event) {
     event.preventDefault()
     try {
+      console.log('totalPoints from handleCheck', this.state.totalPoints)
       //check to see if sparkleMode should be set to true or false
       if (this.state.dailyPoints >= 10 && this.state.lottie === idleAnimation) {
         this.setState({lottie: sparkleAnimation, sparkleMode: true})
-      } else {
+      }
+      if (
+        this.state.dailyPoints < 10 &&
+        this.state.lottie === sparkleAnimation &&
+        this.state.totalPoints > 10
+      ) {
         this.setState({
-          lottie: this.state.isHatched ? idleAnimation : eggWiggleAnimation,
+          lottie: idleAnimation,
           sparkleMode: false
+        })
+      }
+      if (
+        this.state.dailyPoints < 10 &&
+        this.state.lottie === sparkleAnimation &&
+        this.state.totalPoints < 10
+      ) {
+        this.setState({
+          lottie: eggWiggleAnimation,
+          sparkleMode: false,
+          isHatched: false
         })
       }
 
@@ -344,25 +374,31 @@ export class UserHome extends React.Component {
             >
               <div className="animationContainer">
                 <div className="animation">
-                   <Button
-                  onClick={this.handleClick}
-                  style={{backgroundColor: 'transparent'}}
-                  disableRipple={true}
-                >
-                  <Lottie options={lottie} height={400} width={400} />
-                </Button>
+                  <Button
+                    onClick={this.handleClick}
+                    style={{backgroundColor: 'transparent'}}
+                    disableRipple={true}
+                  >
+                    <Lottie options={lottie} height={300} width={300} />
+                  </Button>
                 </div>
                 <div className="progressBar">
                   <ProgressBar dailyPoints={this.state.dailyPoints} />
                 </div>
               </div>
+              <Button
+                // onClick={this.handleGuideClick}
+                style={{backgroundColor: 'transparent'}}
+                disableRipple={true}
+              >
+                <Lottie options={guideAnimation} height={75} width={75} />
+              </Button>
               <div className="listView">
                 <DailyProgressList
                   handleCheck={this.handleCheck}
                   list={this.props.list}
                 />
               </div>
-
             </Grid>
           </div>
         </>
