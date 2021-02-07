@@ -22,6 +22,34 @@ form div {
   display: inline-block;
 }
 
+.loginContainer h1 {
+  font-family: 'Fredoka One', cursive;
+  color: rgb(228, 115, 134);
+  text-align: center;
+}
+
+.petImg {
+  margin: 10px;
+}
+
+.homeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* background-image: url('/eggIcon192.png');
+  background-repeat: no-repeat;
+  background-size: 500px 400px;
+  background-position: center top;
+  background-attachment: fixed; */
+}
+
+.listContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 /*===== LOGIN =====*/
 
 .viewContainer {

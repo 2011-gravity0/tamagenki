@@ -198,7 +198,11 @@ export class UserHome extends React.Component {
       //check to see if sparkleMode should be set to true or false
       if (this.state.dailyPoints >= 10 && this.state.lottie === idleAnimation) {
         this.setState({lottie: sparkleAnimation, sparkleMode: true})
-      } else {
+      }
+      if (
+        this.state.dailyPoints <= 10 &&
+        this.state.lottie === sparkleAnimation
+      ) {
         this.setState({
           lottie: this.state.isHatched ? idleAnimation : eggWiggleAnimation,
           sparkleMode: false
@@ -296,7 +300,7 @@ export class UserHome extends React.Component {
       await this.setDailyPoints()
       await this.setTotalPoints()
 
-      //check to see if this is the 10th checkbox, then trigger eggHatch animation sequence
+      //check to see if this is the 10th checkbox, then trigger eggHatch animation sequence if it is
       if (
         this.state.totalPoints >= 10 &&
         this.state.lottie === eggWiggleAnimation
@@ -344,13 +348,13 @@ export class UserHome extends React.Component {
             >
               <div className="animationContainer">
                 <div className="animation">
-                   <Button
-                  onClick={this.handleClick}
-                  style={{backgroundColor: 'transparent'}}
-                  disableRipple={true}
-                >
-                  <Lottie options={lottie} height={400} width={400} />
-                </Button>
+                  <Button
+                    onClick={this.handleClick}
+                    style={{backgroundColor: 'transparent'}}
+                    disableRipple={true}
+                  >
+                    <Lottie options={lottie} height={400} width={400} />
+                  </Button>
                 </div>
                 <div className="progressBar">
                   <ProgressBar dailyPoints={this.state.dailyPoints} />
@@ -362,7 +366,6 @@ export class UserHome extends React.Component {
                   list={this.props.list}
                 />
               </div>
-
             </Grid>
           </div>
         </>
