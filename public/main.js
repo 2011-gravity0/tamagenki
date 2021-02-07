@@ -75,6 +75,7 @@ const app = (() => {
   const applicationServerPublicKey =
     'BI5Oqd_Wm2nvGdMq5Kg8MmyzbHWgmWirU9LNo2jvfyvaQlCvX88-Ts88N8t7MdEilq_IoRs9QezC01kBXsucMGU'
 
+  // on our app, when user click the reminder page submit button, this happen.
   function subscribeUser() {
     const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey)
     swRegistration.pushManager
@@ -122,19 +123,25 @@ const app = (() => {
       })
   }
 
+  let userSubsctiption
   function updateSubscriptionOnServer(subscription) {
     // Here's where you would send the subscription to the application server
+    // code below is just for demo purpose. We have to replace this with ajax request to our app surver.
 
-    const subscriptionJson = document.querySelector('.js-subscription-json')
-    const endpointURL = document.querySelector('.js-endpoint-url')
-    const subAndEndpoint = document.querySelector('.js-sub-endpoint')
+    // const subscriptionJson = document.querySelector('.js-subscription-json')
+    // const endpointURL = document.querySelector('.js-endpoint-url')
+    // const subAndEndpoint = document.querySelector('.js-sub-endpoint')
 
     if (subscription) {
-      subscriptionJson.textContent = JSON.stringify(subscription)
-      endpointURL.textContent = subscription.endpoint
-      subAndEndpoint.style.display = 'block'
+      console.log('subscription', subscription)
+      userSubsctiption = subscription
+      console.log('this is userSubsctiption', userSubsctiption)
+      // subscriptionJson.textContent = JSON.stringify(subscription)
+      // endpointURL.textContent = subscription.endpoint
+      // subAndEndpoint.style.display = 'block'
     } else {
-      subAndEndpoint.style.display = 'none'
+      // subAndEndpoint.style.display = 'none'
+      // console.log('User is not subscribed')
     }
   }
 
@@ -181,8 +188,10 @@ const app = (() => {
       navigator.serviceWorker
         .register('sw.js')
         .then(swReg => {
-          console.log('Service Worker is registered', swReg)
-
+          console.log(
+            'ServiceWorker registration successful with scope: ',
+            swReg.scope
+          )
           swRegistration = swReg
 
           initializeUI()
@@ -197,3 +206,5 @@ const app = (() => {
   }
 })()
 console.log('this is endpoint:', document.querySelector('.js-endpoint-url'))
+
+// exports.userSubsctiption = userSubsctiption
