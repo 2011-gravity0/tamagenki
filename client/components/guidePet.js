@@ -3,6 +3,7 @@ import React from 'react'
 import animationOwl from '../../public/lotties/owl.json'
 import Lottie from 'react-lottie'
 import history from '../history'
+
 export default class GuidePet extends React.Component {
   constructor(props) {
     super(props)
@@ -24,10 +25,6 @@ export default class GuidePet extends React.Component {
       <div>
         <div>
           <Lottie options={defaultOptions} height={400} width={400} />
-          {/* <img
-            src="https://i.pinimg.com/originals/e2/c9/cd/e2c9cd63e38ced85263bf88d8e131cfb.jpg"
-            alt="Red Ruff Monster"
-          /> */}
         </div>
         <div>
           <p>
