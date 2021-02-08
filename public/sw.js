@@ -124,7 +124,7 @@ self.addEventListener('push', event => {
     ]
   }
   event.waitUntil(
-    self.registration.showNotification('Push Notification', options)
+    self.registration.showNotification('Message from your Tamabuddy', options)
   )
   // event.waitUntil(
   //   clients.matchAll().then((c) => {
