@@ -21,16 +21,6 @@ export class FindEgg extends Component {
     this.props.nextStep()
   }
 
-  //   typeWriter() {
-  //     let i = 0
-  //     let speed = 50
-  //     const {text} = this.state
-  //     if (i < text.length) {
-  //       document.getElementsByClassName('typeScript').innerHTML += text.charAt(i)
-  //       i++
-  //       setTimeout(typeWriter, speed)
-  //     }
-  //   }
   render() {
     const eggOptions = {
       loop: true,

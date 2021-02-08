@@ -3,6 +3,8 @@ import NameAndBedtime from './NameAndBedtime'
 import Reminders from './Reminders'
 import Confirm from './Confirm'
 import Success from './Success'
+import {FindEgg} from './FindEgg'
+import Tutorial from './Tutorial'
 
 export class UserForm extends Component {
   state = {
@@ -59,13 +61,16 @@ export class UserForm extends Component {
     }
     switch (step) {
       case 1:
-        return (
-          <NameAndBedtime
-            nextStep={this.nextStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
-        )
+        // return <FindEgg nextStep={this.nextStep} />
+        return <Tutorial />
+      // case 1:
+      //   return (
+      //     <NameAndBedtime
+      //       nextStep={this.nextStep}
+      //       handleChange={this.handleChange}
+      //       values={values}
+      //     />
+      //   )
       case 2:
         return (
           <Reminders

@@ -12,6 +12,8 @@ import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Lottie from 'react-lottie'
+import animationOwl from '../../../public/lotties/owl.json'
 
 const styles = theme => ({
   // Load app bar information from the theme
@@ -19,7 +21,8 @@ const styles = theme => ({
   root: {
     marginTop: 50,
     marginBottom: 15,
-    padding: 20
+    padding: 20,
+    backgroundColor: 'green'
   },
   button: {
     margin: 50,
@@ -28,6 +31,12 @@ const styles = theme => ({
 })
 
 export class Reminders extends Component {
+  constructor() {
+    super()
+    this.state = {
+      text: 'Would you like reminders for any of the items listed below?'
+    }
+  }
   continue = e => {
     e.preventDefault()
     this.props.nextStep()
@@ -40,7 +49,14 @@ export class Reminders extends Component {
 
   render() {
     const {values, theme, classes, handleChange} = this.props
-
+    const owlOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationOwl,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    }
     return (
       <React.Fragment>
         <AppBar margin="5em">
@@ -51,9 +67,14 @@ export class Reminders extends Component {
         <Paper>
           <div className={classes.toolbar} />
         </Paper>
-        <Box m={1}>
-          <Grid container justify="center">
-            <h1>Let's Move on to Your Preferences</h1>
+        <Box m={4}>
+          <Grid container justify="center" alignItems="flex-start">
+            <Grid item>
+              <Lottie options={owlOptions} height={50} width={50} />
+            </Grid>
+            <Grid item>
+              <p className="typeWriter">{this.state.text}</p>
+            </Grid>
           </Grid>
         </Box>
         <Card className={classes.root}>
