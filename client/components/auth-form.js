@@ -13,9 +13,8 @@ const AuthForm = props => {
   const {name, displayName, error, reroute, reroutePath} = props
   const validateEmail = (input, whichForm) => {
     if (
-      !input.includes('@') &&
-      !input.includes('.') &&
-      whichForm === 'signup'
+      !input.includes('@') ||
+      (!input.includes('.') && whichForm === 'signup')
     ) {
       return true
     }
