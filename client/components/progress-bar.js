@@ -19,7 +19,11 @@ const BorderLinearProgress = withStyles(theme => ({
 }))(LinearProgress)
 
 export const ProgressBar = props => {
-  const {dailyPoints} = props
+  let dailyPoints = props.dailyPoints || 0
+  if (!dailyPoints) {
+    dailyPoints = 0
+  }
+  console.log('daily points', dailyPoints)
 
   return (
     <Grid container>

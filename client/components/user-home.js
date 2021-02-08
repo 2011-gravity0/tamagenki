@@ -176,7 +176,9 @@ export class UserHome extends React.Component {
   setDailyPoints() {
     try {
       let dailyPoints = Object.values(this.props.list).reduce((acc, curr) => {
-        return acc + curr
+        if (!NaN(curr)) {
+          return acc + curr
+        }
       }, 0)
       this.setState({dailyPoints: dailyPoints})
     } catch (error) {
@@ -189,7 +191,6 @@ export class UserHome extends React.Component {
       await this.props.loadList()
       await this.setTotalPoints()
       await this.setDailyPoints()
-      console.log('history', this.props.history)
       if (this.state.totalPoints >= 10 && this.state.dailyPoints < 10) {
         this.setState({lottie: idleAnimation, isHatched: true})
       }
