@@ -25,8 +25,9 @@ const styles = theme => ({
     padding: 20
   },
   button: {
-    margin: 50,
-    padding: 3
+    margin: 20,
+    padding: 5,
+    backgroundColor: '#C9E3BE'
   }
 })
 
@@ -85,7 +86,7 @@ export class Confirm extends Component {
         </Paper>
         <Box mt={2}>
           <Grid container justify="center">
-            <h1>Did I Get Your Answers Right?</h1>
+            <h1 className="questionHeader">Did I Get Your Answers Right?</h1>
           </Grid>
         </Box>
 
@@ -137,12 +138,12 @@ export class Confirm extends Component {
 
         <Grid container justify="center">
           <Box m={2} pt={3}>
-            <Button style={styles.button} onClick={this.goBack}>
+            <Button className={classes.button} onClick={this.goBack}>
               Go Back
             </Button>
           </Box>
           <Box m={2} pt={3}>
-            <Button style={styles.button} onClick={this.handleSubmit}>
+            <Button className={classes.button} onClick={this.handleSubmit}>
               Confirm
             </Button>
           </Box>

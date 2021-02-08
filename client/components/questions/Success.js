@@ -9,8 +9,9 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import Lottie from 'react-lottie'
-import animationData from '../../../public/lotties/dumpling1/data.json'
-import animationData2 from '../../../public/lotties/dumpling2/data.json'
+import animationData from '../../../public/lotties/eggWiggle.json'
+// import animationData from '../../../public/lotties/dumpling1/data.json'
+// import animationData2 from '../../../public/lotties/dumpling2/data.json'
 
 const styles = theme => ({
   // Load app bar information from the theme
@@ -21,8 +22,9 @@ const styles = theme => ({
     padding: 20
   },
   button: {
-    margin: 50,
-    padding: 3
+    margin: 20,
+    padding: 5,
+    backgroundColor: '#C9E3BE'
   }
 })
 
@@ -51,14 +53,14 @@ export class Success extends Component {
       }
     }
 
-    const defaultOptions2 = {
-      loop: true,
-      autoplay: true,
-      animationData: animationData2,
-      rendererSettings: {
-        preserveAspectRatio: 'xMidYMid slice'
-      }
-    }
+    // const defaultOptions2 = {
+    //   loop: true,
+    //   autoplay: true,
+    //   animationData: animationData2,
+    //   rendererSettings: {
+    //     preserveAspectRatio: 'xMidYMid slice'
+    //   }
+    // }
 
     const {values, theme, classes, handleChange} = this.props
 
@@ -74,7 +76,7 @@ export class Success extends Component {
         </Paper>
         <Box m={1}>
           <Grid container justify="center">
-            <h1>Great! Let's Get Started!</h1>
+            <h1 className="questionHeader">Great! Let's Get Started!</h1>
           </Grid>
         </Box>
         <Grid container column="true" justify="center">
@@ -85,18 +87,16 @@ export class Success extends Component {
               style={{backgroundColor: 'transparent'}}
               disableRipple={true}
             >
-              <Lottie
-                options={toggleAnimation ? defaultOptions : defaultOptions2}
-                height={400}
-                width={400}
-              />
+              <Lottie options={defaultOptions} height={300} width={300} />
             </Button>
           </Grid>
           <Grid item container justify="center">
-            <h1>Are you ready to meet your tamabuddy?</h1>
+            <h1 className="questionHeader">
+              Are you ready to meet your tamabuddy?
+            </h1>
           </Grid>
           <Grid item container justify="center">
-            <Button component={Link} to="/nameEgg">
+            <Button className={classes.button} component={Link} to="/nameEgg">
               yes
             </Button>
           </Grid>

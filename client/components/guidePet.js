@@ -5,12 +5,20 @@ import Lottie from 'react-lottie'
 import history from '../history'
 import {withStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
 
 const styles = theme => ({
   button: {
     margin: 50,
     padding: 3,
-    backgroundColor: '#C9E3BE'
+    backgroundColor: '#C9E3BE',
+    color: '#4E7469'
+  },
+  text: {
+    margin: 15,
+    alignContent: 'center',
+    padding: 4,
+    backgroundColor: '#C8EAEF'
   }
 })
 export class GuidePet extends React.Component {
@@ -40,20 +48,22 @@ export class GuidePet extends React.Component {
             alt="Red Ruff Monster"
           /> */}
         </div>
-        <div className="guide-text">
-          <p>
-            As a tamabuddy's guardian, your actions affect their health! As you
-            check items off your list your tammabuddy also feels the positive
-            impact in their life!
-          </p>
-          <p>
-            {' '}
-            Once you check off enough boxes, your egg will hatch. Different
-            checkbox categories will cause different reactions from your
-            tamabuddy. Make sure to check your badges in the dropdown menu on
-            the navbar to see your progress as you go.
-          </p>
-        </div>
+        <Card className={classes.text}>
+          <div className="guide-text">
+            <h3>
+              As a tamabuddy's guardian, your actions affect their health! As
+              you check items off your list your tammabuddy also feels the
+              positive impact in their life!
+            </h3>
+            <h3>
+              {' '}
+              Once you check off enough boxes, your egg will hatch. Different
+              checkbox categories will cause different reactions from your
+              tamabuddy. Make sure to check your badges in the dropdown menu on
+              the navbar to see your progress as you go.
+            </h3>
+          </div>
+        </Card>
         <Button className={classes.button} onClick={() => this.nextPage()}>
           Next
         </Button>
