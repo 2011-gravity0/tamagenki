@@ -11,20 +11,43 @@ import {TextField, Button, Typography} from '@material-ui/core'
  */
 const AuthForm = props => {
   const {name, displayName, error, reroute, reroutePath} = props
-
+  const validateEmail = (input, whichForm) => {
+    if (
+      !input.includes('@') &&
+      !input.includes('.') &&
+      whichForm === 'signup'
+    ) {
+      return true
+    }
+    return false
+  }
+  const validatePassword = (input, whichForm) => {
+    if (input.length < 5 && whichForm === 'signup') {
+      return true
+    }
+    return false
+  }
   const handleSubmit = async evt => {
     try {
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      await props.auth(email, password, formName)
-      history.push(displayName === 'Login' ? '/' : '/questions')
+      if (validateEmail(email, formName)) {
+        document.getElementById('emailP').innerHTML = 'Must be an email'
+        history.push('/signup')
+      } else if (validatePassword(password, formName)) {
+        document.getElementById('passwordP').innerHTML =
+          'Atleast 5 character long'
+        history.push('/signup')
+      } else if (!validateEmail(email) && !validatePassword(password)) {
+        await props.auth(email, password, formName)
+        history.push(displayName === 'Login' ? '/' : '/questions')
+      }
     } catch (error) {
       console.log(error)
     }
   }
-
   return (
     <div className="viewContainer">
       <div className="loginContainer">
@@ -42,6 +65,7 @@ const AuthForm = props => {
               shrink: true
             }}
           />
+          <p style={{color: 'red', fontSize: '15px'}} id="emailP" />
           <TextField
             required
             id="outlined-required"
@@ -54,6 +78,7 @@ const AuthForm = props => {
               shrink: true
             }}
           />
+          <p style={{color: 'red', fontSize: '15px'}} id="passwordP" />
           <Button
             waves="light"
             variant="contained"
