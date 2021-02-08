@@ -299,7 +299,15 @@ form div {
   align-items: center;
 }
 
-.guide-text p {
-  margin: 15px;
+.guide-text h3 {
+  color: #4e7469;
+  font-family: 'Fredoka One';
+  font-weight: lighter;
+}
+
+.questionHeader {
+  font-family: sans-serif;
+  color: rgb(94, 93, 93);
   text-align: center;
+  font-size: 1.5rem;
 }
