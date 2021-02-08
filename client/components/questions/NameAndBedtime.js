@@ -11,6 +11,10 @@ import Box from '@material-ui/core/Box'
 import Toolbar from '@material-ui/core/Toolbar'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
 
 const styles = theme => ({
   // Load app bar information from the theme
@@ -35,9 +39,9 @@ export class NameAndBedtime extends Component {
     const {values, theme, classes, handleChange} = this.props
     return (
       <React.Fragment>
-        <AppBar margin="5em">
+        <AppBar margin="5em" style={{background: '#FFB0AD'}}>
           <Grid container justify="center">
-            <h1>TAMAGENKI</h1>
+            <h1 style={{fontFamily: 'Fredoka One'}}>Tamagenki</h1>
           </Grid>
         </AppBar>
         <Paper>
@@ -61,17 +65,31 @@ export class NameAndBedtime extends Component {
           </form>
         </Card>
         <Card className={classes.root}>
-          <form>
-            <Grid container justify="center">
-              <TextField
-                id="standard-helperText"
-                label="What's your ideal bedtime?"
-                defaultValue={values.bedTime}
-                helperText="your Tamabuddy will get sleepy around the same time as you"
-                onChange={handleChange('bedTime')}
-              />
-            </Grid>
-          </form>
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-outlined-label">
+              BedTime
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-outlined-label"
+              id="demo-simple-select-outlined"
+              defaultValue={values.bedTime}
+              onChange={handleChange('bedTime')}
+              label="What’s your ideal bedtime?"
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={6}>6:00pm</MenuItem>
+              <MenuItem value={7}>7:00pm </MenuItem>
+              <MenuItem value={8}>8:00pm </MenuItem>
+              <MenuItem value={9}>9:00pm </MenuItem>
+              <MenuItem value={10}>10:00pm </MenuItem>
+              <MenuItem value={11}>11:00pm </MenuItem>
+              <MenuItem value={12}>12:00am </MenuItem>
+              <MenuItem value={1}>1:00am</MenuItem>
+              <MenuItem value={2}>2:00am </MenuItem>
+            </Select>
+          </FormControl>
         </Card>
         <Grid container justify="center">
           <Button style={styles.button} onClick={this.continue}>

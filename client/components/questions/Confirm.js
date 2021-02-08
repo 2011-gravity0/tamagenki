@@ -75,9 +75,9 @@ export class Confirm extends Component {
 
     return (
       <React.Fragment>
-        <AppBar margin="5em">
+        <AppBar margin="5em" style={{background: '#FFB0AD'}}>
           <Grid container justify="center">
-            <h1>TAMAGENKI</h1>
+            <h1 style={{fontFamily: 'Fredoka One'}}>Tamagenki</h1>
           </Grid>
         </AppBar>
         <Paper>
