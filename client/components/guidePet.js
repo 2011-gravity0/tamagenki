@@ -51,16 +51,11 @@ export class GuidePet extends React.Component {
         <Card className={classes.text}>
           <div className="guide-text">
             <h3>
-              As a tamabuddy's guardian, your actions affect their health! As
-              you check items off your list your tammabuddy also feels the
-              positive impact in their life!
-            </h3>
-            <h3>
               {' '}
-              Once you check off enough boxes, your egg will hatch. Different
-              checkbox categories will cause different reactions from your
-              tamabuddy. Make sure to check your badges in the dropdown menu on
-              the navbar to see your progress as you go.
+              Welcome to Tamagenki, an accountability pet game that doubles as a
+              way to incorporate healthy habits into your daily life. When you
+              complete actions in the real world, check off the corresponding
+              boxes in Tamagenki to hatch your egg and earn badges!!
             </h3>
           </div>
         </Card>
