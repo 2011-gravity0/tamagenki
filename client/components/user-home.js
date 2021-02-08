@@ -150,11 +150,12 @@ export class UserHome extends React.Component {
       dailyPoints: 0,
       isHatched: false,
       sparkleMode: false,
-      owlMessage: "hello i'm owl"
+      toggleMessage: false
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
     this.setDailyPoints = this.setDailyPoints.bind(this)
+    this.handleOwlClick = this.handleOwlClick.bind(this)
   }
 
   async setTotalPoints() {
@@ -176,7 +177,7 @@ export class UserHome extends React.Component {
   setDailyPoints() {
     try {
       let dailyPoints = Object.values(this.props.list).reduce((acc, curr) => {
-        if (!NaN(curr)) {
+        if (typeof curr === 'number') {
           return acc + curr
         }
       }, 0)
@@ -191,17 +192,17 @@ export class UserHome extends React.Component {
       await this.props.loadList()
       await this.setTotalPoints()
       await this.setDailyPoints()
-      if (this.state.totalPoints >= 10 && this.state.dailyPoints < 10) {
+      if (this.state.totalPoints >= 3 && this.state.dailyPoints < 5) {
         this.setState({lottie: idleAnimation, isHatched: true})
       }
-      if (this.state.dailyPoints >= 10) {
+      if (this.state.dailyPoints >= 3) {
         this.setState({
           lottie: sparkleAnimation,
           isHatched: true,
           sparkleMode: true
         })
       }
-      if (this.state.totalPoints < 10) {
+      if (this.state.totalPoints < 5) {
         this.setState({lottie: eggWiggleAnimation, isHatched: false})
       }
     } catch (error) {
@@ -214,13 +215,13 @@ export class UserHome extends React.Component {
     try {
       console.log('totalPoints from handleCheck', this.state.totalPoints)
       //check to see if sparkleMode should be set to true or false
-      if (this.state.dailyPoints >= 10 && this.state.lottie === idleAnimation) {
+      if (this.state.dailyPoints >= 5 && this.state.lottie === idleAnimation) {
         this.setState({lottie: sparkleAnimation, sparkleMode: true})
       }
       if (
-        this.state.dailyPoints < 10 &&
+        this.state.dailyPoints < 5 &&
         this.state.lottie === sparkleAnimation &&
-        this.state.totalPoints > 10
+        this.state.totalPoints > 3
       ) {
         this.setState({
           lottie: idleAnimation,
@@ -228,9 +229,9 @@ export class UserHome extends React.Component {
         })
       }
       if (
-        this.state.dailyPoints < 10 &&
+        this.state.dailyPoints < 5 &&
         this.state.lottie === sparkleAnimation &&
-        this.state.totalPoints < 10
+        this.state.totalPoints < 3
       ) {
         this.setState({
           lottie: eggWiggleAnimation,
@@ -332,15 +333,14 @@ export class UserHome extends React.Component {
 
       //check to see if this is the 10th checkbox, then trigger eggHatch animation sequence if it is
       if (
-        this.state.totalPoints >= 10 &&
+        this.state.totalPoints >= 3 &&
         this.state.lottie === eggWiggleAnimation
       ) {
         this.setState({lottie: eggHatchAnimation})
         setTimeout(() => {
           this.setState({
-            lottie: sparkleAnimation,
-            isHatched: true,
-            sparkleMode: true
+            lottie: idleAnimation,
+            isHatched: true
           })
         }, 16000)
       }
@@ -360,8 +360,14 @@ export class UserHome extends React.Component {
     }
   }
 
+  handleOwlClick = () => {
+    this.setState({toggleMessage: !this.state.toggleMessage})
+  }
+
   render() {
     const {lottie} = this.state
+    const owlMessage1 = "hello i'm owl"
+    const owlMessage2 = 'howdy folks! check off some boxes'
 
     if (this.props.list) {
       return (
@@ -386,27 +392,24 @@ export class UserHome extends React.Component {
                     <Lottie options={lottie} height={300} width={300} />
                   </Button>
                 </div>
-                <div className="progressBar">
-                  <ProgressBar dailyPoints={this.state.dailyPoints} />
-                </div>
               </div>
             </Grid>
+            <div className="progressBar">
+              <ProgressBar dailyPoints={this.state.dailyPoints} />
+            </div>
           </div>
-          <Grid
-            container
-            justify="flex-start"
-            direction="row"
-            alignItems="center"
-          >
+          <Grid container justify="center" direction="row" alignItems="center">
             <Button
-              // onClick={this.handleGuideClick}
+              onClick={this.handleOwlClick}
               style={{backgroundColor: 'transparent'}}
               disableRipple={true}
             >
               <Lottie options={guideAnimation} height={75} width={75} />
             </Button>
             <Grid item xs={8}>
-              <Paper>{this.state.owlMessage}</Paper>
+              <Paper>
+                {this.state.toggleMessage ? owlMessage1 : owlMessage2}
+              </Paper>
             </Grid>
           </Grid>
           <div className="homeContainer">

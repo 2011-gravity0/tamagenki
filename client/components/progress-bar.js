@@ -20,9 +20,7 @@ const BorderLinearProgress = withStyles(theme => ({
 
 export const ProgressBar = props => {
   let dailyPoints = props.dailyPoints || 0
-  if (!dailyPoints) {
-    dailyPoints = 0
-  }
+
   console.log('daily points', dailyPoints)
 
   return (

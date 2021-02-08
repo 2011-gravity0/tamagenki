@@ -131,7 +131,7 @@ class Badges extends React.Component {
                 <Grid item container justify="center">
                   <img
                     src={
-                      this.state.waterPoints >= 40
+                      this.state.waterPoints >= 4
                         ? '/badges/water.svg'
                         : '/shadows/waterShadow.svg'
                     }
@@ -147,12 +147,12 @@ class Badges extends React.Component {
                   style={{marginTop: '1em'}}
                 >
                   <Typography variant="body1" align="center">
-                    {this.state.waterPoints >= 40
+                    {this.state.waterPoints >= 4
                       ? 'Water Droplet Badge'
                       : '???'}
                   </Typography>
                   <Typography variant="body2" align="center">
-                    {this.state.waterPoints >= 40
+                    {this.state.waterPoints >= 4
                       ? 'You unlocked this badge with 50 Water points. Nice job staying hydrated!'
                       : 'not unlocked yet'}
                   </Typography>
@@ -170,7 +170,7 @@ class Badges extends React.Component {
                 <Grid item container justify="center">
                   <img
                     src={
-                      this.state.meditationPoints >= 7
+                      this.state.meditationPoints >= 1
                         ? '/badges/meditation.svg'
                         : '/shadows/meditationShadow.svg'
                     }
@@ -186,12 +186,12 @@ class Badges extends React.Component {
                   style={{marginTop: '1em'}}
                 >
                   <Typography variant="body1" align="center">
-                    {this.state.meditationPoints >= 7
+                    {this.state.meditationPoints >= 1
                       ? 'Still Mind Badge'
                       : '???'}
                   </Typography>
                   <Typography variant="body2" align="center">
-                    {this.state.meditationPoints >= 7
+                    {this.state.meditationPoints >= 1
                       ? "You unlocked this badge with 7 Meditation points. Keep it up and you'll keep improving!"
                       : 'not unlocked yet'}
                   </Typography>
@@ -208,7 +208,7 @@ class Badges extends React.Component {
                 <Grid item container justify="center">
                   <img
                     src={
-                      this.state.movementPoints >= 5
+                      this.state.movementPoints >= 1
                         ? '/badges/movement.svg'
                         : '/shadows/movementShadow.svg'
                     }
@@ -224,12 +224,12 @@ class Badges extends React.Component {
                   style={{marginTop: '1em'}}
                 >
                   <Typography variant="body1" align="center">
-                    {this.state.movementPoints >= 5
+                    {this.state.movementPoints >= 1
                       ? 'Light Feet Badge'
                       : '???'}
                   </Typography>
                   <Typography variant="body2" align="center">
-                    {this.state.movementPoints >= 5
+                    {this.state.movementPoints >= 1
                       ? 'You unlocked this badge with 5 Movement points. Keep going, you and your tamabuddy will continue to get stronger!'
                       : 'not unlocked yet'}
                   </Typography>
@@ -246,7 +246,7 @@ class Badges extends React.Component {
                 <Grid item container justify="center">
                   <img
                     src={
-                      this.state.relaxationPoints >= 7
+                      this.state.relaxationPoints >= 1
                         ? '/badges/relaxation.svg'
                         : '/shadows/relaxationShadow.svg'
                     }
@@ -262,13 +262,13 @@ class Badges extends React.Component {
                   style={{marginTop: '1em'}}
                 >
                   <Typography variant="body1" align="center">
-                    {this.state.relaxationPoints >= 7
+                    {this.state.relaxationPoints >= 1
                       ? 'Self Care Badge'
                       : '???'}
                   </Typography>
                   <Typography variant="body2" align="center">
-                    {this.state.relaxationPoints >= 7
-                      ? 'You unlocked this badge with 7 Relaxation points. Doing things that make you happy is good for your health!'
+                    {this.state.relaxationPoints >= 1
+                      ? 'You unlocked this badge with 1 Relaxation point. Doing things that make you happy is good for your health!'
                       : 'not unlocked yet'}
                   </Typography>
                 </Grid>
@@ -284,7 +284,7 @@ class Badges extends React.Component {
                 <Grid item container justify="center">
                   <img
                     src={
-                      this.state.sleepPoints >= 7
+                      this.state.sleepPoints >= 1
                         ? '/badges/sleep.svg'
                         : '/shadows/sleepShadow.svg'
                     }
@@ -300,10 +300,10 @@ class Badges extends React.Component {
                   style={{marginTop: '1em'}}
                 >
                   <Typography variant="body1" align="center">
-                    {this.state.sleepPoints >= 7 ? 'Sweet Dreams Badge' : '???'}
+                    {this.state.sleepPoints >= 1 ? 'Sweet Dreams Badge' : '???'}
                   </Typography>
                   <Typography variant="body2" align="center">
-                    {this.state.sleepPoints >= 7
+                    {this.state.sleepPoints >= 1
                       ? 'You unlocked this badge with 7 Sleep points. Going to sleep on time will make your future self happier!'
                       : 'not unlocked yet'}
                   </Typography>
@@ -320,7 +320,7 @@ class Badges extends React.Component {
                 <Grid item container justify="center">
                   <img
                     src={
-                      this.state.veggiePoints >= 15
+                      this.state.veggiePoints >= 2
                         ? '/badges/veg.svg'
                         : '/shadows/vegShadow.svg'
                     }
@@ -336,10 +336,10 @@ class Badges extends React.Component {
                   style={{marginTop: '1em'}}
                 >
                   <Typography variant="body1" align="center">
-                    {this.state.veggiePoints >= 15 ? 'Vitamin Badge' : '???'}
+                    {this.state.veggiePoints >= 2 ? 'Vitamin Badge' : '???'}
                   </Typography>
                   <Typography variant="body2" align="center">
-                    {this.state.veggiePoints >= 15
+                    {this.state.veggiePoints >= 2
                       ? 'You unlocked this badge with 15 Veg points. Eating nutritious food improves your physical and mental health!'
                       : 'not unlocked yet'}
                   </Typography>
@@ -356,7 +356,7 @@ class Badges extends React.Component {
                 <Grid item container justify="center">
                   <img
                     src={
-                      this.state.fruitPoints >= 15
+                      this.state.fruitPoints >= 2
                         ? '/badges/fruit.svg'
                         : '/shadows/fruitShadow.svg'
                     }
@@ -372,10 +372,10 @@ class Badges extends React.Component {
                   style={{marginTop: '1em'}}
                 >
                   <Typography variant="body1" align="center">
-                    {this.state.fruitPoints >= 15 ? 'Juice Box Badge' : '???'}
+                    {this.state.fruitPoints >= 2 ? 'Juice Box Badge' : '???'}
                   </Typography>
                   <Typography variant="body2" align="center">
-                    {this.state.fruitPoints >= 15
+                    {this.state.fruitPoints >= 2
                       ? 'You unlocked this badge with 15 Fruit points. Your cells and your tamabuddy want to say thank you. Nice job!'
                       : 'not unlocked yet'}
                   </Typography>
@@ -392,7 +392,7 @@ class Badges extends React.Component {
                 <Grid item container justify="center">
                   <img
                     src={
-                      this.state.sparklePoints >= 7
+                      this.state.sparklePoints >= 1
                         ? '/badges/sparkle.svg'
                         : '/shadows/sparkleShadow.svg'
                     }
@@ -408,10 +408,10 @@ class Badges extends React.Component {
                   style={{marginTop: '1em'}}
                 >
                   <Typography variant="body1" align="center">
-                    {this.state.sparklePoints >= 7 ? 'Glimmer Badge' : '???'}
+                    {this.state.sparklePoints >= 1 ? 'Glimmer Badge' : '???'}
                   </Typography>
                   <Typography variant="body2" align="center">
-                    {this.state.sparklePoints >= 7
+                    {this.state.sparklePoints >= 1
                       ? "You unlocked this badge by reaching Sparkle Mode 7 times. You're doing an amazing job taking care of yourself and your tamabuddy! Keep it up!"
                       : 'not unlocked yet'}
                   </Typography>
