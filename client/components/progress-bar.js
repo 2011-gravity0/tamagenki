@@ -1,20 +1,38 @@
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import {withStyles} from '@material-ui/core/styles'
 import React from 'react'
+
+const BorderLinearProgress = withStyles(theme => ({
+  root: {
+    height: 15,
+    borderRadius: 5
+  },
+  colorPrimary: {
+    backgroundColor: '#C8EAEF'
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: '#2A8809'
+  }
+}))(LinearProgress)
 
 export const ProgressBar = props => {
   const {dailyPoints} = props
 
   return (
-    <div>
-      <Grid item style={{width: '40%'}}>
-        <LinearProgress variant="determinate" value={dailyPoints / 16 * 100} />{' '}
+    <Grid container>
+      <Grid item style={{width: '12em'}}>
+        <BorderLinearProgress
+          variant="determinate"
+          value={dailyPoints / 16 * 100}
+        />{' '}
       </Grid>
       <Grid item style={{width: '5%'}}>
         {' '}
         <Typography>{`${Math.round(dailyPoints / 16 * 100)}%`}</Typography>
       </Grid>
-    </div>
+    </Grid>
   )
 }

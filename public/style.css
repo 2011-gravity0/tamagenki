@@ -32,18 +32,6 @@ form div {
   margin: 10px;
 }
 
-.homeContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* background-image: url('/eggIcon192.png');
-  background-repeat: no-repeat;
-  background-size: 500px 400px;
-  background-position: center top;
-  background-attachment: fixed; */
-}
-
 .listContainer {
   display: flex;
   justify-content: center;
@@ -138,6 +126,11 @@ form div {
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-image: url('/tamabuddyRoom.jpg');
+  background-repeat: no-repeat;
+  background-size: 400px 300px;
+  background-position: center top;
+  background-attachment: fixed;
 }
 
 .animationContainer {
@@ -157,7 +150,7 @@ form div {
   justify-content: center;
 }
 .listView {
-  height: 44vh;
+  height: 30vh;
   overflow: auto;
   overflow-x: hidden !important;
 }

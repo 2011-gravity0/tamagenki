@@ -83,6 +83,11 @@ const Navbar = ({handleLogout}) => {
                   Dashboard
                 </Link>
               </MenuItem>
+              <MenuItem>
+                <Link to="/badges" className={classes.menu}>
+                  Badges
+                </Link>
+              </MenuItem>
               <MenuItem className={classes.menu}>
                 <Link to="/setting" className={classes.menu}>
                   Setting

@@ -6,6 +6,8 @@ import {fetchUserHistory} from '../store/user'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
+import {withStyles} from '@material-ui/core/styles'
 import Lottie from 'react-lottie'
 import {ProgressBar} from './progress-bar'
 import {DailyProgressList} from './daily-progress-list'
@@ -22,7 +24,6 @@ import meditateData from '../../public/lotties/tamabuddyMeditate.json'
 import sparkleData from '../../public/lotties/tamabuddySparkle.json'
 import waveData from '../../public/lotties/tamabuddyWave.json'
 import waterData from '../../public/lotties/tamabuddyWater.json'
-
 import owlData from '../../public/lotties/owl.json'
 
 /**
@@ -40,7 +41,6 @@ const guideAnimation = {
 /**
  * TAMABUDDY LOTTIES
  */
-
 const eggWiggleAnimation = {
   loop: true,
   autoplay: true,
@@ -137,6 +137,7 @@ const waterAnimation = {
     preserveAspectRatio: 'xMidYMid slice'
   }
 }
+
 /**
  * COMPONENT
  */
@@ -148,7 +149,8 @@ export class UserHome extends React.Component {
       totalPoints: 0,
       dailyPoints: 0,
       isHatched: false,
-      sparkleMode: false
+      sparkleMode: false,
+      owlMessage: "hello i'm owl"
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
@@ -187,6 +189,7 @@ export class UserHome extends React.Component {
       await this.props.loadList()
       await this.setTotalPoints()
       await this.setDailyPoints()
+      console.log('history', this.props.history)
       if (this.state.totalPoints >= 10 && this.state.dailyPoints < 10) {
         this.setState({lottie: idleAnimation, isHatched: true})
       }
@@ -386,20 +389,32 @@ export class UserHome extends React.Component {
                   <ProgressBar dailyPoints={this.state.dailyPoints} />
                 </div>
               </div>
-              <Button
-                // onClick={this.handleGuideClick}
-                style={{backgroundColor: 'transparent'}}
-                disableRipple={true}
-              >
-                <Lottie options={guideAnimation} height={75} width={75} />
-              </Button>
-              <div className="listView">
-                <DailyProgressList
-                  handleCheck={this.handleCheck}
-                  list={this.props.list}
-                />
-              </div>
             </Grid>
+          </div>
+          <Grid
+            container
+            justify="flex-start"
+            direction="row"
+            alignItems="center"
+          >
+            <Button
+              // onClick={this.handleGuideClick}
+              style={{backgroundColor: 'transparent'}}
+              disableRipple={true}
+            >
+              <Lottie options={guideAnimation} height={75} width={75} />
+            </Button>
+            <Grid item xs={8}>
+              <Paper>{this.state.owlMessage}</Paper>
+            </Grid>
+          </Grid>
+          <div className="homeContainer">
+            <div className="listView">
+              <DailyProgressList
+                handleCheck={this.handleCheck}
+                list={this.props.list}
+              />
+            </div>
           </div>
         </>
       )
