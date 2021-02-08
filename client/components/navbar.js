@@ -78,9 +78,14 @@ const Navbar = ({handleLogout}) => {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem>
+              {/* <MenuItem>
                 <Link to="/dashboard" className={classes.menu}>
                   Dashboard
+                </Link>
+              </MenuItem> */}
+              <MenuItem>
+                <Link to="/badges" className={classes.menu}>
+                  Badges
                 </Link>
               </MenuItem>
               <MenuItem className={classes.menu}>

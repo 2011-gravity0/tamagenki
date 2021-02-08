@@ -17,13 +17,18 @@ const styles = theme => ({
   // Load app bar information from the theme
   toolbar: theme.mixins.toolbar,
   root: {
-    marginTop: 50,
-    marginBottom: 15,
-    padding: 20
+    marginTop: 30,
+    padding: 20,
+    marginBottom: 3
   },
   button: {
-    margin: 50,
-    padding: 3
+    margin: 20,
+    padding: 5,
+    backgroundColor: '#C9E3BE'
+  },
+  text: {
+    marginTop: 0,
+    padding: 20
   }
 })
 
@@ -43,35 +48,30 @@ export class Reminders extends Component {
 
     return (
       <React.Fragment>
-        <AppBar margin="5em">
+        <AppBar margin="5em" style={{background: '#FFB0AD'}}>
           <Grid container justify="center">
-            <h1>TAMAGENKI</h1>
+            <h1 style={{fontFamily: 'Fredoka One'}}>Tamagenki</h1>
           </Grid>
         </AppBar>
         <Paper>
           <div className={classes.toolbar} />
         </Paper>
         <Box m={1}>
-          <Grid container justify="center">
-            <h1>Let's Move on to Your Preferences</h1>
+          <Grid container justify="center" className={classes.root}>
+            <h1 className="questionHeader">
+              Let's Move on to Your Preferences
+            </h1>
           </Grid>
         </Box>
-        <Card className={classes.root}>
+        <div className={classes.text}>
           <FormGroup column="true">
             <Grid container justify="center">
-              <Grid item container align="center">
-                <h3>
-                  It can be hard to remember to do these small tasks. Doing them
-                  regularly improves your health and happiness, which makes your
-                  Tamabuddy happier too!
-                </h3>
-
+              <Grid item container align="center" justify="center">
                 <p>
                   {' '}
-                  Would you like a reminder throughout the day for any of these?
+                  Would you like push notifications throughout the day for any
+                  of these?
                 </p>
-
-                <p>Check the boxes that apply.</p>
               </Grid>
 
               <FormControlLabel
@@ -96,16 +96,16 @@ export class Reminders extends Component {
               />
             </Grid>
           </FormGroup>
-        </Card>
+        </div>
 
         <Grid container justify="center">
           <Box m={2} pt={3}>
-            <Button style={styles.button} onClick={this.goBack}>
+            <Button className={classes.button} onClick={this.goBack}>
               Back
             </Button>
           </Box>
           <Box m={2} pt={3}>
-            <Button style={styles.button} onClick={this.continue}>
+            <Button className={classes.button} onClick={this.continue}>
               Continue
             </Button>
           </Box>

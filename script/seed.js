@@ -59,6 +59,14 @@ const users = [
     sleepReminder: true,
     petName: 'Moffle',
     points: 500
+  },
+  {
+    email: 'ed@email.com',
+    userName: 'Ed',
+    password: 'ed',
+    sleepReminder: true,
+    petName: 'Deloba',
+    points: 116
   }
 ]
 
@@ -70,7 +78,80 @@ const dataHistory = {
   water: 5,
   meditation: 0,
   sleep: 1,
-  relaxtions: 2,
+  relaxtion: 2,
+  isToday: false
+}
+
+// 7 dailyProgresses for Ed to unlock all badges
+
+const sunday = {
+  exercise: 1,
+  fruit: 3,
+  vegetables: 3,
+  water: 6,
+  meditation: 1,
+  sleep: 1,
+  relaxation: 1,
+  isToday: false
+}
+const monday = {
+  exercise: 1,
+  fruit: 3,
+  vegetables: 3,
+  water: 6,
+  meditation: 1,
+  sleep: 1,
+  relaxation: 1,
+  isToday: false
+}
+const tuesday = {
+  exercise: 1,
+  fruit: 3,
+  vegetables: 3,
+  water: 6,
+  meditation: 1,
+  sleep: 1,
+  relaxation: 1,
+  isToday: false
+}
+const wednesday = {
+  exercise: 1,
+  fruit: 3,
+  vegetables: 3,
+  water: 6,
+  meditation: 1,
+  sleep: 1,
+  relaxation: 1,
+  isToday: false
+}
+const thursday = {
+  exercise: 1,
+  fruit: 3,
+  vegetables: 3,
+  water: 6,
+  meditation: 1,
+  sleep: 1,
+  relaxation: 1,
+  isToday: false
+}
+const friday = {
+  exercise: 1,
+  fruit: 3,
+  vegetables: 3,
+  water: 6,
+  meditation: 1,
+  sleep: 1,
+  relaxation: 1,
+  isToday: false
+}
+const saturday = {
+  exercise: 1,
+  fruit: 3,
+  vegetables: 3,
+  water: 6,
+  meditation: 1,
+  sleep: 1,
+  relaxation: 1,
   isToday: false
 }
 
@@ -86,6 +167,22 @@ async function seed() {
   const cody = await User.findOne({where: {email: 'cody@email.com'}})
   const history = await DailyProgress.create(dataHistory)
   await history.setUser(cody)
+
+  const ed = await User.findOne({where: {email: 'ed@email.com'}})
+  const mondayHistory = await DailyProgress.create(monday)
+  const tuesdayHistory = await DailyProgress.create(tuesday)
+  const wednesdayHistory = await DailyProgress.create(wednesday)
+  const thursdayHistory = await DailyProgress.create(thursday)
+  const fridayHistory = await DailyProgress.create(friday)
+  const saturdayHistory = await DailyProgress.create(saturday)
+  const sundayHistory = await DailyProgress.create(sunday)
+  await mondayHistory.setUser(ed)
+  await tuesdayHistory.setUser(ed)
+  await wednesdayHistory.setUser(ed)
+  await thursdayHistory.setUser(ed)
+  await fridayHistory.setUser(ed)
+  await saturdayHistory.setUser(ed)
+  await sundayHistory.setUser(ed)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
