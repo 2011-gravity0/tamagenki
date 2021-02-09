@@ -369,7 +369,7 @@ export class UserHome extends React.Component {
     const owlMessage1 = "hello i'm owl"
     const owlMessage2 = 'howdy folks! check off some boxes'
 
-    if (this.props.list) {
+    if (this.props.list && this.state.dailyPoints) {
       return (
         <>
           <div className="homeContainer">
