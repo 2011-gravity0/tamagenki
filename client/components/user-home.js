@@ -6,9 +6,12 @@ import {fetchUserHistory} from '../store/user'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
+import {withStyles} from '@material-ui/core/styles'
 import Lottie from 'react-lottie'
 import {ProgressBar} from './progress-bar'
 import {DailyProgressList} from './daily-progress-list'
+import {pushSetting} from '../../public/main'
 
 import eggWiggleData from '../../public/lotties/eggWiggle.json'
 import eggHatchData from '../../public/lotties/eggHatch.json'
@@ -22,11 +25,23 @@ import meditateData from '../../public/lotties/tamabuddyMeditate.json'
 import sparkleData from '../../public/lotties/tamabuddySparkle.json'
 import waveData from '../../public/lotties/tamabuddyWave.json'
 import waterData from '../../public/lotties/tamabuddyWater.json'
+import owlData from '../../public/lotties/owl.json'
 
 /**
- * LOTTIES
+ * OWL LOTTIE
  */
+const guideAnimation = {
+  loop: true,
+  autoplay: true,
+  animationData: owlData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+}
 
+/**
+ * TAMABUDDY LOTTIES
+ */
 const eggWiggleAnimation = {
   loop: true,
   autoplay: true,
@@ -123,6 +138,7 @@ const waterAnimation = {
     preserveAspectRatio: 'xMidYMid slice'
   }
 }
+
 /**
  * COMPONENT
  */
@@ -134,11 +150,13 @@ export class UserHome extends React.Component {
       totalPoints: 0,
       dailyPoints: 0,
       isHatched: false,
-      sparkleMode: false
+      sparkleMode: false,
+      toggleMessage: false
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
     this.setDailyPoints = this.setDailyPoints.bind(this)
+    this.handleOwlClick = this.handleOwlClick.bind(this)
   }
 
   async setTotalPoints() {
@@ -160,7 +178,9 @@ export class UserHome extends React.Component {
   setDailyPoints() {
     try {
       let dailyPoints = Object.values(this.props.list).reduce((acc, curr) => {
-        return acc + curr
+        if (typeof curr === 'number') {
+          return acc + curr
+        }
       }, 0)
       this.setState({dailyPoints: dailyPoints})
     } catch (error) {
@@ -170,21 +190,22 @@ export class UserHome extends React.Component {
 
   async componentDidMount() {
     try {
+      await pushSetting(this.props.user)
       console.log('totalPoints', this.state.totalPoints)
       await this.props.loadList()
       await this.setTotalPoints()
       await this.setDailyPoints()
-      if (this.state.totalPoints >= 10 && this.state.dailyPoints < 10) {
+      if (this.state.totalPoints >= 3 && this.state.dailyPoints < 5) {
         this.setState({lottie: idleAnimation, isHatched: true})
       }
-      if (this.state.dailyPoints >= 10) {
+      if (this.state.dailyPoints >= 3) {
         this.setState({
           lottie: sparkleAnimation,
           isHatched: true,
           sparkleMode: true
         })
       }
-      if (this.state.totalPoints < 7) {
+      if (this.state.totalPoints < 5) {
         this.setState({lottie: eggWiggleAnimation, isHatched: false})
       }
     } catch (error) {
@@ -195,13 +216,30 @@ export class UserHome extends React.Component {
   async handleCheck(event) {
     event.preventDefault()
     try {
+      console.log('totalPoints from handleCheck', this.state.totalPoints)
       //check to see if sparkleMode should be set to true or false
-      if (this.state.dailyPoints >= 10 && this.state.lottie === idleAnimation) {
+      if (this.state.dailyPoints >= 5 && this.state.lottie === idleAnimation) {
         this.setState({lottie: sparkleAnimation, sparkleMode: true})
-      } else {
+      }
+      if (
+        this.state.dailyPoints < 5 &&
+        this.state.lottie === sparkleAnimation &&
+        this.state.totalPoints > 3
+      ) {
         this.setState({
-          lottie: this.state.isHatched ? idleAnimation : eggWiggleAnimation,
+          lottie: idleAnimation,
           sparkleMode: false
+        })
+      }
+      if (
+        this.state.dailyPoints < 5 &&
+        this.state.lottie === sparkleAnimation &&
+        this.state.totalPoints < 3
+      ) {
+        this.setState({
+          lottie: eggWiggleAnimation,
+          sparkleMode: false,
+          isHatched: false
         })
       }
 
@@ -296,17 +334,16 @@ export class UserHome extends React.Component {
       await this.setDailyPoints()
       await this.setTotalPoints()
 
-      //check to see if this is the 10th checkbox, then trigger eggHatch animation sequence
+      //check to see if this is the 10th checkbox, then trigger eggHatch animation sequence if it is
       if (
-        this.state.totalPoints >= 10 &&
+        this.state.totalPoints >= 3 &&
         this.state.lottie === eggWiggleAnimation
       ) {
         this.setState({lottie: eggHatchAnimation})
         setTimeout(() => {
           this.setState({
-            lottie: sparkleAnimation,
-            isHatched: true,
-            sparkleMode: true
+            lottie: idleAnimation,
+            isHatched: true
           })
         }, 16000)
       }
@@ -326,8 +363,14 @@ export class UserHome extends React.Component {
     }
   }
 
+  handleOwlClick = () => {
+    this.setState({toggleMessage: !this.state.toggleMessage})
+  }
+
   render() {
     const {lottie} = this.state
+    const owlMessage1 = "hello i'm owl"
+    const owlMessage2 = 'howdy folks! check off some boxes'
 
     if (this.props.list) {
       return (
@@ -344,26 +387,41 @@ export class UserHome extends React.Component {
             >
               <div className="animationContainer">
                 <div className="animation">
-                   <Button
-                  onClick={this.handleClick}
-                  style={{backgroundColor: 'transparent'}}
-                  disableRipple={true}
-                >
-                  <Lottie options={lottie} height={400} width={400} />
-                </Button>
-                </div>
-                <div className="progressBar">
-                  <ProgressBar dailyPoints={this.state.dailyPoints} />
+                  <Button
+                    onClick={this.handleClick}
+                    style={{backgroundColor: 'transparent'}}
+                    disableRipple={true}
+                  >
+                    <Lottie options={lottie} height={300} width={300} />
+                  </Button>
                 </div>
               </div>
-              <div className="listView">
-                <DailyProgressList
-                  handleCheck={this.handleCheck}
-                  list={this.props.list}
-                />
-              </div>
-
             </Grid>
+            <div className="progressBar">
+              <ProgressBar dailyPoints={this.state.dailyPoints} />
+            </div>
+          </div>
+          <Grid container justify="center" direction="row" alignItems="center">
+            <Button
+              onClick={this.handleOwlClick}
+              style={{backgroundColor: 'transparent'}}
+              disableRipple={true}
+            >
+              <Lottie options={guideAnimation} height={75} width={75} />
+            </Button>
+            <Grid item xs={8}>
+              <Paper>
+                {this.state.toggleMessage ? owlMessage1 : owlMessage2}
+              </Paper>
+            </Grid>
+          </Grid>
+          <div className="homeContainer">
+            <div className="listView">
+              <DailyProgressList
+                handleCheck={this.handleCheck}
+                list={this.props.list}
+              />
+            </div>
           </div>
         </>
       )
@@ -381,7 +439,8 @@ const mapState = state => {
     email: state.user.email,
     userId: state.user.id,
     list: state.list.list,
-    history: state.user.dailyprogresses
+    history: state.user.dailyprogresses,
+    user: state.user
   }
 }
 

@@ -2,6 +2,8 @@ const router = require('express').Router()
 const User = require('../db/models/user')
 module.exports = router
 
+const {userValidationRules, validate} = require('./validator.js')
+
 router.post('/login', async (req, res, next) => {
   console.log(req.params)
   try {
@@ -20,19 +22,24 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
-router.post('/signup', async (req, res, next) => {
-  try {
-    console.log('auth/sinup called ')
-    const user = await User.create(req.body)
-    req.login(user, err => (err ? next(err) : res.json(user)))
-  } catch (err) {
-    if (err.name === 'SequelizeUniqueConstraintError') {
-      res.status(401).send('User already exists')
-    } else {
-      next(err)
+router.post(
+  '/signup',
+  userValidationRules(),
+  validate,
+  async (req, res, next) => {
+    try {
+      console.log('auth/sinup called ')
+      const user = await User.create(req.body)
+      req.login(user, err => (err ? next(err) : res.json(user)))
+    } catch (err) {
+      if (err.name === 'SequelizeUniqueConstraintError') {
+        res.status(401).send('User already exists')
+      } else {
+        next(err)
+      }
     }
   }
-})
+)
 
 router.post('/logout', (req, res) => {
   req.logout()

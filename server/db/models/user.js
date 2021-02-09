@@ -109,7 +109,7 @@ User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)
 })
 
-User.afterCreate(async user => {
-  const newData = await DailyProgress.create()
-  await newData.setUser(user)
-})
+// User.afterCreate(async user => {
+//   const newData = await DailyProgress.create()
+//   await newData.setUser(user)
+// })
