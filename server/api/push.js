@@ -45,6 +45,7 @@ router.get('/', async (req, res, next) => {
     }
 
     subscriber.forEach(sub => {
+      console.log(sub)
       webPush.sendNotification(sub, payload, options)
     })
 
