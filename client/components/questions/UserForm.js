@@ -5,6 +5,7 @@ import Confirm from './Confirm'
 import Success from './Success'
 import {FindEgg} from './FindEgg'
 import Tutorial from './Tutorial'
+import Explain from './Explain'
 
 export class UserForm extends Component {
   state = {
@@ -61,17 +62,18 @@ export class UserForm extends Component {
     }
     switch (step) {
       case 1:
-        // return <FindEgg nextStep={this.nextStep} />
-        return <Tutorial />
-      // case 1:
-      //   return (
-      //     <NameAndBedtime
-      //       nextStep={this.nextStep}
-      //       handleChange={this.handleChange}
-      //       values={values}
-      //     />
-      //   )
+        return <FindEgg nextStep={this.nextStep} />
       case 2:
+        return <Explain nextStep={this.nextStep} />
+      case 3:
+        return (
+          <NameAndBedtime
+            nextStep={this.nextStep}
+            handleChange={this.handleChange}
+            values={values}
+          />
+        )
+      case 4:
         return (
           <Reminders
             nextStep={this.nextStep}
@@ -80,7 +82,7 @@ export class UserForm extends Component {
             values={values}
           />
         )
-      case 3:
+      case 5:
         return (
           <Confirm
             nextStep={this.nextStep}
@@ -89,7 +91,7 @@ export class UserForm extends Component {
             values={values}
           />
         )
-      case 4:
+      case 6:
         return <Success />
     }
   }

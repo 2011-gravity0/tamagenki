@@ -21,8 +21,7 @@ const styles = theme => ({
   root: {
     marginTop: 50,
     marginBottom: 15,
-    padding: 20,
-    backgroundColor: 'green'
+    padding: 20
   },
   button: {
     margin: 50,

@@ -10,11 +10,6 @@ export class FindEgg extends Component {
   constructor(props) {
     super(props)
     this.continue = this.continue.bind(this)
-    // this.typeWriter = this.typeWriter.bind(this)
-    this.state = {
-      text:
-        'You have stumbled across a Tamabuddy Egg! Would you like to keep it?'
-    }
   }
   continue = e => {
     e.preventDefault()
@@ -25,30 +20,21 @@ export class FindEgg extends Component {
     const eggOptions = {
       loop: true,
       autoplay: true,
-      animationData: animationEgg
-      //   rendererSettings: {
-      //     preserveAspectRatio: 'xMidYMid slice',
-      //   },
+      animationData: animationEgg,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
     }
-
-    let body = document.getElementById('body')
-    body.style.backgroundImage =
-      'url(https://i.pinimg.com/originals/9c/bd/31/9cbd314122dc25c3e416cd12f8fba982.jpg)'
-    body.style.backgroundRepeat = 'no-repeat'
-    body.style.backgroundPosition = 'center'
-    body.style.backgroundSize = '50'
-    body.style.backgroundColor = 'rgba(200, 234, 239, 1)'
 
     return (
       <div className="find-egg-component">
         <p
           className="typeWriter"
-          style={{backgroundColor: 'rgba(200, 234, 239, .5)'}}
+          style={{backgroundColor: 'rgba(200, 234, 239, .3)'}}
         >
-          {this.state.text}
+          You have stumbled across a Tamabuddy Egg! Would you like to keep it?
         </p>
         <Lottie options={eggOptions} height={200} width={200} />
-
         <Button type="submit" onClick={this.continue}>
           Yes
         </Button>
