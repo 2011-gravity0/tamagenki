@@ -1,9 +1,9 @@
 import {createMuiTheme} from '@material-ui/core/styles'
 
-const colorOne = '#C3A789'
-const colorTwo = '#D8DDE7'
-const colorThree = '#EFE9E4'
-const colorFour = '#D1C9B3'
+const colorOne = '#FFFAEA'
+const colorTwo = '#FFBOAD'
+const colorThree = '#C9E3BE'
+const colorFour = '#4F7469'
 const colorWhite = '#fff'
 
 export default createMuiTheme({
@@ -25,26 +25,25 @@ export default createMuiTheme({
   typography: {
     h1: {
       fontSize: '2.8rem',
-      fontWeight: 400,
-      fontFamily: 'Playfair Display',
-      letterSpacing: 5
+
+      fontFamily: 'Fredoka One'
     },
     tab: {
       fontSize: '1em',
       fontWeight: 400,
-      fontFamily: 'Lato',
+      fontFamily: 'Raleway',
       letterSpacing: 2
     },
     body1: {
       fontSize: '1.25em',
       fontWeight: 500,
-      fontFamily: 'Lato',
+      fontFamily: 'Raleway',
       letterSpacing: 2
     },
     body2: {
       fontSize: '1.25em',
       fontWeight: 300,
-      fontFamily: 'Lato',
+      fontFamily: 'Raleway',
       letterSpacing: 2
     }
   },

@@ -1,5 +1,6 @@
 {
   "name": "tamagenki",
+  "gcm_sender_id": "909484735935",
   "short_name": "tamagenki",
   "start_url": "https://tamagenki.herokuapp.com/",
   "display": "standalone",
