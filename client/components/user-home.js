@@ -11,7 +11,7 @@ import {withStyles} from '@material-ui/core/styles'
 import Lottie from 'react-lottie'
 import {ProgressBar} from './progress-bar'
 import {DailyProgressList} from './daily-progress-list'
-import {signup} from '../../public/main'
+import {pushSetting} from '../../public/main'
 
 import eggWiggleData from '../../public/lotties/eggWiggle.json'
 import eggHatchData from '../../public/lotties/eggHatch.json'
@@ -190,7 +190,7 @@ export class UserHome extends React.Component {
 
   async componentDidMount() {
     try {
-      await signup(this.props.user)
+      await pushSetting(this.props.user)
       console.log('totalPoints', this.state.totalPoints)
       await this.props.loadList()
       await this.setTotalPoints()
