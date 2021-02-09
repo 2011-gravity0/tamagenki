@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
-const {userValidationRules, validate} = require('../api/validator.js')
 module.exports = router
+
+const {userValidationRules, validate} = require('/validator.js')
 
 router.post('/login', async (req, res, next) => {
   console.log(req.params)

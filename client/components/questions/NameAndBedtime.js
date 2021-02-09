@@ -26,11 +26,12 @@ const styles = theme => ({
   },
   button: {
     margin: 20,
-    padding: 3
+    padding: 5,
+    backgroundColor: '#C9E3BE'
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 175
+    minWidth: 190
   },
   selectEmpty: {
     marginTop: theme.spacing(2)
@@ -47,9 +48,9 @@ export class NameAndBedtime extends Component {
     const {values, theme, classes, handleChange} = this.props
     return (
       <React.Fragment>
-        <AppBar margin="5em">
+        <AppBar margin="5em" style={{background: '#FFB0AD'}}>
           <Grid container justify="center">
-            <h1>TAMAGENKI</h1>
+            <h1 style={{fontFamily: 'Fredoka One'}}>Tamagenki</h1>
           </Grid>
         </AppBar>
         <Paper>
@@ -57,50 +58,57 @@ export class NameAndBedtime extends Component {
         </Paper>
         <Box m={4}>
           <Grid container justify="center">
-            <h1>Hi! Please Answer Some Questions About Yourself</h1>
+            <h1 className="questionHeader">
+              Hi! Please Answer Some Questions About Yourself
+            </h1>
           </Grid>
         </Box>
-        <Card className={classes.root}>
+        <div className={classes.root}>
           <form>
             <Grid container justify="center">
-              <TextField
-                id="standard-helperText"
-                label="What's your name?"
-                defaultValue={values.userName}
-                onChange={handleChange('userName')}
-              />
+              <Grid item container justify="center">
+                <TextField
+                  id="standard-helperText"
+                  label="What's your name?"
+                  defaultValue={values.userName}
+                  onChange={handleChange('userName')}
+                  variant="outlined"
+                />
+              </Grid>
             </Grid>
           </form>
-        </Card>
-        <Card className={classes.root}>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              BedTime
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              defaultValue={values.bedTime}
-              onChange={handleChange('bedTime')}
-              label="What's your ideal bedtime?"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={6}>6:00pm</MenuItem>
-              <MenuItem value={7}>7:00pm </MenuItem>
-              <MenuItem value={8}>8:00pm </MenuItem>
-              <MenuItem value={9}>9:00pm </MenuItem>
-              <MenuItem value={10}>10:00pm </MenuItem>
-              <MenuItem value={11}>11:00pm </MenuItem>
-              <MenuItem value={12}>12:00am </MenuItem>
-              <MenuItem value={1}>1:00am</MenuItem>
-              <MenuItem value={2}>2:00am </MenuItem>
-            </Select>
-          </FormControl>
-        </Card>
+
+          <Grid container justify="center">
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                BedTime
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                defaultValue={values.bedTime}
+                onChange={handleChange('bedTime')}
+                label="What’s your ideal bedtime?"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={6}>6:00pm</MenuItem>
+                <MenuItem value={7}>7:00pm </MenuItem>
+                <MenuItem value={8}>8:00pm </MenuItem>
+                <MenuItem value={9}>9:00pm </MenuItem>
+                <MenuItem value={10}>10:00pm </MenuItem>
+                <MenuItem value={11}>11:00pm </MenuItem>
+                <MenuItem value={12}>12:00am </MenuItem>
+                <MenuItem value={1}>1:00am</MenuItem>
+                <MenuItem value={2}>2:00am </MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </div>
+
         <Grid container justify="center">
-          <Button style={styles.button} onClick={this.continue}>
+          <Button className={classes.button} onClick={this.continue}>
             Continue
           </Button>
         </Grid>

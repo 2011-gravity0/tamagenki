@@ -72,8 +72,7 @@ const app = (() => {
     })
   }
 
-  const applicationServerPublicKey =
-    'BI5Oqd_Wm2nvGdMq5Kg8MmyzbHWgmWirU9LNo2jvfyvaQlCvX88-Ts88N8t7MdEilq_IoRs9QezC01kBXsucMGU'
+  const applicationServerPublicKey = 'YOUR_VAPID_PUBLIC_KEY'
 
   function subscribeUser() {
     const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey)

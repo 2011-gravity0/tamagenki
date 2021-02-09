@@ -110,7 +110,7 @@ const UserSetting = ({user, updateUser}) => {
               </div>
             </div>
           ))}
-          <h4 className="settingTitle">Reminder Setting</h4>
+          <h4 className="settingTitle">Push Notifications Setting</h4>
           <hr />
           {mapReminer.map(item => (
             <div className="reminderContainer">

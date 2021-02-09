@@ -95,7 +95,7 @@ self.addEventListener('notificationclick', event => {
 
 self.addEventListener('push', event => {
   let body
-
+  console.log(event.data)
   if (event.data) {
     body = event.data.text()
   } else {
@@ -104,7 +104,7 @@ self.addEventListener('push', event => {
 
   const options = {
     body: body,
-    icon: 'images/notification-flat.png',
+    icon: '/blueEggIcon192.png',
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
@@ -124,15 +124,18 @@ self.addEventListener('push', event => {
     ]
   }
   event.waitUntil(
-    clients.matchAll().then(c => {
-      console.log(c)
-      if (c.length === 0) {
-        // Show notification
-        self.registration.showNotification('Push Notification', options)
-      } else {
-        // Send a message to the page to update the UI
-        console.log('Application is already open!')
-      }
-    })
+    self.registration.showNotification('Message from your Tamabuddy', options)
   )
+  // event.waitUntil(
+  //   clients.matchAll().then((c) => {
+  //     console.log(c)
+  //     if (c.length === 0) {
+  //       // Show notification
+  //       self.registration.showNotification('Push Notification', options)
+  //     } else {
+  //       // Send a message to the page to update the UI
+  //       console.log('Application is already open!')
+  //     }
+  //   })
+  // )
 })

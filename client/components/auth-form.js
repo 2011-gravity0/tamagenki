@@ -92,12 +92,12 @@ const AuthForm = props => {
         <Typography variant="subtitle2" align="center" className="or">
           or
         </Typography>
-        <Button variant="outlined" className="googleButton">
+        {/* <Button variant="outlined" className="googleButton">
           <div className="google">
             <img src="/google-icon.svg" />
           </div>
           <a href="/auth/google">{displayName} with Google</a>
-        </Button>
+        </Button> */}
         <a className="googleLink" href={reroutePath}>
           {reroute}
         </a>
