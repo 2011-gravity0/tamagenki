@@ -290,6 +290,43 @@ form div {
   padding: 10px;
 }
 
+.find-egg-component {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  background-image: url('https://i.pinimg.com/originals/9c/bd/31/9cbd314122dc25c3e416cd12f8fba982.jpg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  /* background-attachment: fixed; */
+}
+
+.typeWriter {
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+}
+
+.explain-component {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  background-image: url('https://cdnb.artstation.com/p/assets/images/images/016/756/697/large/john-paul-23a.jpg?1553354181');
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.explain-component p {
+  background-color: rgba(200, 234, 239, 0.6);
+}
+
 /*=====  =====*/
 
 .tutorial-container {
