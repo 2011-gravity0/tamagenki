@@ -44,8 +44,7 @@ export class NameAndBedtime extends Component {
   constructor() {
     super()
     this.state = {
-      text:
-        'I will help you take care of your tamabuddy! To help you I need to know some more information...'
+      text: 'To get started I need to know some more information...'
     }
   }
   continue = e => {
