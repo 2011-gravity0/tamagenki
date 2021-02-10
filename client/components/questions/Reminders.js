@@ -82,12 +82,6 @@ export class Reminders extends Component {
             </Grid>
           </Grid>
         </Box>
-          <Grid container justify="center" className={classes.root}>
-            <h1 className="questionHeader">
-              Let's Move on to Your Preferences
-            </h1>
-          </Grid>
-        </Box>} */}
         <div className={classes.text}>
           <FormGroup column="true">
             <Grid container justify="center">

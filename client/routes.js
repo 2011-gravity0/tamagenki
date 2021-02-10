@@ -13,6 +13,7 @@ import {
 import {me} from './store'
 import UserForm from './components/questions/UserForm'
 import Badges from './components/Badges'
+import BadgesTwo from './components/Badges2'
 
 /**
  * COMPONENT
@@ -41,6 +42,7 @@ class Routes extends Component {
             <Route exact path="/guidePet" component={GuidePet} />
             <Route exact path="/setting" component={UserSetting} />
             <Route path="/badges" component={Badges} />
+            <Route path="/badgestwo" component={BadgesTwo} />
           </Switch>
         )}
 
