@@ -76,10 +76,10 @@ export const updateUser = (userId, userData) => {
   }
 }
 
-export const fetchUserHistory = (userId, action = 'all') => {
+export const fetchUserHistory = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/user/${userId}?action=${action}`)
+      const {data} = await axios.get(`/api/user/history/${userId}`)
       dispatch(getHistory(data))
     } catch (error) {
       console.log('This is Error in fetchUserHistory Thunk', error)

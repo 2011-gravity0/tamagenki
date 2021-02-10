@@ -54,6 +54,11 @@ button {
   align-items: center;
 }
 
+#emailP,
+#passwordP {
+  margin-top: -20px;
+}
+
 .loginContainer h1 {
   font-family: 'Fredoka One', cursive;
   color: rgb(228, 115, 134);
@@ -185,6 +190,30 @@ button {
 .appTitle {
   text-align: center;
   color: rgb(92, 111, 165);
+}
+
+.avatar-modals {
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px lightgrey;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: fit-content;
+  width: 50%;
+  text-align: center;
+  background-color: rgba(255, 248, 237, 1);
+}
+
+.avatar-modals div {
+  outline: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.avatar-modals p:focus {
+  outline: none !important;
 }
 
 /*===== NAME EGG =====*/
@@ -347,6 +376,7 @@ button {
   color: #4e7469;
   font-family: 'Fredoka One';
   font-weight: lighter;
+  text-align: center;
 }
 
 .questionHeader {
@@ -354,4 +384,88 @@ button {
   color: rgb(94, 93, 93);
   text-align: center;
   font-size: 1.5rem;
+}
+
+.explain-one {
+  animation-name: pone;
+  animation-duration: 6s;
+}
+
+@keyframes pone {
+  0% {
+    opacity: 0.01;
+  }
+  16% {
+    opacity: 100;
+  }
+}
+
+.explain-two {
+  animation-name: ptwo;
+  animation-duration: 6s;
+}
+
+@keyframes ptwo {
+  0% {
+    opacity: 0.01;
+  }
+  32% {
+    opacity: 100;
+  }
+}
+
+.explain-three {
+  animation-name: pthree;
+  animation-duration: 6s;
+}
+
+@keyframes pthree {
+  0% {
+    opacity: 0.01;
+  }
+  48% {
+    opacity: 100;
+  }
+}
+
+.explain-four {
+  animation-name: pfour;
+  animation-duration: 6s;
+}
+
+@keyframes pfour {
+  0% {
+    opacity: 0.01;
+  }
+  64% {
+    opacity: 100;
+  }
+}
+
+.explain-five {
+  animation-name: pfive;
+  animation-duration: 6s;
+}
+
+@keyframes pfive {
+  0% {
+    opacity: 0.01;
+  }
+  80% {
+    opacity: 100;
+  }
+}
+
+.explain-six {
+  animation-name: psix;
+  animation-duration: 6s;
+}
+
+@keyframes psix {
+  0% {
+    opacity: 0.01;
+  }
+  100% {
+    opacity: 100;
+  }
 }

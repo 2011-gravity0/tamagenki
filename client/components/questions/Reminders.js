@@ -38,7 +38,8 @@ export class Reminders extends Component {
   constructor() {
     super()
     this.state = {
-      text: 'Would you like reminders for any of the items listed below?'
+      text:
+        'Lets move on to your preferences. Would you like push notifications for any of the items listed below?'
     }
   }
   continue = e => {
@@ -56,7 +57,7 @@ export class Reminders extends Component {
     const owlOptions = {
       loop: true,
       autoplay: true,
-      animationData: animationOwl,
+      animationData: animationOwl,https://github.com/2011-gravity0/tamagenki/pull/80/conflict?name=client%252Fcomponents%252Fquestions%252FReminders.js&ancestor_oid=e1cab3409a3859e1c4bd2960bd430553541fbaff&base_oid=882354ad63ca1afe344af5ca635c7569140ec3c2&head_oid=49efd2b20728cbbefcafc81eea670300782eab6b
       rendererSettings: {
         preserveAspectRatio: 'xMidYMid slice'
       }
@@ -77,27 +78,13 @@ export class Reminders extends Component {
               <Lottie options={owlOptions} height={50} width={50} />
             </Grid>
             <Grid item>
-              <p className="typeWriter">{this.state.text}</p>
+              <p className="questionHeader">{this.state.text}</p>
             </Grid>
-          </Grid>
-        </Box>
-        <Box m={1}>
-          <Grid container justify="center" className={classes.root}>
-            <h1 className="questionHeader">
-              Let's Move on to Your Preferences
-            </h1>
           </Grid>
         </Box>
         <div className={classes.text}>
           <FormGroup column="true">
             <Grid container justify="center">
-              <Grid item container align="center" justify="center">
-                <p>
-                  {' '}
-                  Would you like push notifications throughout the day for any
-                  of these?
-                </p>
-              </Grid>
 
               <FormControlLabel
                 control={<Checkbox onChange={handleChange('waterReminder')} />}
