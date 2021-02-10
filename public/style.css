@@ -22,6 +22,13 @@ form div {
   display: inline-block;
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
 .loginContainer h1 {
   font-family: 'Fredoka One', cursive;
   color: rgb(228, 115, 134);
