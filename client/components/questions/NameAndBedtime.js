@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import {withStyles} from '@material-ui/core/styles'
+import {withStyles, makeStyles} from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -52,6 +52,7 @@ export class NameAndBedtime extends Component {
     e.preventDefault()
     this.props.nextStep()
   }
+  // const classes = useStyles();
   render() {
     const {values, theme, classes, handleChange} = this.props
     const owlOptions = {
@@ -80,10 +81,11 @@ export class NameAndBedtime extends Component {
             <Grid item>
               <p className="typeWriter">{this.state.text}</p>
             </Grid>
-          <Grid container justify="center">
-            <h1 className="questionHeader">
-              Hi! Please Answer Some Questions About Yourself
-            </h1>
+            <Grid container justify="center">
+              <h1 className="questionHeader">
+                Hi! Please Answer Some Questions About Yourself
+              </h1>
+            </Grid>
           </Grid>
         </Box>
         <div className={classes.root}>
