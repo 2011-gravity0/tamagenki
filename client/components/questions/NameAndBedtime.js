@@ -11,6 +11,8 @@ import Box from '@material-ui/core/Box'
 import Toolbar from '@material-ui/core/Toolbar'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import Lottie from 'react-lottie'
+import animationOwl from '../../../public/lotties/owl.json'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
@@ -39,6 +41,13 @@ const styles = theme => ({
 })
 
 export class NameAndBedtime extends Component {
+  constructor() {
+    super()
+    this.state = {
+      text:
+        'I will help you take care of your tamabuddy! To help you I need to know some more information...'
+    }
+  }
   continue = e => {
     e.preventDefault()
     this.props.nextStep()
@@ -46,6 +55,14 @@ export class NameAndBedtime extends Component {
   // const classes = useStyles();
   render() {
     const {values, theme, classes, handleChange} = this.props
+    const owlOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationOwl,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    }
     return (
       <React.Fragment>
         <AppBar margin="5em" style={{background: '#FFB0AD'}}>
@@ -57,10 +74,18 @@ export class NameAndBedtime extends Component {
           <div className={classes.toolbar} />
         </Paper>
         <Box m={4}>
-          <Grid container justify="center">
-            <h1 className="questionHeader">
-              Hi! Please Answer Some Questions About Yourself
-            </h1>
+          <Grid container justify="center" alignItems="flex-start">
+            <Grid item>
+              <Lottie options={owlOptions} height={50} width={50} />
+            </Grid>
+            <Grid item>
+              <p className="typeWriter">{this.state.text}</p>
+            </Grid>
+            <Grid container justify="center">
+              <h1 className="questionHeader">
+                Hi! Please Answer Some Questions About Yourself
+              </h1>
+            </Grid>
           </Grid>
         </Box>
         <div className={classes.root}>
