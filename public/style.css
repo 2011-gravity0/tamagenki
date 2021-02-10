@@ -47,6 +47,11 @@ form div {
   align-items: center;
 }
 
+#emailP,
+#passwordP {
+  margin-top: -20px;
+}
+
 .loginContainer h1 {
   font-family: 'Fredoka One', cursive;
   color: rgb(228, 115, 134);

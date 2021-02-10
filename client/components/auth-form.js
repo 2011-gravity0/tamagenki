@@ -11,7 +11,6 @@ import {TextField, Button, Typography} from '@material-ui/core'
  */
 const AuthForm = props => {
   const {name, displayName, error, reroute, reroutePath} = props
-
   const validateEmail = (input, whichForm) => {
     if (
       !input.includes('@') ||
@@ -27,7 +26,6 @@ const AuthForm = props => {
     }
     return false
   }
-
   const handleSubmit = async evt => {
     try {
       evt.preventDefault()
@@ -49,7 +47,6 @@ const AuthForm = props => {
       console.log(error)
     }
   }
-
   return (
     <div className="viewContainer">
       <div className="loginContainer">
