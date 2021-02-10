@@ -78,12 +78,8 @@ export class NameAndBedtime extends Component {
               <Lottie options={owlOptions} height={50} width={50} />
             </Grid>
             <Grid item>
-              <p className="typeWriter">{this.state.text}</p>
+              <p className="questionHeader">{this.state.text}</p>
             </Grid>
-          <Grid container justify="center">
-            <h1 className="questionHeader">
-              Hi! Please Answer Some Questions About Yourself
-            </h1>
           </Grid>
         </Box>
         <div className={classes.root}>

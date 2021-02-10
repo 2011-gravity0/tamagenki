@@ -15,6 +15,8 @@ import Box from '@material-ui/core/Box'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import Lottie from 'react-lottie'
+import animationOwl from '../../../public/lotties/owl.json'
 
 const styles = theme => ({
   // Load app bar information from the theme
@@ -74,6 +76,15 @@ export class Confirm extends Component {
       }
     } = this.props
 
+    const owlOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationOwl,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    }
+
     return (
       <React.Fragment>
         <AppBar margin="5em" style={{background: '#FFB0AD'}}>
@@ -86,6 +97,7 @@ export class Confirm extends Component {
         </Paper>
         <Box mt={2}>
           <Grid container justify="center">
+            <Lottie options={owlOptions} height={200} width={200} />
             <h1 className="questionHeader">Did I Get Your Answers Right?</h1>
           </Grid>
         </Box>

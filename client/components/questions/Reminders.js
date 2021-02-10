@@ -38,7 +38,8 @@ export class Reminders extends Component {
   constructor() {
     super()
     this.state = {
-      text: 'Would you like reminders for any of the items listed below?'
+      text:
+        'Lets move on to your preferences. Would you like push notifications for any of the items listed below?'
     }
   }
   continue = e => {
@@ -77,25 +78,27 @@ export class Reminders extends Component {
               <Lottie options={owlOptions} height={50} width={50} />
             </Grid>
             <Grid item>
-              <p className="typeWriter">{this.state.text}</p>
+              <p className="questionHeader">{this.state.text}</p>
             </Grid>
-        <Box m={1}>
+          </Grid>
+        </Box>
+        {/* {<Box m={1}>
           <Grid container justify="center" className={classes.root}>
             <h1 className="questionHeader">
               Let's Move on to Your Preferences
             </h1>
           </Grid>
-        </Box>
+        </Box>} */}
         <div className={classes.text}>
           <FormGroup column="true">
             <Grid container justify="center">
-              <Grid item container align="center" justify="center">
+              {/* <Grid item container align="center" justify="center">
                 <p>
                   {' '}
                   Would you like push notifications throughout the day for any
                   of these?
                 </p>
-              </Grid>
+              </Grid> */}
 
               <FormControlLabel
                 control={<Checkbox onChange={handleChange('waterReminder')} />}
