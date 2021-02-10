@@ -92,11 +92,11 @@ export class Success extends Component {
           </Grid>
           <Grid item container justify="center">
             <h1 className="questionHeader">
-              Are you ready to meet your tamabuddy?
+              Are you ready to start your Tamagenki journey?
             </h1>
           </Grid>
           <Grid item container justify="center">
-            <Button className={classes.button} component={Link} to="/nameEgg">
+            <Button className={classes.button} component={Link} to="guidePet">
               yes
             </Button>
           </Grid>
