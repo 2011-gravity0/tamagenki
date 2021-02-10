@@ -96,9 +96,18 @@ export class Confirm extends Component {
           <div className={classes.toolbar} />
         </Paper>
         <Box mt={2}>
-          <Grid container justify="center">
-            <Lottie options={owlOptions} height={200} width={200} />
-            <h1 className="questionHeader">Did I Get Your Answers Right?</h1>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item>
+              <Lottie options={owlOptions} height={100} width={100} />
+            </Grid>
+            <Grid item>
+              <h1 className="questionHeader">Did I Get Your Answers Right?</h1>
+            </Grid>
           </Grid>
         </Box>
 
