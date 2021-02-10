@@ -161,14 +161,19 @@ export class UserHome extends React.Component {
 
   async setTotalPoints() {
     try {
-      await this.props.getUserHistory(this.props.userId, 'pointsOnly')
+      await this.props.getUserHistory(this.props.userId)
       const totalHistoryPoints = this.props.history.reduce((ttl, day) => {
-        const subTotal = Object.values(day).reduce(
-          (subTtl, point) => subTtl + point,
-          0
-        )
+        const subTotal = Object.values(day)
+          .filter(element => typeof element === 'number')
+          .reduce((subTtl, point) => {
+            console.log('this point ', point)
+            return subTtl + point
+          }, 0)
+        console.log('ths is history', this.props.history)
+        console.log('this is subtotal', subTotal)
         return ttl + subTotal
       }, 0)
+      console.log('this is thP', totalHistoryPoints)
       this.setState({totalPoints: totalHistoryPoints})
     } catch (error) {
       console.log(error)
@@ -189,9 +194,11 @@ export class UserHome extends React.Component {
   }
 
   async componentDidMount() {
+    console.log('this is component did mount')
     try {
       await pushSetting(this.props.user)
       console.log('totalPoints', this.state.totalPoints)
+
       await this.props.loadList()
       await this.setTotalPoints()
       await this.setDailyPoints()
@@ -448,8 +455,7 @@ const mapDispatch = dispatch => {
   return {
     loadList: () => dispatch(fetchList()),
     updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
-    getUserHistory: (userId, action) =>
-      dispatch(fetchUserHistory(userId, action))
+    getUserHistory: userId => dispatch(fetchUserHistory(userId))
   }
 }
 
