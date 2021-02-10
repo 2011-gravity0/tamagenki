@@ -3,20 +3,6 @@ const {User, DailyProgress} = require('../db/models')
 
 module.exports = router
 
-const adminsOnly = (req, res, next) => {
-  let err
-  if (!req.user) {
-    err = new Error('You are not logged in')
-    err.status = 401
-    return next(err)
-  } else if (!req.user.isAdmin) {
-    err = new Error('I see you')
-    err.status = 401
-    return next(err)
-  }
-  next()
-}
-
 const loggedInUserOnly = (req, res, next) => {
   console.log(req)
   if (!req.user) {
@@ -30,7 +16,7 @@ const loggedInUserOnly = (req, res, next) => {
   }
   next()
 }
-router.get('/', adminsOnly, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const allUsers = await User.findAll({
       attributes: ['id', 'email', 'petName'],
@@ -41,35 +27,40 @@ router.get('/', adminsOnly, async (req, res, next) => {
     next(err)
   }
 })
-
+// user/history/3
+// history/3
+router.get('/history/:userId', async (req, res, next) => {
+  try {
+    const id = req.params.userId
+    const singleUser = await User.findByPk(id, {
+      include: [
+        {
+          model: DailyProgress,
+          attributes: [
+            'exercise',
+            'fruit',
+            'vegetables',
+            'water',
+            'meditation',
+            'sleep',
+            'relaxation',
+            'date'
+          ]
+        }
+      ]
+    })
+    res.status(200).send(singleUser)
+  } catch (error) {
+    next(error)
+  }
+})
 router.get('/:userId', async (req, res, next) => {
   try {
     const id = req.params.userId
-    const action = req.query.action
     if (isNaN(id)) res.status(400).send('No user found')
-    let singleUser
-    if (action === 'pointsOnly') {
-      singleUser = await User.findByPk(id, {
-        include: [
-          {
-            model: DailyProgress,
-            attributes: [
-              'exercise',
-              'fruit',
-              'vegetables',
-              'water',
-              'meditation',
-              'sleep',
-              'relaxation'
-            ]
-          }
-        ]
-      })
-    } else {
-      singleUser = await User.findByPk(id, {
-        include: [{model: DailyProgress}]
-      })
-    }
+    const singleUser = await User.findByPk(id, {
+      include: [{model: DailyProgress}]
+    })
     if (!singleUser) res.status(400).send('No user found')
     res.status(200).send(singleUser)
   } catch (error) {
