@@ -59,12 +59,6 @@ const DailyProgress = db.define('dailyprogress', {
       min: 0
     }
   },
-  // default value is true because dailyProgress instance
-  //will always be created for a new day.
-  isToday: {
-    type: sequelize.BOOLEAN,
-    defaultValue: true
-  },
   date: {
     type: Sequelize.DATEONLY
   }
