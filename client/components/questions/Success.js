@@ -63,7 +63,7 @@ export class Success extends Component {
     // }
 
     const {values, theme, classes, handleChange} = this.props
-
+    console.log('props in success', this.props)
     return (
       <React.Fragment>
         <AppBar margin="5em" style={{background: '#FFB0AD'}}>
