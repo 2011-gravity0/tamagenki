@@ -79,6 +79,8 @@ export class Reminders extends Component {
             <Grid item>
               <p className="typeWriter">{this.state.text}</p>
             </Grid>
+          </Grid>
+        </Box>
         <Box m={1}>
           <Grid container justify="center" className={classes.root}>
             <h1 className="questionHeader">

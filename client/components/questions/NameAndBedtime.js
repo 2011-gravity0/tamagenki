@@ -80,12 +80,14 @@ export class NameAndBedtime extends Component {
             <Grid item>
               <p className="typeWriter">{this.state.text}</p>
             </Grid>
-          <Grid container justify="center">
-            <h1 className="questionHeader">
-              Hi! Please Answer Some Questions About Yourself
-            </h1>
+            <Grid container justify="center">
+              <h1 className="questionHeader">
+                Hi! Please Answer Some Questions About Yourself
+              </h1>
+            </Grid>
           </Grid>
         </Box>
+
         <div className={classes.root}>
           <form>
             <Grid container justify="center">

@@ -45,11 +45,10 @@ router.get('/', async (req, res, next) => {
     }
 
     subscriber.forEach(sub => {
-      console.log(sub)
       webPush.sendNotification(sub, payload, options)
     })
 
-    res.status(200).send('Push Notification has been sent to this token')
+    res.status(200).send('Push Notification has been sent to User')
   } catch (error) {
     next(error)
   }
