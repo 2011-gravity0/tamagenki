@@ -185,6 +185,30 @@ form div {
   color: rgb(92, 111, 165);
 }
 
+.avatar-modals {
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px lightgrey;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: fit-content;
+  width: 50%;
+  text-align: center;
+  background-color: rgba(255, 248, 237, 1);
+}
+
+.avatar-modals div {
+  outline: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.avatar-modals p:focus {
+  outline: none !important;
+}
+
 /*===== NAME EGG =====*/
 
 .nameEgg {
