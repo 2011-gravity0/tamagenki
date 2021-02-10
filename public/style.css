@@ -345,6 +345,7 @@ form div {
   color: #4e7469;
   font-family: 'Fredoka One';
   font-weight: lighter;
+  text-align: center;
 }
 
 .questionHeader {
@@ -352,4 +353,88 @@ form div {
   color: rgb(94, 93, 93);
   text-align: center;
   font-size: 1.5rem;
+}
+
+.explain-one {
+  animation-name: pone;
+  animation-duration: 6s;
+}
+
+@keyframes pone {
+  0% {
+    opacity: 0.01;
+  }
+  16% {
+    opacity: 100;
+  }
+}
+
+.explain-two {
+  animation-name: ptwo;
+  animation-duration: 6s;
+}
+
+@keyframes ptwo {
+  0% {
+    opacity: 0.01;
+  }
+  32% {
+    opacity: 100;
+  }
+}
+
+.explain-three {
+  animation-name: pthree;
+  animation-duration: 6s;
+}
+
+@keyframes pthree {
+  0% {
+    opacity: 0.01;
+  }
+  48% {
+    opacity: 100;
+  }
+}
+
+.explain-four {
+  animation-name: pfour;
+  animation-duration: 6s;
+}
+
+@keyframes pfour {
+  0% {
+    opacity: 0.01;
+  }
+  64% {
+    opacity: 100;
+  }
+}
+
+.explain-five {
+  animation-name: pfive;
+  animation-duration: 6s;
+}
+
+@keyframes pfive {
+  0% {
+    opacity: 0.01;
+  }
+  80% {
+    opacity: 100;
+  }
+}
+
+.explain-six {
+  animation-name: psix;
+  animation-duration: 6s;
+}
+
+@keyframes psix {
+  0% {
+    opacity: 0.01;
+  }
+  100% {
+    opacity: 100;
+  }
 }
