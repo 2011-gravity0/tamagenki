@@ -57,7 +57,7 @@ export class Reminders extends Component {
     const owlOptions = {
       loop: true,
       autoplay: true,
-      animationData: animationOwl,https://github.com/2011-gravity0/tamagenki/pull/80/conflict?name=client%252Fcomponents%252Fquestions%252FReminders.js&ancestor_oid=e1cab3409a3859e1c4bd2960bd430553541fbaff&base_oid=882354ad63ca1afe344af5ca635c7569140ec3c2&head_oid=49efd2b20728cbbefcafc81eea670300782eab6b
+      animationData: animationOwl,
       rendererSettings: {
         preserveAspectRatio: 'xMidYMid slice'
       }
@@ -85,7 +85,6 @@ export class Reminders extends Component {
         <div className={classes.text}>
           <FormGroup column="true">
             <Grid container justify="center">
-
               <FormControlLabel
                 control={<Checkbox onChange={handleChange('waterReminder')} />}
                 label="drink more water"
