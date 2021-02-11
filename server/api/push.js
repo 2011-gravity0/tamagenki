@@ -48,7 +48,7 @@ router.get('/', async (req, res, next) => {
       webPush.sendNotification(sub, payload, options)
     })
 
-    res.status(200).send('Push Notification has been sent to this token')
+    res.status(200).send('Push Notification has been sent to User')
   } catch (error) {
     next(error)
   }

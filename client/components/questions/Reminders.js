@@ -108,7 +108,6 @@ export class Reminders extends Component {
             </Grid>
           </FormGroup>
         </div>
-
         <Grid container justify="center">
           <Box m={2} pt={3}>
             <Button className={classes.button} onClick={this.goBack}>
