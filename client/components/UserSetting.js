@@ -20,7 +20,7 @@ const UserSetting = ({user, updateUser}) => {
     password: false,
     bedTime: false
   })
-  const [message, setMessage] = useState({})
+  const [message, setMessage] = useState({email: '', password: ''})
   const [updateBody, setUpdateBody] = useState({})
   const [reminder, setReminder] = useState({
     exerciseReminder: user.exerciseReminder,
@@ -35,6 +35,7 @@ const UserSetting = ({user, updateUser}) => {
     }
     return false
   }
+
   const validatePassword = input => {
     if (input.length < 5) {
       return true
@@ -66,19 +67,15 @@ const UserSetting = ({user, updateUser}) => {
 
   const handleSubmit = field => {
     if (field === 'email' && validateEmail(updateBody.email)) {
-      document.getElementById('emailP').innerHTML = 'Must be an email'
+      setMessage({...message, email: 'Must be an email'})
     } else if (field === 'password' && validatePassword(updateBody.password)) {
-      document.getElementById('passwordP').innerHTML =
-        'Atleast 5 character long'
+      setMessage({...message, password: 'Atleast 5 character long'})
     } else {
       updateUser(user.id, updateBody)
       setUpdateBody({})
       setEditMode({...editMode, [field]: false})
-      const error = document.querySelectorAll('p')
-      for (let i = 0; i < error.length; i++) {
-        console.log(error[i])
-        error[i].innerHTML = ''
-      }
+      setMessage({email: '', password: ''})
+      console.log('is thie updated?')
     }
   }
 
@@ -123,9 +120,15 @@ const UserSetting = ({user, updateUser}) => {
                   </h4>
                 )}
               </div>
-              {item.field === 'email' && <p className="error" id="emailP" />}
+              {item.field === 'email' && (
+                <p className="error" id="emailP">
+                  {message.email}
+                </p>
+              )}
               {item.field === 'password' && (
-                <p className="error" id="passwordP" />
+                <p className="error" id="passwordP">
+                  {message.password}
+                </p>
               )}
               <div className="editIcon">
                 <IconButton
