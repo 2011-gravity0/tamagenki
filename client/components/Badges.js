@@ -114,7 +114,8 @@ class Badges extends React.Component {
       }, 0)
       const totalSparklePointsArray = this.props.history.filter(day => {
         let dayTotal = Object.values(day).reduce(
-          (accumulator, points) => accumulator + points,
+          (accumulator, points) =>
+            typeof points === 'number' ? accumulator + points : accumulator + 0,
           0
         )
         if (dayTotal >= 10) return true
@@ -161,6 +162,17 @@ class Badges extends React.Component {
     const {classes} = this.props
 
     const {modal} = this.state
+
+    const thresholds = {
+      water: 4,
+      meditation: 1,
+      exercise: 1,
+      fruit: 2,
+      veggie: 2,
+      sleep: 1,
+      relaxation: 1,
+      sparkle: 1
+    }
 
     const modalMessages = {
       water: 'You unlocked this badge with 40 Water points.',
@@ -266,11 +278,13 @@ class Badges extends React.Component {
             <Modal open={this.state.modalOpen} onClose={this.handleClose}>
               {body}
             </Modal>
-            <button
-              type="button"
+            <Button
               value="water"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={
+                this.state.waterPoints < thresholds.water
+              }
             >
               <Box
                 justifyContent="space-around"
@@ -303,13 +317,15 @@ class Badges extends React.Component {
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
+            <Button
               value="meditation"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={
+                this.state.meditationPoints < thresholds.meditation
+              }
             >
               <Box
                 justifyContent="space-around"
@@ -342,13 +358,15 @@ class Badges extends React.Component {
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
+            <Button
               value="exercise"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={
+                this.state.movementPoints < thresholds.exercise
+              }
             >
               <Box
                 justifyContent="space-around"
@@ -381,13 +399,15 @@ class Badges extends React.Component {
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
+            <Button
               value="relaxation"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={
+                this.state.relaxationPoints < thresholds.relaxation
+              }
             >
               <Box
                 justifyContent="space-around"
@@ -420,13 +440,15 @@ class Badges extends React.Component {
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
+            <Button
               value="sleep"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={
+                this.state.sleepPoints < thresholds.sleep
+              }
             >
               <Box
                 justifyContent="space-around"
@@ -459,13 +481,15 @@ class Badges extends React.Component {
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
+            <Button
               value="veggie"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={
+                this.state.veggiePoints < thresholds.veggie
+              }
             >
               <Box
                 justifyContent="space-around"
@@ -498,13 +522,15 @@ class Badges extends React.Component {
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
+            <Button
               value="fruit"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={
+                this.state.fruitPoints < thresholds.fruit
+              }
             >
               <Box
                 justifyContent="space-around"
@@ -537,13 +563,15 @@ class Badges extends React.Component {
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
+            <Button
               value="sparkle"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={
+                this.state.sparklePoints < thresholds.sparkle
+              }
             >
               <Box
                 justifyContent="space-around"
@@ -576,7 +604,7 @@ class Badges extends React.Component {
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
           </Grid>
           <Grid container justify="flex-end">
             <Link to="/badgestwo">

@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {compose} from 'redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
 import {fetchUserHistory} from '../store/user'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
+import Modal from '@material-ui/core/Modal'
 import {withStyles} from '@material-ui/core/styles'
 import Lottie from 'react-lottie'
 import {ProgressBar} from './progress-bar'
@@ -138,7 +140,24 @@ const waterAnimation = {
     preserveAspectRatio: 'xMidYMid slice'
   }
 }
-
+const styles = theme => ({
+  button: {
+    paddingBottom: 0
+  },
+  modalTitle: {
+    fontFamily: 'Fredoka One',
+    color: '#BE2D25',
+    fontSize: '1.7em'
+  },
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: '#C9E3BE',
+    border: 'none',
+    borderRadius: 5,
+    padding: '1 em'
+  }
+})
 /**
  * COMPONENT
  */
@@ -151,12 +170,19 @@ export class UserHome extends React.Component {
       dailyPoints: 0,
       isHatched: false,
       sparkleMode: false,
-      toggleMessage: false
+      toggleMessage: false,
+      completionModal: false
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
     this.setDailyPoints = this.setDailyPoints.bind(this)
     this.handleOwlClick = this.handleOwlClick.bind(this)
+    this.eggHatch = this.eggHatch.bind(this)
+    this.checkWhichBox = this.checkWhichBox.bind(this)
+    this.sparkleModeCheck = this.sparkleModeCheck.bind(this)
+    this.checkOrUncheck = this.checkOrUncheck.bind(this)
+    this.finalCheck = this.finalCheck.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
   async setTotalPoints() {
@@ -193,8 +219,158 @@ export class UserHome extends React.Component {
     }
   }
 
+  checkWhichBox(event) {
+    if (
+      event.target.name === 'fruit' &&
+      event.target.checked === true &&
+      this.state.isHatched
+    ) {
+      this.finalCheck()
+      this.setState({lottie: appleAnimation})
+      setTimeout(() => {
+        this.setState({
+          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+        })
+      }, 4000)
+    }
+    if (
+      event.target.name === 'vegetables' &&
+      event.target.checked === true &&
+      this.state.isHatched
+    ) {
+      this.finalCheck()
+      this.setState({lottie: carrotAnimation})
+      setTimeout(() => {
+        this.setState({
+          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+        })
+      }, 4000)
+    }
+    if (
+      event.target.name === 'water' &&
+      event.target.checked === true &&
+      this.state.isHatched
+    ) {
+      this.finalCheck()
+      this.setState({lottie: waterAnimation})
+      setTimeout(() => {
+        this.setState({
+          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+        })
+      }, 4000)
+    }
+    if (
+      event.target.name === 'exercise' &&
+      event.target.checked === true &&
+      this.state.isHatched
+    ) {
+      this.finalCheck()
+      this.setState({lottie: exerciseAnimation})
+      setTimeout(() => {
+        this.setState({
+          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+        })
+      }, 6000)
+    }
+    if (
+      event.target.name === 'meditation' &&
+      event.target.checked === true &&
+      this.state.isHatched
+    ) {
+      this.finalCheck()
+      this.setState({lottie: meditateAnimation})
+      setTimeout(() => {
+        this.setState({
+          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+        })
+      }, 6000)
+    }
+    if (
+      (event.target.name === 'relaxation' || event.target.name === 'sleep') &&
+      event.target.checked === true &&
+      this.state.isHatched
+    ) {
+      this.finalCheck()
+      this.setState({lottie: joyAnimation})
+      setTimeout(() => {
+        this.setState({
+          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+        })
+      }, 6000)
+    }
+  }
+
+  eggHatch() {
+    if (
+      this.state.totalPoints >= 3 &&
+      this.state.lottie === eggWiggleAnimation
+    ) {
+      this.setState({lottie: eggHatchAnimation})
+      setTimeout(() => {
+        this.setState({
+          lottie: idleAnimation,
+          isHatched: true
+        })
+      }, 16000)
+    }
+  }
+
+  sparkleModeCheck() {
+    if (this.state.dailyPoints >= 5 && this.state.lottie === idleAnimation) {
+      this.setState({lottie: sparkleAnimation, sparkleMode: true})
+    }
+    if (
+      this.state.dailyPoints < 5 &&
+      this.state.lottie === sparkleAnimation &&
+      this.state.totalPoints > 3
+    ) {
+      this.setState({
+        lottie: idleAnimation,
+        sparkleMode: false
+      })
+    }
+    if (
+      this.state.dailyPoints < 5 &&
+      this.state.lottie === sparkleAnimation &&
+      this.state.totalPoints < 3
+    ) {
+      this.setState({
+        lottie: eggWiggleAnimation,
+        sparkleMode: false,
+        isHatched: false
+      })
+    }
+  }
+
+  async checkOrUncheck(event) {
+    if (event.target.checked === true) {
+      await this.props.updateList(
+        event.target.name,
+        this.props.list[event.target.name] + 1
+      )
+    } else {
+      await this.props.updateList(
+        event.target.name,
+        this.props.list[event.target.name] - 1
+      )
+    }
+  }
+
+  finalCheck() {
+    if (
+      this.state.dailyPoints >= 15 &&
+      this.state.lottie === sparkleAnimation
+    ) {
+      console.log('trip modal')
+      this.setState({lottie: joyAnimation, completionModal: true})
+    } else {
+      null
+    }
+  }
+
   async componentDidMount() {
-    console.log('this is component did mount')
+    console.log('daily points', this.state.dailyPoints)
+
     try {
       await pushSetting(this.props.user)
       console.log('totalPoints', this.state.totalPoints)
@@ -202,9 +378,7 @@ export class UserHome extends React.Component {
       await this.props.loadList()
       await this.setTotalPoints()
       await this.setDailyPoints()
-      if (this.state.totalPoints >= 3 && this.state.dailyPoints < 5) {
-        this.setState({lottie: idleAnimation, isHatched: true})
-      }
+
       if (this.state.dailyPoints >= 3) {
         this.setState({
           lottie: sparkleAnimation,
@@ -212,7 +386,10 @@ export class UserHome extends React.Component {
           sparkleMode: true
         })
       }
-      if (this.state.totalPoints < 5) {
+      if (this.state.totalPoints >= 3 && this.state.dailyPoints < 5) {
+        this.setState({lottie: idleAnimation, isHatched: true})
+      }
+      if (this.state.totalPoints < 3) {
         this.setState({lottie: eggWiggleAnimation, isHatched: false})
       }
     } catch (error) {
@@ -223,137 +400,23 @@ export class UserHome extends React.Component {
   async handleCheck(event) {
     event.preventDefault()
     try {
-      console.log('totalPoints from handleCheck', this.state.totalPoints)
       //check to see if sparkleMode should be set to true or false
-      if (this.state.dailyPoints >= 5 && this.state.lottie === idleAnimation) {
-        this.setState({lottie: sparkleAnimation, sparkleMode: true})
-      }
-      if (
-        this.state.dailyPoints < 5 &&
-        this.state.lottie === sparkleAnimation &&
-        this.state.totalPoints > 3
-      ) {
-        this.setState({
-          lottie: idleAnimation,
-          sparkleMode: false
-        })
-      }
-      if (
-        this.state.dailyPoints < 5 &&
-        this.state.lottie === sparkleAnimation &&
-        this.state.totalPoints < 3
-      ) {
-        this.setState({
-          lottie: eggWiggleAnimation,
-          sparkleMode: false,
-          isHatched: false
-        })
-      }
+      this.sparkleModeCheck()
 
       //check to see which animation change should occur based on checkbox name
-      if (
-        event.target.name === 'fruit' &&
-        event.target.checked === true &&
-        this.state.isHatched
-      ) {
-        this.setState({lottie: appleAnimation})
-        setTimeout(() => {
-          this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-          })
-        }, 4000)
-      }
-      if (
-        event.target.name === 'vegetables' &&
-        event.target.checked === true &&
-        this.state.isHatched
-      ) {
-        this.setState({lottie: carrotAnimation})
-        setTimeout(() => {
-          this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-          })
-        }, 4000)
-      }
-      if (
-        event.target.name === 'water' &&
-        event.target.checked === true &&
-        this.state.isHatched
-      ) {
-        this.setState({lottie: waterAnimation})
-        setTimeout(() => {
-          this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-          })
-        }, 4000)
-      }
-      if (
-        event.target.name === 'exercise' &&
-        event.target.checked === true &&
-        this.state.isHatched
-      ) {
-        this.setState({lottie: exerciseAnimation})
-        setTimeout(() => {
-          this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-          })
-        }, 6000)
-      }
-      if (
-        event.target.name === 'meditation' &&
-        event.target.checked === true &&
-        this.state.isHatched
-      ) {
-        this.setState({lottie: meditateAnimation})
-        setTimeout(() => {
-          this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-          })
-        }, 6000)
-      }
-      if (
-        (event.target.name === 'relaxation' || event.target.name === 'sleep') &&
-        event.target.checked === true &&
-        this.state.isHatched
-      ) {
-        this.setState({lottie: joyAnimation})
-        setTimeout(() => {
-          this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-          })
-        }, 6000)
-      }
+      this.checkWhichBox(event)
 
       //update points based on whether checkbox is checked or unchecked
-      if (event.target.checked === true) {
-        await this.props.updateList(
-          event.target.name,
-          this.props.list[event.target.name] + 1
-        )
-      } else {
-        await this.props.updateList(
-          event.target.name,
-          this.props.list[event.target.name] - 1
-        )
-      }
+      this.checkOrUncheck(event)
 
       //update local state to reflect new change
       await this.setDailyPoints()
       await this.setTotalPoints()
 
       //check to see if this is the 10th checkbox, then trigger eggHatch animation sequence if it is
-      if (
-        this.state.totalPoints >= 3 &&
-        this.state.lottie === eggWiggleAnimation
-      ) {
-        this.setState({lottie: eggHatchAnimation})
-        setTimeout(() => {
-          this.setState({
-            lottie: idleAnimation,
-            isHatched: true
-          })
-        }, 16000)
-      }
+      this.eggHatch()
+
+      //check to see if this is the final checkbox, then trigger a modal and animation change if it is
     } catch (error) {
       console.log(error)
     }
@@ -374,17 +437,45 @@ export class UserHome extends React.Component {
     this.setState({toggleMessage: !this.state.toggleMessage})
   }
 
+  handleClose() {
+    this.setState({completionModal: false})
+  }
+
   render() {
+    const {classes} = this.props
     const {lottie} = this.state
     const owlMessage1 = "hello i'm owl"
     const owlMessage2 = 'howdy folks! check off some boxes'
 
-    if (this.props.list && this.state.dailyPoints !== undefined) {
+    if (this.props.list) {
       return (
         <>
           <div className="homeContainer">
             <Navbar />
-
+            <Modal open={this.state.completionModal} onClose={this.handleClose}>
+              <Grid container>
+                <div
+                  style={{
+                    top: `${50}%`,
+                    left: `${45}%`,
+                    transform: `translate(-${50}%, -${50}%)`,
+                    margin: '1.5em',
+                    padding: '1em'
+                  }}
+                  className={classes.paper}
+                >
+                  <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                  >
+                    <h2 className={classes.modalTitle}>GOOD JOB!!!</h2>
+                  </Grid>
+                </div>
+              </Grid>
+            </Modal>
             <Grid
               container
               direction="column"
@@ -398,6 +489,7 @@ export class UserHome extends React.Component {
                     onClick={this.handleClick}
                     style={{backgroundColor: 'transparent'}}
                     disableRipple={true}
+                    className={classes.button}
                   >
                     <Lottie options={lottie} height={300} width={300} />
                   </Button>
@@ -459,8 +551,10 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(UserHome)
-
+export default compose(
+  connect(mapState, mapDispatch),
+  withStyles(styles, {withTheme: true})
+)(UserHome)
 /**
  * PROP TYPES
  */
