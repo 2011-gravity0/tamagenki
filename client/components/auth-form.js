@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import history from '../history'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
@@ -35,11 +34,15 @@ const AuthForm = props => {
       if (validateEmail(email, formName)) {
         document.getElementById('emailP').innerHTML = 'Must be an email'
         history.push('/signup')
-      } else if (validatePassword(password, formName)) {
+      }
+
+      if (validatePassword(password, formName)) {
         document.getElementById('passwordP').innerHTML =
           'Atleast 5 character long'
         history.push('/signup')
-      } else if (!validateEmail(email) && !validatePassword(password)) {
+      }
+
+      if (!validateEmail(email) && !validatePassword(password)) {
         await props.auth(email, password, formName)
         history.push(displayName === 'Login' ? '/' : '/questions')
       }
@@ -64,7 +67,7 @@ const AuthForm = props => {
               shrink: true
             }}
           />
-          <p style={{color: 'red', fontSize: '15px'}} id="emailP" />
+          <p className="error" id="emailP" />
           <TextField
             required
             id="outlined-required"
@@ -77,7 +80,8 @@ const AuthForm = props => {
               shrink: true
             }}
           />
-          <p style={{color: 'red', fontSize: '15px'}} id="passwordP" />
+          <p className="error" id="passwordP" />
+          {error && <p className="error">Wrong email or password</p>}
           <Button
             waves="light"
             variant="contained"

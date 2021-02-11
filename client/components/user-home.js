@@ -215,14 +215,10 @@ export class UserHome extends React.Component {
         const subTotal = Object.values(day)
           .filter(element => typeof element === 'number')
           .reduce((subTtl, point) => {
-            console.log('this point ', point)
             return subTtl + point
           }, 0)
-        console.log('ths is history', this.props.history)
-        console.log('this is subtotal', subTotal)
         return ttl + subTotal
       }, 0)
-      console.log('this is thP', totalHistoryPoints)
       this.setState({totalPoints: totalHistoryPoints})
     } catch (error) {
       console.log(error)
@@ -390,11 +386,9 @@ export class UserHome extends React.Component {
   }
 
   async componentDidMount() {
-    console.log('daily points', this.state.dailyPoints)
 
     try {
       await pushSetting(this.props.user)
-      console.log('totalPoints', this.state.totalPoints)
 
       await this.props.loadList()
       await this.setTotalPoints()
