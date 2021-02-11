@@ -29,7 +29,7 @@ const styles = theme => ({
     fontSize: '1 rem',
     fontFamily: 'Fredoka One',
     color: '#4F7469',
-    marginBottom: '.5 rem',
+    marginBottom: 0,
     marginTop: 0
   },
   button: {
@@ -114,12 +114,14 @@ class BadgesTwo extends React.Component {
       }, 0)
       const totalSparklePointsArray = this.props.history.filter(day => {
         let dayTotal = Object.values(day).reduce(
-          (accumulator, points) => accumulator + points,
+          (accumulator, points) =>
+            typeof points === 'number' ? accumulator + points : accumulator + 0,
           0
         )
         if (dayTotal >= 10) return true
       })
       const totalSparklePoints = totalSparklePointsArray.length
+      console.log('history', this.props.history)
       this.setState({
         waterPoints: totalWaterPoints,
         meditationPoints: totalMeditationPoints,
@@ -160,6 +162,17 @@ class BadgesTwo extends React.Component {
   render() {
     const {classes} = this.props
     const {modal} = this.state
+
+    const thresholds = {
+      water: 6,
+      meditation: 1,
+      exercise: 1,
+      fruit: 3,
+      veggie: 3,
+      sleep: 1,
+      relaxation: 1,
+      sparkle: 1
+    }
 
     const modalMessages = {
       water: 'You unlocked this badge with 80 Water points!',
@@ -262,11 +275,11 @@ class BadgesTwo extends React.Component {
             <Modal open={this.state.modalOpen} onClose={this.handleClose}>
               {body}
             </Modal>
-            <button
-              type="button"
+            <Button
               value="water"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={this.state.waterPoints < thresholds.water}
             >
               <Box
                 justifyContent="space-around"
@@ -278,12 +291,12 @@ class BadgesTwo extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.waterPoints >= 4
+                        this.state.waterPoints >= thresholds.water
                           ? '/badges/water2.svg'
                           : '/shadows/waterShadow2.svg'
                       }
-                      height="120"
-                      width="120"
+                      height="100"
+                      width="100"
                     />
                   </Grid>
                   <Grid
@@ -294,135 +307,18 @@ class BadgesTwo extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.waterPoints >= 4 ? '' : '???'}
+                      {this.state.waterPoints >= thresholds.water ? '' : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
-              value="meditation"
-              onClick={this.handleOpen}
-              style={{marginLeft: '.7em', marginRight: '.7em'}}
-            >
-              <Box
-                justifyContent="space-around"
-                justify="center"
-                boxShadow={0}
-                className={classes.box}
-              >
-                <Grid container alignContent="flex-end">
-                  <Grid item container justify="center">
-                    <img
-                      src={
-                        this.state.meditationPoints >= 1
-                          ? '/badges/meditation2.svg'
-                          : '/shadows/meditationShadow2.svg'
-                      }
-                      height="120"
-                      width="120"
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    container
-                    direction="column"
-                    justify="center"
-                    style={{marginTop: '1em'}}
-                  >
-                    <Typography variant="body1" align="center">
-                      {this.state.meditationPoints >= 1 ? '' : '???'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-            </button>
-
-            <button
-              type="button"
-              value="exercise"
-              onClick={this.handleOpen}
-              style={{marginLeft: '.7em', marginRight: '.7em'}}
-            >
-              <Box
-                justifyContent="space-around"
-                justify="center"
-                boxShadow={0}
-                className={classes.box}
-              >
-                <Grid container alignContent="flex-end">
-                  <Grid item container justify="center">
-                    <img
-                      src={
-                        this.state.movementPoints >= 1
-                          ? '/badges/movement2.svg'
-                          : '/shadows/movementShadow2.svg'
-                      }
-                      height="115"
-                      width="115"
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    container
-                    direction="column"
-                    justify="center"
-                    style={{marginTop: '1em'}}
-                  >
-                    <Typography variant="body1" align="center">
-                      {this.state.movementPoints >= 1 ? '' : '???'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-            </button>
-
-            <button
-              type="button"
-              value="sleep"
-              onClick={this.handleOpen}
-              style={{marginLeft: '.7em', marginRight: '.7em'}}
-            >
-              <Box
-                justifyContent="space-around"
-                justify="center"
-                boxShadow={0}
-                className={classes.box}
-              >
-                <Grid container alignContent="flex-end">
-                  <Grid item container justify="center">
-                    <img
-                      src={
-                        this.state.sleepPoints >= 1
-                          ? '/badges/sleep2.svg'
-                          : '/shadows/sleepShadow.svg'
-                      }
-                      height="120"
-                      width="120"
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    container
-                    direction="column"
-                    justify="center"
-                    style={{marginTop: '1em'}}
-                  >
-                    <Typography variant="body1" align="center">
-                      {this.state.sleepPoints >= 1 ? '' : '???'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-            </button>
-
-            <button
-              type="button"
+            <Button
               value="relaxation"
               onClick={this.handleOpen}
-              style={{marginLeft: '1.5em', marginRight: '.7em'}}
+              style={{marginLeft: '.7em', marginRight: '.7em', marginTop: 0}}
+              disabled={this.state.relaxationPoints < thresholds.relaxation}
             >
               <Box
                 justifyContent="space-around"
@@ -434,7 +330,7 @@ class BadgesTwo extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.relaxationPoints >= 1
+                        this.state.relaxationPoints >= thresholds.relaxation
                           ? '/badges/relaxation2.svg'
                           : '/shadows/relaxationShadow2.svg'
                       }
@@ -450,18 +346,20 @@ class BadgesTwo extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.relaxationPoints >= 1 ? '' : '???'}
+                      {this.state.relaxationPoints >= thresholds.relaxation
+                        ? ''
+                        : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
-              value="veggie"
+            <Button
+              value="exercise"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={this.state.movementPoints < thresholds.exercise}
             >
               <Box
                 justifyContent="space-around"
@@ -473,12 +371,12 @@ class BadgesTwo extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.veggiePoints >= 2
-                          ? '/badges/veg2.svg'
-                          : '/shadows/vegShadow2.svg'
+                        this.state.movementPoints >= thresholds.exercise
+                          ? '/badges/movement2.svg'
+                          : '/shadows/movementShadow2.svg'
                       }
-                      height="130"
-                      width="130"
+                      height="100"
+                      width="100"
                     />
                   </Grid>
                   <Grid
@@ -489,18 +387,20 @@ class BadgesTwo extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.veggiePoints >= 2 ? '' : '???'}
+                      {this.state.movementPoints >= thresholds.exercise
+                        ? ''
+                        : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
-              value="fruit"
+            <Button
+              value="sleep"
               onClick={this.handleOpen}
-              style={{marginLeft: '2em', marginRight: '2em'}}
+              style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={this.state.sleepPoints < thresholds.sleep}
             >
               <Box
                 justifyContent="space-around"
@@ -512,9 +412,9 @@ class BadgesTwo extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.fruitPoints >= 2
-                          ? '/badges/fruit2.svg'
-                          : '/shadows/fruitShadow2.svg'
+                        this.state.sleepPoints >= thresholds.sleep
+                          ? '/badges/sleep2.svg'
+                          : '/shadows/sleepShadow.svg'
                       }
                       height="110"
                       width="110"
@@ -528,18 +428,18 @@ class BadgesTwo extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.fruitPoints >= 2 ? '' : '???'}
+                      {this.state.sleepPoints >= thresholds.sleep ? '' : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
 
-            <button
-              type="button"
-              value="sparkle"
+            <Button
+              value="meditation"
               onClick={this.handleOpen}
-              style={{marginLeft: '2em', marginRight: '2em'}}
+              style={{marginLeft: '1.5em', marginRight: '.7em'}}
+              disabled={this.state.meditationPoints < thresholds.meditation}
             >
               <Box
                 justifyContent="space-around"
@@ -551,12 +451,12 @@ class BadgesTwo extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.sparklePoints >= 1
-                          ? '/badges/sparkle2.svg'
-                          : '/shadows/sparkleShadow2.svg'
+                        this.state.meditationPoints >= thresholds.meditation
+                          ? '/badges/meditation2.svg'
+                          : '/shadows/meditationShadow2.svg'
                       }
-                      height="120"
-                      width="120"
+                      height="110"
+                      width="110"
                     />
                   </Grid>
                   <Grid
@@ -567,12 +467,135 @@ class BadgesTwo extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.sparklePoints >= 1 ? '' : '???'}
+                      {this.state.meditationPoints >= thresholds.meditation
+                        ? ''
+                        : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
-            </button>
+            </Button>
+
+            <Button
+              value="veggie"
+              onClick={this.handleOpen}
+              style={{marginLeft: '.7em', marginRight: '.7em'}}
+              disabled={this.state.veggiePoints < thresholds.veggie}
+            >
+              <Box
+                justifyContent="space-around"
+                justify="center"
+                boxShadow={0}
+                className={classes.box}
+              >
+                <Grid container alignContent="flex-end">
+                  <Grid item container justify="center">
+                    <img
+                      src={
+                        this.state.veggiePoints >= thresholds.veggie
+                          ? '/badges/veg2.svg'
+                          : '/shadows/vegShadow2.svg'
+                      }
+                      height="110"
+                      width="110"
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    direction="column"
+                    justify="center"
+                    style={{marginTop: '1em'}}
+                  >
+                    <Typography variant="body1" align="center">
+                      {this.state.veggiePoints >= thresholds.veggie
+                        ? ''
+                        : '???'}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Button>
+
+            <Button
+              value="fruit"
+              onClick={this.handleOpen}
+              style={{marginLeft: '2em', marginRight: '2em'}}
+              disabled={this.state.fruitPoints < thresholds.fruit}
+            >
+              <Box
+                justifyContent="space-around"
+                justify="center"
+                boxShadow={0}
+                className={classes.box}
+              >
+                <Grid container alignContent="flex-end">
+                  <Grid item container justify="center">
+                    <img
+                      src={
+                        this.state.fruitPoints >= thresholds.fruit
+                          ? '/badges/fruit2.svg'
+                          : '/shadows/fruitShadow2.svg'
+                      }
+                      height="100"
+                      width="100"
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    direction="column"
+                    justify="center"
+                    style={{marginTop: '1em'}}
+                  >
+                    <Typography variant="body1" align="center">
+                      {this.state.fruitPoints >= thresholds.fruit ? '' : '???'}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Button>
+
+            <Button
+              value="sparkle"
+              onClick={this.handleOpen}
+              style={{marginLeft: '2em', marginRight: '2em'}}
+              disabled={this.state.sparklePoints < thresholds.sparkle}
+            >
+              <Box
+                justifyContent="space-around"
+                justify="center"
+                boxShadow={0}
+                className={classes.box}
+              >
+                <Grid container alignContent="flex-end">
+                  <Grid item container justify="center">
+                    <img
+                      src={
+                        this.state.sparklePoints >= thresholds.sparkle
+                          ? '/badges/sparkle2.svg'
+                          : '/shadows/sparkleShadow2.svg'
+                      }
+                      height="100"
+                      width="100"
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    direction="column"
+                    justify="center"
+                    style={{marginTop: '1em'}}
+                  >
+                    <Typography variant="body1" align="center">
+                      {this.state.sparklePoints >= thresholds.sparkle
+                        ? ''
+                        : '???'}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Button>
           </Grid>
           <Grid container justify="flex-start">
             <Link to="/badges">
