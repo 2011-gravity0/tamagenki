@@ -279,9 +279,7 @@ class BadgesTwo extends React.Component {
               value="water"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
-              disabled={
-                this.state.waterPoints < thresholds.water
-              }
+              disabled={this.state.waterPoints < thresholds.water}
             >
               <Box
                 justifyContent="space-around"
@@ -320,9 +318,7 @@ class BadgesTwo extends React.Component {
               value="relaxation"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em', marginTop: 0}}
-              disabled={
-                this.state.relaxationPoints < thresholds.relaxation
-              }
+              disabled={this.state.relaxationPoints < thresholds.relaxation}
             >
               <Box
                 justifyContent="space-around"
@@ -363,9 +359,7 @@ class BadgesTwo extends React.Component {
               value="exercise"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
-              disabled={
-                this.state.movementPoints < thresholds.exercise
-              }
+              disabled={this.state.movementPoints < thresholds.exercise}
             >
               <Box
                 justifyContent="space-around"
@@ -406,9 +400,7 @@ class BadgesTwo extends React.Component {
               value="sleep"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
-              disabled={
-                this.state.sleepPoints < thresholds.sleep
-              }
+              disabled={this.state.sleepPoints < thresholds.sleep}
             >
               <Box
                 justifyContent="space-around"
@@ -447,9 +439,7 @@ class BadgesTwo extends React.Component {
               value="meditation"
               onClick={this.handleOpen}
               style={{marginLeft: '1.5em', marginRight: '.7em'}}
-              disabled={
-                this.state.meditationPoints < thresholds.meditation
-              }
+              disabled={this.state.meditationPoints < thresholds.meditation}
             >
               <Box
                 justifyContent="space-around"
@@ -490,9 +480,7 @@ class BadgesTwo extends React.Component {
               value="veggie"
               onClick={this.handleOpen}
               style={{marginLeft: '.7em', marginRight: '.7em'}}
-              disabled={
-                this.state.veggiePoints < thresholds.veggie
-              }
+              disabled={this.state.veggiePoints < thresholds.veggie}
             >
               <Box
                 justifyContent="space-around"
@@ -533,9 +521,7 @@ class BadgesTwo extends React.Component {
               value="fruit"
               onClick={this.handleOpen}
               style={{marginLeft: '2em', marginRight: '2em'}}
-              disabled={
-                this.state.fruitPoints < thresholds.fruit
-              }
+              disabled={this.state.fruitPoints < thresholds.fruit}
             >
               <Box
                 justifyContent="space-around"
@@ -574,9 +560,7 @@ class BadgesTwo extends React.Component {
               value="sparkle"
               onClick={this.handleOpen}
               style={{marginLeft: '2em', marginRight: '2em'}}
-              disabled={
-                this.state.sparklePoints < thresholds.sparkle
-              }
+              disabled={this.state.sparklePoints < thresholds.sparkle}
             >
               <Box
                 justifyContent="space-around"
