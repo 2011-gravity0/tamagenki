@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
 import NameAndBedtime from './NameAndBedtime'
 import Reminders from './Reminders'
-import Confirm from './Confirm'
 import Success from './Success'
 import {FindEgg} from './FindEgg'
-import Tutorial from './Tutorial'
 import Explain from './Explain'
 
 export class UserForm extends Component {
@@ -83,15 +81,6 @@ export class UserForm extends Component {
           />
         )
       case 5:
-        return (
-          <Confirm
-            nextStep={this.nextStep}
-            prevStep={this.prevStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
-        )
-      case 6:
         return <Success />
     }
   }

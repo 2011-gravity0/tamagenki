@@ -11,20 +11,8 @@ import Modal from '@material-ui/core/Modal'
 import {makeStyles} from '@material-ui/core/styles'
 import React, {useState} from 'react'
 
-// const useStyles = makeStyles((theme) =>  ({
-//   modals: {
-//     outline: 0,
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     disableAutoFocus: true,
-//   }
-// }))
-
 export const DailyProgressList = props => {
   const {list, handleCheck} = props
-
-  // const classes = useStyles()
 
   const [openModal, setModal] = useState({
     sleep: false,
@@ -37,14 +25,10 @@ export const DailyProgressList = props => {
   })
 
   const handleOpen = async (event, name) => {
-    console.log('inside open')
-    console.log('event target', event.target)
     await setModal({...openModal, [name]: true})
-    console.log('STATE AFTER UPDATE', openModal)
   }
 
   const handleClose = name => {
-    // console.log(event)
     setModal({...openModal, [name]: false})
   }
 
@@ -57,7 +41,7 @@ export const DailyProgressList = props => {
         alignItems="center"
         spacing={2}
       >
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -70,7 +54,6 @@ export const DailyProgressList = props => {
               </ListItemAvatar>
               <Modal
                 className="avatar-modals"
-                // className={classes.modals}
                 open={openModal.sleep}
                 onClose={() => handleClose('sleep')}
               >
@@ -88,7 +71,7 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -101,7 +84,6 @@ export const DailyProgressList = props => {
               </ListItemAvatar>
               <Modal
                 className="avatar-modals"
-                // className={classes.modals}
                 open={openModal.fruit}
                 onClose={() => handleClose('fruit')}
               >
@@ -134,7 +116,7 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -147,7 +129,6 @@ export const DailyProgressList = props => {
               </ListItemAvatar>
               <Modal
                 className="avatar-modals"
-                // className={classes.modals}
                 open={openModal.veggies}
                 onClose={() => handleClose('veggies')}
               >
@@ -180,7 +161,7 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -193,7 +174,6 @@ export const DailyProgressList = props => {
               </ListItemAvatar>
               <Modal
                 className="avatar-modals"
-                // className={classes.modals}
                 open={openModal.water}
                 onClose={() => handleClose('water')}
               >
@@ -250,7 +230,7 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -263,7 +243,6 @@ export const DailyProgressList = props => {
               </ListItemAvatar>
               <Modal
                 className="avatar-modals"
-                // className={classes.modals}
                 open={openModal.exercise}
                 onClose={() => handleClose('exercise')}
               >
@@ -280,7 +259,7 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -293,12 +272,11 @@ export const DailyProgressList = props => {
               </ListItemAvatar>
               <Modal
                 className="avatar-modals"
-                // className={classes.modals}
                 open={openModal.relax}
                 onClose={() => handleClose('relax')}
               >
                 <p>
-                  Check off if you got a chance to disconnect and rela today
+                  Check off if you got a chance to disconnect and relax today
                 </p>
               </Modal>
               <Checkbox
@@ -312,7 +290,7 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
@@ -325,7 +303,6 @@ export const DailyProgressList = props => {
               </ListItemAvatar>
               <Modal
                 className="avatar-modals"
-                // className={classes.modals}
                 open={openModal.meditate}
                 onClose={() => handleClose('meditate')}
               >
