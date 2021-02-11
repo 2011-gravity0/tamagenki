@@ -28,6 +28,7 @@ import sparkleData from '../../public/lotties/tamabuddySparkle.json'
 import waveData from '../../public/lotties/tamabuddyWave.json'
 import waterData from '../../public/lotties/tamabuddyWater.json'
 import owlData from '../../public/lotties/owl.json'
+import tamacoinData from '../../public/lotties/tamacoin.json'
 
 /**
  * OWL LOTTIE
@@ -140,22 +141,44 @@ const waterAnimation = {
     preserveAspectRatio: 'xMidYMid slice'
   }
 }
+const tamacoinAnimation = {
+  loop: true,
+  autoplay: true,
+  animationData: tamacoinData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+}
+
 const styles = theme => ({
   button: {
     paddingBottom: 0
   },
   modalTitle: {
     fontFamily: 'Fredoka One',
-    color: '#BE2D25',
-    fontSize: '1.7em'
+    color: '#fff',
+    fontSize: '1.7em',
+    marginBottom: 0,
+    marginTop: 0
   },
   paper: {
     position: 'absolute',
     width: 400,
-    backgroundColor: '#C9E3BE',
+    backgroundColor: 'transparent',
     border: 'none',
     borderRadius: 5,
     padding: '1 em'
+  },
+  ptext2: {
+    padding: '1.5 em',
+    spacing: '1 em',
+    margin: '1em',
+    marginTop: 0,
+    marginBottom: 0,
+    color: '#fff',
+    fontFamily: 'Helvetica',
+    fontSize: '1.4em',
+    fontWeight: 'bold'
   }
 })
 /**
@@ -362,9 +385,7 @@ export class UserHome extends React.Component {
       this.state.lottie === sparkleAnimation
     ) {
       console.log('trip modal')
-      this.setState({lottie: joyAnimation, completionModal: true})
-    } else {
-      null
+      this.setState({completionModal: true})
     }
   }
 
@@ -452,6 +473,7 @@ export class UserHome extends React.Component {
         <>
           <div className="homeContainer">
             <Navbar />
+
             <Modal open={this.state.completionModal} onClose={this.handleClose}>
               <Grid container>
                 <div
@@ -464,6 +486,7 @@ export class UserHome extends React.Component {
                   }}
                   className={classes.paper}
                 >
+                  <Lottie options={guideAnimation} height={150} width={150} />
                   <Grid
                     item
                     container
@@ -472,10 +495,45 @@ export class UserHome extends React.Component {
                     direction="column"
                   >
                     <h2 className={classes.modalTitle}>GOOD JOB!!!</h2>
+                    <p
+                      style={{
+                        margin: 0,
+                        color: '#fff',
+                        backgroundColor: '#7FBAC5',
+                        padding: 5,
+                        paddingTop: 3,
+                        paddingBottom: 3
+                      }}
+                    >
+                      {this.props.user.petName}'s progress bar has reached 100%.
+                    </p>
+                    <p
+                      style={{
+                        margin: 0,
+                        color: '#fff',
+                        fontWeight: 'bold',
+                        backgroundColor: '#7FBAC5',
+                        padding: 5,
+                        paddingTop: 3,
+                        paddingBottom: 3,
+                        marginTop: 2
+                      }}
+                    >
+                      {' '}
+                      Take a TamaCoin, you deserve it!
+                    </p>
+                    <Button onClick={this.handleClose}>
+                      <Lottie
+                        options={tamacoinAnimation}
+                        height={200}
+                        width={200}
+                      />
+                    </Button>
                   </Grid>
                 </div>
               </Grid>
             </Modal>
+
             <Grid
               container
               direction="column"
@@ -503,7 +561,10 @@ export class UserHome extends React.Component {
           <Grid container justify="center" direction="row" alignItems="center">
             <Button
               onClick={this.handleOwlClick}
-              style={{backgroundColor: 'transparent'}}
+              style={{
+                backgroundColor: 'transparent',
+                display: this.state.completionModal ? 'none' : ''
+              }}
               disableRipple={true}
             >
               <Lottie options={guideAnimation} height={75} width={75} />
