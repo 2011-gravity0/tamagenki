@@ -172,6 +172,7 @@ button {
 }
 .listView {
   height: 30vh;
+  width: 40%;
   overflow: auto;
   overflow-x: hidden !important;
 }
@@ -486,6 +487,12 @@ button {
 
 .guide-text h3 {
   color: #4e7469;
+  font-family: 'Fredoka One';
+  font-weight: lighter;
+  text-align: center;
+}
+
+.guide-text p {
   font-family: 'Fredoka One';
   font-weight: lighter;
   text-align: center;

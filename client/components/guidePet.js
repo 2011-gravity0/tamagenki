@@ -1,9 +1,7 @@
 import React from 'react'
-// import UserHome from './user-home'
 import animationOwl from '../../public/lotties/owl.json'
 import Lottie from 'react-lottie'
 import history from '../history'
-
 import {withStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -47,16 +45,8 @@ export class GuidePet extends React.Component {
         </div>
         <Card className={classes.text}>
           <div className="guide-text">
-            <h3>
-              We are now setting up your tamabuddy's room!
-              {/* {' '}
-              Welcome to Tamagenki, an accountability pet game that doubles as a
-              way to incorporate healthy habits into your daily life. When you
-              complete actions in the real world, check off the corresponding
-              boxes in Tamagenki to hatch your egg and earn badges!! */}
-            </h3>
+            <h3>We are now setting up your tamabuddy's room!</h3>
             <p>
-              {' '}
               Your tamabuddy egg will hatch after checking off 3
               accomplishments.
             </p>
