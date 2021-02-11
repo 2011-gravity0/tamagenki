@@ -10,8 +10,6 @@ import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import Lottie from 'react-lottie'
 import animationData from '../../../public/lotties/eggWiggle.json'
-// import animationData from '../../../public/lotties/dumpling1/data.json'
-// import animationData2 from '../../../public/lotties/dumpling2/data.json'
 
 const styles = theme => ({
   // Load app bar information from the theme
@@ -52,15 +50,6 @@ export class Success extends Component {
         preserveAspectRatio: 'xMidYMid slice'
       }
     }
-
-    // const defaultOptions2 = {
-    //   loop: true,
-    //   autoplay: true,
-    //   animationData: animationData2,
-    //   rendererSettings: {
-    //     preserveAspectRatio: 'xMidYMid slice'
-    //   }
-    // }
 
     const {values, theme, classes, handleChange} = this.props
     console.log('props in success', this.props)
