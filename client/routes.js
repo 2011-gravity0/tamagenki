@@ -13,6 +13,7 @@ import {
 import {me} from './store'
 import UserForm from './components/questions/UserForm'
 import Badges from './components/Badges'
+import UserHistory from './components/UserHistory'
 
 /**
  * COMPONENT
@@ -40,6 +41,7 @@ class Routes extends Component {
             <Route exact path="/questions" component={UserForm} />
             <Route exact path="/guidePet" component={GuidePet} />
             <Route exact path="/setting" component={UserSetting} />
+            <Route exact path="/history" component={UserHistory} />
             <Route path="/badges" component={Badges} />
           </Switch>
         )}

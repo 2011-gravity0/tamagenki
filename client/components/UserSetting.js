@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable no-shadow */
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Navbar from './navbar'
@@ -68,7 +70,7 @@ const UserSetting = ({user, updateUser}) => {
     {field: 'meditationReminder', displayName: 'Meditation'},
     {field: 'sleepReminder', displayName: 'Bedtime'}
   ]
-
+  // console.log('this is props from setting', props)
   return (
     <div className="editContainer">
       <Navbar />

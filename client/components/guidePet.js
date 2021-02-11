@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 // import UserHome from './user-home'
 import animationOwl from '../../public/lotties/owl.json'

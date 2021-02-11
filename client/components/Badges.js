@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
@@ -97,7 +99,6 @@ class Badges extends React.Component {
   async componentDidMount() {
     try {
       await this.setPoints()
-      console.log('badge points', this.state)
     } catch (error) {
       console.log(error)
     }
@@ -105,6 +106,7 @@ class Badges extends React.Component {
 
   render() {
     const {classes} = this.props
+    console.log('this is props', this.props)
     return (
       <div>
         <Navbar />
@@ -436,8 +438,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadList: () => dispatch(fetchList()),
-    updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
+    // loadList: () => dispatch(fetchList()),
+    // updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
     getUserHistory: (userId, action) =>
       dispatch(fetchUserHistory(userId, action))
   }
