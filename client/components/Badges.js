@@ -618,8 +618,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // loadList: () => dispatch(fetchList()),
-    // updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
+    loadList: () => dispatch(fetchList()),
+    updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
     getUserHistory: (userId, action) =>
       dispatch(fetchUserHistory(userId, action))
   }
