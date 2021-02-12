@@ -1,6 +1,7 @@
 const User = require('./user')
 const DailyProgress = require('./dailyprogress')
 const Subscription = require('./subscription')
+const Response = require('./owl')
 // const {default: user} = require('../../../client/store/user')
 
 /**
@@ -23,5 +24,6 @@ Subscription.belongsTo(User)
 module.exports = {
   User,
   DailyProgress,
-  Subscription
+  Subscription,
+  Response
 }
