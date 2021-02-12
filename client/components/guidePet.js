@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import animationOwl from '../../public/lotties/owl.json'
 import Lottie from 'react-lottie'
