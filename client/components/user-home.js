@@ -446,7 +446,6 @@ export class UserHome extends React.Component {
       await pushSetting(this.props.user)
 
       await this.props.loadList()
-      console.log('this is load list', this.props.loadList())
       await this.setTotalPoints()
       await this.setDailyPoints()
 
