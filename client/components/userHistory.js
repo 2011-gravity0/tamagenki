@@ -101,6 +101,7 @@ class UserHistory extends React.Component {
       relaxationRecord,
       meditationRecord
     ]
+    console.log('this is record', Record)
     return Record
   }
 
