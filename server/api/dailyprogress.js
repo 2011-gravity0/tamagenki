@@ -38,7 +38,8 @@ router.get('/', async (req, res, next) => {
         'water',
         'meditation',
         'sleep',
-        'relaxation'
+        'relaxation',
+        'tamacoin'
       ],
       where: {
         userId: req.user.id,
@@ -94,7 +95,8 @@ router.put('/', async (req, res, next) => {
           'water',
           'meditation',
           'sleep',
-          'relaxation'
+          'relaxation',
+          'tamacoin'
         ]
       })
       res.send(updatedProgress)
