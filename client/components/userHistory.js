@@ -17,21 +17,46 @@ import Avatar from '@material-ui/core/Avatar'
 //4 FINISH UP(3)
 //GO TO BED (5)
 
-let userhistory
-let counter = 0
 let weeklyArr
+let monthlyArr
 class UserHistory extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       loading: true,
       userId: '',
-      dataChange: [1, 2, 3, 4, 5, 6, 7]
+      dataChange: [1, 2, 3, 4, 5, 6, 7],
+      dataMonth: [
+        0,
+        1,
+        2,
+        3,
+        4,
+        2,
+        4,
+        5,
+        3,
+        2,
+        3,
+        4,
+        1,
+        3,
+        4,
+        2,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1,
+        2
+      ]
     }
     this.getData = this.getData.bind(this)
     this.plotGraph = this.plotGraph.bind(this)
     this.weeklyData = this.weeklyData.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.monthlyData = this.monthlyData.bind(this)
   }
   getData() {
     let data = this.props.history
@@ -78,9 +103,9 @@ class UserHistory extends React.Component {
     ]
     return Record
   }
-  // cunstomerized to weekly data
-  //just pass in line
+
   weeklyData = userData => {
+    console.log('this is userdata from week', userData)
     const data = []
     const modulusNum = userData.length % 7
     if (userData.length % 7 === 0) {
@@ -95,65 +120,130 @@ class UserHistory extends React.Component {
       return data.reverse()
     }
   }
+  monthlyData = userData => {
+    const data = []
+    const modulusNum = userData.length % 30
+    if (userData.length % 30 === 0) {
+      while (data.length < 31) {
+        return data.push(userData.pop())
+      }
+    } else {
+      while (modulusNum !== data.length) {
+        data.push(userData.pop())
+      }
+      console.log('this is user data in monthly', data)
+      return data.reverse()
+    }
+  }
   handleClick() {
-    console.log('this ihandle function working')
     const images = document.getElementById('historyavatar')
-    let userData
+    let userData = this.getData()
+    let [wd0, wd1, wd2, wd3, wd4, wd5, wd6] = [
+      this.weeklyData(userData[0]),
+      this.weeklyData(userData[1]),
+      this.weeklyData(userData[2]),
+      this.weeklyData(userData[3]),
+      this.weeklyData(userData[4]),
+      this.weeklyData(userData[5]),
+      this.weeklyData(userData[6])
+    ]
+    let [md0, md1, md2, md3, md4, md5, md6] = [
+      this.monthlyData(userData[0]),
+      this.monthlyData(userData[1]),
+      this.monthlyData(userData[4]),
+      this.monthlyData(userData[2]),
+      this.monthlyData(userData[3]),
+      this.monthlyData(userData[5]),
+      this.monthlyData(userData[6])
+    ]
+    console.log('this is userData', userData)
     images.addEventListener('click', event => {
       const action = event.target.id
       console.log('this is action', action)
       if (action === 'bed') {
-        userData = this.getData()[0]
-        weeklyArr = this.weeklyData(userData)
-        this.setState({dataChange: weeklyArr})
+        console.log('this is wd0', wd0, 'this is md0', md0)
+        this.setState({
+          dataChange: wd0,
+          dataMonth: md0
+        })
       }
       if (action === 'grape') {
-        userData = this.getData()[1]
-        weeklyArr = this.weeklyData(userData)
-        this.setState({dataChange: weeklyArr})
+        this.setState({
+          dataChange: wd1,
+          dataMonth: md1
+        })
       }
       if (action === 'vegetables') {
-        userData = this.getData()[4]
-        weeklyArr = this.weeklyData(userData)
-        this.setState({dataChange: weeklyArr})
+        this.setState({
+          dataChange: wd4,
+          dataMonth: md4
+        })
       }
       if (action === 'water') {
-        userData = this.getData()[2]
-        weeklyArr = this.weeklyData(userData)
-        this.setState({dataChange: weeklyArr})
+        this.setState({
+          dataChange: wd2,
+          dataMonth: md2
+        })
       }
       if (action === 'execrise') {
-        userData = this.getData()[3]
-        weeklyArr = this.weeklyData(userData)
-        this.setState({dataChange: weeklyArr})
+        this.setState({
+          dataChange: wd3,
+          dataMonth: md3
+        })
       }
       if (action === 'relax') {
-        userData = this.getData()[5]
-        weeklyArr = this.weeklyData(userData)
-        this.setState({dataChange: weeklyArr})
+        this.setState({
+          dataChange: wd5,
+          dataMonth: md5
+        })
       }
       if (action === 'meditation') {
-        userData = this.getData()[6]
-        weeklyArr = this.weeklyData(userData)
-        this.setState({dataChange: weeklyArr})
+        this.setState({
+          dataChange: wd6,
+          dataMonth: md6
+        })
       }
     })
-    console.log('this is  weekly', weeklyArr)
   }
   plotGraph() {
     console.log('this is datachange', this.state.dataChange)
+    console.log('this is monthly', this.state.dataMonth)
+    const month = [
+      '1st',
+      '2nd',
+      '3rd',
+      '4th',
+      '5th',
+      '6th',
+      '7th',
+      '8th',
+      '9th',
+      '10th',
+      '11th',
+      '12th',
+      '13th',
+      '14th',
+      '15th',
+      '16th',
+      '17th',
+      '18th',
+      '19th',
+      '20th',
+      '21st',
+      '22nd',
+      '23rd',
+      '24th',
+      '25th',
+      '26th',
+      '27th',
+      '28th',
+      '29th',
+      '30th'
+    ]
     return (
       <Line
         data={{
-          labels: [
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
-            'Sunday'
-          ],
+          labels: month,
           datasets: [
             {
               label: 'Weekly',
@@ -164,7 +254,7 @@ class UserHistory extends React.Component {
             },
             {
               label: 'Monthly',
-              data: [0, 1, 2, 3, 4, 2, 4, 5, 3, 2, 3, 4, 1],
+              data: this.state.dataMonth,
               backgroundColor: ['rgba(75, 192, 192, 0.5)'],
               borderColor: ['rgba(75, 192, 192, 1)']
             }
