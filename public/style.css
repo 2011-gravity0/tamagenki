@@ -356,8 +356,12 @@ form div {
 /*===== USER HISTORY =====*/
 #historyavatar {
   text-align: center;
+  margin-top: 5%;
+  padding: 10px 10px;
 }
 .avatar {
   display: inline-flex;
-  padding: 35px 35px;
+  padding: -2px -2px;
+  margin: 10px 10px;
+  border: whitesmoke outset;
 }
