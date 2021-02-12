@@ -8,12 +8,13 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {compose} from 'redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
-import {fetchUserHistory} from '../store/user'
+import {fetchUserHistory, updateUser} from '../store/user'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Modal from '@material-ui/core/Modal'
+import TextField from '@material-ui/core/TextField'
 import {withStyles} from '@material-ui/core/styles'
 import Lottie from 'react-lottie'
 import {ProgressBar} from './progress-bar'
@@ -164,12 +165,29 @@ const styles = theme => ({
     color: '#fff',
     fontSize: '1.7em',
     marginBottom: 0,
-    marginTop: 0
+    marginTop: 0,
+    textAlign: 'center'
+  },
+  hatchedModalTitle: {
+    fontFamily: 'Fredoka One',
+    color: '#c58684',
+    fontSize: '1.7em',
+    marginBottom: 0,
+    marginTop: 0,
+    textAlign: 'center'
   },
   paper: {
     position: 'absolute',
     width: 400,
     backgroundColor: 'transparent',
+    border: 'none',
+    borderRadius: 5,
+    padding: '1 em'
+  },
+  hatchedPaper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: 'rgba(225,255,255,.7)',
     border: 'none',
     borderRadius: 5,
     padding: '1 em'
@@ -184,6 +202,14 @@ const styles = theme => ({
     fontFamily: 'Helvetica',
     fontSize: '1.4em',
     fontWeight: 'bold'
+  },
+  modalP: {
+    margin: 0,
+    color: '#c58684',
+    // backgroundColor: '#7FBAC5',
+    padding: 5,
+    paddingTop: 3,
+    paddingBottom: 3
   }
 })
 /**
@@ -199,7 +225,10 @@ export class UserHome extends React.Component {
       isHatched: false,
       sparkleMode: false,
       toggleMessage: false,
-      completionModal: false
+      completionModal: false,
+      currentAnimation: 0,
+      hatchedModal: false,
+      tamabuddyName: ''
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
@@ -210,12 +239,16 @@ export class UserHome extends React.Component {
     this.sparkleModeCheck = this.sparkleModeCheck.bind(this)
     this.checkOrUncheck = this.checkOrUncheck.bind(this)
     this.finalCheck = this.finalCheck.bind(this)
+    this.handleCoinClose = this.handleCoinClose.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.nameSubmit = this.nameSubmit.bind(this)
   }
 
   async setTotalPoints() {
     try {
       await this.props.getUserHistory(this.props.userId)
+      console.log('user history', this.props.history)
       const totalHistoryPoints = this.props.history.reduce((ttl, day) => {
         const subTotal = Object.values(day)
           .filter(element => typeof element === 'number')
@@ -230,14 +263,22 @@ export class UserHome extends React.Component {
     }
   }
 
-  setDailyPoints() {
+  async setDailyPoints() {
     try {
-      let dailyPoints = Object.values(this.props.list).reduce((acc, curr) => {
-        if (typeof curr === 'number') {
-          return acc + curr
-        }
-      }, 0)
-      this.setState({dailyPoints: dailyPoints})
+      let list = Object.values(this.props.list)
+      if (list.length === 8) {
+        let dailyPoints = list
+          .filter(el => typeof el === 'number')
+          .reduce((acc, curr) => {
+            return acc + curr
+          }, 0)
+        this.setState({dailyPoints: dailyPoints})
+        await this.props.loadList()
+      }
+      console.log(
+        'setDailyPoints user home daily points',
+        this.state.dailyPoints
+      )
     } catch (error) {
       console.error(error)
     }
@@ -251,11 +292,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: appleAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 4000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
     if (
       event.target.name === 'vegetables' &&
@@ -264,11 +308,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: carrotAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 4000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
     if (
       event.target.name === 'water' &&
@@ -277,11 +324,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: waterAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 4000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
     if (
       event.target.name === 'exercise' &&
@@ -290,11 +340,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: exerciseAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 6000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
     if (
       event.target.name === 'meditation' &&
@@ -303,11 +356,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: meditateAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 6000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
     if (
       (event.target.name === 'relaxation' || event.target.name === 'sleep') &&
@@ -316,11 +372,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: joyAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 6000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
   }
 
@@ -333,19 +392,20 @@ export class UserHome extends React.Component {
       setTimeout(() => {
         this.setState({
           lottie: idleAnimation,
-          isHatched: true
+          isHatched: true,
+          hatchedModal: true
         })
       }, 16000)
     }
   }
 
   sparkleModeCheck() {
-    if (this.state.dailyPoints >= 5 && this.state.lottie === idleAnimation) {
+    if (this.state.dailyPoints >= 5) {
       this.setState({lottie: sparkleAnimation, sparkleMode: true})
     }
     if (
       this.state.dailyPoints < 5 &&
-      this.state.lottie === sparkleAnimation &&
+      // this.state.lottie === sparkleAnimation &&
       this.state.totalPoints > 3
     ) {
       this.setState({
@@ -355,7 +415,7 @@ export class UserHome extends React.Component {
     }
     if (
       this.state.dailyPoints < 5 &&
-      this.state.lottie === sparkleAnimation &&
+      // this.state.lottie === sparkleAnimation &&
       this.state.totalPoints < 3
     ) {
       this.setState({
@@ -381,11 +441,7 @@ export class UserHome extends React.Component {
   }
 
   finalCheck() {
-    if (
-      this.state.dailyPoints >= 15 &&
-      this.state.lottie === sparkleAnimation
-    ) {
-      console.log('trip modal')
+    if (this.state.dailyPoints >= 15) {
       this.setState({completionModal: true})
     }
   }
@@ -422,12 +478,10 @@ export class UserHome extends React.Component {
     try {
       //check to see if sparkleMode should be set to true or false
       this.sparkleModeCheck()
-
       //check to see which animation change should occur based on checkbox name
       this.checkWhichBox(event)
-
       //update points based on whether checkbox is checked or unchecked
-      this.checkOrUncheck(event)
+      await this.checkOrUncheck(event)
 
       //update local state to reflect new change
       await this.setDailyPoints()
@@ -457,8 +511,23 @@ export class UserHome extends React.Component {
     this.setState({toggleMessage: !this.state.toggleMessage})
   }
 
-  handleClose() {
+  async handleCoinClose() {
     this.setState({completionModal: false})
+    await this.props.updateList('tamacoin', true)
+  }
+
+  handleClose() {
+    this.setState({completionModal: false, hatchedModal: false})
+  }
+
+  nameSubmit() {
+    this.props.nameBuddy(this.props.userId, {petName: this.state.tamabuddyName})
+  }
+
+  handleChange() {
+    console.log('event name', event.target.name)
+    this.setState({[event.target.name]: event.target.value})
+    console.log(this.state.tamabuddyName)
   }
 
   render() {
@@ -473,7 +542,10 @@ export class UserHome extends React.Component {
           <div className="homeContainer">
             <Navbar />
 
-            <Modal open={this.state.completionModal} onClose={this.handleClose}>
+            <Modal
+              open={this.state.completionModal}
+              onClose={this.handleCoinClose}
+            >
               <Grid container>
                 <div
                   style={{
@@ -521,7 +593,7 @@ export class UserHome extends React.Component {
                       {' '}
                       Take a TamaCoin, you deserve it!
                     </p>
-                    <Button onClick={this.handleClose}>
+                    <Button onClick={this.handleCoinClose}>
                       <Lottie
                         options={tamacoinAnimation}
                         height={200}
@@ -532,7 +604,52 @@ export class UserHome extends React.Component {
                 </div>
               </Grid>
             </Modal>
+            <Modal open={this.state.hatchedModal} onClose={this.handleClose}>
+              <Grid container>
+                <div
+                  style={{
+                    top: `${50}%`,
+                    left: `${45}%`,
+                    transform: `translate(-${50}%, -${50}%)`,
+                    margin: '1.5em',
+                    padding: '1em'
+                  }}
+                  className={classes.hatchedPaper}
+                >
+                  <Lottie options={guideAnimation} height={150} width={150} />
+                  <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                  >
+                    <h2 className={classes.hatchedModalTitle}>
+                      CONGRATULATIONS YOU'VE HATCHED YOUR TAMABUDDY!!!
+                    </h2>
+                    <p className={classes.modalP}>
+                      What would you like to name it?
+                    </p>
 
+                    <TextField
+                      placeholder="enter name here"
+                      variant="outlined"
+                      type="text"
+                      name="tamabuddyName"
+                      onChange={this.handleChange}
+                      value={this.state.tamabuddyName}
+                    />
+                    <button
+                      style={{color: '#c58684'}}
+                      type="submit"
+                      onClick={this.nameSubmit}
+                    >
+                      submit
+                    </button>
+                  </Grid>
+                </div>
+              </Grid>
+            </Modal>
             <Grid
               container
               direction="column"
@@ -562,7 +679,10 @@ export class UserHome extends React.Component {
               onClick={this.handleOwlClick}
               style={{
                 backgroundColor: 'transparent',
-                display: this.state.completionModal ? 'none' : ''
+                display:
+                  this.state.completionModal || this.state.hatchedModal
+                    ? 'none'
+                    : ''
               }}
               disableRipple={true}
             >
@@ -607,7 +727,8 @@ const mapDispatch = dispatch => {
   return {
     loadList: () => dispatch(fetchList()),
     updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
-    getUserHistory: userId => dispatch(fetchUserHistory(userId))
+    getUserHistory: userId => dispatch(fetchUserHistory(userId)),
+    nameBuddy: (userId, data) => dispatch(updateUser(userId, data))
   }
 }
 
