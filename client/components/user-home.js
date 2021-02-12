@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {compose} from 'redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
-import {fetchUserHistory} from '../store/user'
+import {fetchUserHistory, updateUser} from '../store/user'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Modal from '@material-ui/core/Modal'
+import TextField from '@material-ui/core/TextField'
 import {withStyles} from '@material-ui/core/styles'
 import Lottie from 'react-lottie'
 import {ProgressBar} from './progress-bar'
@@ -159,12 +160,29 @@ const styles = theme => ({
     color: '#fff',
     fontSize: '1.7em',
     marginBottom: 0,
-    marginTop: 0
+    marginTop: 0,
+    textAlign: 'center'
+  },
+  hatchedModalTitle: {
+    fontFamily: 'Fredoka One',
+    color: '#c58684',
+    fontSize: '1.7em',
+    marginBottom: 0,
+    marginTop: 0,
+    textAlign: 'center'
   },
   paper: {
     position: 'absolute',
     width: 400,
     backgroundColor: 'transparent',
+    border: 'none',
+    borderRadius: 5,
+    padding: '1 em'
+  },
+  hatchedPaper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: 'rgba(225,255,255,.7)',
     border: 'none',
     borderRadius: 5,
     padding: '1 em'
@@ -179,6 +197,14 @@ const styles = theme => ({
     fontFamily: 'Helvetica',
     fontSize: '1.4em',
     fontWeight: 'bold'
+  },
+  modalP: {
+    margin: 0,
+    color: '#c58684',
+    // backgroundColor: '#7FBAC5',
+    padding: 5,
+    paddingTop: 3,
+    paddingBottom: 3
   }
 })
 /**
@@ -194,7 +220,9 @@ export class UserHome extends React.Component {
       isHatched: false,
       sparkleMode: false,
       toggleMessage: false,
-      completionModal: false
+      completionModal: false,
+      hatchedModal: false,
+      tamabuddyName: ''
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
@@ -206,6 +234,8 @@ export class UserHome extends React.Component {
     this.checkOrUncheck = this.checkOrUncheck.bind(this)
     this.finalCheck = this.finalCheck.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.nameSubmit = this.nameSubmit.bind(this)
   }
 
   async setTotalPoints() {
@@ -328,7 +358,8 @@ export class UserHome extends React.Component {
       setTimeout(() => {
         this.setState({
           lottie: idleAnimation,
-          isHatched: true
+          isHatched: true,
+          hatchedModal: true
         })
       }, 16000)
     }
@@ -386,7 +417,6 @@ export class UserHome extends React.Component {
   }
 
   async componentDidMount() {
-
     try {
       await pushSetting(this.props.user)
 
@@ -453,7 +483,17 @@ export class UserHome extends React.Component {
   }
 
   handleClose() {
-    this.setState({completionModal: false})
+    this.setState({completionModal: false, hatchedModal: false})
+  }
+
+  nameSubmit() {
+    this.props.nameBuddy(this.props.userId, {petName: this.state.tamabuddyName})
+  }
+
+  handleChange() {
+    console.log('event name', event.target.name)
+    this.setState({[event.target.name]: event.target.value})
+    console.log(this.state.tamabuddyName)
   }
 
   render() {
@@ -527,7 +567,52 @@ export class UserHome extends React.Component {
                 </div>
               </Grid>
             </Modal>
+            <Modal open={this.state.hatchedModal} onClose={this.handleClose}>
+              <Grid container>
+                <div
+                  style={{
+                    top: `${50}%`,
+                    left: `${45}%`,
+                    transform: `translate(-${50}%, -${50}%)`,
+                    margin: '1.5em',
+                    padding: '1em'
+                  }}
+                  className={classes.hatchedPaper}
+                >
+                  <Lottie options={guideAnimation} height={150} width={150} />
+                  <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                  >
+                    <h2 className={classes.hatchedModalTitle}>
+                      CONGRATULATIONS YOU'VE HATCHED YOUR TAMABUDDY!!!
+                    </h2>
+                    <p className={classes.modalP}>
+                      What would you like to name it?
+                    </p>
 
+                    <TextField
+                      placeholder="enter name here"
+                      variant="outlined"
+                      type="text"
+                      name="tamabuddyName"
+                      onChange={this.handleChange}
+                      value={this.state.tamabuddyName}
+                    />
+                    <button
+                      style={{color: '#c58684'}}
+                      type="submit"
+                      onClick={this.nameSubmit}
+                    >
+                      submit
+                    </button>
+                  </Grid>
+                </div>
+              </Grid>
+            </Modal>
             <Grid
               container
               direction="column"
@@ -557,7 +642,10 @@ export class UserHome extends React.Component {
               onClick={this.handleOwlClick}
               style={{
                 backgroundColor: 'transparent',
-                display: this.state.completionModal ? 'none' : ''
+                display:
+                  this.state.completionModal || this.state.hatchedModal
+                    ? 'none'
+                    : ''
               }}
               disableRipple={true}
             >
@@ -602,7 +690,8 @@ const mapDispatch = dispatch => {
   return {
     loadList: () => dispatch(fetchList()),
     updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
-    getUserHistory: userId => dispatch(fetchUserHistory(userId))
+    getUserHistory: userId => dispatch(fetchUserHistory(userId)),
+    nameBuddy: (userId, data) => dispatch(updateUser(userId, data))
   }
 }
 
