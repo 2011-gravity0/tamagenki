@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllFeed} from '../store/unlock'
+import Navbar from './navbar'
 
 export class SocialHome extends React.Component {
   constructor(props) {
@@ -17,7 +18,12 @@ export class SocialHome extends React.Component {
   }
 
   render() {
-    return <div>Social Home Rendered</div>
+    return (
+      <div>
+        <Navbar />
+        <div>Social Home Rendered</div>
+      </div>
+    )
   }
 }
 
