@@ -194,7 +194,8 @@ export class UserHome extends React.Component {
       isHatched: false,
       sparkleMode: false,
       toggleMessage: false,
-      completionModal: false
+      completionModal: false,
+      currentAnimation: ''
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
@@ -205,7 +206,7 @@ export class UserHome extends React.Component {
     this.sparkleModeCheck = this.sparkleModeCheck.bind(this)
     this.checkOrUncheck = this.checkOrUncheck.bind(this)
     this.finalCheck = this.finalCheck.bind(this)
-    this.handleClose = this.handleClose.bind(this)
+    this.handleCoinClose = this.handleCoinClose.bind(this)
   }
 
   async setTotalPoints() {
@@ -225,14 +226,22 @@ export class UserHome extends React.Component {
     }
   }
 
-  setDailyPoints() {
+  async setDailyPoints() {
     try {
-      let dailyPoints = Object.values(this.props.list).reduce((acc, curr) => {
-        if (typeof curr === 'number') {
-          return acc + curr
-        }
-      }, 0)
-      this.setState({dailyPoints: dailyPoints})
+      let list = Object.values(this.props.list)
+      if (list.length === 7) {
+        let dailyPoints = list
+          // .filter((el) => typeof el === 'number')
+          .reduce((acc, curr) => {
+            return acc + curr
+          }, 0)
+        this.setState({dailyPoints: dailyPoints})
+        await this.props.loadList()
+      }
+      console.log(
+        'setDailyPoints user home daily points',
+        this.state.dailyPoints
+      )
     } catch (error) {
       console.error(error)
     }
@@ -246,11 +255,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: appleAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 4000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
     if (
       event.target.name === 'vegetables' &&
@@ -259,11 +271,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: carrotAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 4000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
     if (
       event.target.name === 'water' &&
@@ -272,11 +287,16 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: waterAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 4000)
+      console.log('current animation 1', this.state.currentAnimation)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
+      console.log('current animation 2', this.state.currentAnimation)
     }
     if (
       event.target.name === 'exercise' &&
@@ -285,11 +305,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: exerciseAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 6000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
     if (
       event.target.name === 'meditation' &&
@@ -298,11 +321,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: meditateAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 6000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
     if (
       (event.target.name === 'relaxation' || event.target.name === 'sleep') &&
@@ -311,11 +337,14 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: joyAnimation})
-      setTimeout(() => {
-        this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
-        })
-      }, 6000)
+      clearTimeout(this.state.currentAnimation)
+      this.setState({
+        currentAnimation: setTimeout(() => {
+          this.setState({
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
+          })
+        }, 3000)
+      })
     }
   }
 
@@ -335,12 +364,12 @@ export class UserHome extends React.Component {
   }
 
   sparkleModeCheck() {
-    if (this.state.dailyPoints >= 5 && this.state.lottie === idleAnimation) {
+    if (this.state.dailyPoints >= 5) {
       this.setState({lottie: sparkleAnimation, sparkleMode: true})
     }
     if (
       this.state.dailyPoints < 5 &&
-      this.state.lottie === sparkleAnimation &&
+      // this.state.lottie === sparkleAnimation &&
       this.state.totalPoints > 3
     ) {
       this.setState({
@@ -350,7 +379,7 @@ export class UserHome extends React.Component {
     }
     if (
       this.state.dailyPoints < 5 &&
-      this.state.lottie === sparkleAnimation &&
+      // this.state.lottie === sparkleAnimation &&
       this.state.totalPoints < 3
     ) {
       this.setState({
@@ -376,17 +405,12 @@ export class UserHome extends React.Component {
   }
 
   finalCheck() {
-    if (
-      this.state.dailyPoints >= 15 &&
-      this.state.lottie === sparkleAnimation
-    ) {
-      console.log('trip modal')
+    if (this.state.dailyPoints >= 15) {
       this.setState({completionModal: true})
     }
   }
 
   async componentDidMount() {
-
     try {
       await pushSetting(this.props.user)
 
@@ -417,12 +441,10 @@ export class UserHome extends React.Component {
     try {
       //check to see if sparkleMode should be set to true or false
       this.sparkleModeCheck()
-
       //check to see which animation change should occur based on checkbox name
       this.checkWhichBox(event)
-
       //update points based on whether checkbox is checked or unchecked
-      this.checkOrUncheck(event)
+      await this.checkOrUncheck(event)
 
       //update local state to reflect new change
       await this.setDailyPoints()
@@ -452,7 +474,7 @@ export class UserHome extends React.Component {
     this.setState({toggleMessage: !this.state.toggleMessage})
   }
 
-  handleClose() {
+  handleCoinClose() {
     this.setState({completionModal: false})
   }
 
@@ -468,7 +490,10 @@ export class UserHome extends React.Component {
           <div className="homeContainer">
             <Navbar />
 
-            <Modal open={this.state.completionModal} onClose={this.handleClose}>
+            <Modal
+              open={this.state.completionModal}
+              onClose={this.handleCoinClose}
+            >
               <Grid container>
                 <div
                   style={{
@@ -516,7 +541,7 @@ export class UserHome extends React.Component {
                       {' '}
                       Take a TamaCoin, you deserve it!
                     </p>
-                    <Button onClick={this.handleClose}>
+                    <Button onClick={this.handleCoinClose}>
                       <Lottie
                         options={tamacoinAnimation}
                         height={200}
