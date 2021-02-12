@@ -1,6 +1,7 @@
 const User = require('./user')
 const DailyProgress = require('./dailyprogress')
 const Subscription = require('./subscription')
+
 // const {default: user} = require('../../../client/store/user')
 
 /**
@@ -14,6 +15,7 @@ DailyProgress.belongsTo(User)
 
 User.hasMany(Subscription)
 Subscription.belongsTo(User)
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'

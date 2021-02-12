@@ -195,7 +195,7 @@ export class UserHome extends React.Component {
       sparkleMode: false,
       toggleMessage: false,
       completionModal: false,
-      currentAnimation: ''
+      currentAnimation: 0
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
@@ -212,6 +212,7 @@ export class UserHome extends React.Component {
   async setTotalPoints() {
     try {
       await this.props.getUserHistory(this.props.userId)
+      console.log('user history', this.props.history)
       const totalHistoryPoints = this.props.history.reduce((ttl, day) => {
         const subTotal = Object.values(day)
           .filter(element => typeof element === 'number')
@@ -229,9 +230,9 @@ export class UserHome extends React.Component {
   async setDailyPoints() {
     try {
       let list = Object.values(this.props.list)
-      if (list.length === 7) {
+      if (list.length === 8) {
         let dailyPoints = list
-          // .filter((el) => typeof el === 'number')
+          .filter(el => typeof el === 'number')
           .reduce((acc, curr) => {
             return acc + curr
           }, 0)
@@ -287,7 +288,6 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.setState({lottie: waterAnimation})
-      console.log('current animation 1', this.state.currentAnimation)
       clearTimeout(this.state.currentAnimation)
       this.setState({
         currentAnimation: setTimeout(() => {
@@ -296,7 +296,6 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
-      console.log('current animation 2', this.state.currentAnimation)
     }
     if (
       event.target.name === 'exercise' &&
@@ -474,8 +473,9 @@ export class UserHome extends React.Component {
     this.setState({toggleMessage: !this.state.toggleMessage})
   }
 
-  handleCoinClose() {
+  async handleCoinClose() {
     this.setState({completionModal: false})
+    await this.props.updateList('tamacoin', true)
   }
 
   render() {
