@@ -358,10 +358,10 @@ export class UserHome extends React.Component {
       setTimeout(() => {
         this.setState({
           lottie: idleAnimation,
-          isHatched: true
+          isHatched: true,
+          hatchedModal: true
         })
       }, 16000)
-      this.setState({hatchedModal: true})
     }
   }
 
