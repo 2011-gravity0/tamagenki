@@ -3,7 +3,7 @@ const {User, Subscription} = require('../db/models')
 const webPush = require('web-push')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const payloadOptions = {
       exerciseReminder: 'Time to move around!',

@@ -90,7 +90,7 @@ class Badges extends React.Component {
 
   async setPoints() {
     try {
-      await this.props.getUserHistory(this.props.userId, 'pointsOnly')
+      await this.props.getUserHistory(this.props.userId)
       const totalWaterPoints = this.props.history.reduce((ttl, day) => {
         return ttl + day.water
       }, 0)
