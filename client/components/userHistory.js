@@ -1,13 +1,20 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable complexity */
 /* eslint-disable guard-for-in */
 import React from 'react'
-// import Chart from 'chart.js'
-import {Line} from 'react-chartjs-2'
 import Navbar from './navbar'
 import {connect} from 'react-redux'
+import {Line} from 'react-chartjs-2'
 import {fetchUserHistory} from '../store/user'
+import Avatar from '@material-ui/core/Avatar'
 
+// TODO TONIGTH
+//MAKE ICONS FOR ONCLICK(7:45)
+//1 CREATE WEEKLY FUNCTION FOR ALL(9)
+//2 CREATE MONTHLY FUNCTION (12)
+//4 FINISH UP(3)
+//GO TO BED (5)
 class UserHistory extends React.Component {
   constructor(props) {
     super(props)
@@ -64,25 +71,39 @@ class UserHistory extends React.Component {
     ]
     return Record
   }
+  // cunstomerized to weekly data
   sleepData = userData => {
-    let num = 7
-    let maxNum = 8
     const [weeklySleepData, monthlySleepData] = [[], []]
-    const modulusNum = userData[0].length % num
-    if (userData[0].length % num === 0) {
-      while (weeklySleepData.length < maxNum) {
+    const modulusNum = userData[0].length % 7
+    const modNum = userData[0].length % 30
+
+    if (userData[0].length % 7 === 0) {
+      while (weeklySleepData.length < 8) {
         weeklySleepData.push(userData[0].pop())
       }
-      return weeklySleepData.reverse()
     } else {
       while (modulusNum !== weeklySleepData.length) {
         weeklySleepData.push(userData[0].pop())
       }
-      return weeklySleepData.reverse()
+      weeklySleepData.reverse()
     }
+    if (userData[0].length % 30 === 0) {
+      while (monthlySleepData.length < 31) {
+        monthlySleepData.push(userData[0].pop())
+      }
+      monthlySleepData.reverse()
+    } else {
+      while (modNum !== monthlySleepData.length) {
+        monthlySleepData.push(userData[0].pop())
+      }
+      monthlySleepData.reverse()
+    }
+    return [weeklySleepData, monthlySleepData]
   }
   plotGraph() {
     const userData = this.getData()
+    const arr = this.sleepData(userData)
+    console.log('this is sleep data', arr[0])
     return (
       <Line
         data={{
@@ -97,11 +118,17 @@ class UserHistory extends React.Component {
           ],
           datasets: [
             {
-              label: 'sleep',
-              data: this.sleepData(userData),
+              label: 'Weekly',
+              data: arr[0],
               backgroundColor: ['rgba(255, 159, 64, 0.5)'],
               borderColor: ['rgba(255, 159, 64, 1)'],
               borderWidth: 1
+            },
+            {
+              label: 'Monthly',
+              data: [0, 1, 2, 3, 4, 2, 4, 5, 3, 2, 3, 4, 1],
+              backgroundColor: ['rgba(75, 192, 192, 0.5)'],
+              borderColor: ['rgba(75, 192, 192, 1)']
             }
           ]
         }}
@@ -140,6 +167,29 @@ class UserHistory extends React.Component {
       <div>
         <Navbar />,
         {loading ? 'Loading' : this.plotGraph()}
+        <div id="historyavatar">
+          <div className="avatar">
+            <Avatar src="https://img.icons8.com/plasticine/100/000000/sleeping-in-bed.png" />
+          </div>
+          <div className="avatar">
+            <Avatar src="https://img.icons8.com/cotton/64/000000/grape.png" />
+          </div>
+          <div className="avatar">
+            <Avatar src="https://img.icons8.com/fluent/48/000000/group-of-vegetables.png" />
+          </div>
+          <div className="avatar">
+            <Avatar src="https://img.icons8.com/office/16/000000/water.png" />
+          </div>
+          <div className="avatar">
+            <Avatar src="https://img.icons8.com/dusk/64/000000/exercise.png" />
+          </div>
+          <div className="avatar">
+            <Avatar src="https://img.icons8.com/color/48/000000/relax-with-book.png" />
+          </div>
+          <div className="avatar">
+            <Avatar src="https://img.icons8.com/offices/30/000000/meditation-guru.png" />
+          </div>
+        </div>
       </div>
     )
   }

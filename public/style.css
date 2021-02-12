@@ -354,6 +354,10 @@ form div {
   font-size: 1.5rem;
 }
 /*===== USER HISTORY =====*/
-/* canvas.chartjs-render-monitor{
-  margin-top: -10%;
-} */
+#historyavatar {
+  text-align: center;
+}
+.avatar {
+  display: inline-flex;
+  padding: 35px 35px;
+}
