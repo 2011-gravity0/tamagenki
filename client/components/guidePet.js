@@ -1,10 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-// import UserHome from './user-home'
 import animationOwl from '../../public/lotties/owl.json'
 import Lottie from 'react-lottie'
 import history from '../history'
-
 import {withStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -33,7 +31,7 @@ export class GuidePet extends React.Component {
   }
   render() {
     const {classes} = this.props
-    const defaultOptions = {
+    const owlOption = {
       loop: true,
       autoplay: true,
       animationData: animationOwl,
@@ -44,25 +42,27 @@ export class GuidePet extends React.Component {
     return (
       <div className="tutorial-container">
         <div>
-          <Lottie options={defaultOptions} height={300} width={300} />
-          {/* <img
-            src="https://i.pinimg.com/originals/e2/c9/cd/e2c9cd63e38ced85263bf88d8e131cfb.jpg"
-            alt="Red Ruff Monster"
-          /> */}
+          <Lottie options={owlOption} height={300} width={300} />
         </div>
         <Card className={classes.text}>
           <div className="guide-text">
-            <h3>
+            <h3>We are now setting up your tamabuddy's room!</h3>
+            <p>
+              Your tamabuddy egg will hatch after checking off 3
+              accomplishments.
+            </p>
+            <p>
               {' '}
-              Welcome to Tamagenki, an accountability pet game that doubles as a
-              way to incorporate healthy habits into your daily life. When you
-              complete actions in the real world, check off the corresponding
-              boxes in Tamagenki to hatch your egg and earn badges!!
-            </h3>
+              We provided a suggested amount of servings for water, vegatables,
+              and fruits.
+            </p>
+            <p>
+              Clicking on a task icon will provide some helpful suggestions!
+            </p>
           </div>
         </Card>
         <Button className={classes.button} onClick={() => this.nextPage()}>
-          Next
+          Welcome!
         </Button>
       </div>
     )

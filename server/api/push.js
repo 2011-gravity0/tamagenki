@@ -3,7 +3,7 @@ const {User, Subscription} = require('../db/models')
 const webPush = require('web-push')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const payloadOptions = {
       exerciseReminder: 'Time to move around!',
@@ -48,7 +48,7 @@ router.get('/', async (req, res, next) => {
       webPush.sendNotification(sub, payload, options)
     })
 
-    res.status(200).send('Push Notification has been sent to this token')
+    res.status(200).send('Push Notification has been sent to User')
   } catch (error) {
     next(error)
   }

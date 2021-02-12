@@ -5,11 +5,32 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import Avatar from '@material-ui/core/Avatar'
 import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
-import React from 'react'
+import Modal from '@material-ui/core/Modal'
+import {makeStyles} from '@material-ui/core/styles'
+import React, {useState} from 'react'
 
 export const DailyProgressList = props => {
   const {list, handleCheck} = props
+
+  const [openModal, setModal] = useState({
+    sleep: false,
+    fruit: false,
+    veggies: false,
+    water: false,
+    exercise: false,
+    relax: false,
+    meditate: false
+  })
+
+  const handleOpen = async (event, name) => {
+    await setModal({...openModal, [name]: true})
+  }
+
+  const handleClose = name => {
+    setModal({...openModal, [name]: false})
+  }
 
   return (
     <List className="listContainer">
@@ -20,13 +41,25 @@ export const DailyProgressList = props => {
         alignItems="center"
         spacing={2}
       >
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar src="https://img.icons8.com/plasticine/100/000000/sleeping-in-bed.png" />
+                <Avatar
+                  onClick={e => {
+                    handleOpen(e, 'sleep')
+                  }}
+                  src="https://img.icons8.com/plasticine/100/000000/sleeping-in-bed.png"
+                />
               </ListItemAvatar>
-              <ListItemText primary="Did you get 8 hours of sleep?" />
+              <Modal
+                className="avatar-modals"
+                open={openModal.sleep}
+                onClose={() => handleClose('sleep')}
+              >
+                <p>Check off if you got 8 hours of sleep last night</p>
+              </Modal>
+
               <Checkbox
                 onClick={event => {
                   handleCheck(event)
@@ -38,13 +71,24 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar src="https://img.icons8.com/cotton/64/000000/grape.png" />
+                <Avatar
+                  onClick={e => {
+                    handleOpen(e, 'fruit')
+                  }}
+                  src="https://img.icons8.com/cotton/64/000000/grape.png"
+                />
               </ListItemAvatar>
-              <ListItemText primary="Check off today's fruit servings!" />
+              <Modal
+                className="avatar-modals"
+                open={openModal.fruit}
+                onClose={() => handleClose('fruit')}
+              >
+                <p>Check off today's fruit servings</p>
+              </Modal>
               <Checkbox
                 onClick={event => {
                   handleCheck(event)
@@ -72,13 +116,24 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar src="https://img.icons8.com/fluent/48/000000/group-of-vegetables.png" />
+                <Avatar
+                  onClick={e => {
+                    handleOpen(e, 'veggies')
+                  }}
+                  src="https://img.icons8.com/fluent/48/000000/group-of-vegetables.png"
+                />
               </ListItemAvatar>
-              <ListItemText primary="Check off today's vegetables servings!" />
+              <Modal
+                className="avatar-modals"
+                open={openModal.veggies}
+                onClose={() => handleClose('veggies')}
+              >
+                <p>Check off today's vegetables servings</p>
+              </Modal>
               <Checkbox
                 onClick={event => {
                   handleCheck(event)
@@ -106,13 +161,24 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar src="https://img.icons8.com/office/16/000000/water.png" />
+                <Avatar
+                  onClick={e => {
+                    handleOpen(e, 'water')
+                  }}
+                  src="https://img.icons8.com/office/16/000000/water.png"
+                />
               </ListItemAvatar>
-              <ListItemText primary="Check off today's water servings!" />
+              <Modal
+                className="avatar-modals"
+                open={openModal.water}
+                onClose={() => handleClose('water')}
+              >
+                <p>Check off today's water servings</p>
+              </Modal>
               <Checkbox
                 onClick={event => {
                   handleCheck(event)
@@ -164,13 +230,24 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar src="https://img.icons8.com/dusk/64/000000/exercise.png" />
+                <Avatar
+                  onClick={e => {
+                    handleOpen(e, 'exercise')
+                  }}
+                  src="https://img.icons8.com/dusk/64/000000/exercise.png"
+                />
               </ListItemAvatar>
-              <ListItemText primary="Did you get some exercise?" />
+              <Modal
+                className="avatar-modals"
+                open={openModal.exercise}
+                onClose={() => handleClose('exercise')}
+              >
+                <p>Check off if you were able to exercise today</p>
+              </Modal>
               <Checkbox
                 onClick={event => {
                   handleCheck(event)
@@ -182,13 +259,26 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar src="https://img.icons8.com/color/48/000000/relax-with-book.png" />
+                <Avatar
+                  onClick={e => {
+                    handleOpen(e, 'relax')
+                  }}
+                  src="https://img.icons8.com/color/48/000000/relax-with-book.png"
+                />
               </ListItemAvatar>
-              <ListItemText primary="Did you disconnect and relax today?" />
+              <Modal
+                className="avatar-modals"
+                open={openModal.relax}
+                onClose={() => handleClose('relax')}
+              >
+                <p>
+                  Check off if you got a chance to disconnect and relax today
+                </p>
+              </Modal>
               <Checkbox
                 onClick={event => {
                   handleCheck(event)
@@ -200,13 +290,24 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item>
           <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar src="https://img.icons8.com/offices/30/000000/meditation-guru.png" />
+                <Avatar
+                  onClick={e => {
+                    handleOpen(e, 'meditate')
+                  }}
+                  src="https://img.icons8.com/offices/30/000000/meditation-guru.png"
+                />
               </ListItemAvatar>
-              <ListItemText primary="Did you get a chance to meditate?" />
+              <Modal
+                className="avatar-modals"
+                open={openModal.meditate}
+                onClose={() => handleClose('meditate')}
+              >
+                <p>Check off if you got a chance to meditate today</p>
+              </Modal>
               <Checkbox
                 onClick={event => {
                   handleCheck(event)

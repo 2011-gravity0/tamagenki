@@ -27,8 +27,7 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-// user/history/3
-// history/3
+
 router.get('/history/:userId', async (req, res, next) => {
   try {
     const id = req.params.userId
@@ -61,8 +60,11 @@ router.get('/:userId', async (req, res, next) => {
     const singleUser = await User.findByPk(id, {
       include: [{model: DailyProgress}]
     })
-    if (!singleUser) res.status(400).send('No user found')
-    res.status(200).send(singleUser)
+    if (!singleUser) {
+      res.status(400).send('No user found')
+    } else {
+      res.status(200).send(singleUser)
+    }
   } catch (error) {
     next(error)
   }

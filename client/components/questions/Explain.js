@@ -27,18 +27,22 @@ export default class Explain extends Component {
 
     return (
       <div className="explain-component">
-        <p>You are now the gaurdian of a tammabuddy!</p>
-        <p>As a guardian, you are responsible for your buddy's health.</p>
-        <p>The great news is that your tamabuddy's health is tied to yours!</p>
-        <p>
+        <p className="explain-one">You are now the gaurdian of a tammabuddy!</p>
+        <p className="explain-two">
+          As a guardian, you are responsible for your buddy's health.
+        </p>
+        <p className="explain-three">
+          The great news is that your tamabuddy's health is tied to yours!
+        </p>
+        <p className="explain-four">
           Tamagenki helps you make healthier choices with daily suggestions and
           reminders
         </p>
-        <p>
+        <p className="explain-five">
           As you checkoff some of your accomplishments your tammabuddy will aslo
           reap the benefits!
         </p>
-        <p>
+        <p className="explain-six">
           And as time continues you'll be able to earn badges congratulating you
           on your accomplishments.
         </p>

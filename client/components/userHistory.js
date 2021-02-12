@@ -299,27 +299,42 @@ class UserHistory extends React.Component {
         <Navbar />,
         {loading ? 'Loading' : this.plotGraph()}
         <div id="historyavatar">
-          <div className="avatar" id="bed">
-            <Avatar src="https://img.icons8.com/plasticine/100/000000/sleeping-in-bed.png" />
-          </div>
-          <div className="avatar" id="grape">
-            <Avatar src="https://img.icons8.com/cotton/64/000000/grape.png" />
-          </div>
-          <div className="avatar" id="vegetables">
-            <Avatar src="https://img.icons8.com/fluent/48/000000/group-of-vegetables.png" />
-          </div>
-          <div className="avatar" id="water">
-            <Avatar src="https://img.icons8.com/office/16/000000/water.png" />
-          </div>
-          <div className="avatar" id="execrise">
-            <Avatar src="https://img.icons8.com/dusk/64/000000/exercise.png" />
-          </div>
-          <div className="avatar" id="relax">
-            <Avatar src="https://img.icons8.com/color/48/000000/relax-with-book.png" />
-          </div>
-          <div className="avatar" id="meditation">
-            <Avatar src="https://img.icons8.com/offices/30/000000/meditation-guru.png" />
-          </div>
+          <img
+            className="avatar"
+            id="bed"
+            src="https://img.icons8.com/plasticine/100/000000/sleeping-in-bed.png"
+          />
+          <img
+            className="avatar"
+            id="grape"
+            src="https://img.icons8.com/cotton/64/000000/grape.png"
+          />
+          <img
+            className="avatar"
+            id="vegetables"
+            src="https://img.icons8.com/fluent/48/000000/group-of-vegetables.png"
+          />
+
+          <img
+            className="avatar"
+            id="water"
+            src="https://img.icons8.com/office/16/000000/water.png"
+          />
+          <img
+            className="avatar"
+            id="execrise"
+            src="https://img.icons8.com/dusk/64/000000/exercise.png"
+          />
+          <img
+            className="avatar"
+            id="relax"
+            src="https://img.icons8.com/color/48/000000/relax-with-book.png"
+          />
+          <img
+            className="avatar"
+            id="meditation"
+            src="https://img.icons8.com/offices/30/000000/meditation-guru.png"
+          />
         </div>
       </div>
     )

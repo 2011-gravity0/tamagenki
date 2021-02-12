@@ -1,6 +1,8 @@
 const User = require('./user')
 const DailyProgress = require('./dailyprogress')
 const Subscription = require('./subscription')
+const Level = require('./level')
+const Unlock = require('./unlock')
 // const {default: user} = require('../../../client/store/user')
 
 /**
@@ -14,6 +16,15 @@ DailyProgress.belongsTo(User)
 
 User.hasMany(Subscription)
 Subscription.belongsTo(User)
+
+//To add 'like' feature later, Unlock model
+//has to have PK, so it's not made as through table btw User and Level.
+User.hasMany(Unlock)
+Unlock.belongsTo(User)
+
+Level.hasMany(Unlock)
+Unlock.belongsTo(Level)
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
@@ -23,5 +34,7 @@ Subscription.belongsTo(User)
 module.exports = {
   User,
   DailyProgress,
-  Subscription
+  Subscription,
+  Level,
+  Unlock
 }

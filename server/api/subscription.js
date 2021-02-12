@@ -4,26 +4,29 @@ module.exports = router
 
 router.post('/:userId', async (req, res, next) => {
   try {
-    console.log(req.body)
     const userId = req.params.userId
     const data = req.body
     const subKeys = JSON.stringify(data.keys)
 
     const user = await User.findByPk(userId)
 
-    const [subscription, create] = await Subscription.findOrCreate({
-      where: {
-        endpoint: data.endpoint,
-        keys: subKeys
-      },
-      default: {
-        endpoint: data.endpoint,
-        expirationTime: data.expirationTime,
-        keys: subKeys
-      }
-    })
-    subscription.setUser(user)
-    res.json(subscription)
+    if (user) {
+      const [subscription, create] = await Subscription.findOrCreate({
+        where: {
+          endpoint: data.endpoint,
+          keys: subKeys
+        },
+        default: {
+          endpoint: data.endpoint,
+          expirationTime: data.expirationTime,
+          keys: subKeys
+        }
+      })
+      subscription.setUser(user)
+      res.json(subscription)
+    } else {
+      res.status(401).send('User not found')
+    }
   } catch (error) {
     next(error)
   }

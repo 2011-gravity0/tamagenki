@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -31,7 +29,7 @@ const styles = theme => ({
     fontSize: '1 rem',
     fontFamily: 'Fredoka One',
     color: '#4F7469',
-    marginBottom: '.5 rem',
+    marginBottom: 0,
     marginTop: 0
   },
   button: {
@@ -70,7 +68,7 @@ const styles = theme => ({
   }
 })
 
-class Badges extends React.Component {
+class BadgesTwo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -92,7 +90,7 @@ class Badges extends React.Component {
 
   async setPoints() {
     try {
-      await this.props.getUserHistory(this.props.userId)
+      await this.props.getUserHistory(this.props.userId, 'pointsOnly')
       const totalWaterPoints = this.props.history.reduce((ttl, day) => {
         return ttl + day.water
       }, 0)
@@ -123,6 +121,7 @@ class Badges extends React.Component {
         if (dayTotal >= 10) return true
       })
       const totalSparklePoints = totalSparklePointsArray.length
+      console.log('history', this.props.history)
       this.setState({
         waterPoints: totalWaterPoints,
         meditationPoints: totalMeditationPoints,
@@ -148,7 +147,7 @@ class Badges extends React.Component {
 
   handleOpen(event) {
     try {
-      event.preventDefault()
+      //   event.preventDefault()
       console.log(event.currentTarget.value)
       this.setState({modalOpen: true, modal: event.currentTarget.value})
     } catch (error) {
@@ -162,74 +161,70 @@ class Badges extends React.Component {
 
   render() {
     const {classes} = this.props
-
     const {modal} = this.state
 
     const thresholds = {
-      water: 4,
+      water: 6,
       meditation: 1,
       exercise: 1,
-      fruit: 2,
-      veggie: 2,
+      fruit: 3,
+      veggie: 3,
       sleep: 1,
       relaxation: 1,
       sparkle: 1
     }
 
     const modalMessages = {
-      water: 'You unlocked this badge with 40 Water points.',
-      meditation:
-        "You unlocked this badge with 7 Meditation points. Keep it up and you'll keep improving!",
-      exercise: 'You unlocked this badge with 5 Movement points.',
-      fruit:
-        'You unlocked this badge with 18 Fruit points. Keep up the good work!',
-      veggie:
-        'You unlocked this badge with 16 Veg points. Your body and your tamabuddy want to say thank you.',
-      sleep: 'You unlocked this badge with 7 Sleep points. ZzzzZzZzz',
-      relaxation: 'You unlocked this badge with 7 Relaxation points.',
+      water: 'You unlocked this badge with 80 Water points!',
+      meditation: 'You unlocked this badge with 14 Meditation points!',
+      exercise:
+        "You unlocked this badge with 10 Movement points. Wow you're getting beefy!",
+      fruit: 'You unlocked this badge with 40 Fruit points. Sweet!',
+      veggie: "You unlocked this badge with 35 Veg points. You're on a roll!",
+      sleep: 'You unlocked this badge with 14 Sleep points. 😴',
+      relaxation: 'You unlocked this badge with 14 Relaxation points!',
       sparkle:
-        'You unlocked this badge with 7 Sparkle Mode points. Wow great job!'
+        'You unlocked this badge by reaching Sparkle Mode 14 times. Very impressive!'
     }
 
     const modalMessages2 = {
       water:
-        'Studies show that even mild dehydration, such as the loss of 1–3% of body weight, can impair many aspects of brain function. So stay hydrated!',
+        'Fun fact: Adult humans are 60 percent water, and our blood is 90 percent water.',
       meditation:
-        'Meditation may help you gain a new perspective on stressful situations',
+        'Scientific studies on meditation have identified these benefits: Reduced rumination, stress reduction, improved memory, cognitive flexibility, relationship satisfaction, focus, lessening of emotional reactivity.',
       exercise:
-        'A way to stimulate your cellular appetite? Aerobic exercise promotes autophagy, which can lead to increased plasticity in the brain and removal of deranged proteins and other cellular debris implicated in neurodegenerative diseases, such as Alzheimer’s.',
+        'Exercise stimulates your body to release proteins and other chemicals that improve the structure and function of your brain. 💪🏽🧠',
       fruit:
-        "According to the CDC, only 1 in 10 adults get enough fruits or vegetables. Seems like you've been doing pretty well in the fruit department 🍊😎",
+        'Many fruits, especially berries, are high in antioxidants. According to the National Cancer Institute, antioxidants neutralize free radicals, thus preventing them from causing damage.',
       veggie:
-        'Vegetables are high in fiber, which raises energy levels by improving vitamin & mineral absorption in the body.',
+        'Diets high in vegetables can reduce the risk of cardiovascular disease. Cool 😎',
       sleep:
-        'According to the National Institutes of Health, we spend 2 hours per night dreaming, on average.',
-      relaxation:
-        'Relaxation takes many forms. Reading, talking with family, or just watching a movie are all great ways to feed your soul and relax.',
+        'According to the Division of Medicine at Harvard Medical School, REM makes up between 20-25% of total sleep in healthy adults.',
+      relaxation: 'Doing things that make you happy reduces stress.',
       sparkle:
-        'Forming new habits takes patience, so remember to stay consistent.'
+        'Being consistent and practicing good habits will help you reach your goals. 💎'
     }
 
     const modalTitles = {
-      water: 'Water Droplet Badge',
-      meditation: 'Still Mind Badge',
-      exercise: 'Light Feet Badge',
-      fruit: 'Juice Box Badge',
-      veggie: 'Vitamin Badge',
-      sleep: 'Dream Badge',
-      relaxation: 'Self Care Badge',
-      sparkle: 'Glimmer Badge'
+      water: 'Downpour Badge',
+      meditation: 'Focus Badge',
+      exercise: 'Kettlebell Badge',
+      fruit: 'Smoothie Badge',
+      veggie: 'Earth Badge',
+      sleep: 'Full Moon Badge',
+      relaxation: 'Soul Badge',
+      sparkle: 'Diamond Badge'
     }
 
     const modalImages = {
-      water: '/badges/water.svg',
-      meditation: '/badges/meditation.svg',
-      exercise: '/badges/movement.svg',
-      fruit: '/badges/fruit.svg',
-      veggie: '/badges/veg.svg',
-      sleep: '/badges/sleep.svg',
-      relaxation: '/badges/relaxation.svg',
-      sparkle: '/badges/sparkle.svg'
+      water: '/badges/water2.svg',
+      meditation: '/badges/meditation2.svg',
+      exercise: '/badges/movement2.svg',
+      fruit: '/badges/fruit2.svg',
+      veggie: '/badges/veg2.svg',
+      sleep: '/badges/sleep2.svg',
+      relaxation: '/badges/relaxation2.svg',
+      sparkle: '/badges/sparkle2.svg'
     }
 
     const body = (
@@ -273,7 +268,7 @@ class Badges extends React.Component {
             direction="column"
           >
             <Typography variant="h5" className={classes.title}>
-              Level 1 Badges
+              Level 2 Badges
             </Typography>
           </Grid>
           <Grid item container justify="center" alignItems="flex-end">
@@ -296,12 +291,12 @@ class Badges extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.waterPoints >= 4
-                          ? '/badges/water.svg'
-                          : '/shadows/waterShadow.svg'
+                        this.state.waterPoints >= thresholds.water
+                          ? '/badges/water2.svg'
+                          : '/shadows/waterShadow2.svg'
                       }
-                      height="110"
-                      width="110"
+                      height="100"
+                      width="100"
                     />
                   </Grid>
                   <Grid
@@ -312,7 +307,7 @@ class Badges extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.waterPoints >= 4 ? '' : '???'}
+                      {this.state.waterPoints >= thresholds.water ? '' : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -320,10 +315,10 @@ class Badges extends React.Component {
             </Button>
 
             <Button
-              value="meditation"
+              value="relaxation"
               onClick={this.handleOpen}
-              style={{marginLeft: '.7em', marginRight: '.7em'}}
-              disabled={this.state.meditationPoints < thresholds.meditation}
+              style={{marginLeft: '.7em', marginRight: '.7em', marginTop: 0}}
+              disabled={this.state.relaxationPoints < thresholds.relaxation}
             >
               <Box
                 justifyContent="space-around"
@@ -335,12 +330,12 @@ class Badges extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.meditationPoints >= 1
-                          ? '/badges/meditation.svg'
-                          : '/shadows/meditationShadow.svg'
+                        this.state.relaxationPoints >= thresholds.relaxation
+                          ? '/badges/relaxation2.svg'
+                          : '/shadows/relaxationShadow2.svg'
                       }
-                      height="110"
-                      width="110"
+                      height="140"
+                      width="140"
                     />
                   </Grid>
                   <Grid
@@ -351,7 +346,9 @@ class Badges extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.meditationPoints >= 1 ? '' : '???'}
+                      {this.state.relaxationPoints >= thresholds.relaxation
+                        ? ''
+                        : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -374,12 +371,12 @@ class Badges extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.movementPoints >= 1
-                          ? '/badges/movement.svg'
-                          : '/shadows/movementShadow.svg'
+                        this.state.movementPoints >= thresholds.exercise
+                          ? '/badges/movement2.svg'
+                          : '/shadows/movementShadow2.svg'
                       }
-                      height="110"
-                      width="110"
+                      height="100"
+                      width="100"
                     />
                   </Grid>
                   <Grid
@@ -390,46 +387,9 @@ class Badges extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.movementPoints >= 1 ? '' : '???'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-            </Button>
-
-            <Button
-              value="relaxation"
-              onClick={this.handleOpen}
-              style={{marginLeft: '.7em', marginRight: '.7em'}}
-              disabled={this.state.relaxationPoints < thresholds.relaxation}
-            >
-              <Box
-                justifyContent="space-around"
-                justify="center"
-                boxShadow={0}
-                className={classes.box}
-              >
-                <Grid container alignContent="flex-end">
-                  <Grid item container justify="center">
-                    <img
-                      src={
-                        this.state.relaxationPoints >= 1
-                          ? '/badges/relaxation.svg'
-                          : '/shadows/relaxationShadow.svg'
-                      }
-                      height="110"
-                      width="110"
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    container
-                    direction="column"
-                    justify="center"
-                    style={{marginTop: '1em'}}
-                  >
-                    <Typography variant="body1" align="center">
-                      {this.state.relaxationPoints >= 1 ? '' : '???'}
+                      {this.state.movementPoints >= thresholds.exercise
+                        ? ''
+                        : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -452,8 +412,8 @@ class Badges extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.sleepPoints >= 1
-                          ? '/badges/sleep.svg'
+                        this.state.sleepPoints >= thresholds.sleep
+                          ? '/badges/sleep2.svg'
                           : '/shadows/sleepShadow.svg'
                       }
                       height="110"
@@ -468,7 +428,48 @@ class Badges extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.sleepPoints >= 1 ? '' : '???'}
+                      {this.state.sleepPoints >= thresholds.sleep ? '' : '???'}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Button>
+
+            <Button
+              value="meditation"
+              onClick={this.handleOpen}
+              style={{marginLeft: '1.5em', marginRight: '.7em'}}
+              disabled={this.state.meditationPoints < thresholds.meditation}
+            >
+              <Box
+                justifyContent="space-around"
+                justify="center"
+                boxShadow={0}
+                className={classes.box}
+              >
+                <Grid container alignContent="flex-end">
+                  <Grid item container justify="center">
+                    <img
+                      src={
+                        this.state.meditationPoints >= thresholds.meditation
+                          ? '/badges/meditation2.svg'
+                          : '/shadows/meditationShadow2.svg'
+                      }
+                      height="110"
+                      width="110"
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    direction="column"
+                    justify="center"
+                    style={{marginTop: '1em'}}
+                  >
+                    <Typography variant="body1" align="center">
+                      {this.state.meditationPoints >= thresholds.meditation
+                        ? ''
+                        : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -491,9 +492,9 @@ class Badges extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.veggiePoints >= 2
-                          ? '/badges/veg.svg'
-                          : '/shadows/vegShadow.svg'
+                        this.state.veggiePoints >= thresholds.veggie
+                          ? '/badges/veg2.svg'
+                          : '/shadows/vegShadow2.svg'
                       }
                       height="110"
                       width="110"
@@ -507,7 +508,9 @@ class Badges extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.veggiePoints >= 2 ? '' : '???'}
+                      {this.state.veggiePoints >= thresholds.veggie
+                        ? ''
+                        : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -517,7 +520,7 @@ class Badges extends React.Component {
             <Button
               value="fruit"
               onClick={this.handleOpen}
-              style={{marginLeft: '.7em', marginRight: '.7em'}}
+              style={{marginLeft: '2em', marginRight: '2em'}}
               disabled={this.state.fruitPoints < thresholds.fruit}
             >
               <Box
@@ -530,12 +533,12 @@ class Badges extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.fruitPoints >= 2
-                          ? '/badges/fruit.svg'
-                          : '/shadows/fruitShadow.svg'
+                        this.state.fruitPoints >= thresholds.fruit
+                          ? '/badges/fruit2.svg'
+                          : '/shadows/fruitShadow2.svg'
                       }
-                      height="110"
-                      width="110"
+                      height="100"
+                      width="100"
                     />
                   </Grid>
                   <Grid
@@ -546,7 +549,7 @@ class Badges extends React.Component {
                     style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.fruitPoints >= 2 ? '' : '???'}
+                      {this.state.fruitPoints >= thresholds.fruit ? '' : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -556,7 +559,7 @@ class Badges extends React.Component {
             <Button
               value="sparkle"
               onClick={this.handleOpen}
-              style={{marginLeft: '.7em', marginRight: '.7em'}}
+              style={{marginLeft: '2em', marginRight: '2em'}}
               disabled={this.state.sparklePoints < thresholds.sparkle}
             >
               <Box
@@ -569,12 +572,12 @@ class Badges extends React.Component {
                   <Grid item container justify="center">
                     <img
                       src={
-                        this.state.sparklePoints >= 1
-                          ? '/badges/sparkle.svg'
-                          : '/shadows/sparkleShadow.svg'
+                        this.state.sparklePoints >= thresholds.sparkle
+                          ? '/badges/sparkle2.svg'
+                          : '/shadows/sparkleShadow2.svg'
                       }
-                      height="110"
-                      width="110"
+                      height="100"
+                      width="100"
                     />
                   </Grid>
                   <Grid
@@ -582,21 +585,21 @@ class Badges extends React.Component {
                     container
                     direction="column"
                     justify="center"
-                    style={{marginTop: '1em', marginBottom: '0em'}}
+                    style={{marginTop: '1em'}}
                   >
                     <Typography variant="body1" align="center">
-                      {this.state.sparklePoints >= 1 ? '' : '???'}
+                      {this.state.sparklePoints >= thresholds.sparkle
+                        ? ''
+                        : '???'}
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
             </Button>
           </Grid>
-          <Grid container justify="flex-end">
-            <Link to="/badgestwo">
-              <Button className={classes.button} onClick={this.continue}>
-                Level 2 Badges {'->'}
-              </Button>
+          <Grid container justify="flex-start">
+            <Link to="/badges">
+              <Button className={classes.button}>{'<-'} Level 1 Badges</Button>
             </Link>
           </Grid>
         </Grid>
@@ -616,8 +619,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // loadList: () => dispatch(fetchList()),
-    // updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
+    loadList: () => dispatch(fetchList()),
+    updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
     getUserHistory: (userId, action) =>
       dispatch(fetchUserHistory(userId, action))
   }
@@ -626,4 +629,4 @@ const mapDispatch = dispatch => {
 export default compose(
   connect(mapState, mapDispatch),
   withStyles(styles, {withTheme: true})
-)(Badges)
+)(BadgesTwo)

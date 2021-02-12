@@ -22,6 +22,7 @@ const UserSetting = ({user, updateUser}) => {
     password: false,
     bedTime: false
   })
+  const [message, setMessage] = useState({email: '', password: ''})
   const [updateBody, setUpdateBody] = useState({})
   const [reminder, setReminder] = useState({
     exerciseReminder: user.exerciseReminder,
@@ -29,6 +30,20 @@ const UserSetting = ({user, updateUser}) => {
     meditationReminder: user.meditationReminder,
     sleepReminder: user.sleepReminder
   })
+
+  const validateEmail = input => {
+    if (!input.includes('@') || !input.includes('.')) {
+      return true
+    }
+    return false
+  }
+
+  const validatePassword = input => {
+    if (input.length < 5) {
+      return true
+    }
+    return false
+  }
 
   const handleReminder = event => {
     console.log(event.target)
@@ -53,9 +68,17 @@ const UserSetting = ({user, updateUser}) => {
   }
 
   const handleSubmit = field => {
-    updateUser(user.id, updateBody)
-    setUpdateBody({})
-    setEditMode({...editMode, [field]: false})
+    if (field === 'email' && validateEmail(updateBody.email)) {
+      setMessage({...message, email: 'Must be an email'})
+    } else if (field === 'password' && validatePassword(updateBody.password)) {
+      setMessage({...message, password: 'Atleast 5 character long'})
+    } else {
+      updateUser(user.id, updateBody)
+      setUpdateBody({})
+      setEditMode({...editMode, [field]: false})
+      setMessage({email: '', password: ''})
+      console.log('is thie updated?')
+    }
   }
 
   const mapUserInfo = [
@@ -79,7 +102,7 @@ const UserSetting = ({user, updateUser}) => {
           <h4 className="settingTitle">Account Setting</h4>
           <hr />
           {mapUserInfo.map(item => (
-            <div className="itemContainer">
+            <div key={item.field} className="itemContainer">
               <div className="fieldName">
                 <h5>{item.displayName}</h5>
               </div>
@@ -99,6 +122,16 @@ const UserSetting = ({user, updateUser}) => {
                   </h4>
                 )}
               </div>
+              {item.field === 'email' && (
+                <p className="error" id="emailP">
+                  {message.email}
+                </p>
+              )}
+              {item.field === 'password' && (
+                <p className="error" id="passwordP">
+                  {message.password}
+                </p>
+              )}
               <div className="editIcon">
                 <IconButton
                   onClick={
@@ -115,7 +148,7 @@ const UserSetting = ({user, updateUser}) => {
           <h4 className="settingTitle">Push Notifications Setting</h4>
           <hr />
           {mapReminer.map(item => (
-            <div className="reminderContainer">
+            <div key={item.field} className="reminderContainer">
               <div className="fieldName">
                 <h5>{item.displayName}</h5>
               </div>
