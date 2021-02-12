@@ -300,10 +300,7 @@ class UserHistory extends React.Component {
         {loading ? 'Loading' : this.plotGraph()}
         <div id="historyavatar">
           <div className="avatar" id="bed">
-            <Avatar
-              src="https://img.icons8.com/plasticine/100/000000/sleeping-in-bed.png"
-              id="bed"
-            />
+            <Avatar src="https://img.icons8.com/plasticine/100/000000/sleeping-in-bed.png" />
           </div>
           <div className="avatar" id="grape">
             <Avatar src="https://img.icons8.com/cotton/64/000000/grape.png" />
