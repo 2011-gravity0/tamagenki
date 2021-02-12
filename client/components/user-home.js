@@ -221,10 +221,9 @@ export class UserHome extends React.Component {
       sparkleMode: false,
       toggleMessage: false,
       completionModal: false,
-      currentAnimation: 0
+      currentAnimation: 0,
       hatchedModal: false,
       tamabuddyName: ''
-
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
@@ -239,7 +238,6 @@ export class UserHome extends React.Component {
     this.handleClose = this.handleClose.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.nameSubmit = this.nameSubmit.bind(this)
-
   }
 
   async setTotalPoints() {
@@ -507,10 +505,10 @@ export class UserHome extends React.Component {
     this.setState({toggleMessage: !this.state.toggleMessage})
   }
 
-
   async handleCoinClose() {
     this.setState({completionModal: false})
     await this.props.updateList('tamacoin', true)
+  }
 
   handleClose() {
     this.setState({completionModal: false, hatchedModal: false})
