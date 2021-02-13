@@ -140,7 +140,7 @@ button {
   font-size: 12px;
 }
 
-/*===== Owl Guidance =====*/
+/*===== Find Egg and Owl explanation =====*/
 
 .find-egg-component {
   border-radius: 40px;
@@ -163,10 +163,10 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   background-image: url('/explainDesktop.png');
   background-repeat: no-repeat;
   background-position: bottom;
+  background-size: cover;
   padding: 20px;
   margin: 2.5% 5% 5%;
   box-shadow: 5px 5px 5px rgb(205, 203, 203);
@@ -179,6 +179,7 @@ button {
   line-height: 25px;
   padding: 4px 10px;
   border-radius: 2px;
+  color: rgb(43, 43, 43);
   background-color: rgba(231, 249, 253, 0.7);
 }
 
@@ -202,80 +203,6 @@ button {
 
 .guideButton {
   flex-basis: 12%;
-}
-
-/* media query for tablet */
-@media only screen and (max-width: 1025px) {
-  .find-egg-component {
-    border-radius: 0px;
-    height: 99vh;
-    background-image: url('/forestTablet.png');
-    margin: 0;
-  }
-  .explain-component {
-    border-radius: 0px;
-    height: 100vh;
-    background-image: url('/explainTablet.png');
-    margin: 0;
-  }
-  .owlTalk {
-    font-size: 1.5rem;
-  }
-
-  .explain-component .owlTalk {
-    font-size: 1.5rem;
-    margin: 20px 0;
-  }
-}
-
-/* media query for larger than phone but small than tablet */
-@media only screen and (max-width: 600px) {
-  .find-egg-component {
-    border-radius: 0px;
-    height: 95vh;
-    background-image: url('/forestTablet.png');
-    margin: 0;
-  }
-  .explain-component {
-    border-radius: 0px;
-    height: 95vh;
-    background-image: url('/explain650.png');
-    margin: 0;
-  }
-  .owlTalk {
-    font-size: 1.3rem;
-  }
-
-  .explain-component .owlTalk {
-    font-size: 1.1rem;
-    margin: 8px 0;
-  }
-}
-
-/* media queary small screens like phones */
-@media only screen and (max-width: 400px) {
-  .find-egg-component {
-    border-radius: 0px;
-    height: 95vh;
-    background-image: url('/forestTablet.png');
-    margin: 0;
-  }
-  .explain-component {
-    border-radius: 0px;
-    height: 100vh;
-    background-image: url('/explainPhone.png');
-    background-position: left -5px bottom 0;
-    background-size: cover;
-  }
-
-  .owlTalk {
-    font-size: 1.3rem;
-  }
-
-  .explain-component .owlTalk {
-    font-size: 1.1rem;
-    margin: 8px 0;
-  }
 }
 
 /* Guide component text effect */
@@ -369,6 +296,169 @@ button {
   letter-spacing: 0.15em; /* Adjust as needed */
 }
 
+/*===== Owl Questions =====*/
+.question-component {
+  border-radius: 40px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/explainDesktop.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  padding: 20px;
+  margin: 2.5% 5% 5%;
+  box-shadow: 5px 5px 5px rgb(205, 203, 203);
+}
+.questionContainer {
+  width: 320px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 2px 2px 2px rgba(139, 162, 167, 0.9);
+}
+
+.questionOwlAnime {
+  position: relative;
+  bottom: 58px;
+}
+
+.questionContainer .owlTalk {
+  color: rgb(56, 56, 56);
+  background-color: rgba(231, 249, 253, 0);
+  text-align: center;
+  margin: 0;
+  padding: 5px 30px;
+  font-size: 1.5rem;
+}
+
+.questionHeader {
+  position: relative;
+  bottom: 50px;
+}
+
+.nameBedtimeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 20px;
+  width: 225px;
+}
+
+.questionItem {
+  width: 220px;
+  margin: 0;
+}
+
+/* media query for tablet */
+@media only screen and (max-width: 1025px) {
+  .find-egg-component {
+    border-radius: 0px;
+    height: 99vh;
+    background-image: url('/forestTablet.png');
+    margin: 0;
+  }
+  .explain-component {
+    border-radius: 0px;
+    height: 100vh;
+    background-image: url('/explainTablet.png');
+    margin: 0;
+  }
+
+  .question-component {
+    border-radius: 0px;
+    height: 100vh;
+    background-image: url('/explainTablet.png');
+    margin: 0;
+  }
+
+  .owlTalk {
+    font-size: 1.5rem;
+  }
+
+  .explain-component .owlTalk {
+    font-size: 1.5rem;
+    margin: 20px 0;
+  }
+}
+
+/*===== media query for whole guide components =====*/
+
+/* media query for larger than phone but small than tablet */
+@media only screen and (max-width: 600px) {
+  .find-egg-component {
+    border-radius: 0px;
+    height: 95vh;
+    background-image: url('/forestTablet.png');
+    margin: 0;
+  }
+  .explain-component {
+    border-radius: 0px;
+    height: 95vh;
+    background-image: url('/explain650.png');
+    margin: 0;
+  }
+
+  .question-component {
+    border-radius: 0px;
+    height: 95vh;
+    background-image: url('/explain650.png');
+    margin: 0;
+  }
+
+  .owlTalk {
+    font-size: 1.3rem;
+  }
+
+  .explain-component .owlTalk {
+    font-size: 1.1rem;
+    margin: 8px 0;
+  }
+}
+
+/* media queary small screens like phones */
+@media only screen and (max-width: 400px) {
+  .find-egg-component {
+    border-radius: 0px;
+    height: 95vh;
+    background-image: url('/forestTablet.png');
+    margin: 0;
+  }
+  .explain-component {
+    border-radius: 0px;
+    height: 100vh;
+    background-image: url('/explainPhone.png');
+    background-position: left -5px bottom 0;
+    background-size: cover;
+  }
+
+  .question-component {
+    border-radius: 0px;
+    height: 100vh;
+    background-image: url('/explainPhone.png');
+    background-position: left -5px bottom 0;
+    background-size: cover;
+  }
+
+  .owlTalk {
+    font-size: 1.3rem;
+  }
+
+  .explain-component .owlTalk {
+    font-size: 1.1rem;
+    margin: 8px 0;
+  }
+}
+
 .tutorial-container {
   display: flex;
   justify-content: center;
@@ -387,13 +477,6 @@ button {
   font-family: 'Fredoka One';
   font-weight: lighter;
   text-align: center;
-}
-
-.questionHeader {
-  font-family: sans-serif;
-  color: rgb(94, 93, 93);
-  text-align: center;
-  font-size: 1.5rem;
 }
 
 /*===== HOME PAGE =====*/
@@ -617,167 +700,6 @@ button {
   text-align: center;
   margin-top: 15px;
   padding: 10px 10px;
-}
-
-/* media query for desktop */
-@media only screen and (min-width: 1024px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forestDesktop1.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 85vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    text-align: center;
-    background-image: url('/explainDesktop.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px rgb(205, 203, 203);
-  }
-
-  .explain-component p {
-    width: 50%;
-  }
-
-  #tamabuddyButton {
-    height: 135%;
-  }
-}
-
-/* media query for tablet */
-@media only screen and (max-width: 1024px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: center;
-    background-image: url('/forestTablet.png');
-    background-repeat: no-repeat;
-    background-position: top;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 85vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    align-items: center;
-    background-image: url('/explainTablet.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  #tamabuddyButton {
-    height: 130%;
-  }
-}
-
-/* media query for larger than phone but small than tablet */
-@media only screen and (max-width: 600px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forest650.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 90vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/explain650.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component p {
-    width: 100%;
-    font-size: medium;
-  }
-  #tamabuddyButton {
-    height: 100%;
-  }
-}
-
-/* media queary small screens like phones */
-@media only screen and (max-width: 400px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forestphone.png');
-    background-position: bottom;
-    background-repeat: no-repeat;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: center;
-    background-image: url('/explainPhone.png');
-    background-position: top;
-    background-repeat: no-repeat;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-
-  .explain-component p {
-    font-size: small;
-  }
-  #tamabuddyButton {
-    height: 100%;
-  }
-}
-
-.typeWriter {
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: 0.15em; /* Adjust as needed */
-}
-
-.explain-component p {
-  background-color: rgba(200, 234, 239, 0.7);
-  border-radius: 2px;
 }
 
 .ChartContainer {

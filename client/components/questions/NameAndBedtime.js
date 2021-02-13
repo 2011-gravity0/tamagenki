@@ -18,33 +18,11 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 
-const styles = theme => ({
-  // Load app bar information from the theme
-  toolbar: theme.mixins.toolbar,
-  root: {
-    marginTop: 50,
-    marginBottom: 15,
-    padding: 20
-  },
-  button: {
-    margin: 20,
-    padding: 5,
-    backgroundColor: '#C9E3BE'
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 190
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
-})
-
 export class NameAndBedtime extends Component {
   constructor() {
     super()
     this.state = {
-      text: 'To get started I need to know some more information...'
+      text: 'To get started I need to know some more information about you...'
     }
   }
   continue = e => {
@@ -63,44 +41,28 @@ export class NameAndBedtime extends Component {
       }
     }
     return (
-      <React.Fragment>
-        {/* <AppBar margin="5em" style={{background: '#FFB0AD'}}>
-          <Grid container justify="center">
-            <h1 style={{fontFamily: 'Fredoka One'}}>Tamagenki</h1>
+      <div className="question-component">
+        <div className="questionContainer">
+          <div className="questionOwlAnime">
+            <Lottie options={owlOptions} height={100} width={100} />
+          </div>
+          <Grid container justify="center" className="questionHeader">
+            <p className="owlTalk">{this.state.text}</p>
           </Grid>
-        </AppBar> */}
-        <Paper>
-          <div className={classes.toolbar} />
-        </Paper>
-        <Box m={4}>
-          <Grid container justify="center" alignItems="flex-start">
-            <Grid item>
-              <Lottie options={owlOptions} height={50} width={50} />
-            </Grid>
-            <Grid item>
-              <p className="questionHeader owlTalk">{this.state.text}</p>
-            </Grid>
-          </Grid>
-        </Box>
-        <div className={classes.root}>
-          <form>
-            <Grid container justify="center">
-              <Grid item container justify="center">
-                <TextField
-                  id="standard-helperText"
-                  label="What's your name?"
-                  defaultValue={values.userName}
-                  onChange={handleChange('userName')}
-                  variant="outlined"
-                />
-              </Grid>
-            </Grid>
-          </form>
-
-          <Grid container justify="center">
-            <FormControl variant="outlined" className={classes.formControl}>
+          <div className="nameBedtimeContainer">
+            <form className="questionItem">
+              <TextField
+                id="standard-helperText"
+                className="questionItem"
+                label="What's your name?"
+                defaultValue={values.userName}
+                onChange={handleChange('userName')}
+                variant="outlined"
+              />
+            </form>
+            <FormControl variant="outlined" className="questionItem">
               <InputLabel id="demo-simple-select-outlined-label">
-                BedTime
+                Ideal bedtime
               </InputLabel>
               <Select
                 labelId="demo-simple-select-outlined-label"
@@ -112,28 +74,42 @@ export class NameAndBedtime extends Component {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={6}>6:00pm</MenuItem>
-                <MenuItem value={7}>7:00pm </MenuItem>
-                <MenuItem value={8}>8:00pm </MenuItem>
-                <MenuItem value={9}>9:00pm </MenuItem>
-                <MenuItem value={10}>10:00pm </MenuItem>
-                <MenuItem value={11}>11:00pm </MenuItem>
-                <MenuItem value={12}>12:00am </MenuItem>
-                <MenuItem value={1}>1:00am</MenuItem>
-                <MenuItem value={2}>2:00am </MenuItem>
+                <MenuItem value="9:00pm">9:00pm </MenuItem>
+                <MenuItem value="9:30pm">9:30pm </MenuItem>
+                <MenuItem value="10:00pm">10:00pm </MenuItem>
+                <MenuItem value="10:30pm">10:30pm </MenuItem>
+                <MenuItem value="11:00pm">11:00pm </MenuItem>
+                <MenuItem value="11:30pm">11:30pm </MenuItem>
+                <MenuItem value="12:00pm">12:00am </MenuItem>
+                <MenuItem value="12:30pm">12:30am </MenuItem>
+                <MenuItem value="1:00am">1:00am</MenuItem>
+                <MenuItem value="1:30am">1:30am</MenuItem>
+                <MenuItem value="2:00am">2:00am </MenuItem>
               </Select>
             </FormControl>
+          </div>
+          <Grid container justify="center">
+            <Button className={classes.button} onClick={this.continue}>
+              Continue
+            </Button>
           </Grid>
         </div>
-
-        <Grid container justify="center">
-          <Button className={classes.button} onClick={this.continue}>
-            Continue
-          </Button>
-        </Grid>
-      </React.Fragment>
+      </div>
     )
   }
 }
 
 export default withStyles(styles)(NameAndBedtime)
+
+const styles = theme => ({
+  // Load app bar information from the theme
+  root: {
+    width: 220
+  },
+  box: {
+    padding: 10
+  },
+  input: {
+    color: 'white'
+  }
+})
