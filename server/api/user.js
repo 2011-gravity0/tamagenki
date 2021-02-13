@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
   try {
     const allUsers = await User.findAll({
       attributes: ['id', 'email', 'petName'],
-      include: [{model: DailyProgress}]
+      include: [{model: DailyProgress}],
     })
     res.json(allUsers)
   } catch (err) {
@@ -43,10 +43,11 @@ router.get('/history/:userId', async (req, res, next) => {
             'meditation',
             'sleep',
             'relaxation',
-            'date'
-          ]
-        }
-      ]
+            'date',
+            'tamacoin',
+          ],
+        },
+      ],
     })
     res.status(200).send(singleUser)
   } catch (error) {
@@ -58,7 +59,7 @@ router.get('/:userId', async (req, res, next) => {
     const id = req.params.userId
     if (isNaN(id)) res.status(400).send('No user found')
     const singleUser = await User.findByPk(id, {
-      include: [{model: DailyProgress}]
+      include: [{model: DailyProgress}],
     })
     if (!singleUser) {
       res.status(400).send('No user found')
