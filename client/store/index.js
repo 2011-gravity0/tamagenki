@@ -4,10 +4,12 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import dailyProgress from './dailyProgress'
+import owlResponse from './owlResponse'
 
 const reducer = combineReducers({
   user,
-  list: dailyProgress
+  list: dailyProgress,
+  response: owlResponse
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
