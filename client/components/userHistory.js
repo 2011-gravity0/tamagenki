@@ -5,18 +5,13 @@ import {Line} from 'react-chartjs-2'
 import {fetchUserHistory} from '../store/user'
 import Avatar from '@material-ui/core/Avatar'
 
-// TODO TONIGTH
-//1 CREATE WEEKLY FUNCTION FOR ALL(9)
-//2 CREATE MONTHLY FUNCTION (12)
-//4 FINISH UP(3)
-//GO TO BED (5)
-
 let weeklyArr
 let monthlyArr
 class UserHistory extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      chartType: 'monthly',
       loading: true,
       userId: '',
       dataChange: [1, 2, 3, 4, 5, 6, 7],
@@ -47,10 +42,11 @@ class UserHistory extends React.Component {
       ]
     }
     this.getData = this.getData.bind(this)
-    this.plotGraph = this.plotGraph.bind(this)
+    this.plotMonthGraph = this.plotMonthGraph.bind(this)
     this.weeklyData = this.weeklyData.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.monthlyData = this.monthlyData.bind(this)
+    this.plotWeekGraph = this.plotWeekGraph.bind(this)
   }
   getData() {
     let data = this.props.history
@@ -200,7 +196,41 @@ class UserHistory extends React.Component {
       }
     })
   }
-  plotGraph() {
+
+  plotWeekGraph() {
+    return (
+      <div>week</div>
+      // <Line
+      //   data={{
+      //     labels: month,
+      //     datasets: [
+      //       {
+      //         label: 'Weekly',
+      //         data: this.state.dataChange,
+      //         backgroundColor: ['rgba(255, 159, 64, 0.5)'],
+      //         borderColor: ['rgba(255, 159, 64, 1)'],
+      //         borderWidth: 1,
+      //       },
+      //     ],
+      //   }}
+      //   height={100}
+      //   width={0}
+      //   options={{
+      //     maintainAspectRatio: false,
+      //     scales: {
+      //       yAxes: [
+      //         {
+      //           ticks: {
+      //             beginAtZero: true,
+      //           },
+      //         },
+      //       ],
+      //     },
+      //   }}
+      // />
+    )
+  }
+  plotMonthGraph() {
     console.log('this is datachange', this.state.dataChange)
     console.log('this is monthly', this.state.dataMonth)
     const month = [
@@ -240,18 +270,18 @@ class UserHistory extends React.Component {
         data={{
           labels: month,
           datasets: [
-            {
-              label: 'Weekly',
-              data: this.state.dataChange,
-              backgroundColor: ['rgba(255, 159, 64, 0.5)'],
-              borderColor: ['rgba(255, 159, 64, 1)'],
-              borderWidth: 1
-            },
+            // {
+            //   label: 'Weekly',
+            //   data: this.state.dataChange,
+            //   backgroundColor: ['rgba(255, 159, 64, 0.5)'],
+            //   borderColor: ['rgba(255, 159, 64, 1)'],
+            //   borderWidth: 1,
+            // },
             {
               label: 'Monthly',
               data: this.state.dataMonth,
-              backgroundColor: ['rgba(75, 192, 192, 0.5)'],
-              borderColor: ['rgba(75, 192, 192, 1)']
+              backgroundColor: ['rgb(201, 227, 190, 0.5)'],
+              borderColor: ['rgb(201, 227, 190, 1)']
             }
           ]
         }}
@@ -287,13 +317,20 @@ class UserHistory extends React.Component {
     }
   }
   render() {
-    const {loading, userId} = this.state
+    const {loading} = this.state
     // userhistory= this.props.getUserHistory(this.props.userId)
     return (
-      <div>
-        <Navbar />,
-        {loading ? 'Loading' : this.plotGraph()}
-        <div id="historyavatar">
+      <div className="chartContainer">
+        <Navbar />
+        <div className="chartErea">
+          {loading ? (
+            <div className="loading">Loading</div>
+          ) : (
+            this.plotMonthGraph()
+          )}
+        </div>
+
+        <div className="chartIconContainer" id="historyavatar">
           <img
             className="avatar"
             id="bed"
@@ -337,7 +374,6 @@ class UserHistory extends React.Component {
 }
 const mapState = state => {
   return {
-    email: state.user.email,
     userId: state.user.id,
     list: state.list.list,
     history: state.user.dailyprogresses

@@ -28,10 +28,7 @@ export class FindEgg extends Component {
 
     return (
       <div className="find-egg-component">
-        <p
-          className="typeWriter"
-          style={{backgroundColor: 'rgba(200, 234, 239, .3)'}}
-        >
+        <p className="typeWriter owlTalk">
           You have stumbled across a Tamabuddy Egg! Would you like to keep it?
         </p>
         <Lottie options={eggOptions} height={200} width={200} />

@@ -140,6 +140,192 @@ button {
   font-size: 12px;
 }
 
+/*===== Owl Guidance =====*/
+
+.owlTalk {
+  font-family: 'Marmelad', sans-serif;
+  font-size: 1.2rem;
+  line-height: 25px;
+  padding: 2px 10px;
+  margin: 20px;
+  background-color: rgba(200, 231, 239, 0.6);
+}
+
+/* media query for desktop */
+@media only screen and (min-width: 1024px) {
+  .find-egg-component {
+    border-radius: 40px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    background-image: url('/forestDesktop1.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component {
+    border-radius: 40px;
+    height: 85vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    background-image: url('/explainDesktop.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px rgb(205, 203, 203);
+  }
+
+  .explain-component p {
+    width: 50%;
+  }
+}
+
+/* media query for tablet */
+@media only screen and (max-width: 1024px) {
+  .find-egg-component {
+    border-radius: 40px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    background-image: url('/forestTablet.png');
+    background-repeat: no-repeat;
+    background-position: top;
+    margin: 5% 5% 0;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component {
+    border-radius: 40px;
+    height: 85vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    align-items: center;
+    background-image: url('/explainTablet.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+}
+
+/* media query for larger than phone but small than tablet */
+@media only screen and (max-width: 600px) {
+  .find-egg-component {
+    border-radius: 40px;
+    height: 70vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    background-image: url('/forest650.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 0;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component {
+    border-radius: 40px;
+    height: 90vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    background-image: url('/explain650.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component p {
+    width: 100%;
+    font-size: medium;
+  }
+}
+
+/* media queary small screens like phones */
+@media only screen and (max-width: 400px) {
+  .find-egg-component {
+    border-radius: 40px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    background-image: url('/forestphone.png');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    margin: 5% 5% 0;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component {
+    border-radius: 40px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    background-image: url('/explainPhone.png');
+    background-position: top;
+    background-repeat: no-repeat;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+
+  .explain-component p {
+    font-size: small;
+  }
+}
+
+.typeWriter {
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+}
+
+.explain-component p {
+  background-color: rgba(200, 234, 239, 0.7);
+  border-radius: 2px;
+}
+
+.tutorial-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.guide-text h3 {
+  color: #4e7469;
+  font-family: 'Fredoka One';
+  font-weight: lighter;
+  text-align: center;
+}
+
+.guide-text p {
+  font-family: 'Fredoka One';
+  font-weight: lighter;
+  text-align: center;
+}
+
+.questionHeader {
+  font-family: sans-serif;
+  color: rgb(94, 93, 93);
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 /*===== HOME PAGE =====*/
 
 .homeContainer {
@@ -341,193 +527,32 @@ button {
   padding: 10px;
 }
 
-/* media query for desktop */
-@media only screen and (min-width: 1024px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forestDesktop1.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 85vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    text-align: center;
-    background-image: url('/explainDesktop.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px rgb(205, 203, 203);
-  }
-
-  .explain-component p {
-    width: 50%;
-  }
-}
-
-/* media query for tablet */
-@media only screen and (max-width: 1024px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: center;
-    background-image: url('/forestTablet.png');
-    background-repeat: no-repeat;
-    background-position: top;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 85vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    align-items: center;
-    background-image: url('/explainTablet.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-}
-
-/* media query for larger than phone but small than tablet */
-@media only screen and (max-width: 600px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forest650.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 90vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/explain650.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component p {
-    width: 100%;
-    font-size: medium;
-  }
-}
-
-/* media queary small screens like phones */
-@media only screen and (max-width: 400px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forestphone.png');
-    background-position: bottom;
-    background-repeat: no-repeat;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: center;
-    background-image: url('/explainPhone.png');
-    background-position: top;
-    background-repeat: no-repeat;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-
-  .explain-component p {
-    font-size: small;
-  }
-}
-
-.typeWriter {
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: 0.15em; /* Adjust as needed */
-}
-
-.explain-component p {
-  background-color: rgba(200, 234, 239, 0.7);
-  border-radius: 2px;
-}
-
-/*=====  =====*/
-
-.tutorial-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-.guide-text h3 {
-  color: #4e7469;
-  font-family: 'Fredoka One';
-  font-weight: lighter;
-  text-align: center;
-}
-
-.guide-text p {
-  font-family: 'Fredoka One';
-  font-weight: lighter;
-  text-align: center;
-}
-
-.questionHeader {
-  font-family: sans-serif;
-  color: rgb(94, 93, 93);
-  text-align: center;
-  font-size: 1.5rem;
-}
 /*===== USER HISTORY =====*/
 #historyavatar {
   text-align: center;
-  margin-top: 5%;
+  margin-top: 15px;
   padding: 10px 10px;
 }
+
+.ChartContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.chartErea {
+  width: 75vw;
+  margin: 20px auto;
+  height: 70vh;
+}
+
 .avatar {
   display: inline-flex;
   padding: 5px 5px;
   margin: 10px 10px;
-  border: whitesmoke outset;
+  background-color: #fff8ed;
+  border: 1px rgb(202, 176, 127) solid;
+  border-radius: 100%;
   height: 25px;
   width: 25px;
 }

@@ -89,13 +89,13 @@ const Navbar = ({handleLogout}, props) => {
                 </Link>
               </MenuItem>
               <MenuItem className={classes.menu}>
-                <Link to="/setting" className={classes.menu}>
-                  Setting
+                <Link to="/history" className={classes.menu}>
+                  History
                 </Link>
               </MenuItem>
               <MenuItem className={classes.menu}>
-                <Link to="/history" className={classes.menu}>
-                  History
+                <Link to="/setting" className={classes.menu}>
+                  Setting
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleLogout} className={classes.menu}>

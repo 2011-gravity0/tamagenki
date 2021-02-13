@@ -78,7 +78,7 @@ export class Reminders extends Component {
               <Lottie options={owlOptions} height={50} width={50} />
             </Grid>
             <Grid item>
-              <p className="questionHeader">{this.state.text}</p>
+              <p className="questionHeader owlTalk">{this.state.text}</p>
             </Grid>
           </Grid>
         </Box>

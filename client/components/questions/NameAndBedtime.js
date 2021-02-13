@@ -64,11 +64,11 @@ export class NameAndBedtime extends Component {
     }
     return (
       <React.Fragment>
-        <AppBar margin="5em" style={{background: '#FFB0AD'}}>
+        {/* <AppBar margin="5em" style={{background: '#FFB0AD'}}>
           <Grid container justify="center">
             <h1 style={{fontFamily: 'Fredoka One'}}>Tamagenki</h1>
           </Grid>
-        </AppBar>
+        </AppBar> */}
         <Paper>
           <div className={classes.toolbar} />
         </Paper>
@@ -78,7 +78,7 @@ export class NameAndBedtime extends Component {
               <Lottie options={owlOptions} height={50} width={50} />
             </Grid>
             <Grid item>
-              <p className="questionHeader">{this.state.text}</p>
+              <p className="questionHeader owlTalk">{this.state.text}</p>
             </Grid>
           </Grid>
         </Box>

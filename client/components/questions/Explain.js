@@ -26,7 +26,7 @@ export default class Explain extends Component {
     }
 
     return (
-      <div className="explain-component">
+      <div className="explain-component owlTalk">
         <p className="explain-one">You are now the gaurdian of a tammabuddy!</p>
         <p className="explain-two">
           As a guardian, you are responsible for your buddy's health.
