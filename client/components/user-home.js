@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {compose} from 'redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
 import {fetchUserHistory, updateUser} from '../store/user'
+import {fetchResp} from '../store/owlResponse'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -219,7 +220,7 @@ export class UserHome extends React.Component {
       dailyPoints: 0,
       isHatched: false,
       sparkleMode: false,
-      toggleMessage: false,
+      owlResponse: "Hi I'm Owl. Click me!",
       completionModal: false,
       hatchedModal: false,
       tamabuddyName: ''
@@ -478,8 +479,10 @@ export class UserHome extends React.Component {
     }
   }
 
-  handleOwlClick = () => {
-    this.setState({toggleMessage: !this.state.toggleMessage})
+  handleOwlClick = async () => {
+    await this.props.getOwlResp()
+    this.setState({owlResponse: this.props.response.response})
+    console.log('PROPS', this.props)
   }
 
   handleClose() {
@@ -652,9 +655,7 @@ export class UserHome extends React.Component {
               <Lottie options={guideAnimation} height={75} width={75} />
             </Button>
             <Grid item xs={8}>
-              <Paper>
-                {this.state.toggleMessage ? owlMessage1 : owlMessage2}
-              </Paper>
+              <Paper>{this.state.owlResponse}</Paper>
             </Grid>
           </Grid>
           <div className="homeContainer">
@@ -682,7 +683,8 @@ const mapState = state => {
     userId: state.user.id,
     list: state.list.list,
     history: state.user.dailyprogresses,
-    user: state.user
+    user: state.user,
+    response: state.response.response
   }
 }
 
@@ -691,7 +693,8 @@ const mapDispatch = dispatch => {
     loadList: () => dispatch(fetchList()),
     updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
     getUserHistory: userId => dispatch(fetchUserHistory(userId)),
-    nameBuddy: (userId, data) => dispatch(updateUser(userId, data))
+    nameBuddy: (userId, data) => dispatch(updateUser(userId, data)),
+    getOwlResp: () => dispatch(fetchResp())
   }
 }
 
