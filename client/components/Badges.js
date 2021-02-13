@@ -273,7 +273,7 @@ class Badges extends React.Component {
             direction="column"
           >
             <Typography variant="h5" className={classes.title}>
-              Level 1 Badges
+              Tier 1 Badges
             </Typography>
           </Grid>
           <Grid item container justify="center" alignItems="flex-end">
@@ -595,7 +595,7 @@ class Badges extends React.Component {
           <Grid container justify="flex-end">
             <Link to="/badgestwo">
               <Button className={classes.button} onClick={this.continue}>
-                Level 2 Badges {'->'}
+                Tier 2 Badges {'->'}
               </Button>
             </Link>
           </Grid>
