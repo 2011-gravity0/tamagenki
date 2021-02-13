@@ -534,6 +534,167 @@ button {
   padding: 10px 10px;
 }
 
+/* media query for desktop */
+@media only screen and (min-width: 1024px) {
+  .find-egg-component {
+    border-radius: 40px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    background-image: url('/forestDesktop1.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component {
+    border-radius: 40px;
+    height: 85vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    background-image: url('/explainDesktop.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px rgb(205, 203, 203);
+  }
+
+  .explain-component p {
+    width: 50%;
+  }
+
+  #tamabuddyButton {
+    height: 135%;
+  }
+}
+
+/* media query for tablet */
+@media only screen and (max-width: 1024px) {
+  .find-egg-component {
+    border-radius: 40px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    background-image: url('/forestTablet.png');
+    background-repeat: no-repeat;
+    background-position: top;
+    margin: 5% 5% 0;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component {
+    border-radius: 40px;
+    height: 85vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    align-items: center;
+    background-image: url('/explainTablet.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  #tamabuddyButton {
+    height: 130%;
+  }
+}
+
+/* media query for larger than phone but small than tablet */
+@media only screen and (max-width: 600px) {
+  .find-egg-component {
+    border-radius: 40px;
+    height: 70vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    background-image: url('/forest650.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 0;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component {
+    border-radius: 40px;
+    height: 90vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    background-image: url('/explain650.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component p {
+    width: 100%;
+    font-size: medium;
+  }
+  #tamabuddyButton {
+    height: 100%;
+  }
+}
+
+/* media queary small screens like phones */
+@media only screen and (max-width: 400px) {
+  .find-egg-component {
+    border-radius: 40px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    background-image: url('/forestphone.png');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    margin: 5% 5% 0;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+  .explain-component {
+    border-radius: 40px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    background-image: url('/explainPhone.png');
+    background-position: top;
+    background-repeat: no-repeat;
+    margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px lightgrey;
+  }
+
+  .explain-component p {
+    font-size: small;
+  }
+  #tamabuddyButton {
+    height: 100%;
+  }
+}
+
+.typeWriter {
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+}
+
+.explain-component p {
+  background-color: rgba(200, 234, 239, 0.7);
+  border-radius: 2px;
+}
+
 .ChartContainer {
   height: 100vh;
   display: flex;
