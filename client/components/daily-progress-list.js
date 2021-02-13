@@ -46,7 +46,12 @@ export const DailyProgressList = props => {
         alignItems="center"
         spacing={2}
       >
-        <Grid container item className="listItemContainer">
+        <Grid
+          container
+          item
+          className="listItemContainer"
+          className={styles.grid}
+        >
           <Paper className={styles.paper}>
             <ListItem alignItems="center">
               <ListItemAvatar>
@@ -87,7 +92,12 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item className="listItemContainer">
+        <Grid
+          container
+          item
+          className="listItemContainer"
+          className={styles.grid}
+        >
           <Paper className={styles.paper}>
             <ListItem alignItems="center">
               <ListItemAvatar>
@@ -153,7 +163,12 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item className="listItemContainer">
+        <Grid
+          container
+          item
+          className="listItemContainer"
+          className={styles.grid}
+        >
           <Paper className={styles.paper}>
             <ListItem alignItems="center">
               <ListItemAvatar>
@@ -219,7 +234,12 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item className="listItemContainer">
+        <Grid
+          container
+          item
+          className="listItemContainer"
+          className={styles.grid}
+        >
           <Paper className={styles.paper}>
             <ListItem alignItems="center">
               <ListItemAvatar>
@@ -325,7 +345,12 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item className="listItemContainer">
+        <Grid
+          container
+          item
+          className="listItemContainer"
+          className={styles.grid}
+        >
           <Paper className={styles.paper}>
             <ListItem alignItems="center">
               <ListItemAvatar>
@@ -365,7 +390,12 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item className="listItemContainer">
+        <Grid
+          container
+          item
+          className="listItemContainer"
+          className={styles.grid}
+        >
           <Paper className={styles.paper}>
             <ListItem alignItems="center">
               <ListItemAvatar>
@@ -407,7 +437,12 @@ export const DailyProgressList = props => {
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item className="listItemContainer">
+        <Grid
+          container
+          item
+          className="listItemContainer"
+          className={styles.grid}
+        >
           <Paper className={styles.paper}>
             <ListItem alignItems="center">
               <ListItemAvatar>
@@ -453,10 +488,14 @@ export const DailyProgressList = props => {
 }
 
 const useStyles = makeStyles({
+  grid: {
+    paddingTop: 4,
+    paddingBottom: 4
+  },
   paper: {
     width: '100%',
     height: 58,
-    backgroundColor: '#EEF4EB'
+    backgroundColor: '#f0fae8'
   },
   uncheck: {
     borderRadius: 3,
@@ -491,6 +530,10 @@ const useStyles = makeStyles({
     }
   },
   infoButton: {
-    padding: 8
+    padding: 8,
+    color: '#9c9c9c'
   }
 })
+
+// e6ffff
+// e6ffff
