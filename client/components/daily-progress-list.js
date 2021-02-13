@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
 import InfoIcon from '@material-ui/icons/Info'
 import IconButton from '@material-ui/core/IconButton'
+import clsx from 'clsx'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Modal from '@material-ui/core/Modal'
@@ -34,6 +35,8 @@ export const DailyProgressList = props => {
     setModal({...openModal, [name]: false})
   }
 
+  const styles = useStyles()
+
   return (
     <List className="listContainer">
       <Grid
@@ -43,9 +46,9 @@ export const DailyProgressList = props => {
         alignItems="center"
         spacing={2}
       >
-        <Grid container item>
-          <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
-            <ListItem alignItems="flex-start">
+        <Grid container item className="listItemContainer">
+          <Paper className={styles.paper}>
+            <ListItem alignItems="center">
               <ListItemAvatar>
                 <Avatar src="https://img.icons8.com/plasticine/100/000000/sleeping-in-bed.png" />
               </ListItemAvatar>
@@ -59,6 +62,7 @@ export const DailyProgressList = props => {
               <ListItemText>
                 Good night sleep
                 <IconButton
+                  className={styles.infoButton}
                   onClick={e => {
                     handleOpen(e, 'sleep')
                   }}
@@ -68,19 +72,24 @@ export const DailyProgressList = props => {
               </ListItemText>
 
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.sleep > 0}
                 name="sleep"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item>
-          <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
-            <ListItem alignItems="flex-start">
+        <Grid container item className="listItemContainer">
+          <Paper className={styles.paper}>
+            <ListItem alignItems="center">
               <ListItemAvatar>
                 <Avatar src="https://img.icons8.com/color/48/000000/raspberry.png" />
               </ListItemAvatar>
@@ -94,6 +103,7 @@ export const DailyProgressList = props => {
               <ListItemText>
                 Fruits
                 <IconButton
+                  className={styles.infoButton}
                   onClick={e => {
                     handleOpen(e, 'fruit')
                   }}
@@ -102,35 +112,50 @@ export const DailyProgressList = props => {
                 </IconButton>
               </ListItemText>
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.fruit > 0}
                 name="fruit"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.fruit > 1}
                 name="fruit"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.fruit > 2}
                 name="fruit"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item>
-          <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
-            <ListItem alignItems="flex-start">
+        <Grid container item className="listItemContainer">
+          <Paper className={styles.paper}>
+            <ListItem alignItems="center">
               <ListItemAvatar>
                 <Avatar src="https://img.icons8.com/fluent/48/000000/group-of-vegetables.png" />
               </ListItemAvatar>
@@ -144,6 +169,7 @@ export const DailyProgressList = props => {
               <ListItemText>
                 Vegetables
                 <IconButton
+                  className={styles.infoButton}
                   onClick={e => {
                     handleOpen(e, 'veggies')
                   }}
@@ -152,35 +178,50 @@ export const DailyProgressList = props => {
                 </IconButton>
               </ListItemText>
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.vegetables > 0}
                 name="vegetables"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.vegetables > 1}
                 name="vegetables"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.vegetables > 2}
                 name="vegetables"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item>
-          <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
-            <ListItem alignItems="flex-start">
+        <Grid container item className="listItemContainer">
+          <Paper className={styles.paper}>
+            <ListItem alignItems="center">
               <ListItemAvatar>
                 <Avatar src="https://img.icons8.com/color/48/000000/water.png" />
               </ListItemAvatar>
@@ -194,6 +235,8 @@ export const DailyProgressList = props => {
               <ListItemText>
                 Water
                 <IconButton
+                  className={styles.infoButton}
+                  className={styles.infoButton}
                   onClick={e => {
                     handleOpen(e, 'water')
                   }}
@@ -202,59 +245,89 @@ export const DailyProgressList = props => {
                 </IconButton>
               </ListItemText>
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.water > 0}
                 name="water"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.water > 1}
                 name="water"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.water > 2}
                 name="water"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.water > 3}
                 name="water"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.water > 4}
                 name="water"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.water > 5}
                 name="water"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item>
-          <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
-            <ListItem alignItems="flex-start">
+        <Grid container item className="listItemContainer">
+          <Paper className={styles.paper}>
+            <ListItem alignItems="center">
               <ListItemAvatar>
                 <Avatar src="https://img.icons8.com/dusk/64/000000/exercise.png" />
               </ListItemAvatar>
@@ -268,6 +341,7 @@ export const DailyProgressList = props => {
               <ListItemText>
                 Exercise
                 <IconButton
+                  className={styles.infoButton}
                   onClick={e => {
                     handleOpen(e, 'exercise')
                   }}
@@ -276,19 +350,24 @@ export const DailyProgressList = props => {
                 </IconButton>
               </ListItemText>
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.exercise > 0}
                 name="exercise"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item>
-          <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
-            <ListItem alignItems="flex-start">
+        <Grid container item className="listItemContainer">
+          <Paper className={styles.paper}>
+            <ListItem alignItems="center">
               <ListItemAvatar>
                 <Avatar src="https://img.icons8.com/color/48/000000/relax-with-book.png" />
               </ListItemAvatar>
@@ -304,6 +383,7 @@ export const DailyProgressList = props => {
               <ListItemText>
                 No screen & Relax{' '}
                 <IconButton
+                  className={styles.infoButton}
                   onClick={e => {
                     handleOpen(e, 'relax')
                   }}
@@ -312,19 +392,24 @@ export const DailyProgressList = props => {
                 </IconButton>
               </ListItemText>
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.relaxation > 0}
                 name="relaxation"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
             </ListItem>
           </Paper>
         </Grid>
-        <Grid container item>
-          <Paper style={{backgroundColor: '#e6ffff', width: '100%'}}>
-            <ListItem alignItems="flex-start">
+        <Grid container item className="listItemContainer">
+          <Paper className={styles.paper}>
+            <ListItem alignItems="center">
               <ListItemAvatar>
                 <Avatar src="https://img.icons8.com/officel/80/000000/meditation-guru.png" />
               </ListItemAvatar>
@@ -338,6 +423,7 @@ export const DailyProgressList = props => {
               <ListItemText>
                 Meditation
                 <IconButton
+                  className={styles.infoButton}
                   onClick={e => {
                     handleOpen(e, 'meditate')
                   }}
@@ -346,11 +432,16 @@ export const DailyProgressList = props => {
                 </IconButton>
               </ListItemText>
               <Checkbox
+                className="checkBox"
                 onClick={event => {
                   handleCheck(event)
                 }}
                 checked={list.meditation > 0}
                 name="meditation"
+                checkedIcon={
+                  <span className={clsx(styles.uncheck, styles.checked)} />
+                }
+                icon={<span className={styles.uncheck} />}
                 inputProps={{'aria-label': 'primary checkbox'}}
               />
             </ListItem>
@@ -360,3 +451,46 @@ export const DailyProgressList = props => {
     </List>
   )
 }
+
+const useStyles = makeStyles({
+  paper: {
+    width: '100%',
+    height: 58,
+    backgroundColor: '#EEF4EB'
+  },
+  uncheck: {
+    borderRadius: 3,
+    width: 18,
+    height: 18,
+    boxShadow:
+      'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+    backgroundColor: '#fafafa',
+    backgroundImage:
+      'linear-gradient(180deg,hsla(0,0%,100%,.5),hsla(0,0%,100%,0))',
+
+    'input:hover ~ &': {
+      backgroundColor: '#ebf1f5'
+    }
+  },
+  checked: {
+    backgroundColor: '#f57822',
+    backgroundImage:
+      'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
+    '&:before': {
+      display: 'block',
+      width: 18,
+      height: 18,
+      backgroundImage:
+        "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath" +
+        " fill-rule='evenodd' clip-rule='evenodd' d='M12 5c-.28 0-.53.11-.71.29L7 9.59l-2.29-2.3a1.003 " +
+        "1.003 0 00-1.42 1.42l3 3c.18.18.43.29.71.29s.53-.11.71-.29l5-5A1.003 1.003 0 0012 5z' fill='%23fff'/%3E%3C/svg%3E\")",
+      content: '""'
+    },
+    'input:hover ~ &': {
+      backgroundColor: '#f57822'
+    }
+  },
+  infoButton: {
+    padding: 8
+  }
+})
