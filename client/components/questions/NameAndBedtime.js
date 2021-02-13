@@ -18,7 +18,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 
-export class NameAndBedtime extends Component {
+export default class NameAndBedtime extends Component {
   constructor() {
     super()
     this.state = {
@@ -31,7 +31,7 @@ export class NameAndBedtime extends Component {
   }
   // const classes = useStyles();
   render() {
-    const {values, theme, classes, handleChange} = this.props
+    const {values, handleChange} = this.props
     const owlOptions = {
       loop: true,
       autoplay: true,
@@ -88,28 +88,11 @@ export class NameAndBedtime extends Component {
               </Select>
             </FormControl>
           </div>
-          <Grid container justify="center">
-            <Button className={classes.button} onClick={this.continue}>
-              Continue
-            </Button>
+          <Grid container justify="center" className="questionButton">
+            <Button onClick={this.continue}>Continue</Button>
           </Grid>
         </div>
       </div>
     )
   }
 }
-
-export default withStyles(styles)(NameAndBedtime)
-
-const styles = theme => ({
-  // Load app bar information from the theme
-  root: {
-    width: 220
-  },
-  box: {
-    padding: 10
-  },
-  input: {
-    color: 'white'
-  }
-})

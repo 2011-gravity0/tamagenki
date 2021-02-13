@@ -314,7 +314,7 @@ button {
 }
 .questionContainer {
   width: 320px;
-  height: 400px;
+  /* height: 400px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -331,7 +331,7 @@ button {
 }
 
 .questionContainer .owlTalk {
-  color: rgb(56, 56, 56);
+  color: #d87d40;
   background-color: rgba(231, 249, 253, 0);
   text-align: center;
   margin: 0;
@@ -342,6 +342,11 @@ button {
 .questionHeader {
   position: relative;
   bottom: 50px;
+}
+
+.questionHeaderTwo {
+  position: relative;
+  bottom: 35px;
 }
 
 .nameBedtimeContainer {
@@ -359,6 +364,27 @@ button {
   margin: 0;
 }
 
+.questionButton {
+  position: relative;
+  bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.notificationContainer {
+  width: 220px;
+}
+
+.reminderAlign {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.notificationItem {
+  margin: 0 !important;
+}
+
+/*===== media query for whole guide components =====*/
 /* media query for tablet */
 @media only screen and (max-width: 1025px) {
   .find-egg-component {
@@ -390,8 +416,6 @@ button {
     margin: 20px 0;
   }
 }
-
-/*===== media query for whole guide components =====*/
 
 /* media query for larger than phone but small than tablet */
 @media only screen and (max-width: 600px) {
