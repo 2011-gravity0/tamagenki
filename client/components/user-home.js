@@ -273,6 +273,7 @@ export class UserHome extends React.Component {
     this.meditationCheck = this.meditationCheck.bind(this)
     this.relaxationCheck = this.relaxationCheck.bind(this)
     this.sleepCheck = this.sleepCheck.bind(this)
+
   }
 
   async setTotalPoints() {
@@ -647,6 +648,7 @@ export class UserHome extends React.Component {
     await this.props.updateList('tamacoin', true)
     this.setTamacoins()
   }
+
   handleClose() {
     this.setState({unlockBadgeModal: false, hatchedModal: false})
   }

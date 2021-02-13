@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -29,11 +30,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Navbar = ({handleLogout}) => {
+const Navbar = ({handleLogout}, props) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
-
   const handleMenu = event => {
     setAnchorEl(event.currentTarget)
   }
@@ -91,6 +91,11 @@ const Navbar = ({handleLogout}) => {
               <MenuItem className={classes.menu}>
                 <Link to="/setting" className={classes.menu}>
                   Setting
+                </Link>
+              </MenuItem>
+              <MenuItem className={classes.menu}>
+                <Link to="/history" className={classes.menu}>
+                  History
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleLogout} className={classes.menu}>
