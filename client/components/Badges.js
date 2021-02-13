@@ -90,7 +90,7 @@ class Badges extends React.Component {
 
   async setPoints() {
     try {
-      await this.props.getUserHistory(this.props.userId, 'pointsOnly')
+      await this.props.getUserHistory(this.props.userId)
       const totalWaterPoints = this.props.history.reduce((ttl, day) => {
         return ttl + day.water
       }, 0)
@@ -249,9 +249,11 @@ class Badges extends React.Component {
             justify="center"
             direction="column"
           >
-            <img src={modalImages[modal]} height="200" width="200" />
+            <Button onClick={this.handleClose}>
+              <img src={modalImages[modal]} height="200" width="200" />
 
-            <h2 className={classes.modalTitle}>{modalTitles[modal]}</h2>
+              <h2 className={classes.modalTitle}>{modalTitles[modal]}</h2>
+            </Button>
           </Grid>
           <p className={classes.ptext}>{modalMessages[modal]}</p>
           <p className={classes.ptext2}>{modalMessages2[modal]}</p>

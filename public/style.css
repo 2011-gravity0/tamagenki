@@ -517,7 +517,20 @@ button {
   text-align: center;
   font-size: 1.5rem;
 }
-
+/*===== USER HISTORY =====*/
+#historyavatar {
+  text-align: center;
+  margin-top: 5%;
+  padding: 10px 10px;
+}
+.avatar {
+  display: inline-flex;
+  padding: 5px 5px;
+  margin: 10px 10px;
+  border: whitesmoke outset;
+  height: 25px;
+  width: 25px;
+}
 .explain-one {
   animation-name: pone;
   animation-duration: 6s;

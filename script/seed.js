@@ -2,6 +2,8 @@
 
 const db = require('../server/db')
 const {User, DailyProgress, Response} = require('../server/db/models')
+const {User, DailyProgress, Level, Unlock} = require('../server/db/models')
+const levels = require('./levelSeedData')
 
 const users = [
   {
@@ -69,18 +71,6 @@ const users = [
     points: 116
   }
 ]
-
-//Cody has history dailyProgress data.
-const dataHistory = {
-  exercise: 1,
-  fruit: 2,
-  vegetables: 1,
-  water: 5,
-  meditation: 0,
-  sleep: 1,
-  relaxtion: 2,
-  isToday: false
-}
 
 // 7 dailyProgresses for Ed to unlock all badges
 
@@ -163,10 +153,11 @@ async function seed() {
       return User.create(user)
     })
   )
-
-  const cody = await User.findOne({where: {email: 'cody@email.com'}})
-  const history = await DailyProgress.create(dataHistory)
-  await history.setUser(cody)
+  await Promise.all(
+    levels.map(level => {
+      return Level.create(level)
+    })
+  )
 
   const ed = await User.findOne({where: {email: 'ed@email.com'}})
   const mondayHistory = await DailyProgress.create(monday)

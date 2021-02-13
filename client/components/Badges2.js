@@ -246,9 +246,11 @@ class BadgesTwo extends React.Component {
             justify="center"
             direction="column"
           >
-            <img src={modalImages[modal]} height="200" width="200" />
+            <Button onClick={this.handleClose}>
+              <img src={modalImages[modal]} height="200" width="200" />
 
-            <h2 className={classes.modalTitle}>{modalTitles[modal]}</h2>
+              <h2 className={classes.modalTitle}>{modalTitles[modal]}</h2>
+            </Button>
           </Grid>
           <p className={classes.ptext}>{modalMessages[modal]}</p>
           <p className={classes.ptext2}>{modalMessages2[modal]}</p>

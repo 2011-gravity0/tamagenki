@@ -21,8 +21,6 @@ const BorderLinearProgress = withStyles(theme => ({
 export const ProgressBar = props => {
   let dailyPoints = props.dailyPoints || 0
 
-  console.log('daily points', dailyPoints)
-
   return (
     <Grid container>
       <Grid item style={{width: '12em'}}>
