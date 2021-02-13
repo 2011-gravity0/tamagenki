@@ -42,8 +42,8 @@ const guideAnimation = {
   autoplay: true,
   animationData: owlData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 
 /**
@@ -54,109 +54,109 @@ const eggWiggleAnimation = {
   autoplay: true,
   animationData: eggWiggleData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const eggHatchAnimation = {
   loop: true,
   autoplay: true,
   animationData: eggHatchData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const carrotAnimation = {
   loop: true,
   autoplay: true,
   animationData: carrotData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const exerciseAnimation = {
   loop: true,
   autoplay: true,
   animationData: exerciseData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const appleAnimation = {
   loop: true,
   autoplay: true,
   animationData: appleData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const idleAnimation = {
   loop: true,
   autoplay: true,
   animationData: idleData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const joyAnimation = {
   loop: true,
   autoplay: true,
   animationData: joyData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const jumpAnimation = {
   loop: true,
   autoplay: true,
   animationData: jumpData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const meditateAnimation = {
   loop: true,
   autoplay: true,
   animationData: meditateData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const sparkleAnimation = {
   loop: true,
   autoplay: true,
   animationData: sparkleData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const waveAnimation = {
   loop: true,
   autoplay: true,
   animationData: waveData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const waterAnimation = {
   loop: true,
   autoplay: true,
   animationData: waterData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 const tamacoinAnimation = {
   loop: true,
   autoplay: true,
   animationData: tamacoinData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
+    preserveAspectRatio: 'xMidYMid slice'
+  }
 }
 
-const styles = (theme) => ({
+const styles = theme => ({
   button: {
-    paddingBottom: 0,
+    paddingBottom: 0
   },
   modalTitle: {
     fontFamily: 'Fredoka One',
@@ -164,7 +164,7 @@ const styles = (theme) => ({
     fontSize: '1.7em',
     marginBottom: 0,
     marginTop: 0,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   hatchedModalTitle: {
     fontFamily: 'Fredoka One',
@@ -172,7 +172,7 @@ const styles = (theme) => ({
     fontSize: '1.7em',
     marginBottom: 0,
     marginTop: 0,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   paper: {
     position: 'absolute',
@@ -180,7 +180,7 @@ const styles = (theme) => ({
     backgroundColor: 'transparent',
     border: 'none',
     borderRadius: 5,
-    padding: '1 em',
+    padding: '1 em'
   },
   hatchedPaper: {
     position: 'absolute',
@@ -188,7 +188,7 @@ const styles = (theme) => ({
     backgroundColor: 'rgba(225,255,255,.7)',
     border: 'none',
     borderRadius: 5,
-    padding: '1 em',
+    padding: '1 em'
   },
   ptext2: {
     padding: '1.5 em',
@@ -199,7 +199,7 @@ const styles = (theme) => ({
     color: '#fff',
     fontFamily: 'Helvetica',
     fontSize: '1.4em',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   modalP: {
     margin: 0,
@@ -207,20 +207,20 @@ const styles = (theme) => ({
     // backgroundColor: '#7FBAC5',
     padding: 5,
     paddingTop: 3,
-    paddingBottom: 3,
+    paddingBottom: 3
   },
   levelCard: {
     margin: 8,
     padding: 5,
     backgroundColor: '#ECFFE6',
     borderRadius: 5,
-    border: 'none',
+    border: 'none'
   },
   inline: {
     float: 'left',
     display: 'inline',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 })
 /**
  * COMPONENT
@@ -250,7 +250,7 @@ export class UserHome extends React.Component {
       unlockBadgeModal: false,
       currentAnimation: 0,
       tamabuddyName: '',
-      tamacoins: 0,
+      tamacoins: 0
     }
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
@@ -281,7 +281,7 @@ export class UserHome extends React.Component {
       console.log('user history', this.props.history)
       const totalHistoryPoints = this.props.history.reduce((ttl, day) => {
         const subTotal = Object.values(day)
-          .filter((element) => typeof element === 'number')
+          .filter(element => typeof element === 'number')
           .reduce((subTtl, point) => {
             return subTtl + point
           }, 0)
@@ -289,19 +289,19 @@ export class UserHome extends React.Component {
       }, 0)
 
       let water = 0
-      this.props.history.map((day) => (water += day.water))
+      this.props.history.map(day => (water += day.water))
       let exercise = 0
-      this.props.history.map((day) => (exercise += day.exercise))
+      this.props.history.map(day => (exercise += day.exercise))
       let fruit = 0
-      this.props.history.map((day) => (fruit += day.fruit))
+      this.props.history.map(day => (fruit += day.fruit))
       let vegetables = 0
-      this.props.history.map((day) => (vegetables += day.vegetables))
+      this.props.history.map(day => (vegetables += day.vegetables))
       let sleep = 0
-      this.props.history.map((day) => (sleep += day.sleep))
+      this.props.history.map(day => (sleep += day.sleep))
       let relaxation = 0
-      this.props.history.map((day) => (relaxation += day.relaxation))
+      this.props.history.map(day => (relaxation += day.relaxation))
       let meditation = 0
-      this.props.history.map((day) => (meditation += day.meditation))
+      this.props.history.map(day => (meditation += day.meditation))
 
       this.setState({
         totalPoints: totalHistoryPoints,
@@ -311,7 +311,7 @@ export class UserHome extends React.Component {
         vegetables,
         sleep,
         relaxation,
-        meditation,
+        meditation
       })
       console.log('water points', this.state.water)
     } catch (error) {
@@ -324,7 +324,7 @@ export class UserHome extends React.Component {
       let list = Object.values(this.props.list)
       if (list.length === 8) {
         let dailyPoints = list
-          .filter((el) => typeof el === 'number')
+          .filter(el => typeof el === 'number')
           .reduce((acc, curr) => {
             return acc + curr
           }, 0)
@@ -344,7 +344,7 @@ export class UserHome extends React.Component {
     try {
       await this.props.getUserHistory(this.props.userId)
       const totalTamacoins = this.props.history.filter(
-        (day) => day.tamacoin === true
+        day => day.tamacoin === true
       )
       this.setState({tamacoins: totalTamacoins.length})
     } catch (error) {}
@@ -367,9 +367,9 @@ export class UserHome extends React.Component {
       this.setState({
         currentAnimation: setTimeout(() => {
           this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation,
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
           })
-        }, 3000),
+        }, 3000)
       })
     }
     if (
@@ -384,9 +384,9 @@ export class UserHome extends React.Component {
       this.setState({
         currentAnimation: setTimeout(() => {
           this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation,
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
           })
-        }, 3000),
+        }, 3000)
       })
     }
     if (
@@ -398,15 +398,15 @@ export class UserHome extends React.Component {
       this.waterCheck()
       this.setState({
         lottie: waterAnimation,
-        water: this.state.water + 1,
+        water: this.state.water + 1
       })
       clearTimeout(this.state.currentAnimation)
       this.setState({
         currentAnimation: setTimeout(() => {
           this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation,
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
           })
-        }, 3000),
+        }, 3000)
       })
     }
     if (
@@ -421,9 +421,9 @@ export class UserHome extends React.Component {
       this.setState({
         currentAnimation: setTimeout(() => {
           this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation,
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
           })
-        }, 3000),
+        }, 3000)
       })
     }
     if (
@@ -438,9 +438,9 @@ export class UserHome extends React.Component {
       this.setState({
         currentAnimation: setTimeout(() => {
           this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation,
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
           })
-        }, 3000),
+        }, 3000)
       })
     }
     if (
@@ -460,9 +460,9 @@ export class UserHome extends React.Component {
       this.setState({
         currentAnimation: setTimeout(() => {
           this.setState({
-            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation,
+            lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
           })
-        }, 3000),
+        }, 3000)
       })
     }
   }
@@ -478,7 +478,7 @@ export class UserHome extends React.Component {
         this.setState({
           lottie: idleAnimation,
           isHatched: true,
-          hatchedModal: true,
+          hatchedModal: true
         })
       }, 16000)
     }
@@ -495,7 +495,7 @@ export class UserHome extends React.Component {
     ) {
       this.setState({
         lottie: idleAnimation,
-        sparkleMode: false,
+        sparkleMode: false
       })
     }
     if (
@@ -506,7 +506,7 @@ export class UserHome extends React.Component {
       this.setState({
         lottie: eggWiggleAnimation,
         sparkleMode: false,
-        isHatched: false,
+        isHatched: false
       })
     }
   }
@@ -586,7 +586,7 @@ export class UserHome extends React.Component {
         this.setState({
           lottie: sparkleAnimation,
           isHatched: true,
-          sparkleMode: true,
+          sparkleMode: true
         })
       }
       if (this.state.totalPoints >= 3 && this.state.dailyPoints < 5) {
@@ -628,7 +628,7 @@ export class UserHome extends React.Component {
       this.setState({lottie: waveAnimation})
       setTimeout(() => {
         this.setState({
-          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation,
+          lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
         })
       }, 1900)
     }
@@ -671,7 +671,7 @@ export class UserHome extends React.Component {
       vegetables: 'Vitamin Badge',
       sleep: 'Dream Badge',
       relaxation: 'Self Care Badge',
-      sparkle: 'Glimmer Badge',
+      sparkle: 'Glimmer Badge'
     }
 
     const modalImages = {
@@ -682,7 +682,7 @@ export class UserHome extends React.Component {
       vegetables: '/badges/veg.svg',
       sleep: '/badges/sleep.svg',
       relaxation: '/badges/relaxation.svg',
-      sparkle: '/badges/sparkle.svg',
+      sparkle: '/badges/sparkle.svg'
     }
 
     const body = (
@@ -693,7 +693,7 @@ export class UserHome extends React.Component {
             left: `${45}%`,
             transform: `translate(-${50}%, -${50}%)`,
             margin: '1.5em',
-            padding: '1em',
+            padding: '1em'
           }}
           className={classes.paper}
         >
@@ -734,7 +734,7 @@ export class UserHome extends React.Component {
                     left: `${45}%`,
                     transform: `translate(-${50}%, -${50}%)`,
                     margin: '1.5em',
-                    padding: '1em',
+                    padding: '1em'
                   }}
                   className={classes.paper}
                 >
@@ -754,7 +754,7 @@ export class UserHome extends React.Component {
                         backgroundColor: '#7FBAC5',
                         padding: 5,
                         paddingTop: 3,
-                        paddingBottom: 3,
+                        paddingBottom: 3
                       }}
                     >
                       {this.props.user.petName}'s progress bar has reached 100%.
@@ -768,7 +768,7 @@ export class UserHome extends React.Component {
                         padding: 5,
                         paddingTop: 3,
                         paddingBottom: 3,
-                        marginTop: 2,
+                        marginTop: 2
                       }}
                     >
                       {' '}
@@ -793,7 +793,7 @@ export class UserHome extends React.Component {
                     left: `${45}%`,
                     transform: `translate(-${50}%, -${50}%)`,
                     margin: '1.5em',
-                    padding: '1em',
+                    padding: '1em'
                   }}
                   className={classes.hatchedPaper}
                 >
@@ -912,7 +912,7 @@ export class UserHome extends React.Component {
                 display:
                   this.state.completionModal || this.state.hatchedModal
                     ? 'none'
-                    : '',
+                    : ''
               }}
               disableRipple={true}
             >
@@ -943,22 +943,22 @@ export class UserHome extends React.Component {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = state => {
   return {
     email: state.user.email,
     userId: state.user.id,
     list: state.list.list,
     history: state.user.dailyprogresses,
-    user: state.user,
+    user: state.user
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
     loadList: () => dispatch(fetchList()),
     updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
-    getUserHistory: (userId) => dispatch(fetchUserHistory(userId)),
-    nameBuddy: (userId, data) => dispatch(updateUser(userId, data)),
+    getUserHistory: userId => dispatch(fetchUserHistory(userId)),
+    nameBuddy: (userId, data) => dispatch(updateUser(userId, data))
   }
 }
 
@@ -970,5 +970,5 @@ export default compose(
  * PROP TYPES
  */
 UserHome.propTypes = {
-  email: PropTypes.string,
+  email: PropTypes.string
 }
