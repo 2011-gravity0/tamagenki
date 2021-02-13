@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
+const {User, DailyProgress, Response} = require('../server/db/models')
 const {User, DailyProgress, Level, Unlock} = require('../server/db/models')
 const levels = require('./levelSeedData')
 
@@ -173,6 +174,61 @@ async function seed() {
   await fridayHistory.setUser(ed)
   await saturdayHistory.setUser(ed)
   await sundayHistory.setUser(ed)
+
+  await Response.bulkCreate([
+    {
+      response:
+        'In a normal sleep period, a person experiences four to six sleep cycles.'
+    },
+    {response: 'On average, we spend about two hours per night dreaming.'},
+    {
+      response:
+        'Mindfulness meditation increases positive affect and decreases anxiety and negative affect.'
+    },
+    {response: 'Meditation almost certainly does sharpen your attention.'},
+    {
+      response:
+        'Meditation appears to increase compassion. It also makes our compassion more effective.'
+    },
+    {
+      response:
+        'Studies have shown that regular practice of yoga reduces inflammation. A Namaste keeps the doctor away!'
+    },
+    {response: 'Be kind to your wandering mind.'},
+    {
+      response:
+        'Getting things off your mind by writing them down may help you relax.'
+    },
+    {
+      response:
+        'Making a list about what you’re grateful for can help some people feel relaxed.'
+    },
+    {
+      response:
+        'Spending just a few minutes in nature when you feel stressed may help you relax.'
+    },
+    {response: 'Take a break right now and have a glass of water.'},
+    {
+      response:
+        'Long-term dehydration can reduce the joints’ shock-absorbing ability, leading to joint pain.'
+    },
+    {
+      response:
+        'Water helps dissolve minerals and nutrients, making them more accessible to the body.'
+    },
+    {
+      response:
+        'Most of the nutrients in a potato reside just below the skin layer.'
+    },
+    {
+      response:
+        'White potatoes were first cultivated by local Indians in the Andes Mountains of South America.'
+    },
+    {
+      response:
+        'If you suffer from heartburn, try eating a banana for soothing relief.'
+    }
+  ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)

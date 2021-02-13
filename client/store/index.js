@@ -4,11 +4,14 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import dailyProgress from './dailyProgress'
+import owlResponse from './owlResponse'
 import unlock from './unlock'
+
 
 const reducer = combineReducers({
   user,
   list: dailyProgress,
+  response: owlResponse,
   feed: unlock
 })
 const middleware = composeWithDevTools(

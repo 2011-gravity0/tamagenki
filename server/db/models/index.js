@@ -1,8 +1,7 @@
 const User = require('./user')
 const DailyProgress = require('./dailyprogress')
 const Subscription = require('./subscription')
-
-
+const Response = require('./owl')
 const Level = require('./level')
 const Unlock = require('./unlock')
 
@@ -39,6 +38,7 @@ module.exports = {
   User,
   DailyProgress,
   Subscription,
+  Response,
   Level,
   Unlock
 }
