@@ -5,6 +5,7 @@ router.use('/user', require('./user'))
 router.use('/dailyprogress', require('./dailyprogress'))
 router.use('/subscription', require('./subscription'))
 router.use('/push', require('./push'))
+router.use('/response', require('./owlResponse'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
