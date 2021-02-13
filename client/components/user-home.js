@@ -313,7 +313,6 @@ export class UserHome extends React.Component {
         relaxation,
         meditation
       })
-      console.log('water points', this.state.water)
     } catch (error) {
       console.log(error)
     }
@@ -347,11 +346,16 @@ export class UserHome extends React.Component {
         day => day.tamacoin === true
       )
       this.setState({tamacoins: totalTamacoins.length})
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  // getUserLevel() {
-
+  // levelUp() {
+  //   try {
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
   // }
 
   checkWhichBox(event) {
@@ -649,6 +653,7 @@ export class UserHome extends React.Component {
 
   nameSubmit() {
     this.props.nameBuddy(this.props.userId, {petName: this.state.tamabuddyName})
+    this.setState({hatchedModal: false})
   }
 
   handleChange() {
@@ -889,13 +894,28 @@ export class UserHome extends React.Component {
                 </Box>
 
                 <div className="animation">
+                  <div id="tamabuddyButton">
+                    <Button
+                      onClick={this.handleClick}
+                      style={{backgroundColor: 'transparent', height: '100%'}}
+                      disableRipple={true}
+                      className={classes.button}
+                    >
+                      <Lottie options={lottie} height={300} width={300} />
+                    </Button>
+                  </div>
                   <Button
-                    onClick={this.handleClick}
-                    style={{backgroundColor: 'transparent'}}
+                    onClick={this.handleOwlClick}
+                    style={{
+                      backgroundColor: 'transparent',
+                      display:
+                        this.state.completionModal || this.state.hatchedModal
+                          ? 'none'
+                          : ''
+                    }}
                     disableRipple={true}
-                    className={classes.button}
                   >
-                    <Lottie options={lottie} height={300} width={300} />
+                    <Lottie options={guideAnimation} height={75} width={75} />
                   </Button>
                 </div>
               </div>
