@@ -33,6 +33,7 @@ import waveData from '../../public/lotties/tamabuddyWave.json'
 import waterData from '../../public/lotties/tamabuddyWater.json'
 import owlData from '../../public/lotties/owl.json'
 import tamacoinData from '../../public/lotties/tamacoin.json'
+import boomboxData from '../../public/lotties/boombox.json'
 
 /**
  * OWL LOTTIE
@@ -149,6 +150,14 @@ const tamacoinAnimation = {
   loop: true,
   autoplay: true,
   animationData: tamacoinData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+}
+const boomboxAnimation = {
+  loop: true,
+  autoplay: true,
+  animationData: boomboxData,
   rendererSettings: {
     preserveAspectRatio: 'xMidYMid slice'
   }
@@ -330,10 +339,6 @@ export class UserHome extends React.Component {
         this.setState({dailyPoints: dailyPoints})
         await this.props.loadList()
       }
-      console.log(
-        'setDailyPoints user home daily points',
-        this.state.dailyPoints
-      )
     } catch (error) {
       console.error(error)
     }
@@ -351,14 +356,45 @@ export class UserHome extends React.Component {
     }
   }
 
-  // levelUp() {
-  //   try {
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  async levelUpCheck() {
+    if (this.state.totalPoints >= 3 && this.state.totalPoints < 10) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 1
+      })
+    }
+    if (this.state.totalPoints >= 10 && this.state.totalPoints < 15) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 2
+      })
+    }
+    if (this.state.totalPoints >= 15 && this.state.totalPoints < 100) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 3
+      })
+    }
+    if (this.state.totalPoints >= 100 && this.state.totalPoints < 150) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 4
+      })
+    }
+    if (this.state.totalPoints >= 150 && this.state.totalPoints < 200) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 5
+      })
+    }
+    if (this.state.totalPoints >= 200 && this.state.totalPoints < 260) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 6
+      })
+    }
+    if (this.state.totalPoints >= 260 && this.state.totalPoints < 300) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 6
+      })
+    }
+  }
 
-  checkWhichBox(event) {
+  async checkWhichBox(event) {
     if (
       event.target.name === 'fruit' &&
       event.target.checked === true &&
@@ -375,6 +411,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       event.target.name === 'vegetables' &&
@@ -392,6 +429,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       event.target.name === 'water' &&
@@ -412,6 +450,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       event.target.name === 'exercise' &&
@@ -429,6 +468,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       event.target.name === 'meditation' &&
@@ -446,6 +486,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       (event.target.name === 'relaxation' || event.target.name === 'sleep') &&
@@ -468,6 +509,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
   }
 
@@ -585,6 +627,7 @@ export class UserHome extends React.Component {
       await this.setTotalPoints()
       await this.setDailyPoints()
       await this.setTamacoins()
+      await this.levelUpCheck()
 
       if (this.state.dailyPoints >= 3) {
         this.setState({
@@ -870,7 +913,7 @@ export class UserHome extends React.Component {
                         style={{fontFamily: 'Fredoka One', color: '#162C38'}}
                         className={classes.inline}
                       >
-                        LEVEL: {this.state.tamacoins}{' '}
+                        LEVEL: {this.props.user.level}{' '}
                       </span>
                       {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
                     </Grid>
@@ -901,7 +944,7 @@ export class UserHome extends React.Component {
                       disableRipple={true}
                       className={classes.button}
                     >
-                      <Lottie options={lottie} height={300} width={300} />
+                      <Lottie options={lottie} height={270} width={270} />
                     </Button>
                   </div>
                   <Button
@@ -911,11 +954,12 @@ export class UserHome extends React.Component {
                       display:
                         this.state.completionModal || this.state.hatchedModal
                           ? 'none'
-                          : ''
+                          : '',
+                      padding: 0
                     }}
                     disableRipple={true}
                   >
-                    <Lottie options={guideAnimation} height={75} width={75} />
+                    <Lottie options={boomboxAnimation} height={90} width={90} />
                   </Button>
                 </div>
               </div>
