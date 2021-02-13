@@ -43,7 +43,8 @@ router.get('/history/:userId', async (req, res, next) => {
             'meditation',
             'sleep',
             'relaxation',
-            'date'
+            'date',
+            'tamacoin'
           ]
         }
       ]

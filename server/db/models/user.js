@@ -54,11 +54,11 @@ const User = db.define('user', {
   },
   petName: {
     type: Sequelize.STRING
+  },
+  level: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
-  // points: {
-  //   type: Sequelize.INTEGER,
-  //   defaultValue: 0
-  // }
 })
 
 module.exports = User

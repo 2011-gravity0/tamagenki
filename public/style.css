@@ -375,6 +375,10 @@ button {
   .explain-component p {
     width: 50%;
   }
+
+  #tamabuddyButton {
+    height: 135%;
+  }
 }
 
 /* media query for tablet */
@@ -406,6 +410,9 @@ button {
     background-position: bottom;
     margin: 5% 5% 5%;
     box-shadow: 5px 5px 5px lightgrey;
+  }
+  #tamabuddyButton {
+    height: 130%;
   }
 }
 
@@ -443,6 +450,9 @@ button {
     width: 100%;
     font-size: medium;
   }
+  #tamabuddyButton {
+    height: 100%;
+  }
 }
 
 /* media queary small screens like phones */
@@ -476,6 +486,9 @@ button {
 
   .explain-component p {
     font-size: small;
+  }
+  #tamabuddyButton {
+    height: 100%;
   }
 }
 
