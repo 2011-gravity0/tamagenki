@@ -2,6 +2,7 @@ body {
   font-family: sans-serif;
   background-color: FFF8ED;
   height: 100vh;
+  width: 100vw;
   margin: 0;
 }
 
@@ -142,37 +143,55 @@ button {
 
 /*===== Owl Guidance =====*/
 
+.find-egg-component {
+  border-radius: 40px;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-image: url('/forestDesktop1.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding: 20px;
+  margin: 5% 5% 5%;
+  box-shadow: 5px 5px 5px lightgrey;
+}
+
 .owlTalk {
   font-family: 'Marmelad', sans-serif;
+  position: relative;
+  top: 50%;
   font-size: 1.2rem;
   line-height: 25px;
-  padding: 2px 10px;
-  margin: 20px;
-  background-color: rgba(200, 231, 239, 0.6);
+  padding: 4px 10px;
+  background-color: rgba(200, 231, 239, 0.65);
+}
+
+.promptContainer {
+  flex-basis: 35%;
+  text-align: center;
+  margin: auto auto;
+  /* justify-content: center; */
+}
+
+.eggContainer {
+  flex-basis: 10%;
+}
+
+.guideButton {
+  flex-basis: 12%;
 }
 
 /* media query for desktop */
 @media only screen and (min-width: 1024px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forestDesktop1.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
   .explain-component {
     border-radius: 40px;
     height: 85vh;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     align-items: center;
     text-align: center;
     background-image: url('/explainDesktop.png');
@@ -188,19 +207,20 @@ button {
 }
 
 /* media query for tablet */
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1025px) {
   .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
+    border-radius: 0px;
+    height: 99vh;
+    /* display: flex; */
     flex-direction: column;
     justify-content: flex-start;
     text-align: center;
     background-image: url('/forestTablet.png');
     background-repeat: no-repeat;
-    background-position: top;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
+    background-position: bottom;
+    margin: 0;
+    /* margin: 5% 5% 0;
+    box-shadow: 5px 5px 5px lightgrey; */
   }
   .explain-component {
     border-radius: 40px;
@@ -214,31 +234,31 @@ button {
     background-image: url('/explainTablet.png');
     background-repeat: no-repeat;
     background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
+    /* margin: 5% 5% 5%;
+    box-shadow: 5px 5px 5px lightgrey; */
   }
 }
 
 /* media query for larger than phone but small than tablet */
 @media only screen and (max-width: 600px) {
   .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
+    border-radius: 0px;
+    height: 95vh;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+    justify-content: flex-start;
     text-align: center;
-    background-image: url('/forest650.png');
+    background-image: url('/forestTablet.png');
     background-repeat: no-repeat;
     background-position: bottom;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
+    margin: 0;
+    /* box-shadow: 5px 5px 5px lightgrey;  */
   }
   .explain-component {
     border-radius: 40px;
     height: 90vh;
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: flex-end;
@@ -258,17 +278,17 @@ button {
 /* media queary small screens like phones */
 @media only screen and (max-width: 400px) {
   .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
+    border-radius: 0px;
+    height: 95vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
     text-align: center;
-    background-image: url('/forestphone.png');
+    background-image: url('/forestTablet.png');
     background-position: bottom;
     background-repeat: no-repeat;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
+    margin: 0;
+    /* box-shadow: 5px 5px 5px lightgrey; */
   }
   .explain-component {
     border-radius: 40px;
