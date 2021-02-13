@@ -274,7 +274,6 @@ export class UserHome extends React.Component {
     this.meditationCheck = this.meditationCheck.bind(this)
     this.relaxationCheck = this.relaxationCheck.bind(this)
     this.sleepCheck = this.sleepCheck.bind(this)
-
   }
 
   async setTotalPoints() {
@@ -909,7 +908,7 @@ export class UserHome extends React.Component {
                       <Lottie options={lottie} height={300} width={300} />
                     </Button>
                   </div>
-                  <Button
+                  {/* <Button
                     onClick={this.handleOwlClick}
                     style={{
                       backgroundColor: 'transparent',
@@ -921,7 +920,7 @@ export class UserHome extends React.Component {
                     disableRipple={true}
                   >
                     <Lottie options={guideAnimation} height={75} width={75} />
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
             </Grid>
