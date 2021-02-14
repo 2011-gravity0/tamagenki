@@ -3,11 +3,9 @@ import React, {Component} from 'react'
 import {withStyles} from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Toolbar from '@material-ui/core/Toolbar'
-import Card from '@material-ui/core/Card'
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup'
@@ -53,7 +51,7 @@ export class Reminders extends Component {
   }
 
   render() {
-    const {values, theme, classes, handleChange} = this.props
+    const {classes, handleChange} = this.props
     const owlOptions = {
       loop: true,
       autoplay: true,
