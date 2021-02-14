@@ -1,6 +1,5 @@
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import Avatar from '@material-ui/core/Avatar'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -11,7 +10,6 @@ import clsx from 'clsx'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Modal from '@material-ui/core/Modal'
-import {makeStyles} from '@material-ui/core/styles'
 import React, {useState} from 'react'
 
 export const DailyProgressList = props => {

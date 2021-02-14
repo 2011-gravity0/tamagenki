@@ -11,7 +11,7 @@ router.post('/:userId', async (req, res, next) => {
     const user = await User.findByPk(userId)
 
     if (user) {
-      const [subscription, create] = await Subscription.findOrCreate({
+      const [subscription] = await Subscription.findOrCreate({
         where: {
           endpoint: data.endpoint,
           keys: subKeys

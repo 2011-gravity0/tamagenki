@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import history from '../history'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import eggPeek from '../../public/lotties/eggPeek.json'
+import Lottie from 'react-lottie'
 import {TextField, Button, Typography} from '@material-ui/core'
 
 /**
@@ -50,11 +52,21 @@ const AuthForm = props => {
       console.log(error)
     }
   }
+
+  const eggPeekOption = {
+    loop: true,
+    autoplay: true,
+    animationData: eggPeek,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
   return (
     <div className="viewContainer">
       <div className="loginContainer">
         <h1>Tamagenki</h1>
-        <img className="loginEgg" src="/eggHatch.gif" />
+        <img className="loginEgg" src="/images/egg.png" />
+        {/* <Lottie options={eggPeekOption} height={150} width={150} /> */}
         <form className="login-form" onSubmit={handleSubmit} name={name}>
           <TextField
             required
