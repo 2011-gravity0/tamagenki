@@ -10,22 +10,6 @@ import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import Lottie from 'react-lottie'
 import animationData from '../../../public/lotties/eggWiggle.json'
-
-const styles = theme => ({
-  // Load app bar information from the theme
-  toolbar: theme.mixins.toolbar,
-  root: {
-    marginTop: 50,
-    marginBottom: 15,
-    padding: 20
-  },
-  button: {
-    margin: 20,
-    padding: 5,
-    backgroundColor: '#C9E3BE'
-  }
-})
-
 export class Success extends Component {
   constructor(props) {
     super(props)
@@ -52,47 +36,40 @@ export class Success extends Component {
     }
 
     const {values, theme, classes, handleChange} = this.props
-    console.log('props in success', this.props)
     return (
-      <React.Fragment>
-        <AppBar margin="5em" style={{background: '#FFB0AD'}}>
-          <Grid container justify="center">
-            <h1 style={{fontFamily: 'Fredoka One'}}>Tamagenki</h1>
-          </Grid>
-        </AppBar>
-        <Paper>
-          <div className={classes.toolbar} />
-        </Paper>
-        <Box m={1}>
-          <Grid container justify="center">
-            <h1 className="questionHeader">Great! Let's Get Started!</h1>
-          </Grid>
-        </Box>
+      <div className="explain-component">
         <Grid container column="true" justify="center">
-          {/* this is the dumpling animation. Lottie elements aren't clickable so I had to wrap the whole thing in a Button */}
-          <Grid item container justify="center">
-            <Button
-              onClick={this.handleClick}
-              style={{backgroundColor: 'transparent'}}
-              disableRipple={true}
-            >
-              <Lottie options={defaultOptions} height={300} width={300} />
-            </Button>
-          </Grid>
-          <Grid item container justify="center">
-            <h1 className="questionHeader">
-              Are you ready to start your Tamagenki journey?
-            </h1>
-          </Grid>
+          <div>
+            <h1>Great! You are all set!</h1>
+            <h1>Are you ready to start your Tamagenki journey?</h1>
+          </div>
+          <div className="eggContainer">
+            <Lottie options={defaultOptions} height={200} width={200} />
+          </div>
           <Grid item container justify="center">
             <Button className={classes.button} component={Link} to="guidePet">
               yes
             </Button>
           </Grid>
         </Grid>
-      </React.Fragment>
+      </div>
     )
   }
 }
 
 export default withStyles(styles)(Success)
+
+const styles = theme => ({
+  // Load app bar information from the theme
+  toolbar: theme.mixins.toolbar,
+  root: {
+    marginTop: 50,
+    marginBottom: 15,
+    padding: 20
+  },
+  button: {
+    margin: 20,
+    padding: 5,
+    backgroundColor: '#C9E3BE'
+  }
+})

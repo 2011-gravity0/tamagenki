@@ -208,7 +208,7 @@ button {
 /* Guide component text effect */
 .explain-one {
   animation-name: pone;
-  animation-duration: 6s;
+  animation-duration: 5s;
 }
 
 @keyframes pone {
@@ -222,7 +222,7 @@ button {
 
 .explain-two {
   animation-name: ptwo;
-  animation-duration: 6s;
+  animation-duration: 5s;
 }
 
 @keyframes ptwo {
@@ -236,56 +236,56 @@ button {
 
 .explain-three {
   animation-name: pthree;
-  animation-duration: 6s;
+  animation-duration: 5s;
 }
 
 @keyframes pthree {
   0% {
     opacity: 0.01;
   }
-  48% {
+  46% {
     opacity: 100;
   }
 }
 
 .explain-four {
   animation-name: pfour;
-  animation-duration: 6s;
+  animation-duration: 5s;
 }
 
 @keyframes pfour {
   0% {
     opacity: 0.01;
   }
-  64% {
+  62% {
     opacity: 100;
   }
 }
 
 .explain-five {
   animation-name: pfive;
-  animation-duration: 6s;
+  animation-duration: 5s;
 }
 
 @keyframes pfive {
   0% {
     opacity: 0.01;
   }
-  80% {
+  78% {
     opacity: 100;
   }
 }
 
 .explain-six {
   animation-name: psix;
-  animation-duration: 6s;
+  animation-duration: 5s;
 }
 
 @keyframes psix {
   0% {
     opacity: 0.01;
   }
-  100% {
+  94% {
     opacity: 100;
   }
 }
