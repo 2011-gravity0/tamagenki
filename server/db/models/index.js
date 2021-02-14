@@ -19,7 +19,6 @@ DailyProgress.belongsTo(User)
 User.hasMany(Subscription)
 Subscription.belongsTo(User)
 
-
 //To add 'like' feature later, Unlock model
 //has to have PK, so it's not made as through table btw User and Level.
 User.hasMany(Unlock)

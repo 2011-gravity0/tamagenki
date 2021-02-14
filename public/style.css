@@ -1,7 +1,8 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   background-color: FFF8ED;
   height: 100vh;
+  width: 100vw;
   margin: 0;
 }
 
@@ -71,7 +72,6 @@ button {
   margin: 0;
   width: 100%;
   border-width: 1;
-  /* padding: 15; */
   border-color: 'gray';
 }
 
@@ -140,6 +140,391 @@ button {
   font-size: 12px;
 }
 
+/*===== Find Egg and Owl explanation =====*/
+
+.find-egg-component {
+  border-radius: 40px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  background-image: url('/forestDesktop1.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding: 20px;
+  margin: 2.5% 5% 5%;
+  box-shadow: 5px 5px 5px lightgrey;
+}
+
+.explain-component {
+  border-radius: 40px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('/explainDesktop.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  padding: 20px;
+  margin: 2.5% 5% 5%;
+  box-shadow: 5px 5px 5px rgb(205, 203, 203);
+}
+
+.owlTalk {
+  font-family: 'Jaldi', sans-serif;
+  position: relative;
+  font-size: 1.3rem;
+  line-height: 25px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  color: rgb(43, 43, 43);
+  background-color: rgba(231, 249, 253, 0.7);
+}
+
+.explain-component .owlTalk {
+  font-size: 1.1rem;
+  margin: 10px 0;
+}
+.promptContainer {
+  flex-basis: 35%;
+  text-align: center;
+  margin: auto auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.eggContainer {
+  flex-basis: 10%;
+}
+
+.guideButton {
+  flex-basis: 12%;
+}
+
+/* Guide component text effect */
+.explain-one {
+  animation-name: pone;
+  animation-duration: 5s;
+}
+
+@keyframes pone {
+  0% {
+    opacity: 0.01;
+  }
+  16% {
+    opacity: 100;
+  }
+}
+
+.explain-two {
+  animation-name: ptwo;
+  animation-duration: 5s;
+}
+
+@keyframes ptwo {
+  0% {
+    opacity: 0.01;
+  }
+  32% {
+    opacity: 100;
+  }
+}
+
+.explain-three {
+  animation-name: pthree;
+  animation-duration: 5s;
+}
+
+@keyframes pthree {
+  0% {
+    opacity: 0.01;
+  }
+  46% {
+    opacity: 100;
+  }
+}
+
+.explain-four {
+  animation-name: pfour;
+  animation-duration: 5s;
+}
+
+@keyframes pfour {
+  0% {
+    opacity: 0.01;
+  }
+  62% {
+    opacity: 100;
+  }
+}
+
+.explain-five {
+  animation-name: pfive;
+  animation-duration: 5s;
+}
+
+@keyframes pfive {
+  0% {
+    opacity: 0.01;
+  }
+  78% {
+    opacity: 100;
+  }
+}
+
+.explain-six {
+  animation-name: psix;
+  animation-duration: 5s;
+}
+
+@keyframes psix {
+  0% {
+    opacity: 0.01;
+  }
+  94% {
+    opacity: 100;
+  }
+}
+/* Guide component text effect end*/
+
+.typeWriter {
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+}
+
+/*===== Owl Questions =====*/
+.question-component {
+  border-radius: 40px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/explainDesktop.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  padding: 20px;
+  margin: 2.5% 5% 5%;
+  box-shadow: 5px 5px 5px rgb(205, 203, 203);
+}
+.questionContainer {
+  width: 320px;
+  /* height: 400px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 2px 2px 2px rgba(139, 162, 167, 0.9);
+}
+
+.questionOwlAnime {
+  position: relative;
+  bottom: 58px;
+}
+
+.questionContainer .owlTalk {
+  color: #387a5f;
+  background-color: rgba(231, 249, 253, 0);
+  text-align: center;
+  margin: 0;
+  padding: 5px 30px;
+  font-size: 1.5rem;
+}
+
+.questionHeader {
+  position: relative;
+  bottom: 50px;
+}
+
+.questionHeaderTwo {
+  position: relative;
+  bottom: 35px;
+}
+
+.nameBedtimeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 20px;
+  width: 225px;
+}
+
+.questionItem {
+  width: 220px;
+  margin: 0;
+}
+
+.questionButton {
+  position: relative;
+  bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.notificationContainer {
+  width: 220px;
+}
+
+.reminderAlign {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.notificationItem {
+  margin: 0 !important;
+}
+
+.guide-header {
+  position: relative;
+  bottom: 45px;
+}
+
+.guide-text {
+  position: relative;
+  bottom: 25px;
+}
+
+.guide-header > .owlTalk {
+  color: #ca8113;
+  background-color: rgba(231, 249, 253, 0);
+  text-align: center;
+  margin: 0;
+  padding: 5px 30px;
+  font-size: 1.6rem;
+}
+
+.guide-text .owlTalk {
+  color: rgb(37, 37, 37);
+  font-size: 1.1rem;
+}
+
+.startButton {
+  position: relative;
+  bottom: 10px;
+}
+
+/*===== media query for whole guide components =====*/
+/* media query for tablet */
+@media only screen and (max-width: 1025px) {
+  .find-egg-component {
+    border-radius: 0px;
+    height: 99vh;
+    background-image: url('/forestTablet.png');
+    margin: 0;
+  }
+  .explain-component {
+    border-radius: 0px;
+    height: 100vh;
+    background-image: url('/explainTablet.png');
+    margin: 0;
+  }
+
+  .question-component {
+    border-radius: 0px;
+    height: 100vh;
+    background-image: url('/explainTablet.png');
+    margin: 0;
+  }
+
+  .owlTalk {
+    font-size: 1.5rem;
+  }
+
+  .explain-component .owlTalk {
+    font-size: 1.5rem;
+    margin: 20px 0;
+  }
+}
+
+/* media query for larger than phone but small than tablet */
+@media only screen and (max-width: 600px) {
+  .find-egg-component {
+    border-radius: 0px;
+    height: 95vh;
+    background-image: url('/forestTablet.png');
+    margin: 0;
+  }
+  .explain-component {
+    border-radius: 0px;
+    height: 95vh;
+    background-image: url('/explain650.png');
+    margin: 0;
+  }
+
+  .question-component {
+    border-radius: 0px;
+    height: 95vh;
+    background-image: url('/explain650.png');
+    margin: 0;
+  }
+
+  .owlTalk {
+    font-size: 1.3rem;
+  }
+
+  .explain-component .owlTalk {
+    font-size: 1.1rem;
+    margin: 8px 0;
+  }
+}
+
+/* media queary small screens like phones */
+@media only screen and (max-width: 400px) {
+  .find-egg-component {
+    border-radius: 0px;
+    height: 95vh;
+    background-image: url('/forestTablet.png');
+    margin: 0;
+  }
+  .explain-component {
+    border-radius: 0px;
+    height: 100vh;
+    background-image: url('/explainPhone.png');
+    background-position: left -5px bottom 0;
+    background-size: cover;
+  }
+
+  .question-component {
+    border-radius: 0px;
+    height: 100vh;
+    background-image: url('/explainPhone.png');
+    background-position: left -5px bottom 0;
+    background-size: cover;
+  }
+
+  .owlTalk {
+    font-size: 1.3rem;
+  }
+
+  .explain-component .owlTalk {
+    font-size: 1.1rem;
+    margin: 8px 0;
+  }
+}
+
+.tutorial-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .guide-text p {
+  font-family: 'Fredoka One';
+  font-weight: lighter;
+  text-align: center;
+} */
+
 /*===== HOME PAGE =====*/
 
 .homeContainer {
@@ -179,10 +564,25 @@ button {
 }
 .listView {
   height: 30vh;
-  width: 40%;
+  width: 500px;
   overflow: auto;
   overflow-x: hidden !important;
 }
+
+@media (max-width: 600px) {
+  .listView {
+    width: 345px;
+  }
+  .checkBox {
+    width: 11px;
+    height: 11px;
+  }
+  .checkBox span {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .listContainer {
   display: flex;
   justify-content: center;
@@ -341,289 +741,32 @@ button {
   padding: 10px;
 }
 
-/* media query for desktop */
-@media only screen and (min-width: 1024px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forestDesktop1.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 85vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    text-align: center;
-    background-image: url('/explainDesktop.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px rgb(205, 203, 203);
-  }
-
-  .explain-component p {
-    width: 50%;
-  }
-
-  #tamabuddyButton {
-    height: 135%;
-  }
-}
-
-/* media query for tablet */
-@media only screen and (max-width: 1024px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: center;
-    background-image: url('/forestTablet.png');
-    background-repeat: no-repeat;
-    background-position: top;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 85vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    align-items: center;
-    background-image: url('/explainTablet.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  #tamabuddyButton {
-    height: 130%;
-  }
-}
-
-/* media query for larger than phone but small than tablet */
-@media only screen and (max-width: 600px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forest650.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 90vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/explain650.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component p {
-    width: 100%;
-    font-size: medium;
-  }
-  #tamabuddyButton {
-    height: 100%;
-  }
-}
-
-/* media queary small screens like phones */
-@media only screen and (max-width: 400px) {
-  .find-egg-component {
-    border-radius: 40px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: center;
-    background-image: url('/forestphone.png');
-    background-position: bottom;
-    background-repeat: no-repeat;
-    margin: 5% 5% 0;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-  .explain-component {
-    border-radius: 40px;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: center;
-    background-image: url('/explainPhone.png');
-    background-position: top;
-    background-repeat: no-repeat;
-    margin: 5% 5% 5%;
-    box-shadow: 5px 5px 5px lightgrey;
-  }
-
-  .explain-component p {
-    font-size: small;
-  }
-  #tamabuddyButton {
-    height: 100%;
-  }
-}
-
-.typeWriter {
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: 0.15em; /* Adjust as needed */
-}
-
-.explain-component p {
-  background-color: rgba(200, 234, 239, 0.7);
-  border-radius: 2px;
-}
-
-/*=====  =====*/
-
-.tutorial-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-.guide-text h3 {
-  color: #4e7469;
-  font-family: 'Fredoka One';
-  font-weight: lighter;
-  text-align: center;
-}
-
-.guide-text p {
-  font-family: 'Fredoka One';
-  font-weight: lighter;
-  text-align: center;
-}
-
-.questionHeader {
-  font-family: sans-serif;
-  color: rgb(94, 93, 93);
-  text-align: center;
-  font-size: 1.5rem;
-}
 /*===== USER HISTORY =====*/
 #historyavatar {
   text-align: center;
-  margin-top: 5%;
+  margin-top: 15px;
   padding: 10px 10px;
 }
+
+.ChartContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.chartErea {
+  width: 75vw;
+  margin: 20px auto;
+  height: 70vh;
+}
+
 .avatar {
   display: inline-flex;
   padding: 5px 5px;
   margin: 10px 10px;
-  border: whitesmoke outset;
+  background-color: #fff8ed;
+  border: 1px rgb(202, 176, 127) solid;
+  border-radius: 100%;
   height: 25px;
   width: 25px;
-}
-.explain-one {
-  animation-name: pone;
-  animation-duration: 6s;
-}
-
-@keyframes pone {
-  0% {
-    opacity: 0.01;
-  }
-  16% {
-    opacity: 100;
-  }
-}
-
-.explain-two {
-  animation-name: ptwo;
-  animation-duration: 6s;
-}
-
-@keyframes ptwo {
-  0% {
-    opacity: 0.01;
-  }
-  32% {
-    opacity: 100;
-  }
-}
-
-.explain-three {
-  animation-name: pthree;
-  animation-duration: 6s;
-}
-
-@keyframes pthree {
-  0% {
-    opacity: 0.01;
-  }
-  48% {
-    opacity: 100;
-  }
-}
-
-.explain-four {
-  animation-name: pfour;
-  animation-duration: 6s;
-}
-
-@keyframes pfour {
-  0% {
-    opacity: 0.01;
-  }
-  64% {
-    opacity: 100;
-  }
-}
-
-.explain-five {
-  animation-name: pfive;
-  animation-duration: 6s;
-}
-
-@keyframes pfive {
-  0% {
-    opacity: 0.01;
-  }
-  80% {
-    opacity: 100;
-  }
-}
-
-.explain-six {
-  animation-name: psix;
-  animation-duration: 6s;
-}
-
-@keyframes psix {
-  0% {
-    opacity: 0.01;
-  }
-  100% {
-    opacity: 100;
-  }
 }

@@ -7,7 +7,6 @@ import dailyProgress from './dailyProgress'
 import owlResponse from './owlResponse'
 import unlock from './unlock'
 
-
 const reducer = combineReducers({
   user,
   list: dailyProgress,
