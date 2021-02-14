@@ -1,29 +1,3 @@
-// let CACHE_NAME = 'my-cache'
-// let urlsToCache = [
-//   '/style.css',
-//   '/blueEggIcon48.png',
-//   '/blueEggIcon72.png',
-//   '/blueEggIcon96.png',
-//   '/blueEggIcon144.png',
-//   '/blueEggIcon168.png',
-//   '/blueEggIcon192.png',
-//   '/eggGIF.gif',
-//   'eggHatch.gif',
-//   '/lotties/dumpling1',
-//   '/lotties/dumpling2',
-//   '/bundle.js',
-// ]
-
-// self.addEventListener('install', function (event) {
-//   // Perform install steps
-//   event.waitUntil(
-//     caches.open(CACHE_NAME).then(function (cache) {
-//       console.log('Opened cache')
-//       return cache.addAll(urlsToCache)
-//     })
-//   )
-// })
-
 var CACHE_NAME = 'my-site-cache-v1'
 var urlsToCache = [
   '/style.css',
@@ -126,16 +100,4 @@ self.addEventListener('push', event => {
   event.waitUntil(
     self.registration.showNotification('Message from your Tamabuddy', options)
   )
-  // event.waitUntil(
-  //   clients.matchAll().then((c) => {
-  //     console.log(c)
-  //     if (c.length === 0) {
-  //       // Show notification
-  //       self.registration.showNotification('Push Notification', options)
-  //     } else {
-  //       // Send a message to the page to update the UI
-  //       console.log('Application is already open!')
-  //     }
-  //   })
-  // )
 })

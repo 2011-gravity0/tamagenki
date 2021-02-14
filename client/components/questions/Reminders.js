@@ -31,7 +31,7 @@ export class Reminders extends Component {
   }
 
   render() {
-    const {values, theme, classes, handleChange} = this.props
+    const {classes, handleChange} = this.props
     const owlOptions = {
       loop: true,
       autoplay: true,

@@ -6,7 +6,7 @@ import {withStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 
-const styles = theme => ({
+const styles = () => ({
   button: {
     margin: 50,
     padding: 3,
