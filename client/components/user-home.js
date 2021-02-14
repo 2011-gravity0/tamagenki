@@ -5,6 +5,7 @@ import {compose} from 'redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
 import {fetchUserHistory, updateUser} from '../store/user'
 import {fetchResp} from '../store/owlResponse'
+import {Howl, Howler} from 'howler'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -34,6 +35,37 @@ import waveData from '../../public/lotties/tamabuddyWave.json'
 import waterData from '../../public/lotties/tamabuddyWater.json'
 import owlData from '../../public/lotties/owl.json'
 import tamacoinData from '../../public/lotties/tamacoin.json'
+import boomboxData from '../../public/lotties/boombox.json'
+
+/**
+ * AUDIO
+ */
+// const sixties = new Howl({
+//   src: ['/music/60s-summer-party.mp3'],
+//   autoplay: true,
+//   loop: true,
+//   volume: 0.5,
+// })
+// const cityLights = new Howl({
+//   src: ['/music/city-of-lights.mp3'],
+//   autoplay: true,
+//   loop: true,
+//   volume: 0.5,
+// })
+// const eightBit = new Howl({
+//   src: ['/music/claim-to-fame-8bit.mp3'],
+//   autoplay: true,
+//   loop: true,
+//   volume: 0.5,
+// })
+// const welcomeDream = new Howl({
+//   src: ['/music/welcome-to-my-dream.mp3'],
+//   autoplay: true,
+//   loop: true,
+//   volume: 0.5,
+// })
+
+// const songs = [whimsical, sixties, cityLights, eightBit, welcomeDream]
 
 /**
  * OWL LOTTIE
@@ -154,6 +186,14 @@ const tamacoinAnimation = {
     preserveAspectRatio: 'xMidYMid slice'
   }
 }
+const boomboxAnimation = {
+  loop: true,
+  autoplay: true,
+  animationData: boomboxData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+}
 
 const styles = theme => ({
   button: {
@@ -229,8 +269,50 @@ const styles = theme => ({
 export class UserHome extends React.Component {
   constructor(props) {
     super(props)
+
+    this.song0 = new Howl({
+      src: ['/music/whimsical-magic.mp3'],
+      autoplay: false,
+      loop: true,
+      volume: 0.2
+    })
+
+    this.song1 = new Howl({
+      src: ['/music/60s-summer-party.mp3'],
+      autoplay: false,
+      loop: true,
+      volume: 0.2
+    })
+
+    this.song2 = new Howl({
+      src: ['/music/city-of-light.mp3'],
+      autoplay: false,
+      loop: true,
+      volume: 0.2
+    })
+
+    this.song3 = new Howl({
+      src: ['/music/claim-to-fame-8bit.mp3'],
+      autoplay: false,
+      loop: true,
+      volume: 0.2
+    })
+
+    this.song4 = new Howl({
+      src: ['/music/welcome-to-my-dream.mp3'],
+      autoplay: false,
+      loop: true,
+      volume: 0.2
+    })
+
+    this.songs = [this.song0, this.song1, this.song2, this.song3, this.song4]
+
     this.state = {
       lottie: '',
+      boomboxPaused: true,
+      dancing: false,
+      playing: false,
+      song: 1,
       totalPoints: 0,
       dailyPoints: 0,
 
@@ -249,10 +331,12 @@ export class UserHome extends React.Component {
       completionModal: false,
       hatchedModal: false,
       unlockBadgeModal: false,
+      boomboxModal: false,
       currentAnimation: 0,
       tamabuddyName: '',
       tamacoins: 0
     }
+
     this.handleCheck = this.handleCheck.bind(this)
     this.setTotalPoints = this.setTotalPoints.bind(this)
     this.setDailyPoints = this.setDailyPoints.bind(this)
@@ -274,6 +358,36 @@ export class UserHome extends React.Component {
     this.meditationCheck = this.meditationCheck.bind(this)
     this.relaxationCheck = this.relaxationCheck.bind(this)
     this.sleepCheck = this.sleepCheck.bind(this)
+    this.playSong = this.playSong.bind(this)
+    this.pauseSong = this.pauseSong.bind(this)
+    this.boomboxClick = this.boomboxClick.bind(this)
+    this.boomboxCheck = this.boomboxCheck.bind(this)
+  }
+
+  playSong() {
+    const num = Math.floor(Math.random() * 5)
+    this.setState({playing: true, song: num})
+    console.log('this.state.song', this.state.song)
+    this.songs[num].play()
+  }
+
+  pauseSong() {
+    this.setState({playing: false})
+    const num = this.state.song
+    this.songs[num].stop()
+  }
+
+  boomboxClick() {
+    console.log('this.state.playing from boombox', this.state.playing)
+    if (this.state.playing) {
+      this.pauseSong()
+    } else {
+      this.playSong()
+    }
+    this.setState({
+      boomboxPaused: !this.state.boomboxPaused,
+      dancing: !this.state.dancing
+    })
   }
 
   async setTotalPoints() {
@@ -331,10 +445,6 @@ export class UserHome extends React.Component {
         this.setState({dailyPoints: dailyPoints})
         await this.props.loadList()
       }
-      console.log(
-        'setDailyPoints user home daily points',
-        this.state.dailyPoints
-      )
     } catch (error) {
       console.error(error)
     }
@@ -352,14 +462,45 @@ export class UserHome extends React.Component {
     }
   }
 
-  // levelUp() {
-  //   try {
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  async levelUpCheck() {
+    if (this.state.totalPoints >= 3 && this.state.totalPoints < 10) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 1
+      })
+    }
+    if (this.state.totalPoints >= 10 && this.state.totalPoints < 15) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 2
+      })
+    }
+    if (this.state.totalPoints >= 15 && this.state.totalPoints < 100) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 3
+      })
+    }
+    if (this.state.totalPoints >= 100 && this.state.totalPoints < 150) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 4
+      })
+    }
+    if (this.state.totalPoints >= 150 && this.state.totalPoints < 200) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 5
+      })
+    }
+    if (this.state.totalPoints >= 200 && this.state.totalPoints < 260) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 6
+      })
+    }
+    if (this.state.totalPoints >= 260 && this.state.totalPoints < 300) {
+      await this.props.nameBuddy(this.props.user.id, {
+        level: 6
+      })
+    }
+  }
 
-  checkWhichBox(event) {
+  async checkWhichBox(event) {
     if (
       event.target.name === 'fruit' &&
       event.target.checked === true &&
@@ -367,6 +508,7 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.fruitCheck()
+      this.boomboxCheck()
       this.setState({lottie: appleAnimation})
       clearTimeout(this.state.currentAnimation)
       this.setState({
@@ -376,6 +518,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       event.target.name === 'vegetables' &&
@@ -384,6 +527,7 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.vegetablesCheck()
+      this.boomboxCheck()
       this.setState({lottie: carrotAnimation})
       clearTimeout(this.state.currentAnimation)
       this.setState({
@@ -393,6 +537,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       event.target.name === 'water' &&
@@ -401,6 +546,7 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.waterCheck()
+      this.boomboxCheck()
       this.setState({
         lottie: waterAnimation,
         water: this.state.water + 1
@@ -413,6 +559,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       event.target.name === 'exercise' &&
@@ -421,6 +568,7 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.exerciseCheck()
+      this.boomboxCheck()
       this.setState({lottie: exerciseAnimation})
       clearTimeout(this.state.currentAnimation)
       this.setState({
@@ -430,6 +578,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       event.target.name === 'meditation' &&
@@ -438,6 +587,7 @@ export class UserHome extends React.Component {
     ) {
       this.finalCheck()
       this.meditationCheck()
+      this.boomboxCheck()
       this.setState({lottie: meditateAnimation})
       clearTimeout(this.state.currentAnimation)
       this.setState({
@@ -447,6 +597,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
     if (
       (event.target.name === 'relaxation' || event.target.name === 'sleep') &&
@@ -454,6 +605,7 @@ export class UserHome extends React.Component {
       this.state.isHatched
     ) {
       this.finalCheck()
+      this.boomboxCheck()
       if (event.target.name === 'relaxation') {
         this.relaxationCheck()
       } else {
@@ -469,6 +621,7 @@ export class UserHome extends React.Component {
           })
         }, 3000)
       })
+      await this.levelUpCheck()
     }
   }
 
@@ -537,6 +690,12 @@ export class UserHome extends React.Component {
     }
   }
 
+  boomboxCheck() {
+    if (this.state.dailyPoints === 14) {
+      this.setState({boomboxModal: true})
+    }
+  }
+
   waterCheck() {
     if (this.state.water === 4) {
       this.setState({unlockBadgeModal: true, modal: 'water'})
@@ -586,6 +745,7 @@ export class UserHome extends React.Component {
       await this.setTotalPoints()
       await this.setDailyPoints()
       await this.setTamacoins()
+      await this.levelUpCheck()
 
       if (this.state.dailyPoints >= 3) {
         this.setState({
@@ -652,7 +812,11 @@ export class UserHome extends React.Component {
   }
 
   handleClose() {
-    this.setState({unlockBadgeModal: false, hatchedModal: false})
+    this.setState({
+      unlockBadgeModal: false,
+      hatchedModal: false,
+      boomboxModal: false
+    })
   }
 
   nameSubmit() {
@@ -846,6 +1010,57 @@ export class UserHome extends React.Component {
             >
               {body}
             </Modal>
+            <Modal open={this.state.boomboxModal} onClose={this.handleClose}>
+              <Grid container>
+                <div
+                  style={{
+                    top: `${65}%`,
+                    left: `${45}%`,
+                    transform: `translate(-${50}%, -${50}%)`,
+                    margin: '1.5em',
+                    padding: '1em'
+                  }}
+                  className={classes.paper}
+                >
+                  <Lottie options={guideAnimation} height={125} width={125} />
+                  <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                  >
+                    <h2 className={classes.modalTitle}>
+                      You unlocked {this.props.user.petName}'s boombox!
+                    </h2>
+
+                    <p
+                      style={{
+                        margin: 0,
+                        color: '#fff',
+                        fontWeight: 'bold',
+                        backgroundColor: '#7FBAC5',
+                        padding: 5,
+                        paddingTop: 3,
+                        paddingBottom: 3,
+                        marginTop: 2
+                      }}
+                    >
+                      {' '}
+                      You can play songs for {this.props.user.petName} by
+                      tapping on the boombox to turn it on.
+                    </p>
+                    <Button onClick={this.handleClose}>
+                      <Lottie
+                        options={boomboxAnimation}
+                        height={200}
+                        width={200}
+                      />
+                    </Button>
+                  </Grid>
+                </div>
+              </Grid>
+            </Modal>
             <Grid
               container
               direction="column"
@@ -874,7 +1089,7 @@ export class UserHome extends React.Component {
                         style={{fontFamily: 'Fredoka One', color: '#162C38'}}
                         className={classes.inline}
                       >
-                        LEVEL: {this.state.tamacoins}{' '}
+                        LEVEL: {this.props.user.level}{' '}
                       </span>
                       {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
                     </Grid>
@@ -905,22 +1120,30 @@ export class UserHome extends React.Component {
                       disableRipple={true}
                       className={classes.button}
                     >
-                      <Lottie options={lottie} height={300} width={300} />
+                      <Lottie
+                        options={this.state.dancing ? jumpAnimation : lottie}
+                        height={270}
+                        width={270}
+                      />
                     </Button>
                   </div>
-                  {/* <Button
-                    onClick={this.handleOwlClick}
+                  <Button
+                    onClick={this.boomboxClick}
                     style={{
                       backgroundColor: 'transparent',
-                      display:
-                        this.state.completionModal || this.state.hatchedModal
-                          ? 'none'
-                          : ''
+                      padding: 0,
+                      display: this.state.totalPoints < 15 ? 'none' : '',
+                      disabled: this.state.totalPoints < 15
                     }}
                     disableRipple={true}
                   >
-                    <Lottie options={guideAnimation} height={75} width={75} />
-                  </Button> */}
+                    <Lottie
+                      options={boomboxAnimation}
+                      height={90}
+                      width={90}
+                      isStopped={this.state.boomboxPaused}
+                    />
+                  </Button>
                 </div>
               </div>
             </Grid>
@@ -934,7 +1157,9 @@ export class UserHome extends React.Component {
               style={{
                 backgroundColor: 'transparent',
                 display:
-                  this.state.completionModal || this.state.hatchedModal
+                  this.state.completionModal ||
+                  this.state.hatchedModal ||
+                  this.state.boomboxModal
                     ? 'none'
                     : ''
               }}
