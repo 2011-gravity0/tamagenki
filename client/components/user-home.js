@@ -357,7 +357,6 @@ export class UserHome extends React.Component {
       boomboxPaused: !this.state.boomboxPaused,
       dancing: !this.state.dancing
     })
-
   }
 
   async setTotalPoints() {
@@ -470,7 +469,6 @@ export class UserHome extends React.Component {
   }
 
   async checkWhichBox(event) {
-
     event.persist()
 
     if (
@@ -1083,13 +1081,11 @@ export class UserHome extends React.Component {
                       disableRipple={true}
                       className={classes.button}
                     >
-
                       <Lottie
                         options={this.state.dancing ? jumpAnimation : lottie}
                         height={270}
                         width={270}
                       />
-
                     </Button>
                   </div>
                   <Button
@@ -1109,7 +1105,6 @@ export class UserHome extends React.Component {
                       width={90}
                       isStopped={this.state.boomboxPaused}
                     />
-
                   </Button>
                 </div>
               </div>
