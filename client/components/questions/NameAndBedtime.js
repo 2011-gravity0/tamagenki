@@ -20,7 +20,7 @@ export const NameAndBedtime = props => {
         </div>
         <Grid container justify="center" className="questionHeader">
           <p className="owlTalk">
-            'To get started I need to know some more information about you...'
+            To get started I need to know some more information about you...
           </p>
         </Grid>
         <div className="nameBedtimeContainer">

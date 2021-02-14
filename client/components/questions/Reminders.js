@@ -19,8 +19,8 @@ export const Reminders = props => {
         </div>
         <Grid container justify="center" className="questionHeaderTwo">
           <p className="owlTalk">
-            'Lets move on to your preferences. Would you like push notifications
-            for any of the items listed below?',
+            Lets move on to your preferences. Would you like push notifications
+            for any of the items listed below?
           </p>
         </Grid>
         <div className="notificationContainer">
