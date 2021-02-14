@@ -230,6 +230,24 @@ const styles = () => ({
     float: 'left',
     display: 'inline',
     alignItems: 'center'
+  },
+  coin: {
+    position: 'absolute',
+    backgroundColor: '#C9E3BE',
+    border: 'none',
+    borderRadius: 5,
+    padding: '1 em'
+  },
+  coinp: {
+    padding: '1.5 em',
+    spacing: '1 em',
+    margin: '1em',
+    marginTop: 0,
+    marginBottom: 0,
+    color: '#162C38',
+    fontFamily: 'Helvetica',
+    fontSize: '1.4em',
+    fontWeight: 'bold'
   }
 })
 /**
