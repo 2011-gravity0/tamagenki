@@ -1,10 +1,16 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/button-has-type */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable no-useless-constructor */
-import {DateRangeSharp} from '@material-ui/icons'
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllFeed} from '../store/unlock'
 import Navbar from './navbar'
+// import {faThumbsUp} from '@fortawesome/pro-regular-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {Icon, InlineIcon} from '@iconify/react'
+import thumbsUp from '@iconify-icons/fa-regular/thumbs-up'
+
 export class SocialHome extends React.Component {
   constructor(props) {
     super(props)
@@ -12,12 +18,14 @@ export class SocialHome extends React.Component {
       feeds: []
     }
     this.getTime = this.getTime.bind(this)
+    this.likes = this.likes.bind(this)
+    this.clickedLikes = this.clickedLikes.bind(this)
   }
 
   async componentDidMount() {
     try {
       await this.props.getAllFeed()
-      console.log('this is feed', this.props.feed)
+      await this.clickedLikes()
     } catch (error) {
       console.log(error)
     }
@@ -30,28 +38,61 @@ export class SocialHome extends React.Component {
     }
     return dateArr
   }
+  likes() {
+    const element = <Icon icon={thumbsUp} />
+    return (
+      <div id="body">
+        <button class="like__btn">
+          <span id="icon">{element}</span>
+          <span id="count">0</span> Like
+        </button>
+      </div>
+    )
+  }
+  clickedLikes() {
+    console.log('this is working')
+    const likeBtn = document.querySelector('.like__btn')
+    let likeIcon = document.querySelector('#icon'),
+      count = document.querySelector('#count')
+
+    let clicked = false
+
+    console.log('this isOUTSIDE', likeBtn)
+    likeBtn.addEventListener('click', () => {
+      console.log('this is clicked')
+      if (!clicked) {
+        clicked = true
+        likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i>`
+        count.textContent++
+        console.log('this button was liked')
+      } else {
+        clicked = false
+        likeIcon.innerHTML = `<i class="far fa-thumbs-up"></i>`
+        count.textContent--
+        console.log('this button was unliked')
+      }
+    })
+  }
   render() {
     const feeds = this.props.feed
-    const dates = this.getTime()
-    console.log(dates[0])
+    let dates = this.getTime()
     return (
       <div>
         <Navbar />
-        <div className="feedbutton">
-          <button type="button">Community Feed</button>
-          <button type="button">Activity</button>
+        <div>
+          {feeds.reverse().map(feed => (
+            <div key={feed.id} className="onefeed">
+              {feed.user.petName} unlocked a new badge{' '}
+              <img
+                src={feed.level.badgeImage}
+                style={{height: '25px', width: '25px'}}
+              />
+              <br />
+              <small>{String(dates[0])}</small>
+            </div>
+          ))}
         </div>
-        {feeds.reverse().map(feed => (
-          <div key={feed.id} className="onefeed">
-            {feed.user.petName} unlocked a new badge{' '}
-            <img
-              src={feed.level.badgeImage}
-              style={{height: '25px', width: '25px'}}
-            />
-            <br />
-            <small>{String(dates[0])}</small>
-          </div>
-        ))}
+        {this.likes()}
       </div>
     )
   }
@@ -70,3 +111,6 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(SocialHome)
+// npm install --save-dev @iconify/react @iconify-icons/fa-regular
+// import { Icon, InlineIcon } from '@iconify/react';
+// import thumbsUp from '@iconify-icons/fa-regular/thumbs-up';
