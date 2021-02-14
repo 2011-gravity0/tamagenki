@@ -1,3 +1,9 @@
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable complexity */
+/* eslint-disable no-return-assign */
+/* eslint-disable max-statements */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -357,7 +363,6 @@ export class UserHome extends React.Component {
       boomboxPaused: !this.state.boomboxPaused,
       dancing: !this.state.dancing
     })
-
   }
 
   async setTotalPoints() {
@@ -470,7 +475,6 @@ export class UserHome extends React.Component {
   }
 
   async checkWhichBox(event) {
-
     event.persist()
 
     if (
@@ -1083,13 +1087,11 @@ export class UserHome extends React.Component {
                       disableRipple={true}
                       className={classes.button}
                     >
-
                       <Lottie
                         options={this.state.dancing ? jumpAnimation : lottie}
                         height={270}
                         width={270}
                       />
-
                     </Button>
                   </div>
                   <Button
@@ -1109,7 +1111,6 @@ export class UserHome extends React.Component {
                       width={90}
                       isStopped={this.state.boomboxPaused}
                     />
-
                   </Button>
                 </div>
               </div>
