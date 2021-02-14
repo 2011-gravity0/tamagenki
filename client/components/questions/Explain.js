@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import Lottie from 'react-lottie'
 import animationOwl from '../../../public/lotties/owl.json'
 import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
 
 export default class Explain extends Component {
   constructor(props) {

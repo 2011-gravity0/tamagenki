@@ -8,7 +8,6 @@ import {fetchResp} from '../store/owlResponse'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
 import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 import Modal from '@material-ui/core/Modal'
@@ -164,7 +163,7 @@ const boomboxAnimation = {
   }
 }
 
-const styles = theme => ({
+const styles = () => ({
   button: {
     paddingBottom: 0
   },
@@ -283,13 +282,11 @@ export class UserHome extends React.Component {
     this.meditationCheck = this.meditationCheck.bind(this)
     this.relaxationCheck = this.relaxationCheck.bind(this)
     this.sleepCheck = this.sleepCheck.bind(this)
-
   }
 
   async setTotalPoints() {
     try {
       await this.props.getUserHistory(this.props.userId)
-      console.log('user history', this.props.history)
       const totalHistoryPoints = this.props.history.reduce((ttl, day) => {
         const subTotal = Object.values(day)
           .filter(element => typeof element === 'number')
@@ -397,6 +394,7 @@ export class UserHome extends React.Component {
   }
 
   async checkWhichBox(event) {
+    event.persist()
     if (
       event.target.name === 'fruit' &&
       event.target.checked === true &&
@@ -601,18 +599,13 @@ export class UserHome extends React.Component {
     }
   }
   sleepCheck() {
-    console.log('real first sleep check', this.state.sleep)
     if (this.state.sleep === 1) {
-      console.log('first sleep check', this.state.sleep)
       this.setState({unlockBadgeModal: true, modal: 'sleep'})
     }
   }
   relaxationCheck() {
-    console.log('real first relaxation check', this.state.relaxation)
     if (this.state.relaxation === 1) {
-      console.log('first relaxation check', this.state.relaxation)
       this.setState({unlockBadgeModal: true, modal: 'relaxation'})
-      console.log('second relaxation check', this.state.relaxation)
     }
   }
   meditationCheck() {
@@ -686,7 +679,6 @@ export class UserHome extends React.Component {
   handleOwlClick = async () => {
     await this.props.getOwlResp()
     this.setState({owlResponse: this.props.response.response})
-    console.log('PROPS', this.props)
   }
 
   async handleCoinClose() {
@@ -705,16 +697,12 @@ export class UserHome extends React.Component {
   }
 
   handleChange() {
-    console.log('event name', event.target.name)
     this.setState({[event.target.name]: event.target.value})
-    console.log(this.state.tamabuddyName)
   }
 
   render() {
     const {classes} = this.props
     const {lottie, modal} = this.state
-    const owlMessage1 = "hello i'm owl"
-    const owlMessage2 = 'howdy folks! check off some boxes'
 
     const modalTitles = {
       water: 'Water Droplet Badge',

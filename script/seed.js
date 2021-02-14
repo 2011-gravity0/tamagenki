@@ -1,8 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, DailyProgress, Response} = require('../server/db/models')
-const {User, DailyProgress, Level, Unlock} = require('../server/db/models')
+const {
+  User,
+  DailyProgress,
+  Level,
+  Unlock,
+  Response
+} = require('../server/db/models')
 const levels = require('./levelSeedData')
 
 const users = [

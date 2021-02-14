@@ -1,9 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
 import history from '../history'
-import {auth, updateUser} from '../store'
-import {TextField, Button, Typography} from '@material-ui/core'
+import {updateUser} from '../store'
+import {TextField, Button} from '@material-ui/core'
 
 const NamePet = props => {
   const {updateUser, userid} = props
