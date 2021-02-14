@@ -1,4 +1,4 @@
-<img src="/images/readMe.png" width="100%">
+<img src="/public/images/readMe.png" width="100%">
 
 <p align="center">Tamagenki is a pet accountability game that helps users implement healthy and mindfulness habits into their daily life with Javascript, React, Redux, Express, Progressive Web Application, and Lottie animations.</p>
 
