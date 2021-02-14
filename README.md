@@ -8,6 +8,7 @@
 
 * [Table of Contents](#table-of-contents)
 * [Introduction](#introduction)
+* [Technologies](#technologies)
 * [Setup](#setup)
 * [Features](#features)
 * [Contact](#contact)
@@ -20,7 +21,7 @@ Our target audience is people of any age who want to incorporate universally agr
 
 ---
 
-##Technologies
+## Technologies
 
 * Javascript
 * React
