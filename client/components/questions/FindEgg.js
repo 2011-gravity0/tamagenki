@@ -10,7 +10,7 @@ export class FindEgg extends Component {
   }
   continue = e => {
     e.preventDefault()
-    this.props.nextStep()
+    this.props.nextStep('findEgg')
   }
 
   render() {
