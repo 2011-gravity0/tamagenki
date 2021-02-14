@@ -5,6 +5,7 @@ import {compose} from 'redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
 import {fetchUserHistory, updateUser} from '../store/user'
 import {fetchResp} from '../store/owlResponse'
+import {fetchBoombox, fetchUpdatedBoombox} from '../store/boombox'
 
 import {Howl, Howler} from 'howler'
 import Navbar from './navbar'
@@ -381,32 +382,42 @@ export class UserHome extends React.Component {
     this.boomboxCheck = this.boomboxCheck.bind(this)
     this.handleCoinInfo = this.handleCoinInfo.bind(this)
     this.handleBadgeClose = this.handleBadgeClose.bind(this)
+    this.setBoombox = this.setBoombox.bind(this)
   }
 
-  playSong() {
+  async playSong() {
     const num = Math.floor(Math.random() * 5)
-    this.setState({playing: true, song: num})
-    console.log('this.state.song', this.state.song)
     this.songs[num].play()
+    console.log('this.songs[num] from playSong', num, this.songs[num])
+    await this.props.updateBoombox(this.props.boombox.id, {
+      playing: true,
+      song: num
+    })
+    await this.setBoombox()
   }
 
-  pauseSong() {
-    this.setState({playing: false})
+  async pauseSong() {
+    await this.props.updateBoombox(this.props.boombox.id, {
+      playing: false
+    })
     const num = this.state.song
     this.songs[num].stop()
+    Howler.stop()
+    await this.setBoombox()
   }
 
-  boomboxClick() {
-    console.log('this.state.playing from boombox', this.state.playing)
-    if (this.state.playing) {
-      this.pauseSong()
+  async boomboxClick() {
+    console.log('boombox from boomboxClick', this.props.boombox)
+    if (this.props.boombox.playing) {
+      await this.pauseSong()
     } else {
-      this.playSong()
+      await this.playSong()
     }
-    this.setState({
-      boomboxPaused: !this.state.boomboxPaused,
-      dancing: !this.state.dancing
+    await this.props.updateBoombox(this.props.boombox.id, {
+      boomboxPaused: !this.props.boombox.boomboxPaused,
+      dancing: !this.props.boombox.dancing
     })
+    await this.setBoombox()
   }
 
   async setTotalPoints() {
@@ -465,6 +476,20 @@ export class UserHome extends React.Component {
       }
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  async setBoombox() {
+    try {
+      await this.props.getBoombox()
+      this.setState({
+        boomboxPaused: this.props.boombox.boomboxPaused,
+        playing: this.props.boombox.playing,
+        dancing: this.props.boombox.dancing,
+        song: this.props.boombox.song
+      })
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -757,10 +782,18 @@ export class UserHome extends React.Component {
       await pushSetting(this.props.user)
 
       await this.props.loadList()
+      await this.props.getBoombox()
+      await this.setBoombox()
       await this.setTotalPoints()
       await this.setDailyPoints()
       await this.setTamacoins()
       await this.levelUpCheck()
+
+      console.log('boombox from componentdidmount', this.props.boombox)
+      console.log(
+        'is boombox paused? from componentdidmount',
+        this.props.boombox.boomboxPaused
+      )
 
       if (this.state.dailyPoints >= 3) {
         this.setState({
@@ -1256,7 +1289,9 @@ const mapState = state => {
     list: state.list.list,
     history: state.user.dailyprogresses,
     user: state.user,
-    response: state.response.response
+    response: state.response.response,
+    boombox: state.boombox,
+    boomboxId: state.boombox.id
   }
 }
 
@@ -1266,7 +1301,10 @@ const mapDispatch = dispatch => {
     updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
     getUserHistory: userId => dispatch(fetchUserHistory(userId)),
     nameBuddy: (userId, data) => dispatch(updateUser(userId, data)),
-    getOwlResp: () => dispatch(fetchResp())
+    getOwlResp: () => dispatch(fetchResp()),
+    getBoombox: () => dispatch(fetchBoombox()),
+    updateBoombox: (boomboxId, boomboxData) =>
+      dispatch(fetchUpdatedBoombox(boomboxId, boomboxData))
   }
 }
 
