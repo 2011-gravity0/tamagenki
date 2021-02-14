@@ -301,6 +301,7 @@ export class UserHome extends React.Component {
       hatchedModal: false,
       unlockBadgeModal: false,
       boomboxModal: false,
+      coinInfoModal: false,
       currentAnimation: 0,
       tamabuddyName: '',
       tamacoins: 0
@@ -331,6 +332,7 @@ export class UserHome extends React.Component {
     this.pauseSong = this.pauseSong.bind(this)
     this.boomboxClick = this.boomboxClick.bind(this)
     this.boomboxCheck = this.boomboxCheck.bind(this)
+    this.handleCoinInfo = this.handleCoinInfo.bind(this)
   }
 
   playSong() {
@@ -779,7 +781,8 @@ export class UserHome extends React.Component {
     this.setState({
       unlockBadgeModal: false,
       hatchedModal: false,
-      boomboxModal: false
+      boomboxModal: false,
+      coinInfoModal: false
     })
   }
 
@@ -862,6 +865,35 @@ export class UserHome extends React.Component {
         <>
           <div className="homeContainer">
             <Navbar />
+
+            <Modal open={this.state.coinInfoModal} onClose={this.handleClose}>
+              <Grid container>
+                <div
+                  style={{
+                    top: `${50}%`,
+                    left: `${45}%`,
+                    transform: `translate(-${50}%, -${50}%)`,
+                    margin: '1.5em',
+                    padding: '1em'
+                  }}
+                  className={classes.coin}
+                >
+                  <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                  >
+                    <p className={classes.coinp}>
+                      You'll get a Tamacoin every time
+                      {' ' + this.props.user.petName}'s progress bar reaches
+                      100%.
+                    </p>
+                  </Grid>
+                </div>
+              </Grid>
+            </Modal>
 
             <Modal
               open={this.state.completionModal}
@@ -1064,6 +1096,7 @@ export class UserHome extends React.Component {
                       <Avatar
                         src="/images/tamacoin.svg"
                         className={classes.inline}
+                        onClick={this.handleCoinInfo}
                       />
 
                       <span
