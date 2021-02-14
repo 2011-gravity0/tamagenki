@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
 import {fetchUserHistory} from '../store/user'
+import {Howl, Howler} from 'howler'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
 import {compose} from 'redux'
@@ -71,6 +72,14 @@ const styles = theme => ({
 class BadgesTwo extends React.Component {
   constructor(props) {
     super(props)
+
+    this.badge = new Howl({
+      src: ['/sounds/badge.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.1
+    })
+
     this.state = {
       waterPoints: 0,
       meditationPoints: 0,
@@ -147,8 +156,8 @@ class BadgesTwo extends React.Component {
 
   handleOpen(event) {
     try {
-      //   event.preventDefault()
-      console.log(event.currentTarget.value)
+      event.preventDefault()
+      this.badge.play()
       this.setState({modalOpen: true, modal: event.currentTarget.value})
     } catch (error) {
       console.log(error)
