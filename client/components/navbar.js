@@ -98,6 +98,11 @@ const Navbar = ({handleLogout}, props) => {
                   History
                 </Link>
               </MenuItem>
+              <MenuItem className={classes.menu}>
+                <Link to="/feed" className={classes.menu}>
+                  Social
+                </Link>
+              </MenuItem>
               <MenuItem onClick={handleLogout} className={classes.menu}>
                 Logout
               </MenuItem>

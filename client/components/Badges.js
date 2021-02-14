@@ -1,6 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import axios from 'axios'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
@@ -88,6 +89,7 @@ class Badges extends React.Component {
     this.setPoints = this.setPoints.bind(this)
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.shareBadge = this.shareBadge.bind(this)
   }
 
   async setPoints() {
@@ -155,7 +157,13 @@ class Badges extends React.Component {
       console.log(error)
     }
   }
-
+  shareBadge() {
+    try {
+      console.log('sharebadge')
+    } catch (error) {
+      console.log(error)
+    }
+  }
   handleClose() {
     this.setState({modalOpen: false})
   }
@@ -259,6 +267,7 @@ class Badges extends React.Component {
           </Grid>
           <p className={classes.ptext}>{modalMessages[modal]}</p>
           <p className={classes.ptext2}>{modalMessages2[modal]}</p>
+          <Button onClick={this.shareBadge}>Share</Button>
         </div>
       </Grid>
     )

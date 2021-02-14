@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-constructor */
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllFeed} from '../store/unlock'
@@ -6,22 +7,35 @@ import Navbar from './navbar'
 export class SocialHome extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      feeds: []
+    }
+    // this.showBadge = this.showBadge.bind(this)
   }
 
   async componentDidMount() {
     try {
       await this.props.getAllFeed()
-      console.log('This is all feed', this.props.feed)
+      console.log('this is feed', this.props.feed)
     } catch (error) {
       console.log(error)
     }
   }
 
   render() {
+    const feeds = this.props.feed
     return (
       <div>
         <Navbar />
-        <div>Social Home Rendered</div>
+        {feeds.map(feed => (
+          <div key={feed.id}>
+            {feed.user.petName} unlocked a new badge{' '}
+            <img
+              src={feed.level.badgeImage}
+              style={{height: '25px', width: '25px'}}
+            />
+          </div>
+        ))}
       </div>
     )
   }
