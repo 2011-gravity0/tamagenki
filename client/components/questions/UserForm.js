@@ -6,10 +6,19 @@ import GuidePet from '../guidePet'
 import {FindEgg} from './FindEgg'
 import Explain from './Explain'
 import {updateUser} from '../../store/user'
+import {Howl, Howler} from 'howler'
 
 export class UserForm extends Component {
   constructor(props) {
     super(props)
+
+    this.backgroundMusic = new Howl({
+      src: ['/music/whimsical-magic.mp3'],
+      autoplay: false,
+      loop: true,
+      volume: 0.08
+    })
+
     this.state = {
       step: 1,
       userName: '',
@@ -22,6 +31,8 @@ export class UserForm extends Component {
     this.nextStep = this.nextStep.bind(this)
     this.prevStep = this.prevStep.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.stopMusic = this.stopMusic.bind(this)
+    this.startMusic = this.startMusic.bind(this)
   }
 
   //Proceed to next step
@@ -62,10 +73,18 @@ export class UserForm extends Component {
     }
   }
 
+  startMusic() {
+    this.backgroundMusic.play()
+  }
+
+  stopMusic() {
+    this.backgroundMusic.stop()
+  }
+
   render() {
     switch (this.state.step) {
       case 1:
-        return <FindEgg nextStep={this.nextStep} />
+        return <FindEgg nextStep={this.nextStep} startMusic={this.startMusic} />
       case 2:
         return <Explain nextStep={this.nextStep} />
       case 3:
@@ -84,7 +103,7 @@ export class UserForm extends Component {
           />
         )
       case 5:
-        return <GuidePet />
+        return <GuidePet stopMusic={this.stopMusic} />
     }
   }
 }

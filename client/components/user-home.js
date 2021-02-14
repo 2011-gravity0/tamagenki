@@ -243,13 +243,10 @@ const styles = () => ({
   coinp: {
     padding: '1.5 em',
     spacing: '1 em',
-    margin: '.2em',
-    marginTop: 0,
-    marginBottom: 0,
+    margin: 0,
     color: '#162C38',
     fontFamily: 'Helvetica',
-    fontSize: '1.4em',
-    fontWeight: 'bold'
+    fontSize: '1.2em'
   }
 })
 /**

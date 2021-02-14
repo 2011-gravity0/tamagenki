@@ -53,7 +53,8 @@ const User = db.define('user', {
     defaultValue: '11:00'
   },
   petName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue: 'Tamabuddy'
   },
   level: {
     type: Sequelize.INTEGER,
