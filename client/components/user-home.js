@@ -688,10 +688,11 @@ export class UserHome extends React.Component {
   }
 
   handleClose() {
-    this.setState({unlockBadgeModal: false, hatchedModal: false})
+    this.setState({unlockBadgeModal: false})
   }
 
   nameSubmit() {
+    this.setState({hatchedModal: false})
     this.props.nameBuddy(this.props.userId, {petName: this.state.tamabuddyName})
     this.setState({hatchedModal: false})
   }
@@ -826,7 +827,7 @@ export class UserHome extends React.Component {
                 </div>
               </Grid>
             </Modal>
-            <Modal open={this.state.hatchedModal} onClose={this.handleClose}>
+            <Modal open={this.state.hatchedModal} onClose={this.nameSubmit}>
               <Grid container>
                 <div
                   style={{
@@ -836,7 +837,7 @@ export class UserHome extends React.Component {
                     margin: '1.5em',
                     padding: '1em'
                   }}
-                  className={classes.hatchedPaper}
+                  className={classes.paper}
                 >
                   <Lottie options={guideAnimation} height={150} width={150} />
                   <Grid
@@ -846,10 +847,10 @@ export class UserHome extends React.Component {
                     justify="center"
                     direction="column"
                   >
-                    <h2 className={classes.hatchedModalTitle}>
+                    <h2 className={classes.modalTitle}>
                       CONGRATULATIONS YOU'VE HATCHED YOUR TAMABUDDY!!!
                     </h2>
-                    <p className={classes.modalP}>
+                    <p className={classes.ptext2}>
                       What would you like to name it?
                     </p>
 
@@ -861,13 +862,13 @@ export class UserHome extends React.Component {
                       onChange={this.handleChange}
                       value={this.state.tamabuddyName}
                     />
-                    <button
-                      style={{color: '#c58684'}}
+                    <Button
+                      style={{color: 'white'}}
                       type="submit"
                       onClick={this.nameSubmit}
                     >
                       submit
-                    </button>
+                    </Button>
                   </Grid>
                 </div>
               </Grid>
