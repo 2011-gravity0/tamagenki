@@ -16,7 +16,7 @@ export class UserForm extends Component {
       src: ['/music/whimsical-magic.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.08
+      volume: 0.05
     })
 
     this.state = {

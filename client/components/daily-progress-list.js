@@ -12,7 +12,15 @@ import {makeStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Modal from '@material-ui/core/Modal'
+import {Howl, Howler} from 'howler'
 import React, {useState} from 'react'
+
+const info = new Howl({
+  src: ['/sounds/iconInfo.mp3'],
+  autoplay: false,
+  loop: false,
+  volume: 0.19
+})
 
 export const DailyProgressList = props => {
   const {list, handleCheck} = props
@@ -28,6 +36,7 @@ export const DailyProgressList = props => {
   })
 
   const handleOpen = async (event, name) => {
+    info.play()
     await setModal({...openModal, [name]: true})
   }
 

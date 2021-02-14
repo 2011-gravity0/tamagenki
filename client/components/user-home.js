@@ -305,6 +305,13 @@ export class UserHome extends React.Component {
       volume: 0.25
     })
 
+    this.heart = new Howl({
+      src: ['/sounds/heartLevel.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.12
+    })
+
     this.owl = new Howl({
       src: ['/sounds/owlHmm.mp3'],
       autoplay: false,
@@ -347,6 +354,7 @@ export class UserHome extends React.Component {
       unlockBadgeModal: false,
       boomboxModal: false,
       coinInfoModal: false,
+      heartInfoModal: false,
       currentAnimation: 0,
       tamabuddyName: '',
       tamacoins: 0
@@ -378,6 +386,7 @@ export class UserHome extends React.Component {
     this.boomboxClick = this.boomboxClick.bind(this)
     this.boomboxCheck = this.boomboxCheck.bind(this)
     this.handleCoinInfo = this.handleCoinInfo.bind(this)
+    this.handleHeartInfo = this.handleHeartInfo.bind(this)
     this.handleBadgeClose = this.handleBadgeClose.bind(this)
     this.setBoombox = this.setBoombox.bind(this)
   }
@@ -869,7 +878,15 @@ export class UserHome extends React.Component {
     this.setState({
       hatchedModal: false,
       boomboxModal: false,
-      coinInfoModal: false
+      coinInfoModal: false,
+      heartInfoModal: false
+    })
+  }
+
+  handleHeartInfo() {
+    this.heart.play()
+    this.setState({
+      heartInfoModal: true
     })
   }
 
@@ -954,6 +971,35 @@ export class UserHome extends React.Component {
           <div className="homeContainer">
             <Navbar />
 
+            <Modal open={this.state.heartInfoModal} onClose={this.handleClose}>
+              <Grid container>
+                <div
+                  style={{
+                    top: `${50}%`,
+                    left: `${45}%`,
+                    transform: `translate(-${50}%, -${50}%)`,
+                    margin: '1.5em',
+                    padding: '1em'
+                  }}
+                  className={classes.coin}
+                >
+                  <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                  >
+                    <p className={classes.coinp}>
+                      {' ' + this.props.user.petName} will Level up and get
+                      stronger as you continue to check off boxes and accumulate
+                      points.
+                    </p>
+                  </Grid>
+                </div>
+              </Grid>
+            </Modal>
+
             <Modal open={this.state.coinInfoModal} onClose={this.handleClose}>
               <Grid container>
                 <div
@@ -974,7 +1020,7 @@ export class UserHome extends React.Component {
                     direction="column"
                   >
                     <p className={classes.coinp}>
-                      You'll get a Tamacoin every time
+                      You'll get a Tamacoin every day
                       {' ' + this.props.user.petName}'s progress bar reaches
                       100%.
                     </p>
@@ -1170,6 +1216,7 @@ export class UserHome extends React.Component {
                         src="/images/levelHeart.svg"
                         className={classes.inline}
                         variant="square"
+                        onClick={this.handleHeartInfo}
                       />
 
                       <span
