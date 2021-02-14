@@ -1,64 +1,69 @@
 import React, {Component} from 'react'
-import NameAndBedtime from './NameAndBedtime'
-import Reminders from './Reminders'
+import {connect} from 'react-redux'
+import {NameAndBedtime} from './NameAndBedtime'
+import {Reminders} from './Reminders'
 import GuidePet from '../guidePet'
 import {FindEgg} from './FindEgg'
 import Explain from './Explain'
+import {updateUser} from '../../store/user'
 
 export class UserForm extends Component {
-  state = {
-    step: 1,
-    userName: '',
-    bedTime: '',
-    sleepReminder: false,
-    exerciseReminder: false,
-    waterReminder: false,
-    meditationReminder: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      step: 1,
+      userName: '',
+      bedTime: '',
+      sleepReminder: false,
+      exerciseReminder: false,
+      waterReminder: false,
+      meditationReminder: false
+    }
+    this.nextStep = this.nextStep.bind(this)
+    this.prevStep = this.prevStep.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   //Proceed to next step
-  nextStep = () => {
-    const {step} = this.state
+  async nextStep(page) {
+    if (page === 'nameBed') {
+      const requestBody = {
+        userName: this.state.userName,
+        bedTime: this.state.bedTime
+      }
+      await this.props.updateUser(this.props.userId, requestBody)
+    } else if (page === 'reminder') {
+      const requestBody = {
+        sleepReminder: this.state.sleepReminder,
+        exerciseReminder: this.state.exerciseReminder,
+        waterReminder: this.state.waterReminder,
+        meditationReminder: this.state.meditationReminder
+      }
+      await this.props.updateUser(this.props.userId, requestBody)
+    }
     this.setState({
-      step: step + 1
+      step: this.state.step + 1
     })
   }
 
   //Go to previous step
-  prevStep = () => {
-    const {step} = this.state
+  prevStep() {
     this.setState({
-      step: step - 1
+      step: this.state.step - 1
     })
   }
 
-  handleChange = input => e => {
-    if (this.state.step === 2) {
-      this.setState({[input]: e.target.checked})
+  handleChange(e) {
+    if (this.state.step === 4) {
+      this.setState({[e.target.name]: e.target.checked})
     } else {
-      this.setState({[input]: e.target.value})
+      console.log(e)
+      this.setState({[e.target.name]: e.target.value})
     }
   }
 
   render() {
-    const {step} = this.state
-    const {
-      userName,
-      bedTime,
-      sleepReminder,
-      exerciseReminder,
-      waterReminder,
-      meditationReminder
-    } = this.state
-    const values = {
-      userName,
-      bedTime,
-      sleepReminder,
-      exerciseReminder,
-      waterReminder,
-      meditationReminder
-    }
-    switch (step) {
+    switch (this.state.step) {
       case 1:
         return <FindEgg nextStep={this.nextStep} />
       case 2:
@@ -68,7 +73,6 @@ export class UserForm extends Component {
           <NameAndBedtime
             nextStep={this.nextStep}
             handleChange={this.handleChange}
-            values={values}
           />
         )
       case 4:
@@ -77,7 +81,6 @@ export class UserForm extends Component {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
-            values={values}
           />
         )
       case 5:
@@ -86,4 +89,18 @@ export class UserForm extends Component {
   }
 }
 
-export default UserForm
+const mapState = state => {
+  return {
+    userId: state.user.id
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    updateUser: (id, data) => {
+      dispatch(updateUser(id, data))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserForm)
