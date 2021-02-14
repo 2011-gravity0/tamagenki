@@ -12,7 +12,7 @@ import {Typography} from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 import Modal from '@material-ui/core/Modal'
 
-const styles = theme => ({
+const styles = () => ({
   box: {
     width: '5em',
     margin: '1em',

@@ -3,13 +3,6 @@ import Navbar from './navbar'
 import {connect} from 'react-redux'
 import {Line} from 'react-chartjs-2'
 import {fetchUserHistory} from '../store/user'
-import Avatar from '@material-ui/core/Avatar'
-
-// TODO TONIGTH
-//1 CREATE WEEKLY FUNCTION FOR ALL(9)
-//2 CREATE MONTHLY FUNCTION (12)
-//4 FINISH UP(3)
-//GO TO BED (5)
 
 let weeklyArr
 let monthlyArr
