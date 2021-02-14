@@ -783,6 +783,12 @@ export class UserHome extends React.Component {
     })
   }
 
+  handleCoinInfo() {
+    this.setState({
+      coinInfoModal: true
+    })
+  }
+
   nameSubmit() {
     this.setState({hatchedModal: false})
     this.props.nameBuddy(this.props.userId, {petName: this.state.tamabuddyName})
