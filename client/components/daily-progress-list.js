@@ -1,12 +1,14 @@
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
 import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
 import InfoIcon from '@material-ui/icons/Info'
 import IconButton from '@material-ui/core/IconButton'
 import clsx from 'clsx'
+import {makeStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Modal from '@material-ui/core/Modal'
@@ -485,7 +487,7 @@ export const DailyProgressList = props => {
   )
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   grid: {
     paddingTop: 4,
     paddingBottom: 4
@@ -531,7 +533,7 @@ const useStyles = makeStyles({
     padding: 8,
     color: '#9c9c9c'
   }
-})
+}))
 
 // e6ffff
 // e6ffff

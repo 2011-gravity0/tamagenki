@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 
-import {withStyles} from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
@@ -12,7 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Lottie from 'react-lottie'
 import animationOwl from '../../../public/lotties/owl.json'
 
-export class Reminders extends Component {
+export default class Reminders extends Component {
   constructor() {
     super()
     this.state = {
@@ -85,14 +83,10 @@ export class Reminders extends Component {
           </div>
           <Grid container justify="center">
             <Box m={2} pt={3}>
-              <Button className={classes.button} onClick={this.goBack}>
-                Back
-              </Button>
+              <Button onClick={this.goBack}>Back</Button>
             </Box>
             <Box m={2} pt={3}>
-              <Button className={classes.button} onClick={this.continue}>
-                Continue
-              </Button>
+              <Button onClick={this.continue}>Continue</Button>
             </Box>
           </Grid>
         </div>
@@ -100,24 +94,3 @@ export class Reminders extends Component {
     )
   }
 }
-
-export default withStyles(styles)(Reminders)
-
-const styles = theme => ({
-  // Load app bar information from the theme
-  toolbar: theme.mixins.toolbar,
-  root: {
-    marginTop: 30,
-    padding: 20,
-    marginBottom: 3
-  },
-  button: {
-    margin: 20,
-    padding: 5,
-    backgroundColor: '#C9E3BE'
-  },
-  text: {
-    marginTop: 0,
-    padding: 20
-  }
-})

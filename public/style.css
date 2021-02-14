@@ -331,7 +331,7 @@ button {
 }
 
 .questionContainer .owlTalk {
-  color: #d87d40;
+  color: #387a5f;
   background-color: rgba(231, 249, 253, 0);
   text-align: center;
   margin: 0;
@@ -382,6 +382,35 @@ button {
 
 .notificationItem {
   margin: 0 !important;
+}
+
+.guide-header {
+  position: relative;
+  bottom: 45px;
+}
+
+.guide-text {
+  position: relative;
+  bottom: 25px;
+}
+
+.guide-header > .owlTalk {
+  color: #ca8113;
+  background-color: rgba(231, 249, 253, 0);
+  text-align: center;
+  margin: 0;
+  padding: 5px 30px;
+  font-size: 1.6rem;
+}
+
+.guide-text .owlTalk {
+  color: rgb(37, 37, 37);
+  font-size: 1.2rem;
+}
+
+.startButton {
+  position: relative;
+  bottom: 10px;
 }
 
 /*===== media query for whole guide components =====*/
@@ -490,18 +519,11 @@ button {
   align-items: center;
 }
 
-.guide-text h3 {
-  color: #4e7469;
+/* .guide-text p {
   font-family: 'Fredoka One';
   font-weight: lighter;
   text-align: center;
-}
-
-.guide-text p {
-  font-family: 'Fredoka One';
-  font-weight: lighter;
-  text-align: center;
-}
+} */
 
 /*===== HOME PAGE =====*/
 
