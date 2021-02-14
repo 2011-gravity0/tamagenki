@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import NameAndBedtime from './NameAndBedtime'
 import Reminders from './Reminders'
-import Success from './Success'
+import GuidePet from '../guidePet'
 import {FindEgg} from './FindEgg'
 import Explain from './Explain'
 
@@ -81,7 +81,7 @@ export class UserForm extends Component {
           />
         )
       case 5:
-        return <Success />
+        return <GuidePet />
     }
   }
 }

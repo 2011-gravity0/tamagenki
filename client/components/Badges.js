@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
@@ -15,7 +13,7 @@ import {Typography} from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 import Modal from '@material-ui/core/Modal'
 
-const styles = theme => ({
+const styles = () => ({
   box: {
     width: '5em',
     margin: '1em',
@@ -284,7 +282,7 @@ class Badges extends React.Component {
             direction="column"
           >
             <Typography variant="h5" className={classes.title}>
-              Level 1 Badges
+              Tier 1 Badges
             </Typography>
           </Grid>
           <Grid item container justify="center" alignItems="flex-end">
@@ -606,7 +604,7 @@ class Badges extends React.Component {
           <Grid container justify="flex-end">
             <Link to="/badgestwo">
               <Button className={classes.button} onClick={this.continue}>
-                Level 2 Badges {'->'}
+                Tier 2 Badges {'->'}
               </Button>
             </Link>
           </Grid>
@@ -627,8 +625,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // loadList: () => dispatch(fetchList()),
-    // updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
+    loadList: () => dispatch(fetchList()),
+    updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
     getUserHistory: (userId, action) =>
       dispatch(fetchUserHistory(userId, action))
   }

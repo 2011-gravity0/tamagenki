@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, DailyProgress} = require('../db/models')
+const {DailyProgress} = require('../db/models')
 module.exports = router
 
 const adminsOnly = (req, res, next) => {
@@ -30,7 +30,7 @@ router.get('/', async (req, res, next) => {
   try {
     let today = await getDate()
 
-    const [todaysProgress, created] = await DailyProgress.findOrCreate({
+    const [todaysProgress] = await DailyProgress.findOrCreate({
       attributes: [
         'exercise',
         'fruit',
@@ -46,11 +46,8 @@ router.get('/', async (req, res, next) => {
         date: today
       }
     })
-    if (todaysProgress) {
-      res.send(todaysProgress)
-    } else {
-      next()
-    }
+
+    res.send(todaysProgress)
   } catch (error) {
     next(error)
   }
@@ -59,7 +56,11 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const singleProgress = await DailyProgress.findByPk(req.params.id)
-    res.send(singleProgress)
+    if (singleProgress) {
+      res.send(singleProgress)
+    } else {
+      next()
+    }
   } catch (error) {
     next(error)
   }

@@ -1,27 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import animationOwl from '../../public/lotties/owl.json'
 import Lottie from 'react-lottie'
 import history from '../history'
-import {withStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 
-const styles = theme => ({
-  button: {
-    margin: 50,
-    padding: 3,
-    backgroundColor: '#C9E3BE',
-    color: '#4E7469'
-  },
-  text: {
-    margin: 15,
-    alignContent: 'center',
-    padding: 4,
-    backgroundColor: '#C8EAEF'
-  }
-})
-export class GuidePet extends React.Component {
+export default class GuidePet extends React.Component {
   constructor(props) {
     super(props)
     this.nextPage = this.nextPage.bind(this)
@@ -30,8 +14,7 @@ export class GuidePet extends React.Component {
     history.push('/')
   }
   render() {
-    const {classes} = this.props
-    const owlOption = {
+    const owlOptions = {
       loop: true,
       autoplay: true,
       animationData: animationOwl,
@@ -40,33 +23,35 @@ export class GuidePet extends React.Component {
       }
     }
     return (
-      <div className="tutorial-container">
-        <div>
-          <Lottie options={owlOption} height={300} width={300} />
-        </div>
-        <Card className={classes.text}>
-          <div className="guide-text">
-            <h3>We are now setting up your tamabuddy's room!</h3>
-            <p>
-              Your tamabuddy egg will hatch after checking off 3
-              accomplishments.
-            </p>
-            <p>
-              {' '}
-              We provided a suggested amount of servings for water, vegatables,
-              and fruits.
-            </p>
-            <p>
-              Clicking on a task icon will provide some helpful suggestions!
+      <div className="question-component">
+        <div className="questionContainer">
+          <div className="questionOwlAnime">
+            <Lottie options={owlOptions} height={100} width={100} />
+          </div>
+          <div className="guide-header">
+            <p className="owlTalk">You are all set!</p>
+            <p className="owlTalk">
+              We are now setting up your tamabuddy's room!
             </p>
           </div>
-        </Card>
-        <Button className={classes.button} onClick={() => this.nextPage()}>
-          Welcome!
-        </Button>
+          <div className="guide-text">
+            <p className="owlTalk">
+              Your tamabuddy egg will hatch after checking off a few
+              accomplishments.
+            </p>
+            <p className="owlTalk">
+              We provided a suggested amount of servings for water, vegatables,
+              and fruits along with other healty habits suggestions.
+            </p>
+            <p className="owlTalk">
+              Clicking on a info icon will provide more detail for each task!
+            </p>
+          </div>
+          <Button className="startButton" onClick={() => this.nextPage()}>
+            Let's Start!
+          </Button>
+        </div>
       </div>
     )
   }
 }
-
-export default withStyles(styles)(GuidePet)

@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import {withStyles} from '@material-ui/core/styles'
 import React from 'react'
 
-const BorderLinearProgress = withStyles(theme => ({
+const BorderLinearProgress = withStyles(() => ({
   root: {
     height: 15,
     borderRadius: 5
