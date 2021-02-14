@@ -261,35 +261,56 @@ export class UserHome extends React.Component {
       src: ['/music/whimsical-magic.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.2
+      volume: 0.08
     })
 
     this.song1 = new Howl({
       src: ['/music/60s-summer-party.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.2
+      volume: 0.08
     })
 
     this.song2 = new Howl({
       src: ['/music/city-of-light.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.2
+      volume: 0.08
     })
 
     this.song3 = new Howl({
       src: ['/music/claim-to-fame-8bit.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.2
+      volume: 0.08
     })
 
     this.song4 = new Howl({
       src: ['/music/welcome-to-my-dream.mp3'],
       autoplay: false,
       loop: true,
+      volume: 0.08
+    })
+
+    this.buddy = new Howl({
+      src: ['/sounds/critter.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.03
+    })
+
+    this.coin = new Howl({
+      src: ['/sounds/coins.mp3'],
+      autoplay: false,
+      loop: false,
       volume: 0.2
+    })
+
+    this.owl = new Howl({
+      src: ['/sounds/owlHmm.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.05
     })
 
     this.songs = [this.song0, this.song1, this.song2, this.song3, this.song4]
@@ -681,7 +702,7 @@ export class UserHome extends React.Component {
   }
 
   boomboxCheck() {
-    if (this.state.dailyPoints === 14) {
+    if (this.state.totalPoints === 14) {
       this.setState({boomboxModal: true})
     }
   }
@@ -776,6 +797,7 @@ export class UserHome extends React.Component {
   handleClick = () => {
     if (this.state.isHatched) {
       this.setState({lottie: waveAnimation})
+      this.buddy.play()
       setTimeout(() => {
         this.setState({
           lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
@@ -785,11 +807,13 @@ export class UserHome extends React.Component {
   }
 
   handleOwlClick = async () => {
+    this.owl.play()
     await this.props.getOwlResp()
     this.setState({owlResponse: this.props.response.response})
   }
 
   async handleCoinClose() {
+    this.coin.play()
     this.setState({completionModal: false})
     await this.props.updateList('tamacoin', true)
     this.setTamacoins()
