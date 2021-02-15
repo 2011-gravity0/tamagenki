@@ -41,7 +41,7 @@ export default class GuidePet extends React.Component {
             </p>
             <p className="owlTalk">
               We provided a suggested amount of servings for water, vegatables,
-              and fruits along with other healty habits suggestions.
+              and fruits along with other healthy habits suggestions.
             </p>
             <p className="owlTalk">
               Clicking on a info icon will provide more detail for each task!

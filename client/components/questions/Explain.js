@@ -10,7 +10,7 @@ export default class Explain extends Component {
   }
   continue = e => {
     e.preventDefault()
-    this.props.nextStep()
+    this.props.nextStep('explain')
   }
 
   render() {
