@@ -374,7 +374,6 @@ export class UserHome extends React.Component {
       streakInfoModal: false,
       currentAnimation: 0,
       tamabuddyName: '',
-      hatchModalButton: true,
       tamacoins: 0
     }
 
@@ -962,11 +961,9 @@ export class UserHome extends React.Component {
   }
 
   nameSubmit() {
-    // if(this.state.tamabuddyName){
-
-    // }
-    this.setState({hatchedModal: false})
-    this.props.nameBuddy(this.props.userId, {petName: this.state.tamabuddyName})
+    this.props.nameBuddy(this.props.userId, {
+      petName: this.state.tamabuddyName
+    })
     this.setState({hatchedModal: false})
   }
 
@@ -1208,7 +1205,7 @@ export class UserHome extends React.Component {
                     margin: '1.5em',
                     padding: '1em'
                   }}
-                  className={classes.paper}
+                  className={classes.hatchedPaper}
                 >
                   <Lottie options={guideAnimation} height={150} width={150} />
                   <Grid
@@ -1230,7 +1227,7 @@ export class UserHome extends React.Component {
                       variant="outlined"
                       type="text"
                       name="tamabuddyName"
-                      required="true"
+                      required={true}
                       onChange={this.handleChange}
                       value={this.state.tamabuddyName}
                     />
@@ -1238,7 +1235,7 @@ export class UserHome extends React.Component {
                       style={{color: 'white'}}
                       type="submit"
                       onClick={this.nameSubmit}
-                      disabled={this.state.hatchModalButton}
+                      disabled={!this.state.tamabuddyName}
                     >
                       submit
                     </Button>
