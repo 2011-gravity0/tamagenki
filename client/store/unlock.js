@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const GET_FEED = 'GET_FEED'
 const POST_FEED = 'POST_FEED'
+const UPDATE_LIKES = 'UPDATE_LIKES'
 
 const getFeed = allFeed => {
   return {
@@ -14,6 +15,13 @@ const postFeed = newFeed => {
   return {
     type: POST_FEED,
     newFeed
+  }
+}
+
+const getLikes = feed => {
+  return {
+    type: UPDATE_LIKES,
+    feed
   }
 }
 
@@ -35,6 +43,16 @@ export const unlockNewLevel = (userId, levelName) => {
       dispatch(postFeed(data))
     } catch (error) {
       console.log('This is error in unlockNewLevel Thunk', error)
+    }
+  }
+}
+
+export const updateLikes = (unlockId, points) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/unlock/${unlockId}`, {likes: points})
+    } catch (error) {
+      console.error(error)
     }
   }
 }
