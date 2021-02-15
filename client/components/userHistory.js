@@ -1,10 +1,8 @@
 import React from 'react'
 import Navbar from './navbar'
 import {connect} from 'react-redux'
-import {compose} from 'redux'
 import {Line} from 'react-chartjs-2'
 import {fetchUserHistory} from '../store/user'
-import Avatar from '@material-ui/core/Avatar'
 import moment from 'moment'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
@@ -16,7 +14,7 @@ class UserHistory extends React.Component {
       chartRange: 'week',
       labelDateRange: [],
       mapDateRange: [],
-      data: [],
+      userData: [],
       prev: 0,
       chartType: 'all',
       loading: true
@@ -78,7 +76,7 @@ class UserHistory extends React.Component {
         }
       })
     }
-    this.setState({data: range})
+    this.setState({userData: range})
   }
 
   async toggleChartRange(range) {
@@ -96,23 +94,24 @@ class UserHistory extends React.Component {
     if (type === 'prev') {
       await this.setState({prev: this.state.prev + 1})
     } else if (this.state.prev > 0) {
-        await this.setState({prev: this.state.prev - 1})
-      }
+      await this.setState({prev: this.state.prev - 1})
+    }
     await this.dateRangeMaker()
     await this.handleDataSort()
   }
 
   plotGraph() {
+    const {chartType, labelDateRange, chartRange, userData} = this.state
     return (
       <Line
         data={{
-          labels: this.state.labelDateRange,
+          labels: labelDateRange,
           datasets: [
             {
-              label: `${this.state.chartRange} | ${this.state.chartType}`,
-              data: this.state.data,
-              backgroundColor: [`${chartColor[this.state.chartType].fill}`],
-              borderColor: [`${chartColor[this.state.chartType].border}`]
+              label: `${chartRange} | ${chartType}`,
+              data: userData,
+              backgroundColor: [`${chartColor[chartType].fill}`],
+              borderColor: [`${chartColor[chartType].border}`]
             }
           ]
         }}
@@ -146,13 +145,15 @@ class UserHistory extends React.Component {
     }
   }
   render() {
-    const {loading} = this.state
-    console.log('State', this.state)
     return (
       <div className="chartContainer">
         <Navbar />
         <div className="chartErea">
-          {loading ? <div className="loading">Loading</div> : this.plotGraph()}
+          {this.state.loading ? (
+            <div className="loading">Loading</div>
+          ) : (
+            this.plotGraph()
+          )}
         </div>
         <div className="chartButtonContainer">
           <div className="chartRangeContainer">
