@@ -409,6 +409,7 @@ export class UserHome extends React.Component {
     this.setBoombox = this.setBoombox.bind(this)
     this.setStreak = this.setStreak.bind(this)
     this.firstCheck = this.firstCheck.bind(this)
+    this.levelUpCheck = this.levelUpCheck.bind(this)
   }
 
   async playSong() {
@@ -576,17 +577,17 @@ export class UserHome extends React.Component {
         level: 4
       })
     }
-    if (this.state.totalPoints >= 150 && this.state.totalPoints < 200) {
+    if (this.state.totalPoints >= 150 && this.state.totalPoints < 400) {
       await this.props.nameBuddy(this.props.user.id, {
         level: 5
       })
     }
-    if (this.state.totalPoints >= 200 && this.state.totalPoints < 260) {
+    if (this.state.totalPoints >= 400 && this.state.totalPoints < 550) {
       await this.props.nameBuddy(this.props.user.id, {
         level: 6
       })
     }
-    if (this.state.totalPoints >= 260 && this.state.totalPoints < 300) {
+    if (this.state.totalPoints >= 550) {
       await this.props.nameBuddy(this.props.user.id, {
         level: 7
       })
@@ -848,6 +849,8 @@ export class UserHome extends React.Component {
       await this.levelUpCheck()
       await this.props.getYesterday()
       await this.setStreak()
+
+      console.log('total points from componentdidmount', this.state.totalPoints)
 
       if (this.state.dailyPoints >= 3) {
         this.setState({
