@@ -50,6 +50,21 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+router.put('/:unlockId', async (req, res, next) => {
+  try {
+    const unlock = await Unlock.findByPk(req.params.unlockId)
+    if (unlock) {
+      unlock.update({likes: req.body.likes})
+      const updatedInstance = Unlock.findOne({where: {id: req.params.unlockId}})
+      res.send(updatedInstance)
+    } else {
+      next()
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.post('/:userId/:levelName', async (req, res, next) => {
   try {
     const userId = req.params.userId
