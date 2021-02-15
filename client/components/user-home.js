@@ -544,7 +544,7 @@ export class UserHome extends React.Component {
     }
     if (this.state.totalPoints >= 260 && this.state.totalPoints < 300) {
       await this.props.nameBuddy(this.props.user.id, {
-        level: 6
+        level: 7
       })
     }
   }
@@ -911,6 +911,17 @@ export class UserHome extends React.Component {
     const {classes} = this.props
     const {lottie, modal} = this.state
 
+    const hearts = [
+      '/levels/zero.svg',
+      '/levels/one.svg',
+      '/levels/two.svg',
+      '/levels/three.svg',
+      '/levels/four.svg',
+      '/levels/five.svg',
+      '/levels/six.svg',
+      '/levels/seven.svg'
+    ]
+
     const modalTitles = {
       water: 'Water Droplet Badge',
       meditation: 'Still Mind Badge',
@@ -1181,7 +1192,8 @@ export class UserHome extends React.Component {
                     >
                       {' '}
                       You can play songs for {this.props.user.petName} by
-                      tapping on the boombox to turn it on.
+                      tapping on the boombox to turn it on. Try turning it off
+                      and on again to switch songs.
                     </p>
                     <Button onClick={this.handleClose}>
                       <Lottie
@@ -1213,7 +1225,7 @@ export class UserHome extends React.Component {
                   >
                     <Grid item>
                       <Avatar
-                        src="/images/levelHeart.svg"
+                        src={hearts[this.props.user.level]}
                         className={classes.inline}
                         variant="square"
                         onClick={this.handleHeartInfo}
