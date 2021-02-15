@@ -45,7 +45,10 @@ const Navbar = ({handleLogout}, props) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" style={{background: '#FFB0AD'}}>
+      <AppBar
+        position="sticky"
+        style={{background: '#FFB0AD', position: 'static'}}
+      >
         <Toolbar className="nav">
           {/* The navbar will show these links and tools to anyone */}
           <Typography variant="h5" className={classes.title}>

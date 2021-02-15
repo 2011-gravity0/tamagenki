@@ -1030,49 +1030,21 @@ export class UserHome extends React.Component {
               className="contentsContainer"
             >
               <div className="animationContainer">
-                <Box className={classes.levelCard} width="100%">
-                  <Grid
-                    item
-                    container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center"
-                    spacing={0}
-                  >
-                    <Grid item>
-                      <Avatar
-                        src="/images/levelHeart.svg"
-                        className={classes.inline}
-                        variant="square"
-                      />
-
-                      <span
-                        style={{fontFamily: 'Lalezar', color: '#162C38'}}
-                        className={classes.inline}
-                      >
-                        LEVEL: {this.props.user.level}{' '}
-                      </span>
-                      {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
-                    </Grid>
-                    <Grid item>
-                      <Avatar
-                        src="/images/tamacoin.svg"
-                        className={classes.inline}
-                      />
-
-                      <span
-                        style={{fontFamily: 'Lalezar', color: '#162C38'}}
-                        className={classes.inline}
-                      >
-                        {this.state.tamacoins}{' '}
-                      </span>
-                      {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
-                    </Grid>
-                    {/* </Grid> */}
-                    <Grid item>streak</Grid>
-                  </Grid>
-                </Box>
-
+                <div className="statusBar">
+                  <div className="levelContainer">
+                    <img
+                      src="/images/levelHeart.svg"
+                      className="statusIcon heart"
+                      variant="square"
+                    />
+                    <span>LEVEL: {this.props.user.level} </span>
+                  </div>
+                  <div className="levelContainer">
+                    <img src="/images/tamacoin.svg" className="statusIcon" />
+                    <span>{this.state.tamacoins}</span>
+                  </div>
+                  <span>streak</span>
+                </div>
                 <div className="animation">
                   <div id="tamabuddyButton">
                     <Button
