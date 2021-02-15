@@ -8,12 +8,19 @@ import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import {motion} from 'framer-motion'
 
 export const NameAndBedtime = props => {
   const {handleChange, nextStep} = props
 
   return (
-    <div className="question-component">
+    <motion.div
+      className="question-component"
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
+      exit={{opacity: 0}}
+      transition={{duration: 1}}
+    >
       <div className="questionContainer">
         <div className="questionOwlAnime">
           <Lottie options={owlOptions} height={100} width={100} />
@@ -73,7 +80,7 @@ export const NameAndBedtime = props => {
           </Button>
         </Grid>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

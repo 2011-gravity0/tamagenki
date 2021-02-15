@@ -1,14 +1,9 @@
 'use strict'
 
 const db = require('../server/db')
-const {
-  User,
-  DailyProgress,
-  Level,
-  Unlock,
-  Response
-} = require('../server/db/models')
+const {User, DailyProgress, Level, Response} = require('../server/db/models')
 const levels = require('./levelSeedData')
+const bulkDataMaker = require('./bulkDataMaker')
 
 const users = [
   {
@@ -77,79 +72,6 @@ const users = [
   }
 ]
 
-// 7 dailyProgresses for Ed to unlock all badges
-
-const sunday = {
-  exercise: 1,
-  fruit: 3,
-  vegetables: 3,
-  water: 6,
-  meditation: 1,
-  sleep: 1,
-  relaxation: 1,
-  isToday: false
-}
-const monday = {
-  exercise: 1,
-  fruit: 3,
-  vegetables: 3,
-  water: 6,
-  meditation: 1,
-  sleep: 1,
-  relaxation: 1,
-  isToday: false
-}
-const tuesday = {
-  exercise: 1,
-  fruit: 3,
-  vegetables: 3,
-  water: 6,
-  meditation: 1,
-  sleep: 1,
-  relaxation: 1,
-  isToday: false
-}
-const wednesday = {
-  exercise: 1,
-  fruit: 3,
-  vegetables: 3,
-  water: 6,
-  meditation: 1,
-  sleep: 1,
-  relaxation: 1,
-  isToday: false
-}
-const thursday = {
-  exercise: 1,
-  fruit: 3,
-  vegetables: 3,
-  water: 6,
-  meditation: 1,
-  sleep: 1,
-  relaxation: 1,
-  isToday: false
-}
-const friday = {
-  exercise: 1,
-  fruit: 3,
-  vegetables: 3,
-  water: 6,
-  meditation: 1,
-  sleep: 1,
-  relaxation: 1,
-  isToday: false
-}
-const saturday = {
-  exercise: 1,
-  fruit: 3,
-  vegetables: 3,
-  water: 6,
-  meditation: 1,
-  sleep: 1,
-  relaxation: 1,
-  isToday: false
-}
-
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
@@ -165,20 +87,16 @@ async function seed() {
   )
 
   const ed = await User.findOne({where: {email: 'ed@email.com'}})
-  const mondayHistory = await DailyProgress.create(monday)
-  const tuesdayHistory = await DailyProgress.create(tuesday)
-  const wednesdayHistory = await DailyProgress.create(wednesday)
-  const thursdayHistory = await DailyProgress.create(thursday)
-  const fridayHistory = await DailyProgress.create(friday)
-  const saturdayHistory = await DailyProgress.create(saturday)
-  const sundayHistory = await DailyProgress.create(sunday)
-  await mondayHistory.setUser(ed)
-  await tuesdayHistory.setUser(ed)
-  await wednesdayHistory.setUser(ed)
-  await thursdayHistory.setUser(ed)
-  await fridayHistory.setUser(ed)
-  await saturdayHistory.setUser(ed)
-  await sundayHistory.setUser(ed)
+  // 30 dailyProgresses for Ed to unlock all badges and for history page
+  const edDailyData = bulkDataMaker(75)
+
+  await Promise.all(
+    edDailyData.map(async day => {
+      const history = await DailyProgress.create(day)
+      await history.setUser(ed)
+      return history
+    })
+  )
 
   await Response.bulkCreate([
     {

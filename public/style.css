@@ -58,7 +58,7 @@ button {
 
 #emailP,
 #passwordP {
-  margin-top: -18px;
+  margin-top: -10px;
   text-align: left;
 }
 
@@ -180,7 +180,7 @@ button {
   padding: 4px 10px;
   border-radius: 2px;
   color: rgb(43, 43, 43);
-  background-color: rgba(231, 249, 253, 0.7);
+  background-color: rgba(231, 249, 253, 0.75);
 }
 
 .explain-component .owlTalk {
@@ -372,9 +372,6 @@ button {
 
 .notificationContainer {
   width: 220px;
-}
-
-.reminderAlign {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -382,11 +379,12 @@ button {
 
 .notificationItem {
   margin: 0 !important;
+  color: rgb(43, 43, 43);
 }
 
 .guide-header {
   position: relative;
-  bottom: 45px;
+  bottom: 48px;
 }
 
 .guide-text {
@@ -511,19 +509,6 @@ button {
     margin: 8px 0;
   }
 }
-
-.tutorial-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* .guide-text p {
-  font-family: 'Fredoka One';
-  font-weight: lighter;
-  text-align: center;
-} */
 
 /*===== HOME PAGE =====*/
 
@@ -686,6 +671,12 @@ button {
   margin-left: 15px;
 }
 
+.fieldName h5 {
+  color: gray;
+  font-size: 0.9rem;
+  margin: 10px 0;
+}
+
 .userInfo {
   margin: 0;
   width: 180px;
@@ -707,13 +698,11 @@ button {
 }
 
 .settingTitle {
-  color: #c58684;
-  margin: 15px 0;
-}
-
-.editContainer h5 {
-  color: gray;
-  margin: 10px 0;
+  color: #3f6e60;
+  /* color: #c58684; */
+  font-size: 1.2rem;
+  font-family: 'Lalezar', cursive;
+  margin: 15px 0 0;
 }
 
 .editContainer hr {
@@ -760,13 +749,28 @@ button {
   height: 70vh;
 }
 
-.avatar {
+.typeIcon {
   display: inline-flex;
-  padding: 5px 5px;
-  margin: 10px 10px;
+  padding: 5px;
+  margin: 5px;
   background-color: #fff8ed;
   border: 1px rgb(202, 176, 127) solid;
   border-radius: 100%;
   height: 25px;
   width: 25px;
+}
+
+.chartButtonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chartRangeContainer {
+  width: 120px;
+}
+
+.rangeButton {
+  color: red;
 }

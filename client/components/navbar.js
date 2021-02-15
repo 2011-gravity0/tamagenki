@@ -22,7 +22,8 @@ const useStyles = makeStyles(theme => ({
     width: '100vw'
   },
   menu: {
-    color: 'gray'
+    color: 'gray',
+    fontFamily: 'Source Sans Pro'
   },
   title: {
     flexGrow: 1,

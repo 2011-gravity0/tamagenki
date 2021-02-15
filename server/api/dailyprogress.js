@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {DailyProgress} = require('../db/models')
+const moment = require('moment')
 module.exports = router
 
 const adminsOnly = (req, res, next) => {
@@ -16,13 +17,8 @@ const adminsOnly = (req, res, next) => {
 }
 
 const getDate = () => {
-  let [month, date, year] = new Date().toLocaleDateString('en-US').split('/')
-
-  if (month.length !== 0) {
-    return `${year}-0${month}-${date}`
-  } else {
-    return `${year}-${month}-${date}`
-  }
+  const today = new Date()
+  return moment(today).format('YYYY-MM-DD')
 }
 
 // get today's dailyProgress

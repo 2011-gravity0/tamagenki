@@ -169,7 +169,7 @@ const styles = () => ({
     paddingBottom: 0
   },
   modalTitle: {
-    fontFamily: 'Fredoka One',
+    fontFamily: 'Lalezar',
     color: '#fff',
     fontSize: '1.7em',
     marginBottom: 0,
@@ -177,7 +177,7 @@ const styles = () => ({
     textAlign: 'center'
   },
   hatchedModalTitle: {
-    fontFamily: 'Fredoka One',
+    fontFamily: 'Lalezar',
     color: '#c58684',
     fontSize: '1.7em',
     marginBottom: 0,
@@ -277,7 +277,7 @@ export class UserHome extends React.Component {
     this.songs = [this.song0, this.song1, this.song2, this.song3, this.song4]
 
     this.state = {
-      lottie: '',
+      lottie: {},
       boomboxPaused: true,
       dancing: false,
       playing: false,
@@ -357,7 +357,6 @@ export class UserHome extends React.Component {
       boomboxPaused: !this.state.boomboxPaused,
       dancing: !this.state.dancing
     })
-
   }
 
   async setTotalPoints() {
@@ -470,7 +469,6 @@ export class UserHome extends React.Component {
   }
 
   async checkWhichBox(event) {
-
     event.persist()
 
     if (
@@ -1049,7 +1047,7 @@ export class UserHome extends React.Component {
                       />
 
                       <span
-                        style={{fontFamily: 'Fredoka One', color: '#162C38'}}
+                        style={{fontFamily: 'Lalezar', color: '#162C38'}}
                         className={classes.inline}
                       >
                         LEVEL: {this.props.user.level}{' '}
@@ -1063,7 +1061,7 @@ export class UserHome extends React.Component {
                       />
 
                       <span
-                        style={{fontFamily: 'Fredoka One', color: '#162C38'}}
+                        style={{fontFamily: 'Lalezar', color: '#162C38'}}
                         className={classes.inline}
                       >
                         {this.state.tamacoins}{' '}
@@ -1083,13 +1081,11 @@ export class UserHome extends React.Component {
                       disableRipple={true}
                       className={classes.button}
                     >
-
                       <Lottie
                         options={this.state.dancing ? jumpAnimation : lottie}
                         height={270}
                         width={270}
                       />
-
                     </Button>
                   </div>
                   <Button
@@ -1109,7 +1105,6 @@ export class UserHome extends React.Component {
                       width={90}
                       isStopped={this.state.boomboxPaused}
                     />
-
                   </Button>
                 </div>
               </div>

@@ -57,7 +57,6 @@ export class UserForm extends Component {
     if (this.state.step === 4) {
       this.setState({[e.target.name]: e.target.checked})
     } else {
-      console.log(e)
       this.setState({[e.target.name]: e.target.value})
     }
   }
