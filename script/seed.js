@@ -87,8 +87,8 @@ async function seed() {
   )
 
   const ed = await User.findOne({where: {email: 'ed@email.com'}})
-  // 30 dailyProgresses for Ed to unlock all badges and for history page
-  const edDailyData = bulkDataMaker(75)
+  // num of dailyProgresses for Ed to unlock all badges and for history page
+  const edDailyData = bulkDataMaker(300)
 
   await Promise.all(
     edDailyData.map(async day => {

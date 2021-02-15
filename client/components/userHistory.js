@@ -20,14 +20,14 @@ class UserHistory extends React.Component {
       loading: true
     }
     this.plotGraph = this.plotGraph.bind(this)
-    this.dateRangeMaker = this.dateRangeMaker.bind(this)
+    this.createDataRange = this.createDataRange.bind(this)
     this.handleDataSort = this.handleDataSort.bind(this)
     this.toggleChartRange = this.toggleChartRange.bind(this)
     this.toggleChartType = this.toggleChartType.bind(this)
     this.toggleDate = this.toggleDate.bind(this)
   }
 
-  dateRangeMaker() {
+  createDataRange() {
     const dateArr = []
     const rangeBank = {month: 30, week: 7}
     const endDay = this.state.prev * rangeBank[this.state.chartRange]
@@ -81,7 +81,7 @@ class UserHistory extends React.Component {
 
   async toggleChartRange(range) {
     await this.setState({chartRange: range, prev: 0})
-    await this.dateRangeMaker()
+    await this.createDataRange()
     await this.handleDataSort()
   }
 
@@ -96,7 +96,7 @@ class UserHistory extends React.Component {
     } else if (this.state.prev > 0) {
       await this.setState({prev: this.state.prev - 1})
     }
-    await this.dateRangeMaker()
+    await this.createDataRange()
     await this.handleDataSort()
   }
 
@@ -135,7 +135,7 @@ class UserHistory extends React.Component {
   async componentDidMount() {
     try {
       await this.props.getUserHistory(this.props.userId)
-      await this.dateRangeMaker()
+      await this.createDataRange()
       await this.handleDataSort()
       this.setState({
         loading: false
