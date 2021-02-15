@@ -6,12 +6,16 @@ import user from './user'
 import dailyProgress from './dailyProgress'
 import owlResponse from './owlResponse'
 import unlock from './unlock'
+import boombox from './boombox'
+import yesterday from './yesterday'
 
 const reducer = combineReducers({
   user,
   list: dailyProgress,
   response: owlResponse,
-  feed: unlock
+  feed: unlock,
+  boombox,
+  yesterday
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -22,3 +26,5 @@ export default store
 export * from './user'
 export * from './dailyProgress'
 export * from './unlock'
+export * from './boombox'
+export * from './yesterday'

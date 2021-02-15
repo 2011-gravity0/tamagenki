@@ -80,6 +80,13 @@ class BadgesTwo extends React.Component {
       volume: 0.1
     })
 
+    this.drawer = new Howl({
+      src: ['/sounds/drawer.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.3
+    })
+
     this.state = {
       waterPoints: 0,
       meditationPoints: 0,
@@ -157,7 +164,7 @@ class BadgesTwo extends React.Component {
   handleOpen(event) {
     try {
       event.preventDefault()
-      this.badge.play()
+      this.drawer.play()
       this.setState({modalOpen: true, modal: event.currentTarget.value})
     } catch (error) {
       console.log(error)
@@ -165,6 +172,7 @@ class BadgesTwo extends React.Component {
   }
 
   handleClose() {
+    this.badge.play()
     this.setState({modalOpen: false})
   }
 

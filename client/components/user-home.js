@@ -5,6 +5,8 @@ import {compose} from 'redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
 import {fetchUserHistory, updateUser} from '../store/user'
 import {fetchResp} from '../store/owlResponse'
+import {fetchBoombox, fetchUpdatedBoombox} from '../store/boombox'
+import {fetchYesterday} from '../store/yesterday'
 
 import {Howl, Howler} from 'howler'
 import Navbar from './navbar'
@@ -242,13 +244,10 @@ const styles = () => ({
   coinp: {
     padding: '1.5 em',
     spacing: '1 em',
-    margin: '.2em',
-    marginTop: 0,
-    marginBottom: 0,
+    margin: 0,
     color: '#162C38',
     fontFamily: 'Helvetica',
-    fontSize: '1.4em',
-    fontWeight: 'bold'
+    fontSize: '1.2em'
   }
 })
 /**
@@ -307,6 +306,20 @@ export class UserHome extends React.Component {
       volume: 0.25
     })
 
+    this.heart = new Howl({
+      src: ['/sounds/heartLevel.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.12
+    })
+
+    this.streak = new Howl({
+      src: ['/sounds/streak.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.12
+    })
+
     this.owl = new Howl({
       src: ['/sounds/owlHmm.mp3'],
       autoplay: false,
@@ -319,6 +332,13 @@ export class UserHome extends React.Component {
       autoplay: false,
       loop: false,
       volume: 0.1
+    })
+
+    this.checkbox = new Howl({
+      src: ['/sounds/checkbox.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.05
     })
 
     this.songs = [this.song0, this.song1, this.song2, this.song3, this.song4]
@@ -342,6 +362,7 @@ export class UserHome extends React.Component {
       modal: '',
 
       isHatched: false,
+      hatching: false,
       sparkleMode: false,
       owlResponse: "Hi I'm Owl. Click me!",
       completionModal: false,
@@ -349,6 +370,8 @@ export class UserHome extends React.Component {
       unlockBadgeModal: false,
       boomboxModal: false,
       coinInfoModal: false,
+      heartInfoModal: false,
+      streakInfoModal: false,
       currentAnimation: 0,
       tamabuddyName: '',
       tamacoins: 0
@@ -380,33 +403,47 @@ export class UserHome extends React.Component {
     this.boomboxClick = this.boomboxClick.bind(this)
     this.boomboxCheck = this.boomboxCheck.bind(this)
     this.handleCoinInfo = this.handleCoinInfo.bind(this)
+    this.handleHeartInfo = this.handleHeartInfo.bind(this)
+    this.handleStreakInfo = this.handleStreakInfo.bind(this)
     this.handleBadgeClose = this.handleBadgeClose.bind(this)
+    this.setBoombox = this.setBoombox.bind(this)
+    this.setStreak = this.setStreak.bind(this)
+    this.firstCheck = this.firstCheck.bind(this)
   }
 
-  playSong() {
-    const num = Math.floor(Math.random() * 5)
-    this.setState({playing: true, song: num})
-    console.log('this.state.song', this.state.song)
+  async playSong() {
+    const num = Math.floor(Math.random() * this.songs.length)
     this.songs[num].play()
+    console.log('this.songs[num] from playSong', num, this.songs[num])
+    await this.props.updateBoombox(this.props.boombox.id, {
+      playing: true,
+      song: num
+    })
+    await this.setBoombox()
   }
 
-  pauseSong() {
-    this.setState({playing: false})
+  async pauseSong() {
+    await this.props.updateBoombox(this.props.boombox.id, {
+      playing: false
+    })
     const num = this.state.song
     this.songs[num].stop()
+    Howler.stop()
+    await this.setBoombox()
   }
 
-  boomboxClick() {
-    console.log('this.state.playing from boombox', this.state.playing)
-    if (this.state.playing) {
-      this.pauseSong()
+  async boomboxClick() {
+    console.log('boombox from boomboxClick', this.props.boombox)
+    if (this.props.boombox.playing) {
+      await this.pauseSong()
     } else {
-      this.playSong()
+      await this.playSong()
     }
-    this.setState({
-      boomboxPaused: !this.state.boomboxPaused,
-      dancing: !this.state.dancing
+    await this.props.updateBoombox(this.props.boombox.id, {
+      boomboxPaused: !this.props.boombox.boomboxPaused,
+      dancing: !this.props.boombox.dancing
     })
+    await this.setBoombox()
   }
 
   async setTotalPoints() {
@@ -468,6 +505,39 @@ export class UserHome extends React.Component {
     }
   }
 
+  async setStreak() {
+    try {
+      await this.props.getYesterday()
+      let yesterday = Object.values(this.props.yesterday)
+      if (yesterday.length === 8) {
+        let yesterdaysPoints = yesterday
+          .filter(el => typeof el === 'number')
+          .reduce((acc, curr) => {
+            return acc + curr
+          }, 0)
+        if (!yesterdaysPoints && !this.state.dailyPoints) {
+          await this.props.nameBuddy(this.props.userId, {streak: 0})
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async setBoombox() {
+    try {
+      await this.props.getBoombox()
+      this.setState({
+        boomboxPaused: this.props.boombox.boomboxPaused,
+        playing: this.props.boombox.playing,
+        dancing: this.props.boombox.dancing,
+        song: this.props.boombox.song
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async setTamacoins() {
     try {
       await this.props.getUserHistory(this.props.userId)
@@ -481,6 +551,11 @@ export class UserHome extends React.Component {
   }
 
   async levelUpCheck() {
+    if (this.state.totalPoints < 3) {
+      await this.props.nameBuddy(this.props.userId, {
+        level: 0
+      })
+    }
     if (this.state.totalPoints >= 3 && this.state.totalPoints < 10) {
       await this.props.nameBuddy(this.props.user.id, {
         level: 1
@@ -513,7 +588,7 @@ export class UserHome extends React.Component {
     }
     if (this.state.totalPoints >= 260 && this.state.totalPoints < 300) {
       await this.props.nameBuddy(this.props.user.id, {
-        level: 6
+        level: 7
       })
     }
   }
@@ -526,7 +601,7 @@ export class UserHome extends React.Component {
       event.target.checked === true &&
       this.state.isHatched
     ) {
-      this.finalCheck()
+      // this.finalCheck()
       this.fruitCheck()
       this.boomboxCheck()
       this.setState({lottie: appleAnimation})
@@ -539,13 +614,14 @@ export class UserHome extends React.Component {
         }, 3000)
       })
       await this.levelUpCheck()
+      // await this.firstCheck()
     }
     if (
       event.target.name === 'vegetables' &&
       event.target.checked === true &&
       this.state.isHatched
     ) {
-      this.finalCheck()
+      // this.finalCheck()
       this.vegetablesCheck()
       this.boomboxCheck()
       this.setState({lottie: carrotAnimation})
@@ -558,13 +634,14 @@ export class UserHome extends React.Component {
         }, 3000)
       })
       await this.levelUpCheck()
+      // await this.firstCheck()
     }
     if (
       event.target.name === 'water' &&
       event.target.checked === true &&
       this.state.isHatched
     ) {
-      this.finalCheck()
+      // this.finalCheck()
       this.waterCheck()
       this.boomboxCheck()
       this.setState({
@@ -580,13 +657,14 @@ export class UserHome extends React.Component {
         }, 3000)
       })
       await this.levelUpCheck()
+      // await this.firstCheck()
     }
     if (
       event.target.name === 'exercise' &&
       event.target.checked === true &&
       this.state.isHatched
     ) {
-      this.finalCheck()
+      // this.finalCheck()
       this.exerciseCheck()
       this.boomboxCheck()
       this.setState({lottie: exerciseAnimation})
@@ -599,13 +677,14 @@ export class UserHome extends React.Component {
         }, 3000)
       })
       await this.levelUpCheck()
+      // await this.firstCheck()
     }
     if (
       event.target.name === 'meditation' &&
       event.target.checked === true &&
       this.state.isHatched
     ) {
-      this.finalCheck()
+      // this.finalCheck()
       this.meditationCheck()
       this.boomboxCheck()
       this.setState({lottie: meditateAnimation})
@@ -618,13 +697,14 @@ export class UserHome extends React.Component {
         }, 3000)
       })
       await this.levelUpCheck()
+      // await this.firstCheck()
     }
     if (
       (event.target.name === 'relaxation' || event.target.name === 'sleep') &&
       event.target.checked === true &&
       this.state.isHatched
     ) {
-      this.finalCheck()
+      // this.finalCheck()
       this.boomboxCheck()
       if (event.target.name === 'relaxation') {
         this.relaxationCheck()
@@ -642,6 +722,7 @@ export class UserHome extends React.Component {
         }, 3000)
       })
       await this.levelUpCheck()
+      // await this.firstCheck()
     }
   }
 
@@ -650,13 +731,14 @@ export class UserHome extends React.Component {
       this.state.totalPoints >= 3 &&
       this.state.lottie === eggWiggleAnimation
     ) {
-      this.setState({lottie: eggHatchAnimation})
+      this.setState({lottie: eggHatchAnimation, hatching: true})
       clearTimeout(this.state.currentAnimation)
       setTimeout(() => {
         this.setState({
           lottie: idleAnimation,
           isHatched: true,
-          hatchedModal: true
+          hatchedModal: true,
+          hatching: false
         })
       }, 16000)
     }
@@ -666,21 +748,13 @@ export class UserHome extends React.Component {
     if (this.state.dailyPoints >= 5) {
       this.setState({lottie: sparkleAnimation, sparkleMode: true})
     }
-    if (
-      this.state.dailyPoints < 5 &&
-      // this.state.lottie === sparkleAnimation &&
-      this.state.totalPoints > 3
-    ) {
+    if (this.state.dailyPoints < 5 && this.state.totalPoints > 3) {
       this.setState({
         lottie: idleAnimation,
         sparkleMode: false
       })
     }
-    if (
-      this.state.dailyPoints < 5 &&
-      // this.state.lottie === sparkleAnimation &&
-      this.state.totalPoints < 3
-    ) {
+    if (this.state.dailyPoints < 5 && this.state.totalPoints < 3) {
       this.setState({
         lottie: eggWiggleAnimation,
         sparkleMode: false,
@@ -705,8 +779,17 @@ export class UserHome extends React.Component {
   }
 
   finalCheck() {
-    if (this.state.dailyPoints >= 15) {
+    if (this.state.dailyPoints === 16) {
       this.setState({completionModal: true})
+    }
+  }
+
+  async firstCheck() {
+    if (this.state.dailyPoints === 1) {
+      await this.props.nameBuddy(this.props.userId, {
+        streak: this.props.user.streak + 1
+      })
+      console.log('user from firstCheck', this.props.user)
     }
   }
 
@@ -759,8 +842,12 @@ export class UserHome extends React.Component {
       await this.props.loadList()
       await this.setTotalPoints()
       await this.setDailyPoints()
+      await this.props.getBoombox()
+      await this.setBoombox()
       await this.setTamacoins()
       await this.levelUpCheck()
+      await this.props.getYesterday()
+      await this.setStreak()
 
       if (this.state.dailyPoints >= 3) {
         this.setState({
@@ -794,10 +881,17 @@ export class UserHome extends React.Component {
       await this.setDailyPoints()
       await this.setTotalPoints()
 
+      console.log('event.target.checked', event.target.checked)
+      if (event.target.checked === true) {
+        //check to see if this is the first checkbox of the day, then add 1 to user's streak if it is
+        await this.firstCheck()
+        //check to see if this is the final checkbox, then trigger tamacoin modal if it is
+        this.finalCheck()
+        this.checkbox.play()
+      }
+
       //check to see if this is the 10th checkbox, then trigger eggHatch animation sequence if it is
       this.eggHatch()
-
-      //check to see if this is the final checkbox, then trigger a modal and animation change if it is
     } catch (error) {
       console.log(error)
     }
@@ -839,7 +933,23 @@ export class UserHome extends React.Component {
     this.setState({
       hatchedModal: false,
       boomboxModal: false,
-      coinInfoModal: false
+      coinInfoModal: false,
+      heartInfoModal: false,
+      streakInfoModal: false
+    })
+  }
+
+  handleStreakInfo() {
+    this.streak.play()
+    this.setState({
+      streakInfoModal: true
+    })
+  }
+
+  handleHeartInfo() {
+    this.heart.play()
+    this.setState({
+      heartInfoModal: true
     })
   }
 
@@ -863,6 +973,17 @@ export class UserHome extends React.Component {
   render() {
     const {classes} = this.props
     const {lottie, modal} = this.state
+
+    const hearts = [
+      '/levels/zero.svg',
+      '/levels/one.svg',
+      '/levels/two.svg',
+      '/levels/three.svg',
+      '/levels/four.svg',
+      '/levels/five.svg',
+      '/levels/six.svg',
+      '/levels/seven.svg'
+    ]
 
     const modalTitles = {
       water: 'Water Droplet Badge',
@@ -924,14 +1045,14 @@ export class UserHome extends React.Component {
           <div className="homeContainer">
             <Navbar />
 
-            <Modal open={this.state.coinInfoModal} onClose={this.handleClose}>
+            <Modal open={this.state.streakInfoModal} onClose={this.handleClose}>
               <Grid container>
                 <div
                   style={{
                     top: `${50}%`,
                     left: `${45}%`,
                     transform: `translate(-${50}%, -${50}%)`,
-                    margin: '1.5em',
+                    margin: '.1em',
                     padding: '1em'
                   }}
                   className={classes.coin}
@@ -944,7 +1065,65 @@ export class UserHome extends React.Component {
                     direction="column"
                   >
                     <p className={classes.coinp}>
-                      You'll get a Tamacoin every time
+                      Your streak will keep growing as long as you check off at
+                      least one box everyday. If you miss a day your streak
+                      count will be reset to zero.
+                    </p>
+                  </Grid>
+                </div>
+              </Grid>
+            </Modal>
+
+            <Modal open={this.state.heartInfoModal} onClose={this.handleClose}>
+              <Grid container>
+                <div
+                  style={{
+                    top: `${50}%`,
+                    left: `${45}%`,
+                    transform: `translate(-${50}%, -${50}%)`,
+                    margin: '.1em',
+                    padding: '1em'
+                  }}
+                  className={classes.coin}
+                >
+                  <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                  >
+                    <p className={classes.coinp}>
+                      {' ' + this.props.user.petName} will Level up and get
+                      stronger as you continue to check off boxes and accumulate
+                      points.
+                    </p>
+                  </Grid>
+                </div>
+              </Grid>
+            </Modal>
+
+            <Modal open={this.state.coinInfoModal} onClose={this.handleClose}>
+              <Grid container>
+                <div
+                  style={{
+                    top: `${50}%`,
+                    left: `${45}%`,
+                    transform: `translate(-${50}%, -${50}%)`,
+                    margin: '.1em',
+                    padding: '1em'
+                  }}
+                  className={classes.coin}
+                >
+                  <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                  >
+                    <p className={classes.coinp}>
+                      You'll get a Tamacoin for every day
                       {' ' + this.props.user.petName}'s progress bar reaches
                       100%.
                     </p>
@@ -1105,7 +1284,8 @@ export class UserHome extends React.Component {
                     >
                       {' '}
                       You can play songs for {this.props.user.petName} by
-                      tapping on the boombox to turn it on.
+                      tapping on the boombox to turn it on. Try turning it off
+                      and on again to switch songs.
                     </p>
                     <Button onClick={this.handleClose}>
                       <Lottie
@@ -1137,9 +1317,10 @@ export class UserHome extends React.Component {
                   >
                     <Grid item>
                       <Avatar
-                        src="/images/levelHeart.svg"
+                        src={hearts[this.props.user.level]}
                         className={classes.inline}
                         variant="square"
+                        onClick={this.handleHeartInfo}
                       />
 
                       <span
@@ -1166,7 +1347,23 @@ export class UserHome extends React.Component {
                       {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
                     </Grid>
                     {/* </Grid> */}
-                    <Grid item>streak</Grid>
+                    <Grid item>
+                      <Avatar
+                        src="/images/streak.svg"
+                        className={classes.inline}
+                        onClick={this.handleStreakInfo}
+                      />
+                      <span
+                        style={{
+                          fontFamily: 'Fredoka One',
+                          color: '#162C38',
+                          paddingRight: '.3em'
+                        }}
+                        className={classes.inline}
+                      >
+                        STREAK: {this.props.user.streak}
+                      </span>
+                    </Grid>
                   </Grid>
                 </Box>
 
@@ -1235,6 +1432,7 @@ export class UserHome extends React.Component {
               <DailyProgressList
                 handleCheck={this.handleCheck}
                 list={this.props.list}
+                hatching={this.state.hatching}
               />
             </div>
           </div>
@@ -1256,7 +1454,10 @@ const mapState = state => {
     list: state.list.list,
     history: state.user.dailyprogresses,
     user: state.user,
-    response: state.response.response
+    response: state.response.response,
+    boombox: state.boombox,
+    boomboxId: state.boombox.id,
+    yesterday: state.yesterday
   }
 }
 
@@ -1266,7 +1467,11 @@ const mapDispatch = dispatch => {
     updateList: (column, points) => dispatch(fetchUpdatedList(column, points)),
     getUserHistory: userId => dispatch(fetchUserHistory(userId)),
     nameBuddy: (userId, data) => dispatch(updateUser(userId, data)),
-    getOwlResp: () => dispatch(fetchResp())
+    getOwlResp: () => dispatch(fetchResp()),
+    getBoombox: () => dispatch(fetchBoombox()),
+    updateBoombox: (boomboxId, boomboxData) =>
+      dispatch(fetchUpdatedBoombox(boomboxId, boomboxData)),
+    getYesterday: () => dispatch(fetchYesterday())
   }
 }
 
