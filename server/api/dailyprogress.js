@@ -47,7 +47,8 @@ router.get('/', async (req, res, next) => {
         'meditation',
         'sleep',
         'relaxation',
-        'tamacoin'
+        'tamacoin',
+        'streakEarned'
       ],
       where: {
         userId: req.user.id,
@@ -75,7 +76,8 @@ router.get('/yesterday', async (req, res, next) => {
         'meditation',
         'sleep',
         'relaxation',
-        'tamacoin'
+        'tamacoin',
+        'streakEarned'
       ],
       where: {
         userId: req.user.id,

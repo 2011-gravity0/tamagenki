@@ -492,7 +492,7 @@ export class UserHome extends React.Component {
   async setDailyPoints() {
     try {
       let list = Object.values(this.props.list)
-      if (list.length === 8) {
+      if (list.length === 9) {
         let dailyPoints = list
           .filter(el => typeof el === 'number')
           .reduce((acc, curr) => {
@@ -510,7 +510,7 @@ export class UserHome extends React.Component {
     try {
       await this.props.getYesterday()
       let yesterday = Object.values(this.props.yesterday)
-      if (yesterday.length === 8) {
+      if (yesterday.length === 9) {
         let yesterdaysPoints = yesterday
           .filter(el => typeof el === 'number')
           .reduce((acc, curr) => {
@@ -793,7 +793,8 @@ export class UserHome extends React.Component {
       this.props.list.streakEarned,
       this.state.dailyPoints
     )
-    if (this.state.dailyPoints === 1) {
+    console.log('list from firstCheck', this.props.list)
+    if (this.state.dailyPoints === 1 && !this.props.list.streakEarned) {
       await this.props.updateList('streakEarned', true)
       await this.props.nameBuddy(this.props.userId, {
         streak: this.props.user.streak + 1
