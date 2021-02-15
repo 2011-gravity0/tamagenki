@@ -59,6 +59,10 @@ const User = db.define('user', {
   level: {
     type: Sequelize.INTEGER,
     defaultValue: 0
+  },
+  streak: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 

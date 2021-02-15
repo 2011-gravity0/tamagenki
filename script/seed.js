@@ -70,10 +70,11 @@ const users = [
   {
     email: 'ed@email.com',
     userName: 'Ed',
-    password: 'ed',
+    password: 'edward',
     sleepReminder: true,
     petName: 'Deloba',
-    points: 116
+    points: 116,
+    streak: 7
   }
 ]
 
@@ -87,7 +88,8 @@ const sunday = {
   meditation: 1,
   sleep: 1,
   relaxation: 1,
-  isToday: false
+  isToday: false,
+  tamacoin: true
 }
 const monday = {
   exercise: 1,
@@ -97,7 +99,8 @@ const monday = {
   meditation: 1,
   sleep: 1,
   relaxation: 1,
-  isToday: false
+  isToday: false,
+  tamacoin: true
 }
 const tuesday = {
   exercise: 1,
@@ -107,7 +110,8 @@ const tuesday = {
   meditation: 1,
   sleep: 1,
   relaxation: 1,
-  isToday: false
+  isToday: false,
+  tamacoin: true
 }
 const wednesday = {
   exercise: 1,
@@ -117,7 +121,8 @@ const wednesday = {
   meditation: 1,
   sleep: 1,
   relaxation: 1,
-  isToday: false
+  isToday: false,
+  tamacoin: true
 }
 const thursday = {
   exercise: 1,
@@ -127,7 +132,8 @@ const thursday = {
   meditation: 1,
   sleep: 1,
   relaxation: 1,
-  isToday: false
+  isToday: false,
+  tamacoin: true
 }
 const friday = {
   exercise: 1,
@@ -137,7 +143,8 @@ const friday = {
   meditation: 1,
   sleep: 1,
   relaxation: 1,
-  isToday: false
+  isToday: false,
+  tamacoin: true
 }
 const saturday = {
   exercise: 1,
@@ -147,7 +154,8 @@ const saturday = {
   meditation: 1,
   sleep: 1,
   relaxation: 1,
-  isToday: false
+  isToday: false,
+  tamacoin: true
 }
 
 async function seed() {

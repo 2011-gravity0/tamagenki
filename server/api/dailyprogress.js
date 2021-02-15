@@ -25,6 +25,18 @@ const getDate = () => {
   }
 }
 
+const getYesterdaysDate = () => {
+  let yesterday = new Date()
+  yesterday.setDate(yesterday.getDate() - 1)
+  let [month, date, year] = yesterday.toLocaleDateString('en-US').split('/')
+
+  if (month.length !== 0) {
+    return `${year}-0${month}-${date}`
+  } else {
+    return `${year}-${month}-${date}`
+  }
+}
+
 // get today's dailyProgress
 router.get('/', async (req, res, next) => {
   try {
@@ -48,6 +60,33 @@ router.get('/', async (req, res, next) => {
     })
 
     res.send(todaysProgress)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//get yesterday's dailyProgress to check if the user's streak is still going or not
+router.get('/yesterday', async (req, res, next) => {
+  try {
+    let yesterday = await getYesterdaysDate()
+
+    const [yesterdaysProgress] = await DailyProgress.findOrCreate({
+      attributes: [
+        'exercise',
+        'fruit',
+        'vegetables',
+        'water',
+        'meditation',
+        'sleep',
+        'relaxation',
+        'tamacoin'
+      ],
+      where: {
+        userId: req.user.id,
+        date: yesterday
+      }
+    })
+    res.send(yesterdaysProgress)
   } catch (error) {
     next(error)
   }

@@ -41,6 +41,7 @@ export default function dailyProgress(state = initialState, action) {
       return {...state, list: action.list}
     case UPDATE_POINTS:
       return {...state, list: action.list}
+
     default:
       return state
   }
