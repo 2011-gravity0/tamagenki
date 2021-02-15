@@ -12,11 +12,11 @@ class UserHistory extends React.Component {
     super(props)
     this.state = {
       chartRange: 'week',
+      chartType: 'all',
+      prev: 0,
       labelDateRange: [],
       mapDateRange: [],
       userData: [],
-      prev: 0,
-      chartType: 'all',
       loading: true
     }
     this.plotGraph = this.plotGraph.bind(this)
