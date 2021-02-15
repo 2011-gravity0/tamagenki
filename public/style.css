@@ -412,6 +412,12 @@ button {
 }
 
 /*===== media query for whole guide components =====*/
+/* media query for desktop */
+@media only screen and (min-width: 1024px) {
+  #tamabuddyButton {
+    height: 135%;
+  }
+}
 /* media query for tablet */
 @media only screen and (max-width: 1025px) {
   .find-egg-component {
@@ -441,6 +447,9 @@ button {
   .explain-component .owlTalk {
     font-size: 1.5rem;
     margin: 20px 0;
+  }
+  #tamabuddyButton {
+    height: 130%;
   }
 }
 
@@ -473,6 +482,9 @@ button {
   .explain-component .owlTalk {
     font-size: 1.1rem;
     margin: 8px 0;
+  }
+  #tamabuddyButton {
+    height: 100%;
   }
 }
 
@@ -507,6 +519,9 @@ button {
   .explain-component .owlTalk {
     font-size: 1.1rem;
     margin: 8px 0;
+  }
+  #tamabuddyButton {
+    height: 100%;
   }
 }
 

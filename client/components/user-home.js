@@ -5,6 +5,7 @@ import {compose} from 'redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
 import {fetchUserHistory, updateUser} from '../store/user'
 import {fetchResp} from '../store/owlResponse'
+
 import {Howl, Howler} from 'howler'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
@@ -230,6 +231,24 @@ const styles = () => ({
     float: 'left',
     display: 'inline',
     alignItems: 'center'
+  },
+  coin: {
+    position: 'absolute',
+    backgroundColor: '#C9E3BE',
+    border: 'none',
+    borderRadius: 5,
+    padding: '1 em'
+  },
+  coinp: {
+    padding: '1.5 em',
+    spacing: '1 em',
+    margin: '.2em',
+    marginTop: 0,
+    marginBottom: 0,
+    color: '#162C38',
+    fontFamily: 'Helvetica',
+    fontSize: '1.4em',
+    fontWeight: 'bold'
   }
 })
 /**
@@ -243,35 +262,63 @@ export class UserHome extends React.Component {
       src: ['/music/whimsical-magic.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.2
+      volume: 0.08
     })
 
     this.song1 = new Howl({
       src: ['/music/60s-summer-party.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.2
+      volume: 0.08
     })
 
     this.song2 = new Howl({
       src: ['/music/city-of-light.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.2
+      volume: 0.08
     })
 
     this.song3 = new Howl({
       src: ['/music/claim-to-fame-8bit.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.2
+      volume: 0.08
     })
 
     this.song4 = new Howl({
       src: ['/music/welcome-to-my-dream.mp3'],
       autoplay: false,
       loop: true,
-      volume: 0.2
+      volume: 0.08
+    })
+
+    this.buddy = new Howl({
+      src: ['/sounds/critter.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.03
+    })
+
+    this.coin = new Howl({
+      src: ['/sounds/coins.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.25
+    })
+
+    this.owl = new Howl({
+      src: ['/sounds/owlHmm.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.05
+    })
+
+    this.badge = new Howl({
+      src: ['/sounds/badge.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.1
     })
 
     this.songs = [this.song0, this.song1, this.song2, this.song3, this.song4]
@@ -301,6 +348,7 @@ export class UserHome extends React.Component {
       hatchedModal: false,
       unlockBadgeModal: false,
       boomboxModal: false,
+      coinInfoModal: false,
       currentAnimation: 0,
       tamabuddyName: '',
       tamacoins: 0
@@ -331,6 +379,8 @@ export class UserHome extends React.Component {
     this.pauseSong = this.pauseSong.bind(this)
     this.boomboxClick = this.boomboxClick.bind(this)
     this.boomboxCheck = this.boomboxCheck.bind(this)
+    this.handleCoinInfo = this.handleCoinInfo.bind(this)
+    this.handleBadgeClose = this.handleBadgeClose.bind(this)
   }
 
   playSong() {
@@ -661,7 +711,7 @@ export class UserHome extends React.Component {
   }
 
   boomboxCheck() {
-    if (this.state.dailyPoints === 14) {
+    if (this.state.totalPoints === 14) {
       this.setState({boomboxModal: true})
     }
   }
@@ -697,7 +747,7 @@ export class UserHome extends React.Component {
     }
   }
   meditationCheck() {
-    if (this.state.meditation === 1) {
+    if (this.state.meditation === 0) {
       this.setState({unlockBadgeModal: true, modal: 'meditation'})
     }
   }
@@ -756,6 +806,7 @@ export class UserHome extends React.Component {
   handleClick = () => {
     if (this.state.isHatched) {
       this.setState({lottie: waveAnimation})
+      this.buddy.play()
       setTimeout(() => {
         this.setState({
           lottie: this.state.sparkleMode ? sparkleAnimation : idleAnimation
@@ -765,21 +816,37 @@ export class UserHome extends React.Component {
   }
 
   handleOwlClick = async () => {
+    this.owl.play()
     await this.props.getOwlResp()
     this.setState({owlResponse: this.props.response.response})
   }
 
   async handleCoinClose() {
+    this.coin.play()
     this.setState({completionModal: false})
     await this.props.updateList('tamacoin', true)
     this.setTamacoins()
   }
 
+  handleBadgeClose() {
+    this.badge.play()
+    this.setState({
+      unlockBadgeModal: false
+    })
+  }
+
   handleClose() {
     this.setState({
-      unlockBadgeModal: false,
       hatchedModal: false,
-      boomboxModal: false
+      boomboxModal: false,
+      coinInfoModal: false
+    })
+  }
+
+  handleCoinInfo() {
+    this.coin.play()
+    this.setState({
+      coinInfoModal: true
     })
   }
 
@@ -840,7 +907,7 @@ export class UserHome extends React.Component {
           >
             <h2 className={classes.modalTitle}>GOOD JOB!!!</h2>
             <p className={classes.ptext2}>You unlocked the</p>
-            <Button onClick={this.handleClose}>
+            <Button onClick={this.handleBadgeClose}>
               <img src={modalImages[modal]} height="200" width="200" />
 
               <h2 className={classes.modalTitle}>{modalTitles[modal]}</h2>
@@ -856,6 +923,35 @@ export class UserHome extends React.Component {
         <>
           <div className="homeContainer">
             <Navbar />
+
+            <Modal open={this.state.coinInfoModal} onClose={this.handleClose}>
+              <Grid container>
+                <div
+                  style={{
+                    top: `${50}%`,
+                    left: `${45}%`,
+                    transform: `translate(-${50}%, -${50}%)`,
+                    margin: '1.5em',
+                    padding: '1em'
+                  }}
+                  className={classes.coin}
+                >
+                  <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                  >
+                    <p className={classes.coinp}>
+                      You'll get a Tamacoin every time
+                      {' ' + this.props.user.petName}'s progress bar reaches
+                      100%.
+                    </p>
+                  </Grid>
+                </div>
+              </Grid>
+            </Modal>
 
             <Modal
               open={this.state.completionModal}
