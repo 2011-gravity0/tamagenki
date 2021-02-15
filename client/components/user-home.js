@@ -338,7 +338,7 @@ export class UserHome extends React.Component {
       src: ['/sounds/checkbox.mp3'],
       autoplay: false,
       loop: false,
-      volume: 0.01
+      volume: 0.05
     })
 
     this.songs = [this.song0, this.song1, this.song2, this.song3, this.song4]

@@ -78,7 +78,7 @@ export class UserForm extends Component {
   }
 
   stopMusic() {
-    this.backgroundMusic.stop()
+    this.backgroundMusic.fade(0.05, 0, 6000)
   }
 
   render() {
