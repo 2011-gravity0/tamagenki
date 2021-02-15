@@ -1306,7 +1306,11 @@ export class UserHome extends React.Component {
               className="contentsContainer"
             >
               <div className="animationContainer">
-                <Box className={classes.levelCard} width="100%">
+                <Box
+                  className={classes.levelCard}
+                  className="statusBar"
+                  width={330}
+                >
                   <Grid
                     item
                     container
@@ -1315,7 +1319,7 @@ export class UserHome extends React.Component {
                     alignItems="center"
                     spacing={0}
                   >
-                    <Grid item>
+                    <Grid item className="levelContainer">
                       <Avatar
                         src={hearts[this.props.user.level]}
                         className={classes.inline}
@@ -1323,44 +1327,31 @@ export class UserHome extends React.Component {
                         onClick={this.handleHeartInfo}
                       />
 
-                      <span
-                        style={{fontFamily: 'Fredoka One', color: '#162C38'}}
-                        className={classes.inline}
-                      >
+                      <span className={classes.inline}>
                         LEVEL: {this.props.user.level}{' '}
                       </span>
                       {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
                     </Grid>
-                    <Grid item>
+                    <Grid item className="levelContainer">
                       <Avatar
                         src="/images/tamacoin.svg"
                         className={classes.inline}
                         onClick={this.handleCoinInfo}
                       />
 
-                      <span
-                        style={{fontFamily: 'Fredoka One', color: '#162C38'}}
-                        className={classes.inline}
-                      >
+                      <span className={classes.inline}>
                         {this.state.tamacoins}{' '}
                       </span>
                       {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
                     </Grid>
                     {/* </Grid> */}
-                    <Grid item>
+                    <Grid item className="levelContainer arrowIcon">
                       <Avatar
                         src="/images/streak.svg"
                         className={classes.inline}
                         onClick={this.handleStreakInfo}
                       />
-                      <span
-                        style={{
-                          fontFamily: 'Fredoka One',
-                          color: '#162C38',
-                          paddingRight: '.3em'
-                        }}
-                        className={classes.inline}
-                      >
+                      <span className={classes.inline}>
                         STREAK: {this.props.user.streak}
                       </span>
                     </Grid>
@@ -1371,7 +1362,6 @@ export class UserHome extends React.Component {
                   <div id="tamabuddyButton">
                     <Button
                       onClick={this.handleClick}
-                      style={{backgroundColor: 'transparent', height: '100%'}}
                       disableRipple={true}
                       className={classes.button}
                     >
@@ -1384,6 +1374,7 @@ export class UserHome extends React.Component {
                   </div>
                   <Button
                     onClick={this.boomboxClick}
+                    className="boomboxButton"
                     style={{
                       backgroundColor: 'transparent',
 
@@ -1395,8 +1386,8 @@ export class UserHome extends React.Component {
                   >
                     <Lottie
                       options={boomboxAnimation}
-                      height={90}
-                      width={90}
+                      height={80}
+                      width={80}
                       isStopped={this.state.boomboxPaused}
                     />
                   </Button>
