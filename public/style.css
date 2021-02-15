@@ -411,13 +411,19 @@ button {
   bottom: 10px;
 }
 
-/*===== media query for whole guide components =====*/
-/* media query for desktop */
-@media only screen and (min-width: 1024px) {
-  #tamabuddyButton {
-    height: 135%;
-  }
+#tamabuddyButton button {
+  height: 120%;
+  padding: 0;
+  background-color: transparent;
 }
+
+.boomboxButton {
+  /* margin-bottom: 55px !important; */
+  width: 80px;
+}
+
+/*===== media query for whole guide components =====*/
+
 /* media query for tablet */
 @media only screen and (max-width: 1025px) {
   .find-egg-component {
@@ -447,9 +453,6 @@ button {
   .explain-component .owlTalk {
     font-size: 1.5rem;
     margin: 20px 0;
-  }
-  #tamabuddyButton {
-    height: 130%;
   }
 }
 
@@ -482,9 +485,6 @@ button {
   .explain-component .owlTalk {
     font-size: 1.1rem;
     margin: 8px 0;
-  }
-  #tamabuddyButton {
-    height: 100%;
   }
 }
 
@@ -520,8 +520,11 @@ button {
     font-size: 1.1rem;
     margin: 8px 0;
   }
-  #tamabuddyButton {
-    height: 100%;
+  #tamabuddyButton button {
+    margin-top: 65px;
+    width: 270px;
+    height: 270px;
+    background-color: transparent;
   }
 }
 
@@ -634,11 +637,11 @@ button {
 
 .statusBar {
   margin: 15px;
-  width: 310px;
+  width: 330px in !important;
   height: 40px;
-  padding: 0 15px 0 18px;
-  background-color: rgba(218, 255, 229, 0.788);
-  border-radius: 8px;
+  padding: 0 14px 0 10px;
+  background-color: rgba(218, 255, 229, 0.884);
+  border-radius: 5px;
   display: flex;
   position: fixed;
   top: 60px;
@@ -647,26 +650,25 @@ button {
   align-items: center;
 }
 
-.statusIcon {
-  height: 30px;
-  width: 30px;
-  margin-right: 5px;
-}
-
-.heart {
-  margin-bottom: 3px;
-}
-
-.statusBar span {
-  font-family: 'Lalezar', cursive;
-  color: #273a44;
-  font-size: 1.2rem;
-}
-
 .levelContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.levelContainer span {
+  font-family: 'Lalezar', cursive;
+  color: '#162C38';
+  font-size: 1rem;
+  margin-left: 5px;
+}
+
+/* .AnimationContainer .MuiBox-root {
+} */
+
+.arrowIcon .MuiAvatar-img {
+  margin: 4px 0 0 5px;
+  width: 35px;
 }
 
 /*===== NAME EGG =====*/
@@ -864,6 +866,10 @@ button {
 
 .rangeButton {
   color: red;
+}
+
+.typeIcon:hover {
+  border-bottom: none;
 }
 
 @media only screen and (max-width: 600px) {
