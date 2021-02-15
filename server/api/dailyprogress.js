@@ -132,7 +132,8 @@ router.put('/', async (req, res, next) => {
           'meditation',
           'sleep',
           'relaxation',
-          'tamacoin'
+          'tamacoin',
+          'streakEarned'
         ]
       })
       res.send(updatedProgress)

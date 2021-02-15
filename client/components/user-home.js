@@ -786,11 +786,14 @@ export class UserHome extends React.Component {
   }
 
   async firstCheck() {
-    if (this.state.dailyPoints === 1) {
+    console.log('streak earned from firstCheck', this.props.list.streakEarned)
+    if (this.state.dailyPoints === 1 && !this.props.list.streakEarned) {
+      await this.props.updateList('streakEarned', true)
       await this.props.nameBuddy(this.props.userId, {
         streak: this.props.user.streak + 1
       })
-      console.log('user from firstCheck', this.props.user)
+
+      console.log('list from firstCheck', this.props.list)
     }
   }
 
