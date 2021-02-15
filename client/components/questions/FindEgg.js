@@ -14,6 +14,10 @@ export class FindEgg extends Component {
     this.props.nextStep('findEgg')
   }
 
+  componentDidMount() {
+    this.props.startMusic()
+  }
+
   render() {
     const eggOptions = {
       loop: true,

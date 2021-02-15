@@ -65,10 +65,11 @@ const users = [
   {
     email: 'ed@email.com',
     userName: 'Ed',
-    password: 'ed',
+    password: 'edward',
     sleepReminder: true,
     petName: 'Deloba',
-    points: 116
+    points: 116,
+    streak: 7
   }
 ]
 

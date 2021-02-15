@@ -34,7 +34,7 @@ export default class Explain extends Component {
       >
         <div className="promptContainer">
           <p className="explain-one owlTalk">
-            You are now the gaurdian of a tammabuddy!
+            You are now the guardian of a tammabuddy!
           </p>
           <p className="explain-two owlTalk">
             As a guardian, you are responsible for your buddy's health.
@@ -48,7 +48,7 @@ export default class Explain extends Component {
           </p>
           <p className="explain-five owlTalk">
             As you checkoff some of your accomplishments your tammabuddy will
-            aslo reap the benefits!
+            also reap the benefits!
           </p>
           <p className="explain-six owlTalk">
             And as time continues you'll be able to earn badges congratulating

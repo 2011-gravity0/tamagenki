@@ -4,6 +4,7 @@ const Subscription = require('./subscription')
 const Response = require('./owl')
 const Level = require('./level')
 const Unlock = require('./unlock')
+const Boombox = require('./boombox')
 
 // const {default: user} = require('../../../client/store/user')
 
@@ -27,6 +28,9 @@ Unlock.belongsTo(User)
 Level.hasMany(Unlock)
 Unlock.belongsTo(Level)
 
+User.hasOne(Boombox)
+Boombox.belongsTo(User)
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
@@ -39,5 +43,6 @@ module.exports = {
   Subscription,
   Response,
   Level,
-  Unlock
+  Unlock,
+  Boombox
 }

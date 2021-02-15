@@ -10,6 +10,7 @@ export default class GuidePet extends React.Component {
     this.nextPage = this.nextPage.bind(this)
   }
   nextPage() {
+    this.props.stopMusic()
     history.push('/')
   }
   render() {

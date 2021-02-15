@@ -554,6 +554,9 @@ button {
   background-size: 100vh;
   background-position: center top;
   background-attachment: fixed;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 5px 5px 5px rgb(205, 203, 203);
 }
 
 .animation {
