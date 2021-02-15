@@ -33,49 +33,33 @@ export class SocialHome extends React.Component {
   getTime() {
     const dateArr = []
     for (let i = 0; i < this.props.feed.length; i++) {
-      let date = this.props.feed[i].createdAt
+      let [date] = this.props.feed[i].createdAt
       dateArr.push(new Date(date))
     }
     return dateArr
   }
-  likes() {
+  likes(feedId) {
     const element = <Icon icon={thumbsUp} />
     return (
       <div id="body">
-        <button class="like__btn">
+        <button
+          class="like__btn"
+          onClick={() => {
+            this.clickedLikes(feedId)
+          }}
+          style={{height: '25px', width: '25px'}}
+        >
           <span id="icon">{element}</span>
-          <span id="count">0</span> Like
+          <span id="count"> 0 </span> Like
         </button>
       </div>
     )
   }
-  clickedLikes() {
-    console.log('this is working')
-    const likeBtn = document.querySelector('.like__btn')
-    let likeIcon = document.querySelector('#icon'),
-      count = document.querySelector('#count')
-
-    let clicked = false
-
-    console.log('this isOUTSIDE', likeBtn)
-    likeBtn.addEventListener('click', () => {
-      console.log('this is clicked')
-      if (!clicked) {
-        clicked = true
-        likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i>`
-        count.textContent++
-        console.log('this button was liked')
-      } else {
-        clicked = false
-        likeIcon.innerHTML = `<i class="far fa-thumbs-up"></i>`
-        count.textContent--
-        console.log('this button was unliked')
-      }
-    })
-  }
+  clickedLikes() {}
   render() {
     const feeds = this.props.feed
     let dates = this.getTime()
+    console.log('FEED', this.props.feed)
     return (
       <div>
         <Navbar />
@@ -88,11 +72,11 @@ export class SocialHome extends React.Component {
                 style={{height: '25px', width: '25px'}}
               />
               <br />
+              {this.likes(feed.id)}
               <small>{String(dates[0])}</small>
             </div>
           ))}
         </div>
-        {this.likes()}
       </div>
     )
   }

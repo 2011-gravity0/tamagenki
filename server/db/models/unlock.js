@@ -6,6 +6,13 @@ const Unlock = db.define('unlock', {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: 'system purpose only'
+  },
+  likes: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+    validate: {
+      min: 0
+    }
   }
 })
 
