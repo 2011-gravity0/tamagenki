@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
@@ -27,7 +28,6 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-    console.log(isLoggedIn)
 
     return (
       <Switch>
@@ -36,7 +36,6 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
           //Only logged in user can see home
-
           <Switch>
             <Route exact path="/" component={UserHome} />
             <Route exact path="/nameEgg" component={NamePet} />

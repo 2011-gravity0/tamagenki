@@ -58,7 +58,7 @@ button {
 
 #emailP,
 #passwordP {
-  margin-top: -18px;
+  margin-top: -10px;
   text-align: left;
 }
 
@@ -180,7 +180,7 @@ button {
   padding: 4px 10px;
   border-radius: 2px;
   color: rgb(43, 43, 43);
-  background-color: rgba(231, 249, 253, 0.7);
+  background-color: rgba(231, 249, 253, 0.75);
 }
 
 .explain-component .owlTalk {
@@ -372,9 +372,6 @@ button {
 
 .notificationContainer {
   width: 220px;
-}
-
-.reminderAlign {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -382,11 +379,12 @@ button {
 
 .notificationItem {
   margin: 0 !important;
+  color: rgb(43, 43, 43);
 }
 
 .guide-header {
   position: relative;
-  bottom: 45px;
+  bottom: 48px;
 }
 
 .guide-text {
@@ -527,19 +525,6 @@ button {
   }
 }
 
-.tutorial-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* .guide-text p {
-  font-family: 'Fredoka One';
-  font-weight: lighter;
-  text-align: center;
-} */
-
 /*===== HOME PAGE =====*/
 
 .homeContainer {
@@ -550,7 +535,8 @@ button {
 
 .animationContainer {
   width: 375px;
-  height: 44vh;
+  height: 43vh;
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -588,6 +574,9 @@ button {
 }
 
 @media (max-width: 600px) {
+  .animationContainer {
+    margin-top: 40px;
+  }
   .listView {
     width: 345px;
   }
@@ -641,6 +630,43 @@ button {
 
 .avatar-modals p:focus {
   outline: none !important;
+}
+
+.statusBar {
+  margin: 15px;
+  width: 310px;
+  height: 40px;
+  padding: 0 15px 0 18px;
+  background-color: rgba(218, 255, 229, 0.788);
+  border-radius: 8px;
+  display: flex;
+  position: fixed;
+  top: 60px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statusIcon {
+  height: 30px;
+  width: 30px;
+  margin-right: 5px;
+}
+
+.heart {
+  margin-bottom: 3px;
+}
+
+.statusBar span {
+  font-family: 'Lalezar', cursive;
+  color: #273a44;
+  font-size: 1.2rem;
+}
+
+.levelContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 /*===== NAME EGG =====*/
@@ -704,6 +730,12 @@ button {
   margin-left: 15px;
 }
 
+.fieldName h5 {
+  color: gray;
+  font-size: 0.9rem;
+  margin: 10px 0;
+}
+
 .userInfo {
   margin: 0;
   width: 180px;
@@ -725,13 +757,11 @@ button {
 }
 
 .settingTitle {
-  color: #c58684;
-  margin: 15px 0;
-}
-
-.editContainer h5 {
-  color: gray;
-  margin: 10px 0;
+  color: #3f6e60;
+  /* color: #c58684; */
+  font-size: 1.2rem;
+  font-family: 'Lalezar', cursive;
+  margin: 15px 0 0;
 }
 
 .editContainer hr {
@@ -766,25 +796,91 @@ button {
   padding: 10px 10px;
 }
 
-.ChartContainer {
-  height: 100vh;
+.chartContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 .chartErea {
-  width: 75vw;
-  margin: 20px auto;
+  width: 80vw;
+  margin: 25px auto;
   height: 70vh;
 }
 
-.avatar {
+.typeIcon {
   display: inline-flex;
-  padding: 5px 5px;
-  margin: 10px 10px;
-  background-color: #fff8ed;
-  border: 1px rgb(202, 176, 127) solid;
+  padding: 5px;
+  margin: 3px;
+  background-color: #ffeac6;
+  box-shadow: inset 0 2px 0 rgba(243, 230, 220, 0.5),
+    0 2px 2px rgba(0, 0, 0, 0.19);
+  border-bottom: solid 2px #ac8063;
   border-radius: 100%;
   height: 25px;
   width: 25px;
+}
+
+.typeIcon p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #b66d31;
+  margin: 0;
+  padding: 0 0 3px;
+  height: 15px;
+}
+
+.allDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chartButtonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chartRangeContainer {
+  width: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.chartRangeContainer button {
+  color: #db7d30;
+  border-color: #db7d30;
+}
+
+.chartIconContainer {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.rangeButton {
+  color: red;
+}
+
+@media only screen and (max-width: 600px) {
+  .chartErea {
+    width: 95vw;
+    margin: 20px auto;
+    height: 63vh;
+  }
+  .chartIconContainer {
+    margin: 17px;
+    width: 300px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .typeIcon {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+  }
 }

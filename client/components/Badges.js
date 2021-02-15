@@ -28,7 +28,7 @@ const styles = () => ({
   },
   title: {
     fontSize: '1 rem',
-    fontFamily: 'Fredoka One',
+    fontFamily: 'Lalezar',
     color: '#4F7469',
     marginBottom: '.5 rem',
     marginTop: 0
@@ -63,7 +63,7 @@ const styles = () => ({
     fontWeight: 'bold'
   },
   modalTitle: {
-    fontFamily: 'Fredoka One',
+    fontFamily: 'Lalezar',
     color: '#BE2D25',
     fontSize: '1.7em'
   }

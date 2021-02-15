@@ -172,7 +172,7 @@ const styles = () => ({
     paddingBottom: 0
   },
   modalTitle: {
-    fontFamily: 'Fredoka One',
+    fontFamily: 'Lalezar',
     color: '#fff',
     fontSize: '1.7em',
     marginBottom: 0,
@@ -180,7 +180,7 @@ const styles = () => ({
     textAlign: 'center'
   },
   hatchedModalTitle: {
-    fontFamily: 'Fredoka One',
+    fontFamily: 'Lalezar',
     color: '#c58684',
     fontSize: '1.7em',
     marginBottom: 0,
@@ -344,7 +344,7 @@ export class UserHome extends React.Component {
     this.songs = [this.song0, this.song1, this.song2, this.song3, this.song4]
 
     this.state = {
-      lottie: '',
+      lottie: {},
       boomboxPaused: true,
       dancing: false,
       playing: false,
