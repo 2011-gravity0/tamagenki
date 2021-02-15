@@ -780,14 +780,20 @@ export class UserHome extends React.Component {
   }
 
   finalCheck() {
+    console.log('daily points from final check', this.state.dailyPoints)
     if (this.state.dailyPoints === 16) {
       this.setState({completionModal: true})
     }
   }
 
   async firstCheck() {
-    console.log('streak earned from firstCheck', this.props.list.streakEarned)
-    if (this.state.dailyPoints === 1 && !this.props.list.streakEarned) {
+    // await this.setDailyPoints()
+    console.log(
+      'streak earned from firstCheck',
+      this.props.list.streakEarned,
+      this.state.dailyPoints
+    )
+    if (this.state.dailyPoints === 1) {
       await this.props.updateList('streakEarned', true)
       await this.props.nameBuddy(this.props.userId, {
         streak: this.props.user.streak + 1
@@ -886,6 +892,7 @@ export class UserHome extends React.Component {
       //update local state to reflect new change
       await this.setDailyPoints()
       await this.setTotalPoints()
+      console.log('daily points from handle check', this.state.dailyPoints)
 
       console.log('event.target.checked', event.target.checked)
       if (event.target.checked === true) {
