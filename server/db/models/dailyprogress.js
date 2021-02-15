@@ -65,6 +65,10 @@ const DailyProgress = db.define('dailyprogress', {
   tamacoin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  streakEarned: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 module.exports = DailyProgress

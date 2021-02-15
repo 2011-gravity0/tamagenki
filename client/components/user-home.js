@@ -409,6 +409,7 @@ export class UserHome extends React.Component {
     this.setBoombox = this.setBoombox.bind(this)
     this.setStreak = this.setStreak.bind(this)
     this.firstCheck = this.firstCheck.bind(this)
+    this.levelUpCheck = this.levelUpCheck.bind(this)
   }
 
   async playSong() {
@@ -491,7 +492,7 @@ export class UserHome extends React.Component {
   async setDailyPoints() {
     try {
       let list = Object.values(this.props.list)
-      if (list.length === 8) {
+      if (list.length === 9) {
         let dailyPoints = list
           .filter(el => typeof el === 'number')
           .reduce((acc, curr) => {
@@ -509,7 +510,7 @@ export class UserHome extends React.Component {
     try {
       await this.props.getYesterday()
       let yesterday = Object.values(this.props.yesterday)
-      if (yesterday.length === 8) {
+      if (yesterday.length === 9) {
         let yesterdaysPoints = yesterday
           .filter(el => typeof el === 'number')
           .reduce((acc, curr) => {
@@ -576,17 +577,17 @@ export class UserHome extends React.Component {
         level: 4
       })
     }
-    if (this.state.totalPoints >= 150 && this.state.totalPoints < 200) {
+    if (this.state.totalPoints >= 150 && this.state.totalPoints < 400) {
       await this.props.nameBuddy(this.props.user.id, {
         level: 5
       })
     }
-    if (this.state.totalPoints >= 200 && this.state.totalPoints < 260) {
+    if (this.state.totalPoints >= 400 && this.state.totalPoints < 550) {
       await this.props.nameBuddy(this.props.user.id, {
         level: 6
       })
     }
-    if (this.state.totalPoints >= 260 && this.state.totalPoints < 300) {
+    if (this.state.totalPoints >= 550) {
       await this.props.nameBuddy(this.props.user.id, {
         level: 7
       })
@@ -779,17 +780,27 @@ export class UserHome extends React.Component {
   }
 
   finalCheck() {
+    console.log('daily points from final check', this.state.dailyPoints)
     if (this.state.dailyPoints === 16) {
       this.setState({completionModal: true})
     }
   }
 
   async firstCheck() {
-    if (this.state.dailyPoints === 1) {
+    // await this.setDailyPoints()
+    console.log(
+      'streak earned from firstCheck',
+      this.props.list.streakEarned,
+      this.state.dailyPoints
+    )
+    console.log('list from firstCheck', this.props.list)
+    if (this.state.dailyPoints === 1 && !this.props.list.streakEarned) {
+      await this.props.updateList('streakEarned', true)
       await this.props.nameBuddy(this.props.userId, {
         streak: this.props.user.streak + 1
       })
-      console.log('user from firstCheck', this.props.user)
+
+      console.log('list from firstCheck', this.props.list)
     }
   }
 
@@ -849,6 +860,8 @@ export class UserHome extends React.Component {
       await this.props.getYesterday()
       await this.setStreak()
 
+      console.log('total points from componentdidmount', this.state.totalPoints)
+
       if (this.state.dailyPoints >= 3) {
         this.setState({
           lottie: sparkleAnimation,
@@ -880,6 +893,7 @@ export class UserHome extends React.Component {
       //update local state to reflect new change
       await this.setDailyPoints()
       await this.setTotalPoints()
+      console.log('daily points from handle check', this.state.dailyPoints)
 
       console.log('event.target.checked', event.target.checked)
       if (event.target.checked === true) {
