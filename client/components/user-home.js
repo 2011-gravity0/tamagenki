@@ -338,7 +338,7 @@ export class UserHome extends React.Component {
       src: ['/sounds/checkbox.mp3'],
       autoplay: false,
       loop: false,
-      volume: 0.06
+      volume: 0.01
     })
 
     this.songs = [this.song0, this.song1, this.song2, this.song3, this.song4]
@@ -362,6 +362,7 @@ export class UserHome extends React.Component {
       modal: '',
 
       isHatched: false,
+      hatching: false,
       sparkleMode: false,
       owlResponse: "Hi I'm Owl. Click me!",
       completionModal: false,
@@ -730,13 +731,14 @@ export class UserHome extends React.Component {
       this.state.totalPoints >= 3 &&
       this.state.lottie === eggWiggleAnimation
     ) {
-      this.setState({lottie: eggHatchAnimation})
+      this.setState({lottie: eggHatchAnimation, hatching: true})
       clearTimeout(this.state.currentAnimation)
       setTimeout(() => {
         this.setState({
           lottie: idleAnimation,
           isHatched: true,
-          hatchedModal: true
+          hatchedModal: true,
+          hatching: false
         })
       }, 16000)
     }
@@ -1430,6 +1432,7 @@ export class UserHome extends React.Component {
               <DailyProgressList
                 handleCheck={this.handleCheck}
                 list={this.props.list}
+                hatching={this.state.hatching}
               />
             </div>
           </div>
