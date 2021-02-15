@@ -412,7 +412,7 @@ export class UserHome extends React.Component {
   }
 
   async playSong() {
-    const num = Math.floor(Math.random() * 5)
+    const num = Math.floor(Math.random() * this.songs.length)
     this.songs[num].play()
     console.log('this.songs[num] from playSong', num, this.songs[num])
     await this.props.updateBoombox(this.props.boombox.id, {
@@ -1052,7 +1052,7 @@ export class UserHome extends React.Component {
                     top: `${50}%`,
                     left: `${45}%`,
                     transform: `translate(-${50}%, -${50}%)`,
-                    margin: '1.5em',
+                    margin: '.1em',
                     padding: '1em'
                   }}
                   className={classes.coin}
@@ -1081,7 +1081,7 @@ export class UserHome extends React.Component {
                     top: `${50}%`,
                     left: `${45}%`,
                     transform: `translate(-${50}%, -${50}%)`,
-                    margin: '1.5em',
+                    margin: '.1em',
                     padding: '1em'
                   }}
                   className={classes.coin}
@@ -1110,7 +1110,7 @@ export class UserHome extends React.Component {
                     top: `${50}%`,
                     left: `${45}%`,
                     transform: `translate(-${50}%, -${50}%)`,
-                    margin: '1.5em',
+                    margin: '.1em',
                     padding: '1em'
                   }}
                   className={classes.coin}
