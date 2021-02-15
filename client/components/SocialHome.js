@@ -39,11 +39,13 @@ export class SocialHome extends React.Component {
     return dateArr
   }
   likes(feedId) {
-    const element = <Icon icon={thumbsUp} />
+    const element = (
+      <Icon icon={thumbsUp} style={{height: '5px', width: '5px'}} />
+    )
     return (
       <div id="body">
         <button
-          class="like__btn"
+          className="like__btn"
           onClick={() => {
             this.clickedLikes(feedId)
           }}
@@ -55,7 +57,28 @@ export class SocialHome extends React.Component {
       </div>
     )
   }
-  clickedLikes() {}
+  clickedLikes() {
+    // let likeIcon = document.querySelector('#icon'),
+    //   count = document.querySelector('#count')
+    // console.log('this is feedId:', feedId)
+    // if (!this.state.likesArr.includes(feedId)) {
+    //   likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i>`
+    //   count.textContent++
+    //   await this.setState({
+    //     likesArr: [...this.state.likesArr, feedId]
+    //   })
+    //   console.log('this button was liked')
+    //   console.log('this is like arr', this.state.likesArr)
+    // } else {
+    //   likeIcon.innerHTML = '<i class="far fa-thumbs-up"></i>'
+    //   count.textContent--
+    //   this.setState({
+    //     likesArr: this.state.likesArr.filter(likeId => likeId !== feedId)
+    //   })
+    //   console.log('this button was unliked')
+    //   console.log('this is like arr', this.state.likesArr)
+    // }
+  }
   render() {
     const feeds = this.props.feed
     let dates = this.getTime()
