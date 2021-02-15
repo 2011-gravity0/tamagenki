@@ -28,10 +28,10 @@ export const fetchAllFeed = () => {
   }
 }
 
-export const unlockNewLevel = (userId, levelId) => {
+export const unlockNewLevel = (userId, levelName) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`/api/unlock/${userId}/${levelId}`)
+      const {data} = await axios.post(`/api/unlock/${userId}/${levelName}`)
       dispatch(postFeed(data))
     } catch (error) {
       console.log('This is error in unlockNewLevel Thunk', error)
