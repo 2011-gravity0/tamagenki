@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/no-unused-state */
@@ -6,16 +7,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllFeed} from '../store/unlock'
 import Navbar from './navbar'
-// import {faThumbsUp} from '@fortawesome/pro-regular-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {Icon, InlineIcon} from '@iconify/react'
-import thumbsUp from '@iconify-icons/fa-regular/thumbs-up'
 
 export class SocialHome extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      feeds: []
+      feeds: [],
+      likesArr: []
     }
     this.getTime = this.getTime.bind(this)
     this.likes = this.likes.bind(this)
@@ -25,7 +23,6 @@ export class SocialHome extends React.Component {
   async componentDidMount() {
     try {
       await this.props.getAllFeed()
-      await this.clickedLikes()
     } catch (error) {
       console.log(error)
     }
@@ -38,6 +35,7 @@ export class SocialHome extends React.Component {
     }
     return dateArr
   }
+
   likes(feedId) {
     const element = (
       <Icon icon={thumbsUp} style={{height: '5px', width: '5px'}} />
@@ -57,29 +55,32 @@ export class SocialHome extends React.Component {
       </div>
     )
   }
-  clickedLikes() {
-    // let likeIcon = document.querySelector('#icon'),
-    //   count = document.querySelector('#count')
-    // console.log('this is feedId:', feedId)
-    // if (!this.state.likesArr.includes(feedId)) {
-    //   likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i>`
-    //   count.textContent++
-    //   await this.setState({
-    //     likesArr: [...this.state.likesArr, feedId]
-    //   })
-    //   console.log('this button was liked')
-    //   console.log('this is like arr', this.state.likesArr)
-    // } else {
-    //   likeIcon.innerHTML = '<i class="far fa-thumbs-up"></i>'
-    //   count.textContent--
-    //   this.setState({
-    //     likesArr: this.state.likesArr.filter(likeId => likeId !== feedId)
-    //   })
-    //   console.log('this button was unliked')
-    //   console.log('this is like arr', this.state.likesArr)
-    // }
+
+  async clickedLikes(feedId) {
+    // const likeBtn = document.querySelector('.like__btn')
+    let likeIcon = document.querySelector('#icon'),
+      count = document.querySelector('#count')
+    console.log('this is feedId:', feedId)
+    if (!this.state.likesArr.includes(feedId)) {
+      likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i>`
+      count.textContent++
+      await this.setState({
+        likesArr: [...this.state.likesArr, feedId]
+      })
+      console.log('this button was liked')
+      console.log('this is like arr', this.state.likesArr)
+    } else {
+      likeIcon.innerHTML = '<i class="far fa-thumbs-up"></i>'
+      count.textContent--
+      this.setState({
+        likesArr: this.state.likesArr.filter(likeId => likeId !== feedId)
+      })
+      console.log('this button was unliked')
+      console.log('this is like arr', this.state.likesArr)
+    }
   }
   render() {
+    console.log(this.props)
     const feeds = this.props.feed
     let dates = this.getTime()
     console.log('FEED', this.props.feed)
@@ -87,7 +88,7 @@ export class SocialHome extends React.Component {
       <div>
         <Navbar />
         <div>
-          {feeds.reverse().map(feed => (
+          {feeds.map(feed => (
             <div key={feed.id} className="onefeed">
               {feed.user.petName} unlocked a new badge{' '}
               <img
