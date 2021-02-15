@@ -15,9 +15,9 @@
 
 ## Introduction
 
-Tamagenki is a pet accountability game that uses push notifications and checklists to help users implement healthy and mindfulness habits into their daily life. Once a user signs up they are assigned a tamabuddy who's reactions and emotions change when a they check off items from their suggested to-do list. As users acquire points they are able to unlock milestone badges congratulating them on their progress!
+Tamagenki is a pet accountability game that uses push notifications and checklists to help users implement health and mindfulness habits into their daily life. Once a user signs up they are assigned a tamabuddy whose reactions and emotions change when a they check off items from their suggested* (change to 'a to-do list' to avoid the implication that it's just a suggestion and can be changed?) to-do list. As users acquire points they are able to unlock milestone badges congratulating them on their progress!
 
-Our target audience is people of any age who want to incorporate universally agreed upon healthy habits into their daily life to improve their overall physical and mental health. While health tracking apps and reminder apps exist, Tamagenki came from a need for a simple system that tracks all of these things in one place, as they are all a huge part of a person's general health and happiness. Gamifying the app helps people find balance in their lives and adds an element of fun while doing it.
+Our target audience is people of any age who want to incorporate universally agreed upon healthy habits into their daily life to improve their overall physical and mental health. While health tracking apps and reminder apps exist * (for specific goals like water intake, diet, and exercise), Tamagenki came from a need for a simple system that tracks all of these things in one place, as they are all a huge part of a person's general health and happiness. Gamifying the app helps people find balance in their lives and adds an element of fun while doing it. * (Tamagenki helps people find balance in their lives and gamifying the app adds an element of fun while doing it)
 
 ---
 
@@ -31,10 +31,11 @@ Our target audience is people of any age who want to incorporate universally agr
 * Sequelize
 * PostgreSQL
 * React-Lottie
-* After Effects
+* Haiku Animator
 * React Chart
-* Matreial-UI
+* Material-UI
 * Progressive Web Application
+* Howler.js
 
 ---
 
