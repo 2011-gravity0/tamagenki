@@ -14,10 +14,11 @@ class UserHistory extends React.Component {
     super(props)
     this.state = {
       chartRange: 'week',
-      dateRange: [],
+      labelDateRange: [],
+      mapDateRange: [],
       data: [],
       prev: 0,
-      chartType: 'meditation',
+      chartType: 'all',
       loading: true
     }
     this.plotGraph = this.plotGraph.bind(this)
@@ -45,12 +46,13 @@ class UserHistory extends React.Component {
       const currDay = getDate(i)
       dateArr.push(currDay)
     }
-    this.setState({dateRange: dateArr})
+    const monthDateOnly = dateArr.map(day => day.slice(5))
+    this.setState({mapDateRange: dateArr, labelDateRange: monthDateOnly})
   }
 
   handleDataSort() {
     const {history} = this.props
-    let range = [...this.state.dateRange]
+    let range = [...this.state.mapDateRange]
     if (this.state.chartType === 'all') {
       range = range.map(day => {
         const userData = history.filter(elm => elm.date === day)
@@ -80,7 +82,7 @@ class UserHistory extends React.Component {
   }
 
   async toggleChartRange(range) {
-    await this.setState({chartRange: range})
+    await this.setState({chartRange: range, prev: 0})
     await this.dateRangeMaker()
     await this.handleDataSort()
   }
@@ -90,12 +92,12 @@ class UserHistory extends React.Component {
     await this.handleDataSort()
   }
 
-  async toggleDate(e) {
-    if (e.target.name === 'prev') {
+  async toggleDate(type) {
+    if (type === 'prev') {
       await this.setState({prev: this.state.prev + 1})
-    } else {
-      await this.setState({prev: this.state.prev - 1})
-    }
+    } else if (this.state.prev > 0) {
+        await this.setState({prev: this.state.prev - 1})
+      }
     await this.dateRangeMaker()
     await this.handleDataSort()
   }
@@ -104,7 +106,7 @@ class UserHistory extends React.Component {
     return (
       <Line
         data={{
-          labels: this.state.dateRange,
+          labels: this.state.labelDateRange,
           datasets: [
             {
               label: `${this.state.chartRange} | ${this.state.chartType}`,
@@ -154,6 +156,9 @@ class UserHistory extends React.Component {
         </div>
         <div className="chartButtonContainer">
           <div className="chartRangeContainer">
+            <button onClick={() => this.toggleDate('prev')}>
+              &lt; last {this.state.chartRange}
+            </button>
             <ButtonGroup
               className="rangeButton"
               size="small"
@@ -166,8 +171,14 @@ class UserHistory extends React.Component {
                 Week
               </Button>
             </ButtonGroup>
+            <button
+              disable={this.state.prev}
+              onClick={() => this.toggleDate('next')}
+            >
+              next {this.state.chartRange} &gt;
+            </button>
           </div>
-          <div className="chartIconContainer" id="historyavatar">
+          <div className="chartIconContainer">
             <button onClick={() => this.toggleChartType('all')}>
               <div className="typeIcon allDiv">
                 <p>All</p>
