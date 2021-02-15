@@ -85,8 +85,8 @@ class UserHistory extends React.Component {
     await this.handleDataSort()
   }
 
-  async toggleChartType(e) {
-    await this.setState({chartType: e.target.name})
+  async toggleChartType(type) {
+    await this.setState({chartType: type})
     await this.handleDataSort()
   }
 
@@ -168,43 +168,48 @@ class UserHistory extends React.Component {
             </ButtonGroup>
           </div>
           <div className="chartIconContainer" id="historyavatar">
-            <button>
+            <button onClick={() => this.toggleChartType('all')}>
+              <div className="typeIcon allDiv">
+                <p>All</p>
+              </div>
+            </button>
+            <button onClick={() => this.toggleChartType('sleep')}>
               <img
                 className="typeIcon"
                 src="https://img.icons8.com/plasticine/100/000000/sleeping-in-bed.png"
               />
             </button>
-            <button>
+            <button onClick={() => this.toggleChartType('fruit')}>
               <img
                 className="typeIcon"
                 src="https://img.icons8.com/color/48/000000/raspberry.png"
               />
             </button>
-            <button>
+            <button onClick={() => this.toggleChartType('vegetables')}>
               <img
                 className="typeIcon"
                 src="https://img.icons8.com/fluent/48/000000/group-of-vegetables.png"
               />
             </button>
-            <button>
+            <button onClick={() => this.toggleChartType('water')}>
               <img
                 className="typeIcon"
                 src="https://img.icons8.com/color/48/000000/water.png"
               />
             </button>
-            <button>
+            <button onClick={() => this.toggleChartType('exercise')}>
               <img
                 className="typeIcon"
                 src="https://img.icons8.com/dusk/64/000000/exercise.png"
               />
             </button>
-            <button>
+            <button onClick={() => this.toggleChartType('relaxation')}>
               <img
                 className="typeIcon"
                 src="https://img.icons8.com/color/48/000000/relax-with-book.png"
               />
             </button>
-            <button>
+            <button onClick={() => this.toggleChartType('meditation')}>
               <img
                 className="typeIcon"
                 src="https://img.icons8.com/officel/80/000000/meditation-guru.png"
@@ -249,5 +254,9 @@ const chartColor = {
   relaxation: {
     fill: 'rgb(245, 179, 110, 0.5)',
     border: 'rgb(245, 179, 110, 1)'
+  },
+  exercise: {
+    fill: 'rgb(252, 83, 83, 0.5)',
+    border: 'rgb(252, 83, 83, 1)'
   }
 }

@@ -760,6 +760,22 @@ button {
   width: 25px;
 }
 
+.typeIcon p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #b66d31;
+  margin: 0;
+  padding: 0 0 3px;
+  height: 15px;
+}
+
+.allDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .chartButtonContainer {
   display: flex;
   flex-direction: column;
@@ -769,6 +785,12 @@ button {
 
 .chartRangeContainer {
   width: 120px;
+}
+
+.chartIconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .rangeButton {
