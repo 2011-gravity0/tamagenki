@@ -1392,25 +1392,26 @@ export class UserHome extends React.Component {
                       />
                     </Button>
                   </div>
-                  <Button
-                    onClick={this.boomboxClick}
-                    className="boomboxButton"
-                    style={{
-                      backgroundColor: 'transparent',
+                  <div id="boomboxButton">
+                    <Button
+                      onClick={this.boomboxClick}
+                      style={{
+                        backgroundColor: 'transparent',
 
-                      padding: 0,
-                      display: this.state.totalPoints < 15 ? 'none' : '',
-                      disabled: this.state.totalPoints < 15
-                    }}
-                    disableRipple={true}
-                  >
-                    <Lottie
-                      options={boomboxAnimation}
-                      height={80}
-                      width={80}
-                      isStopped={this.state.boomboxPaused}
-                    />
-                  </Button>
+                        padding: 0,
+                        display: this.state.totalPoints < 15 ? 'none' : '',
+                        disabled: this.state.totalPoints < 15
+                      }}
+                      disableRipple={true}
+                    >
+                      <Lottie
+                        options={boomboxAnimation}
+                        height={80}
+                        width={80}
+                        isStopped={this.state.boomboxPaused}
+                      />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </Grid>

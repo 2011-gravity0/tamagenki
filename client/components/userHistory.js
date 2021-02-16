@@ -40,7 +40,7 @@ class UserHistory extends React.Component {
       return moment(numDayAgo).format('YYYY-MM-DD')
     }
 
-    for (let i = startDay; i >= endDay; i--) {
+    for (let i = startDay - 1; i >= endDay; i--) {
       const currDay = getDate(i)
       dateArr.push(currDay)
     }
@@ -245,8 +245,6 @@ const mapDispatch = dispatch => {
     getUserHistory: userId => dispatch(fetchUserHistory(userId))
   }
 }
-// export default connect(mapState, mapDispatch)(UserHistory)
-// withStyles(styles)(UserHistory)
 
 export default connect(mapState, mapDispatch)(UserHistory)
 

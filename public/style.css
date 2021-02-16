@@ -203,6 +203,7 @@ button {
 
 .guideButton {
   flex-basis: 12%;
+  margin-bottom: 10px;
 }
 
 /* Guide component text effect */
@@ -412,14 +413,21 @@ button {
 }
 
 #tamabuddyButton button {
-  height: 120%;
+  height: 270px;
+  margin-top: 45px;
   padding: 0;
   background-color: transparent;
 }
 
-.boomboxButton {
-  /* margin-bottom: 55px !important; */
-  width: 80px;
+#boomboxButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#boomboxButton button {
+  height: 100px;
+  width: 85px;
 }
 
 /*===== media query for whole guide components =====*/
