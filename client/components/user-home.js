@@ -1061,390 +1061,406 @@ export class UserHome extends React.Component {
       return (
         <>
           <div className="homeContainer">
-            <Navbar />
+            <div className="flexContainer">
+              <Navbar />
 
-            <Modal open={this.state.streakInfoModal} onClose={this.handleClose}>
-              <Grid container>
-                <div
-                  style={{
-                    top: `${50}%`,
-                    left: `${45}%`,
-                    transform: `translate(-${50}%, -${50}%)`,
-                    margin: '.1em',
-                    padding: '1em'
-                  }}
-                  className={classes.coin}
-                >
-                  <Grid
-                    item
-                    container
-                    alignItems="center"
-                    justify="center"
-                    direction="column"
+              <Modal
+                open={this.state.streakInfoModal}
+                onClose={this.handleClose}
+              >
+                <Grid container>
+                  <div
+                    style={{
+                      top: `${50}%`,
+                      left: `${45}%`,
+                      transform: `translate(-${50}%, -${50}%)`,
+                      margin: '.1em',
+                      padding: '1em'
+                    }}
+                    className={classes.coin}
                   >
-                    <p className={classes.coinp}>
-                      Your streak will keep growing as long as you check off at
-                      least one box everyday. If you miss a day your streak
-                      count will be reset to zero.
-                    </p>
-                  </Grid>
-                </div>
-              </Grid>
-            </Modal>
-
-            <Modal open={this.state.heartInfoModal} onClose={this.handleClose}>
-              <Grid container>
-                <div
-                  style={{
-                    top: `${50}%`,
-                    left: `${45}%`,
-                    transform: `translate(-${50}%, -${50}%)`,
-                    margin: '.1em',
-                    padding: '1em'
-                  }}
-                  className={classes.coin}
-                >
-                  <Grid
-                    item
-                    container
-                    alignItems="center"
-                    justify="center"
-                    direction="column"
-                  >
-                    <p className={classes.coinp}>
-                      {' ' + this.props.user.petName} will Level up and get
-                      stronger as you continue to check off boxes and accumulate
-                      points.
-                    </p>
-                  </Grid>
-                </div>
-              </Grid>
-            </Modal>
-
-            <Modal open={this.state.coinInfoModal} onClose={this.handleClose}>
-              <Grid container>
-                <div
-                  style={{
-                    top: `${50}%`,
-                    left: `${45}%`,
-                    transform: `translate(-${50}%, -${50}%)`,
-                    margin: '.1em',
-                    padding: '1em'
-                  }}
-                  className={classes.coin}
-                >
-                  <Grid
-                    item
-                    container
-                    alignItems="center"
-                    justify="center"
-                    direction="column"
-                  >
-                    <p className={classes.coinp}>
-                      You'll get a Tamacoin for every day
-                      {' ' + this.props.user.petName}'s progress bar reaches
-                      100%.
-                    </p>
-                  </Grid>
-                </div>
-              </Grid>
-            </Modal>
-
-            <Modal
-              open={this.state.completionModal}
-              onClose={this.handleCoinClose}
-            >
-              <Grid container>
-                <div
-                  style={{
-                    top: `${65}%`,
-                    left: `${45}%`,
-                    transform: `translate(-${50}%, -${50}%)`,
-                    margin: '1.5em',
-                    padding: '1em'
-                  }}
-                  className={classes.paper}
-                >
-                  <Lottie options={guideAnimation} height={125} width={125} />
-                  <Grid
-                    item
-                    container
-                    alignItems="center"
-                    justify="center"
-                    direction="column"
-                  >
-                    <h2 className={classes.modalTitle}>GOOD JOB!!!</h2>
-                    <p
-                      style={{
-                        margin: 0,
-                        color: '#fff',
-                        backgroundColor: '#7FBAC5',
-                        padding: 5,
-                        paddingTop: 3,
-                        paddingBottom: 3
-                      }}
+                    <Grid
+                      item
+                      container
+                      alignItems="center"
+                      justify="center"
+                      direction="column"
                     >
-                      {this.props.user.petName}'s progress bar has reached 100%.
-                    </p>
-                    <p
-                      style={{
-                        margin: 0,
-                        color: '#fff',
-                        fontWeight: 'bold',
-                        backgroundColor: '#7FBAC5',
-                        padding: 5,
-                        paddingTop: 3,
-                        paddingBottom: 3,
-                        marginTop: 2
-                      }}
+                      <p className={classes.coinp}>
+                        Your streak will keep growing as long as you check off
+                        at least one box everyday. If you miss a day your streak
+                        count will be reset to zero.
+                      </p>
+                    </Grid>
+                  </div>
+                </Grid>
+              </Modal>
+
+              <Modal
+                open={this.state.heartInfoModal}
+                onClose={this.handleClose}
+              >
+                <Grid container>
+                  <div
+                    style={{
+                      top: `${50}%`,
+                      left: `${45}%`,
+                      transform: `translate(-${50}%, -${50}%)`,
+                      margin: '.1em',
+                      padding: '1em'
+                    }}
+                    className={classes.coin}
+                  >
+                    <Grid
+                      item
+                      container
+                      alignItems="center"
+                      justify="center"
+                      direction="column"
                     >
-                      {' '}
-                      Take a TamaCoin, you deserve it!
-                    </p>
-                    <Button onClick={this.handleCoinClose}>
-                      <Lottie
-                        options={tamacoinAnimation}
-                        height={200}
-                        width={200}
+                      <p className={classes.coinp}>
+                        {' ' + this.props.user.petName} will Level up and get
+                        stronger as you continue to check off boxes and
+                        accumulate points.
+                      </p>
+                    </Grid>
+                  </div>
+                </Grid>
+              </Modal>
+
+              <Modal open={this.state.coinInfoModal} onClose={this.handleClose}>
+                <Grid container>
+                  <div
+                    style={{
+                      top: `${50}%`,
+                      left: `${45}%`,
+                      transform: `translate(-${50}%, -${50}%)`,
+                      margin: '.1em',
+                      padding: '1em'
+                    }}
+                    className={classes.coin}
+                  >
+                    <Grid
+                      item
+                      container
+                      alignItems="center"
+                      justify="center"
+                      direction="column"
+                    >
+                      <p className={classes.coinp}>
+                        You'll get a Tamacoin for every day
+                        {' ' + this.props.user.petName}'s progress bar reaches
+                        100%.
+                      </p>
+                    </Grid>
+                  </div>
+                </Grid>
+              </Modal>
+
+              <Modal
+                open={this.state.completionModal}
+                onClose={this.handleCoinClose}
+              >
+                <Grid container>
+                  <div
+                    style={{
+                      top: `${65}%`,
+                      left: `${45}%`,
+                      transform: `translate(-${50}%, -${50}%)`,
+                      margin: '1.5em',
+                      padding: '1em'
+                    }}
+                    className={classes.paper}
+                  >
+                    <Lottie options={guideAnimation} height={125} width={125} />
+                    <Grid
+                      item
+                      container
+                      alignItems="center"
+                      justify="center"
+                      direction="column"
+                    >
+                      <h2 className={classes.modalTitle}>GOOD JOB!!!</h2>
+                      <p
+                        style={{
+                          margin: 0,
+                          color: '#fff',
+                          backgroundColor: '#7FBAC5',
+                          padding: 5,
+                          paddingTop: 3,
+                          paddingBottom: 3
+                        }}
+                      >
+                        {this.props.user.petName}'s progress bar has reached
+                        100%.
+                      </p>
+                      <p
+                        style={{
+                          margin: 0,
+                          color: '#fff',
+                          fontWeight: 'bold',
+                          backgroundColor: '#7FBAC5',
+                          padding: 5,
+                          paddingTop: 3,
+                          paddingBottom: 3,
+                          marginTop: 2
+                        }}
+                      >
+                        {' '}
+                        Take a TamaCoin, you deserve it!
+                      </p>
+                      <Button onClick={this.handleCoinClose}>
+                        <Lottie
+                          options={tamacoinAnimation}
+                          height={200}
+                          width={200}
+                        />
+                      </Button>
+                    </Grid>
+                  </div>
+                </Grid>
+              </Modal>
+              <Modal open={this.state.hatchedModal} onClose={this.nameSubmit}>
+                <Grid container>
+                  <div
+                    style={{
+                      top: `${50}%`,
+                      left: `${45}%`,
+                      transform: `translate(-${50}%, -${50}%)`,
+                      margin: '1.5em',
+                      padding: '1em'
+                    }}
+                    className={classes.hatchedPaper}
+                  >
+                    <Lottie options={guideAnimation} height={150} width={150} />
+                    <Grid
+                      item
+                      container
+                      alignItems="center"
+                      justify="center"
+                      direction="column"
+                    >
+                      <h2 className={classes.hatchedModalTitle}>
+                        CONGRATULATIONS YOU'VE HATCHED YOUR TAMABUDDY!!!
+                      </h2>
+                      <p className={classes.modalP}>
+                        What would you like to name it?
+                      </p>
+
+                      <TextField
+                        placeholder="enter name here"
+                        variant="outlined"
+                        type="text"
+                        name="tamabuddyName"
+                        required={true}
+                        onChange={this.handleChange}
+                        value={this.state.tamabuddyName}
                       />
-                    </Button>
-                  </Grid>
-                </div>
-              </Grid>
-            </Modal>
-            <Modal open={this.state.hatchedModal} onClose={this.nameSubmit}>
-              <Grid container>
-                <div
-                  style={{
-                    top: `${50}%`,
-                    left: `${45}%`,
-                    transform: `translate(-${50}%, -${50}%)`,
-                    margin: '1.5em',
-                    padding: '1em'
-                  }}
-                  className={classes.hatchedPaper}
-                >
-                  <Lottie options={guideAnimation} height={150} width={150} />
-                  <Grid
-                    item
-                    container
-                    alignItems="center"
-                    justify="center"
-                    direction="column"
+                      <Button
+                        style={{color: '#387a5f'}}
+                        type="submit"
+                        onClick={this.nameSubmit}
+                        disabled={!this.state.tamabuddyName}
+                      >
+                        submit
+                      </Button>
+                    </Grid>
+                  </div>
+                </Grid>
+              </Modal>
+              <Modal
+                open={this.state.unlockBadgeModal}
+                onClose={this.handleClose}
+              >
+                {body}
+              </Modal>
+              <Modal open={this.state.boomboxModal} onClose={this.handleClose}>
+                <Grid container>
+                  <div
+                    style={{
+                      top: `${65}%`,
+                      left: `${45}%`,
+                      transform: `translate(-${50}%, -${50}%)`,
+                      margin: '1.5em',
+                      padding: '1em'
+                    }}
+                    className={classes.paper}
                   >
-                    <h2 className={classes.hatchedModalTitle}>
-                      CONGRATULATIONS YOU'VE HATCHED YOUR TAMABUDDY!!!
-                    </h2>
-                    <p className={classes.modalP}>
-                      What would you like to name it?
-                    </p>
-
-                    <TextField
-                      placeholder="enter name here"
-                      variant="outlined"
-                      type="text"
-                      name="tamabuddyName"
-                      required={true}
-                      onChange={this.handleChange}
-                      value={this.state.tamabuddyName}
-                    />
-                    <Button
-                      style={{color: '#387a5f'}}
-                      type="submit"
-                      onClick={this.nameSubmit}
-                      disabled={!this.state.tamabuddyName}
+                    <Lottie options={guideAnimation} height={125} width={125} />
+                    <Grid
+                      item
+                      container
+                      alignItems="center"
+                      justify="center"
+                      direction="column"
                     >
-                      submit
-                    </Button>
-                  </Grid>
-                </div>
-              </Grid>
-            </Modal>
-            <Modal
-              open={this.state.unlockBadgeModal}
-              onClose={this.handleClose}
-            >
-              {body}
-            </Modal>
-            <Modal open={this.state.boomboxModal} onClose={this.handleClose}>
-              <Grid container>
-                <div
-                  style={{
-                    top: `${65}%`,
-                    left: `${45}%`,
-                    transform: `translate(-${50}%, -${50}%)`,
-                    margin: '1.5em',
-                    padding: '1em'
-                  }}
-                  className={classes.paper}
-                >
-                  <Lottie options={guideAnimation} height={125} width={125} />
-                  <Grid
-                    item
-                    container
-                    alignItems="center"
-                    justify="center"
-                    direction="column"
+                      <h2 className={classes.modalTitle}>
+                        You unlocked {this.props.user.petName}'s boombox!
+                      </h2>
+
+                      <p
+                        style={{
+                          margin: 0,
+                          color: '#fff',
+                          fontWeight: 'bold',
+                          backgroundColor: '#7FBAC5',
+                          padding: 5,
+                          paddingTop: 3,
+                          paddingBottom: 3,
+                          marginTop: 2
+                        }}
+                      >
+                        {' '}
+                        You can play songs for {this.props.user.petName} by
+                        tapping on the boombox to turn it on. Try turning it off
+                        and on again to switch songs.
+                      </p>
+                      <Button onClick={this.handleClose}>
+                        <Lottie
+                          options={boomboxAnimation}
+                          height={200}
+                          width={200}
+                        />
+                      </Button>
+                    </Grid>
+                  </div>
+                </Grid>
+              </Modal>
+              <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                className="contentsContainer"
+              >
+                <div className="animationContainer">
+                  <Box
+                    className={classes.levelCard}
+                    className="statusBar"
+                    width={330}
                   >
-                    <h2 className={classes.modalTitle}>
-                      You unlocked {this.props.user.petName}'s boombox!
-                    </h2>
-
-                    <p
-                      style={{
-                        margin: 0,
-                        color: '#fff',
-                        fontWeight: 'bold',
-                        backgroundColor: '#7FBAC5',
-                        padding: 5,
-                        paddingTop: 3,
-                        paddingBottom: 3,
-                        marginTop: 2
-                      }}
+                    <Grid
+                      item
+                      container
+                      direction="row"
+                      justify="space-between"
+                      alignItems="center"
+                      spacing={0}
                     >
-                      {' '}
-                      You can play songs for {this.props.user.petName} by
-                      tapping on the boombox to turn it on. Try turning it off
-                      and on again to switch songs.
-                    </p>
-                    <Button onClick={this.handleClose}>
-                      <Lottie
-                        options={boomboxAnimation}
-                        height={200}
-                        width={200}
-                      />
-                    </Button>
-                  </Grid>
+                      <Grid item className="levelContainer">
+                        <Avatar
+                          src={hearts[this.props.user.level]}
+                          className={classes.inline}
+                          variant="square"
+                          onClick={this.handleHeartInfo}
+                        />
+
+                        <span className={classes.inline}>
+                          LEVEL: {this.props.user.level}{' '}
+                        </span>
+                        {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
+                      </Grid>
+                      <Grid item className="levelContainer">
+                        <Avatar
+                          src="/images/tamacoin.svg"
+                          className={classes.inline}
+                          onClick={this.handleCoinInfo}
+                        />
+
+                        <span className={classes.inline}>
+                          {this.state.tamacoins}{' '}
+                        </span>
+                        {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
+                      </Grid>
+                      {/* </Grid> */}
+                      <Grid item className="levelContainer arrowIcon">
+                        <Avatar
+                          src="/images/streak.svg"
+                          className={classes.inline}
+                          onClick={this.handleStreakInfo}
+                        />
+                        <span className={classes.inline}>
+                          STREAK: {this.props.user.streak}
+                        </span>
+                      </Grid>
+                    </Grid>
+                  </Box>
+
+                  <div className="animation">
+                    <div id="tamabuddyButton">
+                      <Button
+                        onClick={this.handleClick}
+                        disableRipple={true}
+                        className={classes.button}
+                      >
+                        <Lottie
+                          options={this.state.dancing ? jumpAnimation : lottie}
+                          height={270}
+                          width={270}
+                        />
+                      </Button>
+                    </div>
+                    <div id="boomboxButton">
+                      <Button
+                        onClick={this.boomboxClick}
+                        style={{
+                          backgroundColor: 'transparent',
+
+                          padding: 0,
+                          display: this.state.totalPoints < 15 ? 'none' : '',
+                          disabled: this.state.totalPoints < 15
+                        }}
+                        disableRipple={true}
+                      >
+                        <Lottie
+                          options={boomboxAnimation}
+                          height={80}
+                          width={80}
+                          isStopped={this.state.boomboxPaused}
+                        />
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </Grid>
-            </Modal>
+              <div className="progressBar">
+                <ProgressBar dailyPoints={this.state.dailyPoints} />
+              </div>
+            </div>
             <Grid
               container
-              direction="column"
               justify="center"
+              direction="row"
               alignItems="center"
-              className="contentsContainer"
             >
-              <div className="animationContainer">
-                <Box
-                  className={classes.levelCard}
-                  className="statusBar"
-                  width={330}
-                >
-                  <Grid
-                    item
-                    container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center"
-                    spacing={0}
-                  >
-                    <Grid item className="levelContainer">
-                      <Avatar
-                        src={hearts[this.props.user.level]}
-                        className={classes.inline}
-                        variant="square"
-                        onClick={this.handleHeartInfo}
-                      />
-
-                      <span className={classes.inline}>
-                        LEVEL: {this.props.user.level}{' '}
-                      </span>
-                      {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
-                    </Grid>
-                    <Grid item className="levelContainer">
-                      <Avatar
-                        src="/images/tamacoin.svg"
-                        className={classes.inline}
-                        onClick={this.handleCoinInfo}
-                      />
-
-                      <span className={classes.inline}>
-                        {this.state.tamacoins}{' '}
-                      </span>
-                      {/* <Grid item container spacing={0} alignItems="center" direction='row'> */}
-                    </Grid>
-                    {/* </Grid> */}
-                    <Grid item className="levelContainer arrowIcon">
-                      <Avatar
-                        src="/images/streak.svg"
-                        className={classes.inline}
-                        onClick={this.handleStreakInfo}
-                      />
-                      <span className={classes.inline}>
-                        STREAK: {this.props.user.streak}
-                      </span>
-                    </Grid>
-                  </Grid>
-                </Box>
-
-                <div className="animation">
-                  <div id="tamabuddyButton">
-                    <Button
-                      onClick={this.handleClick}
-                      disableRipple={true}
-                      className={classes.button}
-                    >
-                      <Lottie
-                        options={this.state.dancing ? jumpAnimation : lottie}
-                        height={270}
-                        width={270}
-                      />
-                    </Button>
-                  </div>
-                  <Button
-                    onClick={this.boomboxClick}
-                    className="boomboxButton"
-                    style={{
-                      backgroundColor: 'transparent',
-
-                      padding: 0,
-                      display: this.state.totalPoints < 15 ? 'none' : '',
-                      disabled: this.state.totalPoints < 15
-                    }}
-                    disableRipple={true}
-                  >
-                    <Lottie
-                      options={boomboxAnimation}
-                      height={80}
-                      width={80}
-                      isStopped={this.state.boomboxPaused}
-                    />
-                  </Button>
-                </div>
+              <Button
+                onClick={this.handleOwlClick}
+                style={{
+                  padding: 0,
+                  backgroundColor: 'transparent',
+                  display:
+                    this.state.completionModal ||
+                    this.state.hatchedModal ||
+                    this.state.boomboxModal
+                      ? 'none'
+                      : ''
+                }}
+                disableRipple={true}
+              >
+                <Lottie options={guideAnimation} height={75} width={75} />
+              </Button>
+              <Grid item xs={8}>
+                <Paper>{this.state.owlResponse}</Paper>
+              </Grid>
+            </Grid>
+            <div className="flexContainer">
+              <div className="listView">
+                <DailyProgressList
+                  handleCheck={this.handleCheck}
+                  list={this.props.list}
+                  hatching={this.state.hatching}
+                />
               </div>
-            </Grid>
-            <div className="progressBar">
-              <ProgressBar dailyPoints={this.state.dailyPoints} />
-            </div>
-          </div>
-          <Grid container justify="center" direction="row" alignItems="center">
-            <Button
-              onClick={this.handleOwlClick}
-              style={{
-                backgroundColor: 'transparent',
-                display:
-                  this.state.completionModal ||
-                  this.state.hatchedModal ||
-                  this.state.boomboxModal
-                    ? 'none'
-                    : ''
-              }}
-              disableRipple={true}
-            >
-              <Lottie options={guideAnimation} height={75} width={75} />
-            </Button>
-            <Grid item xs={8}>
-              <Paper>{this.state.owlResponse}</Paper>
-            </Grid>
-          </Grid>
-          <div className="homeContainer">
-            <div className="listView">
-              <DailyProgressList
-                handleCheck={this.handleCheck}
-                list={this.props.list}
-                hatching={this.state.hatching}
-              />
             </div>
           </div>
         </>
