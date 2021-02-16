@@ -679,6 +679,12 @@ button.MuiButton-root {
   align-items: center;
 }
 
+@media only screen and (max-width: 400px) {
+  .statusBar {
+    margin: 5px 10px 15px 5px;
+  }
+}
+
 .levelContainer {
   display: flex;
   flex-direction: row;
