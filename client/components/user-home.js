@@ -198,7 +198,7 @@ const styles = () => ({
   hatchedPaper: {
     position: 'absolute',
     width: 400,
-    backgroundColor: 'rgba(225,255,255,.7)',
+    backgroundColor: 'rgba(225,255,255)',
     border: 'none',
     borderRadius: 5,
     padding: '1 em'
