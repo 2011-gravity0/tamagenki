@@ -1,23 +1,13 @@
-/* eslint-disable react/no-access-state-in-setstate */
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/no-unused-state */
-/* eslint-disable no-useless-constructor */
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllFeed} from '../store/unlock'
 import Navbar from './navbar'
-
+import Likes from './likes'
 export class SocialHome extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      feeds: [],
-      likesArr: []
-    }
+
     this.getTime = this.getTime.bind(this)
-    this.likes = this.likes.bind(this)
-    this.clickedLikes = this.clickedLikes.bind(this)
   }
 
   async componentDidMount() {
@@ -35,49 +25,7 @@ export class SocialHome extends React.Component {
     }
     return dateArr
   }
-  likes(id) {
-    // const element = <Icon icon={thumbsUp} />
-    return (
-      <div
-        id="body"
-        onClick={() => {
-          this.clickedLikes(id)
-        }}
-      >
-        <button type="button" class="like__btn">
-          <span id="icon">
-            <i class="far fa-thumbs-up" />
-          </span>
-          <span id="count">0</span> Like
-        </button>
-      </div>
-    )
-  }
-  async clickedLikes(feedId) {
-    // const likeBtn = document.querySelector('.like__btn')
-    let likeIcon = document.querySelector('#icon'),
-      count = document.querySelector('#count')
-    console.log('this is feedId:', feedId)
-    if (!this.state.likesArr.includes(feedId)) {
-      likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i>`
-      count.textContent++
-      await this.setState({
-        likesArr: [...this.state.likesArr, feedId]
-      })
-      console.log('this button was liked')
-      console.log('this is like arr', this.state.likesArr)
-    } else {
-      likeIcon.innerHTML = '<i class="far fa-thumbs-up"></i>'
-      count.textContent--
-      this.setState({
-        likesArr: this.state.likesArr.filter(likeId => likeId !== feedId)
-      })
-      console.log('this button was unliked')
-      console.log('this is like arr', this.state.likesArr)
-    }
-  }
   render() {
-    console.log(this.props)
     const feeds = this.props.feed
     let dates = this.getTime()
     return (
@@ -92,7 +40,7 @@ export class SocialHome extends React.Component {
                 style={{height: '25px', width: '25px'}}
               />
               <br />
-              {this.likes(this.id)}
+              <Likes />
               <small>{String(dates[0])}</small>
             </div>
           ))}
@@ -115,6 +63,3 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(SocialHome)
-// npm install --save-dev @iconify/react @iconify-icons/fa-regular
-// import { Icon, InlineIcon } from '@iconify/react';
-// import thumbsUp from '@iconify-icons/fa-regular/thumbs-up';
