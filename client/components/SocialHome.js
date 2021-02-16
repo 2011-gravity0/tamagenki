@@ -20,7 +20,7 @@ export class SocialHome extends React.Component {
   getTime() {
     const dateArr = []
     for (let i = 0; i < this.props.feed.length; i++) {
-      let date = this.props.feed[i].createdAt
+      let [date] = this.props.feed[i].createdAt
       dateArr.push(new Date(date))
     }
     return dateArr
@@ -28,6 +28,7 @@ export class SocialHome extends React.Component {
   render() {
     const feeds = this.props.feed
     let dates = this.getTime()
+    console.log('FEED', this.props.feed)
     return (
       <div>
         <Navbar />
