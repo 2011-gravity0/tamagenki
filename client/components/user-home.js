@@ -181,7 +181,7 @@ const styles = () => ({
   },
   hatchedModalTitle: {
     fontFamily: 'Lalezar',
-    color: '#c58684',
+    color: '#387a5f',
     fontSize: '1.7em',
     marginBottom: 0,
     marginTop: 0,
@@ -198,7 +198,7 @@ const styles = () => ({
   hatchedPaper: {
     position: 'absolute',
     width: 400,
-    backgroundColor: 'rgba(225,255,255,.7)',
+    backgroundColor: 'rgba(225,255,255)',
     border: 'none',
     borderRadius: 5,
     padding: '1 em'
@@ -215,12 +215,15 @@ const styles = () => ({
     fontWeight: 'bold'
   },
   modalP: {
-    margin: 0,
-    color: '#c58684',
-    // backgroundColor: '#7FBAC5',
-    padding: 5,
-    paddingTop: 3,
-    paddingBottom: 3
+    padding: '1.5 em',
+    spacing: '1 em',
+    margin: '1em',
+    marginTop: 0,
+    marginBottom: 0,
+    color: '#387a5f',
+    fontFamily: 'Helvetica',
+    fontSize: '1.4em',
+    fontWeight: 'bold'
   },
   levelCard: {
     margin: 8,
@@ -975,8 +978,9 @@ export class UserHome extends React.Component {
   }
 
   nameSubmit() {
-    this.setState({hatchedModal: false})
-    this.props.nameBuddy(this.props.userId, {petName: this.state.tamabuddyName})
+    this.props.nameBuddy(this.props.userId, {
+      petName: this.state.tamabuddyName
+    })
     this.setState({hatchedModal: false})
   }
 
@@ -1218,7 +1222,7 @@ export class UserHome extends React.Component {
                     margin: '1.5em',
                     padding: '1em'
                   }}
-                  className={classes.paper}
+                  className={classes.hatchedPaper}
                 >
                   <Lottie options={guideAnimation} height={150} width={150} />
                   <Grid
@@ -1228,10 +1232,10 @@ export class UserHome extends React.Component {
                     justify="center"
                     direction="column"
                   >
-                    <h2 className={classes.modalTitle}>
+                    <h2 className={classes.hatchedModalTitle}>
                       CONGRATULATIONS YOU'VE HATCHED YOUR TAMABUDDY!!!
                     </h2>
-                    <p className={classes.ptext2}>
+                    <p className={classes.modalP}>
                       What would you like to name it?
                     </p>
 
@@ -1240,13 +1244,15 @@ export class UserHome extends React.Component {
                       variant="outlined"
                       type="text"
                       name="tamabuddyName"
+                      required={true}
                       onChange={this.handleChange}
                       value={this.state.tamabuddyName}
                     />
                     <Button
-                      style={{color: 'white'}}
+                      style={{color: '#387a5f'}}
                       type="submit"
                       onClick={this.nameSubmit}
+                      disabled={!this.state.tamabuddyName}
                     >
                       submit
                     </Button>

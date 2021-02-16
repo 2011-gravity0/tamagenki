@@ -54,7 +54,11 @@ const User = db.define('user', {
   },
   petName: {
     type: Sequelize.STRING,
-    defaultValue: 'Tamabuddy'
+    defaultValue: 'Tamabuddy',
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   level: {
     type: Sequelize.INTEGER,
