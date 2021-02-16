@@ -418,8 +418,8 @@ export const DailyProgressList = props => {
           className="listItemContainer"
           className={styles.grid}
         >
-          <Paper className={styles.paper}>
-            <ListItem alignItems="center">
+          <Paper className={styles.paper} id="homeList">
+            <ListItem alignItems="center" className={styles.listItem}>
               <ListItemAvatar>
                 <Avatar src="https://img.icons8.com/color/48/000000/relax-with-book.png" />
               </ListItemAvatar>
@@ -518,8 +518,11 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100%',
-    height: 58,
+    height: 50,
     backgroundColor: '#f0fae8'
+  },
+  listItem: {
+    paddingTop: 5
   },
   uncheck: {
     borderRadius: 3,

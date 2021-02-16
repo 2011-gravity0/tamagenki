@@ -167,6 +167,7 @@ button {
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+  position: relative;
   padding: 20px;
   margin: 2.5% 5% 5%;
   box-shadow: 5px 5px 5px rgb(205, 203, 203);
@@ -203,7 +204,11 @@ button {
 
 .guideButton {
   flex-basis: 12%;
-  margin-bottom: 10px;
+}
+
+.explain-component button {
+  position: relative;
+  bottom: 25px;
 }
 
 /* Guide component text effect */
@@ -414,7 +419,7 @@ button {
 
 #tamabuddyButton button {
   height: 270px;
-  margin-top: 45px;
+  /* margin-top: 45px; */
   padding: 0;
   background-color: transparent;
 }
@@ -426,6 +431,7 @@ button {
 }
 
 #boomboxButton button {
+  margin-bottom: 20px;
   height: 100px;
   width: 85px;
 }
@@ -529,7 +535,6 @@ button {
     margin: 8px 0;
   }
   #tamabuddyButton button {
-    margin-top: 65px;
     width: 270px;
     height: 270px;
     background-color: transparent;
@@ -548,6 +553,7 @@ button {
   width: 375px;
   height: 43vh;
   margin-top: 25px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -560,6 +566,7 @@ button {
 }
 
 .contentsContainer {
+  height: 44vh;
   background-image: url('/tamabuddyRoom.jpg');
   background-repeat: no-repeat;
   background-size: 100vh;
@@ -578,10 +585,17 @@ button {
   justify-content: center;
 }
 .listView {
-  height: 30vh;
+  height: 32vh;
   width: 500px;
   overflow: auto;
   overflow-x: hidden !important;
+}
+li.MuiListItem-root {
+  padding-top: 0px;
+}
+
+button.MuiButton-root {
+  padding: 0, 8px;
 }
 
 @media (max-width: 600px) {
@@ -644,15 +658,14 @@ button {
 }
 
 .statusBar {
-  margin: 15px;
+  margin: 15px 10px 15px 5px;
   width: 330px in !important;
   height: 40px;
   padding: 0 14px 0 10px;
   background-color: rgba(218, 255, 229, 0.884);
   border-radius: 5px;
   display: flex;
-  position: fixed;
-  top: 60px;
+  position: relative;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -888,13 +901,13 @@ button {
   }
   .chartIconContainer {
     margin: 17px;
-    width: 300px;
+    width: 295px;
     justify-content: space-evenly;
     flex-wrap: wrap;
   }
   .typeIcon {
     height: 30px;
     width: 30px;
-    margin: 5px;
+    margin: 4px;
   }
 }

@@ -1423,6 +1423,7 @@ export class UserHome extends React.Component {
             <Button
               onClick={this.handleOwlClick}
               style={{
+                padding: 0,
                 backgroundColor: 'transparent',
                 display:
                   this.state.completionModal ||
