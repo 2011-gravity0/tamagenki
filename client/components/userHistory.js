@@ -118,6 +118,9 @@ class UserHistory extends React.Component {
         height={100}
         width={0}
         options={{
+          animation: {
+            duration: 0
+          },
           maintainAspectRatio: false,
           scales: {
             yAxes: [
