@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllFeed} from '../store/unlock'
 import Navbar from './navbar'
-import Likes from './likes'
+
 export class SocialHome extends React.Component {
   constructor(props) {
     super(props)
@@ -20,34 +20,39 @@ export class SocialHome extends React.Component {
   getTime() {
     const dateArr = []
     for (let i = 0; i < this.props.feed.length; i++) {
-      let [date] = this.props.feed[i].createdAt
-      dateArr.push(new Date(date))
+      let date = this.props.feed[i].createdAt
+      const [year, month, day] = date.split('T')[0].split('-')
+      console.log(year, month, day)
+      dateArr.push(new Date(year, month, day))
     }
     return dateArr
   }
   render() {
     const feeds = this.props.feed
     let dates = this.getTime()
-    console.log('FEED', this.props.feed)
-    return (
-      <div>
-        <Navbar />
+
+    if (feeds.length) {
+      return (
         <div>
-          {feeds.map(feed => (
-            <div key={feed.id} className="onefeed">
-              {feed.user.petName} unlocked a new badge{' '}
-              <img
-                src={feed.level.badgeImage}
-                style={{height: '25px', width: '25px'}}
-              />
-              <br />
-              <Likes />
-              <small>{String(dates[0])}</small>
-            </div>
-          ))}
+          <Navbar />
+          <div className="listContainer">
+            {feeds.map(feed => (
+              <div className="social-feed" key={feed.id}>
+                {feed.user.petName} unlocked a new badge{' '}
+                <img
+                  src={feed.level.badgeImage}
+                  style={{height: '25px', width: '25px'}}
+                />
+                <br />
+                <small>{String(dates[0])}</small>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return <h1>LOADING...</h1>
+    }
   }
 }
 

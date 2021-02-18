@@ -785,6 +785,18 @@ button {
   height: 25px;
   width: 25px;
 }
+
+/* SOCIAL FEED */
+.social-feed {
+  width: 500px;
+  margin: 10px 0 0;
+  overflow: auto;
+  overflow-x: hidden !important;
+  background-color: #f0fae8;
+  border-radius: 4px;
+  text-align: center;
+}
+
 /*===== USER SOCIAL =====*/
 .onefeed {
   border: outset;
