@@ -1,12 +1,8 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-
 import {withStyles} from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import Box from '@material-ui/core/Box'
 import Lottie from 'react-lottie'
 import animationData from '../../../public/lotties/eggWiggle.json'
 export class Success extends Component {

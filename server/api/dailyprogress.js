@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {DailyProgress} = require('../db/models')
+const moment = require('moment')
 module.exports = router
 
 const adminsOnly = (req, res, next) => {
@@ -16,7 +17,14 @@ const adminsOnly = (req, res, next) => {
 }
 
 const getDate = () => {
-  let [month, date, year] = new Date().toLocaleDateString('en-US').split('/')
+  const today = new Date()
+  return moment(today).format('YYYY-MM-DD')
+}
+
+const getYesterdaysDate = () => {
+  let yesterday = new Date()
+  yesterday.setDate(yesterday.getDate() - 1)
+  let [month, date, year] = yesterday.toLocaleDateString('en-US').split('/')
 
   if (month.length !== 0) {
     return `${year}-0${month}-${date}`
@@ -39,7 +47,8 @@ router.get('/', async (req, res, next) => {
         'meditation',
         'sleep',
         'relaxation',
-        'tamacoin'
+        'tamacoin',
+        'streakEarned'
       ],
       where: {
         userId: req.user.id,
@@ -48,6 +57,34 @@ router.get('/', async (req, res, next) => {
     })
 
     res.send(todaysProgress)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//get yesterday's dailyProgress to check if the user's streak is still going or not
+router.get('/yesterday', async (req, res, next) => {
+  try {
+    let yesterday = await getYesterdaysDate()
+
+    const [yesterdaysProgress] = await DailyProgress.findOrCreate({
+      attributes: [
+        'exercise',
+        'fruit',
+        'vegetables',
+        'water',
+        'meditation',
+        'sleep',
+        'relaxation',
+        'tamacoin',
+        'streakEarned'
+      ],
+      where: {
+        userId: req.user.id,
+        date: yesterday
+      }
+    })
+    res.send(yesterdaysProgress)
   } catch (error) {
     next(error)
   }
@@ -97,7 +134,8 @@ router.put('/', async (req, res, next) => {
           'meditation',
           'sleep',
           'relaxation',
-          'tamacoin'
+          'tamacoin',
+          'streakEarned'
         ]
       })
       res.send(updatedProgress)

@@ -29,7 +29,7 @@ const styles = () => ({
   },
   title: {
     fontSize: '1 rem',
-    fontFamily: 'Fredoka One',
+    fontFamily: 'Lalezar',
     color: '#4F7469',
     marginBottom: '.5 rem',
     marginTop: 0
@@ -64,7 +64,7 @@ const styles = () => ({
     fontWeight: 'bold'
   },
   modalTitle: {
-    fontFamily: 'Fredoka One',
+    fontFamily: 'Lalezar',
     color: '#BE2D25',
     fontSize: '1.7em'
   }
@@ -79,6 +79,13 @@ class Badges extends React.Component {
       autoplay: false,
       loop: false,
       volume: 0.1
+    })
+
+    this.drawer = new Howl({
+      src: ['/sounds/drawer.mp3'],
+      autoplay: false,
+      loop: false,
+      volume: 0.3
     })
 
     this.state = {
@@ -158,7 +165,7 @@ class Badges extends React.Component {
   handleOpen(event) {
     try {
       event.preventDefault()
-      this.badge.play()
+      this.drawer.play()
       this.setState({modalOpen: true, modal: event.currentTarget.value})
     } catch (error) {
       console.log(error)
@@ -172,6 +179,7 @@ class Badges extends React.Component {
     }
   }
   handleClose() {
+    this.badge.play()
     this.setState({modalOpen: false})
   }
 

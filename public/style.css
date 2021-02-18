@@ -58,7 +58,7 @@ button {
 
 #emailP,
 #passwordP {
-  margin-top: -18px;
+  margin-top: -10px;
   text-align: left;
 }
 
@@ -167,6 +167,7 @@ button {
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+  position: relative;
   padding: 20px;
   margin: 2.5% 5% 5%;
   box-shadow: 5px 5px 5px rgb(205, 203, 203);
@@ -180,7 +181,7 @@ button {
   padding: 4px 10px;
   border-radius: 2px;
   color: rgb(43, 43, 43);
-  background-color: rgba(231, 249, 253, 0.7);
+  background-color: rgba(231, 249, 253, 0.75);
 }
 
 .explain-component .owlTalk {
@@ -203,6 +204,11 @@ button {
 
 .guideButton {
   flex-basis: 12%;
+}
+
+.explain-component button {
+  position: relative;
+  bottom: 20px;
 }
 
 /* Guide component text effect */
@@ -372,9 +378,6 @@ button {
 
 .notificationContainer {
   width: 220px;
-}
-
-.reminderAlign {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -382,11 +385,12 @@ button {
 
 .notificationItem {
   margin: 0 !important;
+  color: rgb(43, 43, 43);
 }
 
 .guide-header {
   position: relative;
-  bottom: 45px;
+  bottom: 48px;
 }
 
 .guide-text {
@@ -413,13 +417,27 @@ button {
   bottom: 10px;
 }
 
-/*===== media query for whole guide components =====*/
-/* media query for desktop */
-@media only screen and (min-width: 1024px) {
-  #tamabuddyButton {
-    height: 135%;
-  }
+#tamabuddyButton button {
+  height: 270px;
+  /* margin-top: 45px; */
+  padding: 0;
+  background-color: transparent;
 }
+
+#boomboxButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#boomboxButton button {
+  margin-bottom: 20px;
+  height: 100px;
+  width: 85px;
+}
+
+/*===== media query for whole guide components =====*/
+
 /* media query for tablet */
 @media only screen and (max-width: 1025px) {
   .find-egg-component {
@@ -449,9 +467,6 @@ button {
   .explain-component .owlTalk {
     font-size: 1.5rem;
     margin: 20px 0;
-  }
-  #tamabuddyButton {
-    height: 130%;
   }
 }
 
@@ -484,9 +499,6 @@ button {
   .explain-component .owlTalk {
     font-size: 1.1rem;
     margin: 8px 0;
-  }
-  #tamabuddyButton {
-    height: 100%;
   }
 }
 
@@ -522,27 +534,24 @@ button {
     font-size: 1.1rem;
     margin: 8px 0;
   }
-  #tamabuddyButton {
-    height: 100%;
+  #tamabuddyButton button {
+    width: 270px;
+    height: 270px;
+    background-color: transparent;
   }
 }
-
-.tutorial-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* .guide-text p {
-  font-family: 'Fredoka One';
-  font-weight: lighter;
-  text-align: center;
-} */
 
 /*===== HOME PAGE =====*/
 
 .homeContainer {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flexContainer {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -550,7 +559,9 @@ button {
 
 .animationContainer {
   width: 375px;
-  height: 44vh;
+  height: 43vh;
+  margin-top: 25px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -563,11 +574,15 @@ button {
 }
 
 .contentsContainer {
+  height: 44vh;
   background-image: url('/tamabuddyRoom.jpg');
   background-repeat: no-repeat;
   background-size: 100vh;
   background-position: center top;
   background-attachment: fixed;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 5px 5px 5px rgb(205, 203, 203);
 }
 
 .animation {
@@ -578,13 +593,23 @@ button {
   justify-content: center;
 }
 .listView {
-  height: 30vh;
+  height: 32vh;
   width: 500px;
   overflow: auto;
   overflow-x: hidden !important;
 }
+li.MuiListItem-root {
+  padding-top: 0px;
+}
+
+button.MuiButton-root {
+  padding: 0, 8px;
+}
 
 @media (max-width: 600px) {
+  .animationContainer {
+    margin-top: 40px;
+  }
   .listView {
     width: 345px;
   }
@@ -638,6 +663,47 @@ button {
 
 .avatar-modals p:focus {
   outline: none !important;
+}
+
+.statusBar {
+  margin: 15px 10px 15px 5px;
+  width: 330px in !important;
+  height: 40px;
+  padding: 0 14px 0 10px;
+  background-color: rgba(218, 255, 229, 0.884);
+  border-radius: 5px;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media only screen and (max-width: 400px) {
+  .statusBar {
+    margin: 5px 10px 15px 5px;
+  }
+}
+
+.levelContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.levelContainer span {
+  font-family: 'Lalezar', cursive;
+  color: '#162C38';
+  font-size: 1rem;
+  margin-left: 5px;
+}
+
+/* .AnimationContainer .MuiBox-root {
+} */
+
+.arrowIcon .MuiAvatar-img {
+  margin: 4px 0 0 5px;
+  width: 35px;
 }
 
 /*===== NAME EGG =====*/
@@ -701,6 +767,12 @@ button {
   margin-left: 15px;
 }
 
+.fieldName h5 {
+  color: gray;
+  font-size: 0.9rem;
+  margin: 10px 0;
+}
+
 .userInfo {
   margin: 0;
   width: 180px;
@@ -722,13 +794,11 @@ button {
 }
 
 .settingTitle {
-  color: #c58684;
-  margin: 15px 0;
-}
-
-.editContainer h5 {
-  color: gray;
-  margin: 10px 0;
+  color: #3f6e60;
+  /* color: #c58684; */
+  font-size: 1.2rem;
+  font-family: 'Lalezar', cursive;
+  margin: 15px 0 0;
 }
 
 .editContainer hr {
@@ -763,24 +833,25 @@ button {
   padding: 10px 10px;
 }
 
-.ChartContainer {
-  height: 100vh;
+.chartContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 .chartErea {
-  width: 75vw;
-  margin: 20px auto;
+  width: 80vw;
+  margin: 25px auto;
   height: 70vh;
 }
 
-.avatar {
+.typeIcon {
   display: inline-flex;
-  padding: 5px 5px;
-  margin: 10px 10px;
-  background-color: #fff8ed;
-  border: 1px rgb(202, 176, 127) solid;
+  padding: 5px;
+  margin: 3px;
+  background-color: #ffeac6;
+  box-shadow: inset 0 2px 0 rgba(243, 230, 220, 0.5),
+    0 2px 2px rgba(0, 0, 0, 0.19);
+  border-bottom: solid 2px #ac8063;
   border-radius: 100%;
   height: 25px;
   width: 25px;
@@ -795,28 +866,74 @@ button {
   background-color: #f0fae8;
   border-radius: 4px;
   text-align: center;
+  box-shadow: 5px 5px 5px lightgrey;
 }
 
-/*===== USER SOCIAL =====*/
-.onefeed {
-  border: outset;
-  text-align: center;
-  height: 20%;
+.typeIcon p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #b66d31;
+  margin: 0;
+  padding: 0 0 3px;
+  height: 15px;
 }
-#body {
+
+.allDiv {
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-top: 5px;
+  align-items: center;
 }
-.like__btn {
-  padding: 10px 15px;
-  background: #0080ff;
-  font-size: 18px;
-  font-family: 'Open Sans', sans-serif;
-  border-radius: 5px;
-  color: #e8efff;
-  outline: none;
-  border: none;
-  cursor: pointer;
+
+.chartButtonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chartRangeContainer {
+  width: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.chartRangeContainer button {
+  color: #db7d30;
+  border-color: #db7d30;
+}
+
+.chartIconContainer {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.rangeButton {
+  color: red;
+}
+
+.typeIcon:hover {
+  border-bottom: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .chartErea {
+    width: 95vw;
+    margin: 20px auto;
+    height: 63vh;
+  }
+  .chartIconContainer {
+    margin: 17px;
+    width: 295px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .typeIcon {
+    height: 30px;
+    width: 30px;
+    margin: 4px;
+  }
 }

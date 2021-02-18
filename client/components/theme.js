@@ -26,7 +26,7 @@ export default createMuiTheme({
     h1: {
       fontSize: '2.8rem',
 
-      fontFamily: 'Fredoka One'
+      fontFamily: 'Lalezar'
     },
     tab: {
       fontSize: '1em',

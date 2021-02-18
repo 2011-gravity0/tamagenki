@@ -12,10 +12,18 @@ import {makeStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Modal from '@material-ui/core/Modal'
+import {Howl, Howler} from 'howler'
 import React, {useState} from 'react'
 
+const info = new Howl({
+  src: ['/sounds/iconInfo.mp3'],
+  autoplay: false,
+  loop: false,
+  volume: 0.19
+})
+
 export const DailyProgressList = props => {
-  const {list, handleCheck} = props
+  const {list, handleCheck, hatching} = props
 
   const [openModal, setModal] = useState({
     sleep: false,
@@ -28,6 +36,7 @@ export const DailyProgressList = props => {
   })
 
   const handleOpen = async (event, name) => {
+    info.play()
     await setModal({...openModal, [name]: true})
   }
 
@@ -78,6 +87,7 @@ export const DailyProgressList = props => {
 
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -123,6 +133,7 @@ export const DailyProgressList = props => {
               </ListItemText>
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -149,6 +160,7 @@ export const DailyProgressList = props => {
               />
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -194,6 +206,7 @@ export const DailyProgressList = props => {
               </ListItemText>
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -207,6 +220,7 @@ export const DailyProgressList = props => {
               />
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -220,6 +234,7 @@ export const DailyProgressList = props => {
               />
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -266,6 +281,7 @@ export const DailyProgressList = props => {
               </ListItemText>
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -279,6 +295,7 @@ export const DailyProgressList = props => {
               />
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -292,6 +309,7 @@ export const DailyProgressList = props => {
               />
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -305,6 +323,7 @@ export const DailyProgressList = props => {
               />
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -318,6 +337,7 @@ export const DailyProgressList = props => {
               />
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -331,6 +351,7 @@ export const DailyProgressList = props => {
               />
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -376,6 +397,7 @@ export const DailyProgressList = props => {
               </ListItemText>
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -396,8 +418,8 @@ export const DailyProgressList = props => {
           className="listItemContainer"
           className={styles.grid}
         >
-          <Paper className={styles.paper}>
-            <ListItem alignItems="center">
+          <Paper className={styles.paper} id="homeList">
+            <ListItem alignItems="center" className={styles.listItem}>
               <ListItemAvatar>
                 <Avatar src="https://img.icons8.com/color/48/000000/relax-with-book.png" />
               </ListItemAvatar>
@@ -423,6 +445,7 @@ export const DailyProgressList = props => {
               </ListItemText>
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -468,6 +491,7 @@ export const DailyProgressList = props => {
               </ListItemText>
               <Checkbox
                 className="checkBox"
+                disabled={hatching}
                 onClick={event => {
                   handleCheck(event)
                 }}
@@ -494,8 +518,11 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100%',
-    height: 58,
+    height: 50,
     backgroundColor: '#f0fae8'
+  },
+  listItem: {
+    paddingTop: 5
   },
   uncheck: {
     borderRadius: 3,

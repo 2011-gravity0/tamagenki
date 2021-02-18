@@ -3,7 +3,6 @@ import animationOwl from '../../public/lotties/owl.json'
 import Lottie from 'react-lottie'
 import history from '../history'
 import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
 
 export default class GuidePet extends React.Component {
   constructor(props) {
@@ -11,6 +10,7 @@ export default class GuidePet extends React.Component {
     this.nextPage = this.nextPage.bind(this)
   }
   nextPage() {
+    this.props.stopMusic()
     history.push('/')
   }
   render() {

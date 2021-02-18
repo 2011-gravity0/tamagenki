@@ -116,7 +116,7 @@ const UserSetting = ({user, updateUser}) => {
                   />
                 ) : (
                   <h4>
-                    {item.field === 'password' ? '****' : user[item.field]}
+                    {item.field === 'password' ? '*****' : user[item.field]}
                   </h4>
                 )}
               </div>

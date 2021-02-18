@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllFeed} from '../store/unlock'
 import Navbar from './navbar'
+import moment from 'moment'
 
 export class SocialHome extends React.Component {
   constructor(props) {
@@ -21,9 +22,7 @@ export class SocialHome extends React.Component {
     const dateArr = []
     for (let i = 0; i < this.props.feed.length; i++) {
       let date = this.props.feed[i].createdAt
-      const [year, month, day] = date.split('T')[0].split('-')
-      console.log(year, month, day)
-      dateArr.push(new Date(year, month, day))
+      dateArr.push(moment(date).fromNow())
     }
     return dateArr
   }

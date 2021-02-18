@@ -6,10 +6,19 @@ import GuidePet from '../guidePet'
 import {FindEgg} from './FindEgg'
 import Explain from './Explain'
 import {updateUser} from '../../store/user'
+import {Howl, Howler} from 'howler'
 
 export class UserForm extends Component {
   constructor(props) {
     super(props)
+
+    this.backgroundMusic = new Howl({
+      src: ['/music/whimsical-magic.mp3'],
+      autoplay: false,
+      loop: true,
+      volume: 0.05
+    })
+
     this.state = {
       step: 1,
       userName: '',
@@ -22,6 +31,8 @@ export class UserForm extends Component {
     this.nextStep = this.nextStep.bind(this)
     this.prevStep = this.prevStep.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.stopMusic = this.stopMusic.bind(this)
+    this.startMusic = this.startMusic.bind(this)
   }
 
   //Proceed to next step
@@ -57,15 +68,22 @@ export class UserForm extends Component {
     if (this.state.step === 4) {
       this.setState({[e.target.name]: e.target.checked})
     } else {
-      console.log(e)
       this.setState({[e.target.name]: e.target.value})
     }
+  }
+
+  startMusic() {
+    this.backgroundMusic.play()
+  }
+
+  stopMusic() {
+    this.backgroundMusic.fade(0.05, 0, 6000)
   }
 
   render() {
     switch (this.state.step) {
       case 1:
-        return <FindEgg nextStep={this.nextStep} />
+        return <FindEgg nextStep={this.nextStep} startMusic={this.startMusic} />
       case 2:
         return <Explain nextStep={this.nextStep} />
       case 3:
@@ -84,7 +102,7 @@ export class UserForm extends Component {
           />
         )
       case 5:
-        return <GuidePet />
+        return <GuidePet stopMusic={this.stopMusic} />
     }
   }
 }
