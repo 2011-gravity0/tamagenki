@@ -5,9 +5,9 @@ import {compose} from 'redux'
 import {fetchList, fetchUpdatedList} from '../store/dailyProgress'
 import {fetchUserHistory, updateUser} from '../store/user'
 import {fetchResp} from '../store/owlResponse'
+import {unlockNewLevel} from '../store/unlock'
 import {fetchBoombox, fetchUpdatedBoombox} from '../store/boombox'
 import {fetchYesterday} from '../store/yesterday'
-
 import {Howl, Howler} from 'howler'
 import Navbar from './navbar'
 import Grid from '@material-ui/core/Grid'
@@ -1025,6 +1025,17 @@ export class UserHome extends React.Component {
       sparkle: '/badges/sparkle.svg'
     }
 
+    const modalImagesParams = {
+      water: 'badges/water.svg',
+      meditation: 'badges/meditation.svg',
+      exercise: 'badges/movement.svg',
+      fruit: 'badges/fruit.svg',
+      vegetables: 'badges/veg.svg',
+      sleep: 'badges/sleep.svg',
+      relaxation: 'badges/relaxation.svg',
+      sparkle: 'badges/sparkle.svg'
+    }
+
     const body = (
       <Grid container>
         <div
@@ -1051,7 +1062,13 @@ export class UserHome extends React.Component {
 
               <h2 className={classes.modalTitle}>{modalTitles[modal]}</h2>
             </Button>
-            <Button>Share</Button>
+            <Button
+              onClick={() =>
+                this.props.addBadgeToFeed(this.props.userId, modalTitles[modal])
+              }
+            >
+              Share
+            </Button>
           </Grid>
         </div>
       </Grid>
@@ -1495,6 +1512,8 @@ const mapDispatch = dispatch => {
     getUserHistory: userId => dispatch(fetchUserHistory(userId)),
     nameBuddy: (userId, data) => dispatch(updateUser(userId, data)),
     getOwlResp: () => dispatch(fetchResp()),
+    addBadgeToFeed: (userId, levelId) =>
+      dispatch(unlockNewLevel(userId, levelId)),
     getBoombox: () => dispatch(fetchBoombox()),
     updateBoombox: (boomboxId, boomboxData) =>
       dispatch(fetchUpdatedBoombox(boomboxId, boomboxData)),
