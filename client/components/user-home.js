@@ -413,6 +413,7 @@ export class UserHome extends React.Component {
     this.setStreak = this.setStreak.bind(this)
     this.firstCheck = this.firstCheck.bind(this)
     this.levelUpCheck = this.levelUpCheck.bind(this)
+    this.feedSubmit = this.feedSubmit.bind(this)
   }
 
   async playSong() {
@@ -984,6 +985,11 @@ export class UserHome extends React.Component {
     this.setState({hatchedModal: false})
   }
 
+  feedSubmit(modal) {
+    this.props.addBadgeToFeed(this.props.userId, modal)
+    this.setState({unlockBadgeModal: false})
+  }
+
   handleChange() {
     this.setState({[event.target.name]: event.target.value})
   }
@@ -1062,11 +1068,7 @@ export class UserHome extends React.Component {
 
               <h2 className={classes.modalTitle}>{modalTitles[modal]}</h2>
             </Button>
-            <Button
-              onClick={() =>
-                this.props.addBadgeToFeed(this.props.userId, modalTitles[modal])
-              }
-            >
+            <Button onClick={() => this.feedSubmit(modalTitles[modal])}>
               Share
             </Button>
           </Grid>

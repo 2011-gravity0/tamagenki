@@ -29,13 +29,14 @@ export class SocialHome extends React.Component {
   render() {
     const feeds = this.props.feed
     let dates = this.getTime()
+    console.log('PROPS', this.props)
 
-    if (feeds.length) {
+    if (feeds.length !== undefined) {
       return (
         <div>
           <Navbar />
-          <div className="listContainer">
-            {feeds.map(feed => (
+          {/* <div className="listContainer">
+            {feeds.map((feed) => {
               <div className="social-feed" key={feed.id}>
                 {feed.user.petName} unlocked a new badge{' '}
                 <img
@@ -45,12 +46,17 @@ export class SocialHome extends React.Component {
                 <br />
                 <small>{String(dates[0])}</small>
               </div>
-            ))}
-          </div>
+            })}
+          </div> */}
         </div>
       )
     } else {
-      return <h1>LOADING...</h1>
+      return (
+        <div>
+          <Navbar />
+          <h1>The feed is empty. Check off some items to earn some badges!</h1>
+        </div>
+      )
     }
   }
 }

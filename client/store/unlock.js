@@ -59,9 +59,10 @@ export const updateLikes = (unlockId, points) => {
 
 const initialState = []
 export default function unlock(state = initialState, action) {
+  console.log('action.allFeed', action.allFeed)
   switch (action.type) {
     case GET_FEED:
-      return action.allFeed
+      return [...state, action.allFeed]
     case POST_FEED:
       return [...state, action.newFeed]
     default:
