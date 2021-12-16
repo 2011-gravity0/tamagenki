@@ -73,5 +73,5 @@ To-do
 Created by: <br />
 [Angie Munoz](https://www.linkedin.com/in/angiepmunoz/) <br />
 [Nneoma Chukwukelu](https://www.linkedin.com/in/nneoma-chukwukelu-b71098a0/) <br />
-[Samantha Shampland](https://www.linkedin.com/in/samantha-shapland/) <br />
+[Samantha Shapland](https://www.linkedin.com/in/samantha-shapland/) <br />
 [Satomi Ichii](https://www.linkedin.com/in/satomi-ichii/)
