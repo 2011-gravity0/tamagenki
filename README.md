@@ -19,6 +19,8 @@ Tamagenki is a pet accountability game that uses push notifications and checklis
 
 Our target audience is people of any age who want to incorporate universally agreed upon healthy habits into their daily life to improve their overall physical and mental health. While health tracking apps and reminder apps exist for specific goals like water intake, diet, and exercise, Tamagenki came from a need for a simple system that tracks all of these things in one place, as they are all a huge part of a person's general health and happiness. Tamagenki helps people find balance in their lives and gamifying the app adds an element of fun while doing it.
 
+Here is the deployed project on Heroku: https://tamagenki.herokuapp.com/
+
 ---
 
 ## Technologies
