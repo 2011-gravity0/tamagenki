@@ -102,6 +102,11 @@ const Navbar = ({handleLogout}, props) => {
                   Setting
                 </Link>
               </MenuItem>
+              <MenuItem className={classes.menu}>
+                <Link to="/feed" className={classes.menu}>
+                  Social
+                </Link>
+              </MenuItem>
               <MenuItem onClick={handleLogout} className={classes.menu}>
                 Logout
               </MenuItem>
